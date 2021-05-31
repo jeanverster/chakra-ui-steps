@@ -8,7 +8,6 @@ import {
   ThemingProps,
   useMultiStyleConfig,
 } from '@chakra-ui/system';
-import { Fade } from '@chakra-ui/transition';
 import { cx } from '@chakra-ui/utils';
 import * as React from 'react';
 
@@ -86,9 +85,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
               : null;
           })}
         </chakra.div>
-        {orientation === 'horizontal' && (
-          <Fade in>{renderHorizontalContent()}</Fade>
-        )}
+        {orientation === 'horizontal' && renderHorizontalContent()}
       </StylesProvider>
     );
   }

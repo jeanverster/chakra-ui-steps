@@ -45,7 +45,7 @@ const baseStyle = (props: Dict) => {
       fontSize: 'md',
     },
     description: {
-      fontWeight: 'lighter',
+      marginTop: '-2px',
       color: mode(`gray.800`, `gray.200`)(props),
       textAlign: 'center',
       opacity: 0.9,
@@ -71,7 +71,7 @@ const sizes = {
       fontSize: 'sm',
     },
     description: {
-      fontWeight: 'medium',
+      fontWeight: '300',
       textAlign: 'center',
       fontSize: 'xs',
     },
@@ -92,7 +92,7 @@ const sizes = {
       fontSize: 'md',
     },
     description: {
-      fontWeight: 'lighter',
+      fontWeight: '300',
       textAlign: 'center',
       fontSize: 'sm',
     },
@@ -113,7 +113,7 @@ const sizes = {
       fontSize: 'lg',
     },
     description: {
-      fontWeight: 'lighter',
+      fontWeight: '300',
       textAlign: 'center',
       fontSize: 'md',
     },
