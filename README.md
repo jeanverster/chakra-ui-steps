@@ -4,7 +4,7 @@
   Steps component designed to work seamlessly with Chakra UI
 </p>
 <p>
-An interactive demo can be viewed <a href="https://www.flaticon.com/authors/ultimatearm" title="ultimatearm">here</a>.
+An interactive demo can be viewed <a target="_blank" href="https://jeanverster.github.io/chakra-ui-steps-site/" title="chakra ui steps demo site">here</a>.
 </p>
 
 ## Features
