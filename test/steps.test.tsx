@@ -28,23 +28,7 @@ describe('<Steps />', () => {
     expect(getByText('Step 3')).toBeTruthy();
   });
 
-  it('should NOT render children when horizontal', async () => {
-    const { queryByTestId } = render(
-      <Steps colorScheme="green" activeStep={0}>
-        <Step label="Step 1">
-          <Flex data-testid="child-1">
-            <span>Child 1</span>
-          </Flex>
-        </Step>
-      </Steps>
-    );
-
-    const child = queryByTestId('child-1');
-
-    expect(child).toBe(null);
-  });
-
-  it('should render children when vertical', async () => {
+  it('should render children', async () => {
     const { queryByTestId } = render(
       <Steps colorScheme="green" orientation="vertical" activeStep={0}>
         <Step label="Step 1">

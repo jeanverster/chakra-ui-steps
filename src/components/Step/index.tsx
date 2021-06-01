@@ -202,7 +202,9 @@ export const Step = forwardRef<StepProps, 'div'>(
             isCompletedStep={isCompletedStep || false}
             hasLabel={!!labelProp || !!descriptionProp}
           >
-            <Collapse in={isCurrentStep}>{children}</Collapse>
+            <Collapse style={{ width: '100%' }} in={isCurrentStep}>
+              {children}
+            </Collapse>
           </Connector>
         </chakra.div>
       </>
