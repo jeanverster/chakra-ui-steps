@@ -22,7 +22,7 @@ An interactive demo can be viewed <a target="_blank" href="https://jeanverster.g
 
 > NOTE: This component requires Chakra UI > v1.0 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>.
 
-In order to get started you will need to extend the default Chakra theme with the provided `StepStyleConfig` object, like so:
+In order to get started you will need to extend the default Chakra theme with the provided `StepsStyleConfig` object, like so:
 
 ```jsx
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
