@@ -42,7 +42,7 @@
   "name": "chakra-ui-steps",
   "author": "Jean Verster",
   "module": "dist/chakra-ui-steps.esm.js",
-  "homepage": "https:",
+  "homepage": "https://github.com/jeanverster/chakra-ui-steps",
   "size-limit": [
     {
       "path": "dist/chakra-ui-steps.cjs.production.min.js",
