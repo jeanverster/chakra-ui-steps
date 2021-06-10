@@ -39,9 +39,17 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
+  "description": "Steps component designed to work seamlessly with Chakra UI",
   "name": "chakra-ui-steps",
   "author": "Jean Verster",
   "module": "dist/chakra-ui-steps.esm.js",
+  "keywords": [
+    "steps",
+    "stepper",
+    "chakra",
+    "navigation",
+    "multi"
+  ],
   "homepage": "https://github.com/jeanverster/chakra-ui-steps",
   "size-limit": [
     {
