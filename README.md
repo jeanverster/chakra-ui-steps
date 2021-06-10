@@ -3,11 +3,9 @@
   <h2 style="margin-left: 1rem; font-size: 2.5rem; font-weight: bold;">chakra-ui-steps</h2>  
 </div>
 
-Steps component designed to work seamlessly with Chakra UI
+### Steps component designed to work seamlessly with Chakra UI
 
-An interactive demo can be viewed <a href="https://www.flaticon.com/authors/ultimatearm" title="ultimatearm">here</a>.
-
-<hr />
+### An interactive demo can be viewed <a target="_blank" href="https://jeanverster.github.io/chakra-ui-steps-site/" title="chakra ui steps demo site">here</a>.
 
 ## Features
 
@@ -15,8 +13,6 @@ An interactive demo can be viewed <a href="https://www.flaticon.com/authors/ulti
 - Easily render step content
 - Custom icons
 - Size variants
-
-<hr />
 
 ## Installation
 
