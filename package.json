@@ -22,6 +22,10 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
+    "@chakra-ui/react": ">=1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^4",
     "react": ">=16"
   },
   "husky": {
@@ -38,14 +42,15 @@
   "name": "chakra-ui-steps",
   "author": "Jean Verster",
   "module": "dist/chakra-ui-steps.esm.js",
+  "homepage": "https:",
   "size-limit": [
     {
       "path": "dist/chakra-ui-steps.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "1 s"
     },
     {
       "path": "dist/chakra-ui-steps.esm.js",
-      "limit": "10 KB"
+      "limit": "1 s"
     }
   ],
   "devDependencies": {
@@ -65,7 +70,7 @@
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
     "babel-loader": "^8.2.2",
-    "framer-motion": "^4",
+    "framer-motion": "^4.1.17",
     "husky": "^6.0.0",
     "jest-axe": "^4.1.0",
     "react": "^17.0.2",
@@ -75,5 +80,8 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@size-limit/preset-big-lib": "^4.12.0"
   }
 }
