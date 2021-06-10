@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/jeanverster/chakra-ui-steps/compare/v1.0.0...v1.0.1) (2021-06-10)
+
+
+### Bug Fixes
+
+* add missing quotation ([37e92f5](https://github.com/jeanverster/chakra-ui-steps/commit/37e92f5ad7261eb49aa5a5f78ff4995df5d40a52))
+* remove node 10 engine from main workflow ([27c0caf](https://github.com/jeanverster/chakra-ui-steps/commit/27c0caf485bbd1a502bfbf2cfc6c3210431538dc))
+
 # 1.0.0 (2021-06-10)
 
 
