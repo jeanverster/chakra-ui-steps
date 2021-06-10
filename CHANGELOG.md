@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/jeanverster/chakra-ui-steps/compare/v1.0.2...v1.0.3) (2021-06-10)
+
+
+### Bug Fixes
+
+* switch out background color animations for border only ([d56199b](https://github.com/jeanverster/chakra-ui-steps/commit/d56199bf457dea97e3546b679b7d587120d8fbe6))
+
 ## [1.0.2](https://github.com/jeanverster/chakra-ui-steps/compare/v1.0.1...v1.0.2) (2021-06-10)
 
 
