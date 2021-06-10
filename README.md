@@ -1,22 +1,36 @@
-# chakra-ui-steps
+<div style="display: flex; flex-direction: row; align-items:center; margin-bottom: 1rem;">
+  <img alt="chakra-ui-logo-round" src="https://i.imgur.com/xhPNj6b.png" width="60" style="border-radius:50%;">
+  <h2 style="margin-left: 1rem; font-size: 2.5rem; font-weight: bold;">chakra-ui-steps</h2>  
+</div>
 
-<p>
-  Steps component designed to work seamlessly with Chakra UI
-</p>
-<p>
+Steps component designed to work seamlessly with Chakra UI
+
 An interactive demo can be viewed <a href="https://www.flaticon.com/authors/ultimatearm" title="ultimatearm">here</a>.
-</p>
+
+<hr />
 
 ## Features
 
 - Multiple orientations
-- Supports child components
+- Easily render step content
 - Custom icons
 - Size variants
 
+<hr />
+
 ## Installation
 
-`$ yarn add chakra-ui-steps`
+Yarn:
+
+```bash
+yarn add chakra-ui-steps
+```
+
+NPM:
+
+```bash
+npm i chakra-ui-steps
+```
 
 ## Usage
 
@@ -58,9 +72,9 @@ export const BasicExample = () => {
 
 ## Props
 
-### `Steps`
-
 > Note: Both the `Step` and `Steps` component extend the Chakra UI `Box` component so they accept all the default styling props.
+
+### `Steps`
 
 | Prop              | Type    | Required | Description                                                                | Default    |
 | ----------------- | ------- | -------- | -------------------------------------------------------------------------- | ---------- |
