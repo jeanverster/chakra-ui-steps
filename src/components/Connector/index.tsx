@@ -1,7 +1,6 @@
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import {
   chakra,
-  forwardRef,
   HTMLChakraProps,
   ThemingProps,
   useStyles,
@@ -11,27 +10,25 @@ import { getColor } from '@chakra-ui/theme-tools';
 import { motion } from 'framer-motion';
 import * as React from 'react';
 
-export interface ConnectorProps extends HTMLChakraProps<'div'>, ThemingProps {
+interface ConnectorProps extends HTMLChakraProps<'div'>, ThemingProps {
   isCompletedStep: boolean;
   isVertical: boolean;
   isLastStep?: boolean;
   hasLabel?: boolean;
+  orientation?: 'vertical' | 'horizontal';
 }
 
 const MotionDiv = motion(chakra.div);
 
-export const Connector = forwardRef(
-  (
-    {
-      colorScheme: c,
-      isCompletedStep,
-      isVertical,
-      children,
-      isLastStep,
-      hasLabel,
-    }: ConnectorProps,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
+export const Connector = React.memo(
+  ({
+    colorScheme: c,
+    isCompletedStep,
+    isVertical,
+    children,
+    isLastStep,
+    hasLabel,
+  }: ConnectorProps) => {
     const { connector, stepIcon } = useStyles();
 
     const theme = useTheme();
@@ -52,25 +49,20 @@ export const Connector = forwardRef(
 
     return (
       <MotionDiv
-        ref={ref}
         __css={{
           ...connector,
           ml: getMargin(),
           my: isVertical ? 2 : 0,
           pl: isVertical ? 4 : 0,
+          borderTopWidth: isLastStep || isVertical ? 0 : '2px',
           borderLeftWidth: isLastStep || !isVertical ? 0 : '2px',
           minHeight: isLastStep || !isVertical ? 'auto' : '1.5rem',
         }}
         initial={{
-          backgroundColor: isVertical ? 'transparent' : rawInitialColor,
+          borderColor: rawInitialColor,
         }}
         animate={{
-          ...(!isVertical && {
-            backgroundColor: isCompletedStep ? rawActiveColor : rawInitialColor,
-          }),
-          ...(isVertical && {
-            borderColor: isCompletedStep ? rawActiveColor : rawInitialColor,
-          }),
+          borderColor: isCompletedStep ? rawActiveColor : rawInitialColor,
         }}
       >
         {isVertical && children}
