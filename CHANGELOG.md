@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/jeanverster/chakra-ui-steps/compare/v1.0.1...v1.0.2) (2021-06-10)
+
+
+### Bug Fixes
+
+* remove unused env declaration ([24b1dd2](https://github.com/jeanverster/chakra-ui-steps/commit/24b1dd2cbfedbca22dd1822c424db74a5e39fd7f))
+
 ## [1.0.1](https://github.com/jeanverster/chakra-ui-steps/compare/v1.0.0...v1.0.1) (2021-06-10)
 
 
