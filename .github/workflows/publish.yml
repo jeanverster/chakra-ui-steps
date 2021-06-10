@@ -13,6 +13,7 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
+      - run: yarn test --ci --coverage --maxWorkers=2
       - run: npm config set registry https://registry.npmjs.org && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
