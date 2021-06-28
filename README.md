@@ -96,7 +96,7 @@ export const BasicExample = () => {
 ### `Steps`
 
 | Prop              | Type    | Required | Description                                                                | Default    |
-| ----------------- | ------- | -------- | -------------------------------------------------------------------------- | ---------- |
+|-------------------|---------|----------|----------------------------------------------------------------------------|------------|
 | **`activeStep`**  | number  | yes      | Currently active step                                                      | 0          |
 | **`colorScheme`** | string  | no       | Sets the color accent of the Steps component show                          | green      |
 | **`orientation`** | string  | no       | Sets the orientation of the Steps component                                | horizontal |
@@ -104,8 +104,9 @@ export const BasicExample = () => {
 
 ### `Step`
 
-| Prop              | Type                | Required | Description                                                          | Default   |
-| ----------------- | ------------------- | -------- | -------------------------------------------------------------------- | --------- |
-| **`label`**       | string              | no       | Sets the title of the step                                           | ''        |
-| **`description`** | string              | no       | Provides extra info about the step                                   | ''        |
-| **`icon`**        | React.ComponentType | no       | Custom icon to overwrite the default numerical indicator of the step | undefined |
+| Prop                  | Type                | Required | Description                                                          | Default   |
+|-----------------------|---------------------|----------|----------------------------------------------------------------------|-----------|
+| **`label`**           | string              | no       | Sets the title of the step                                           | ''        |
+| **`description`**     | string              | no       | Provides extra info about the step                                   | ''        |
+| **`icon`**            | React.ComponentType | no       | Custom icon to overwrite the default numerical indicator of the step | undefined |
+| **`isCompletedStep`** | boolean             | no       | Individually control each step state, defaults to active step        | undefined |
