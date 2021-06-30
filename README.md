@@ -18,9 +18,6 @@
   <a href="https://saythanks.io/to/jeanverster0107@gmail.com">
       <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
   </a>
-<a href="https://en.cryptobadges.io/donate/0x79793def35b46e8f0bd23f0c628aa0851b826f78">
-    <img src="https://img.shields.io/badge/Donate-A6A9AA?style=for-the-badge&logo=ethereum&logoColor=white&style="flat"">
-  </a>
 </p>
 
 ![screenshot](https://i.imgur.com/XeOZxIF.gif)
