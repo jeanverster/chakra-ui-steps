@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.0.3...v1.1.0) (2021-06-30)
+
+
+### Bug Fixes
+
+* use correct link ([3a6c7cc](https://github.com/jeanverster/chakra-ui-steps/commit/3a6c7cc359caebd7bcbcb88c450394635048379d))
+
+
+### Features
+
+* control isCompletedStep on Step component ([104e21b](https://github.com/jeanverster/chakra-ui-steps/commit/104e21be57561f89c667ae7be7e42e7b9ceea910))
+
 ## [1.0.3](https://github.com/jeanverster/chakra-ui-steps/compare/v1.0.2...v1.0.3) (2021-06-10)
 
 
