@@ -18,12 +18,7 @@
   <a href="https://saythanks.io/to/jeanverster0107@gmail.com">
       <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
   </a>
-  <br/>
-If you enjoy this package, please consider making a donation   <a href="https://www.paypal.me/AmitMerchant">
-    <img src="https://img.shields.io/badge/Ethereum-A6A9AA?style=for-the-badge&logo=ethereum&logoColor=white&style="flat"">
-  </a>
 </p>
-<br />
 
 ![screenshot](https://i.imgur.com/XeOZxIF.gif)
 
