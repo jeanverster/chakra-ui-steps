@@ -1,11 +1,31 @@
-<div style="display: flex; flex-direction: row; align-items:center; margin-bottom: 1rem;">
-  <img alt="chakra-ui-logo-round" src="https://i.imgur.com/xhPNj6b.png" width="60" style="border-radius:50%;">
-  <h2 style="margin-left: 1rem; font-size: 2.5rem; font-weight: bold;">chakra-ui-steps</h2>  
-</div>
+<h1 align="center" style="font-weight: bold;">
+  <br>
+  <a href="https://jeanverster.github.io/chakra-ui-steps-site/"><img src="https://i.imgur.com/xhPNj6b.png" alt="Markdownify" width="50" style="border-radius:50%"></a>
+  <br>
+  Chakra UI Steps
+  <br>
+</h1>
 
-### Steps component designed to work seamlessly with Chakra UI
+<h4 align="center">Steps component designed to work seamlessly with <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a>.</h4>
 
-### An interactive demo can be viewed <a target="_blank" href="https://jeanverster.github.io/chakra-ui-steps-site/" title="chakra ui steps demo site">here</a>.
+<h4 align="center">An interactive demo can be viewed <a href="https://jeanverster.github.io/chakra-ui-steps-site/" target="_blank">here</a>.</h4>
+
+<p align="center">
+  <a href="https://badge.fury.io/js/chakra-ui-steps">
+    <img src="https://badge.fury.io/js/chakra-ui-steps.svg"
+         alt="Gitter">
+  </a>
+  <a href="https://saythanks.io/to/jeanverster0107@gmail.com">
+      <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
+  </a>
+  <br/>
+If you enjoy this package, please consider making a donation   <a href="https://www.paypal.me/AmitMerchant">
+    <img src="https://img.shields.io/badge/Ethereum-A6A9AA?style=for-the-badge&logo=ethereum&logoColor=white&style="flat"">
+  </a>
+</p>
+<br />
+
+![screenshot](https://i.imgur.com/XeOZxIF.gif)
 
 ## Features
 
@@ -31,6 +51,29 @@ npm i chakra-ui-steps
 ## Usage
 
 > NOTE: This component requires Chakra UI > v1.0 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>.
+
+In order to get started you will need to extend the default Chakra theme with the provided `StepsStyleConfig` object, like so:
+
+```jsx
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
+
+const theme = extendTheme({
+  components: {
+    Steps,
+  },
+});
+
+export const App = () => {
+  return (
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  );
+};
+```
+
+Once that's done you should be good to go!
 
 ### Basic Example:
 
@@ -81,8 +124,9 @@ export const BasicExample = () => {
 
 ### `Step`
 
-| Prop              | Type                | Required | Description                                                          | Default   |
-| ----------------- | ------------------- | -------- | -------------------------------------------------------------------- | --------- |
-| **`label`**       | string              | no       | Sets the title of the step                                           | ''        |
-| **`description`** | string              | no       | Provides extra info about the step                                   | ''        |
-| **`icon`**        | React.ComponentType | no       | Custom icon to overwrite the default numerical indicator of the step | undefined |
+| Prop                  | Type                | Required | Description                                                          | Default   |
+| --------------------- | ------------------- | -------- | -------------------------------------------------------------------- | --------- |
+| **`label`**           | string              | no       | Sets the title of the step                                           | ''        |
+| **`description`**     | string              | no       | Provides extra info about the step                                   | ''        |
+| **`icon`**            | React.ComponentType | no       | Custom icon to overwrite the default numerical indicator of the step | undefined |
+| **`isCompletedStep`** | boolean             | no       | Individually control each step state, defaults to active step        | undefined |

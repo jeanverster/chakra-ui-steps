@@ -43,4 +43,23 @@ describe('<Steps />', () => {
 
     expect(child).toBeTruthy();
   });
+
+  it('should be able to control isCompletedStep for each step', async () => {
+    const { container } = render(
+      <Steps colorScheme="green" orientation="vertical" activeStep={1}>
+        <Step isCompletedStep={false} label="Step 1">
+          <Flex data-testid="child-1">
+            <span>Child 1</span>
+          </Flex>
+        </Step>
+        <Step isCompletedStep={true} label="Step 2">
+          <Flex data-testid="child-2">
+            <span>Child 2</span>
+          </Flex>
+        </Step>
+      </Steps>
+    );
+    expect(container.querySelectorAll('svg').length).toBe(1)    
+
+  });
 });

@@ -66,7 +66,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
           className={cx('chakra-steps', className)}
         >
           {React.Children.map(children, (child, i) => {
-            const isCompletedStep = i < activeStep;
+            const isCompletedStep = (React.isValidElement(child) && child.props.isCompletedStep) ?? i < activeStep;
             const isLastStep = i === stepCount - 1;
             const isCurrentStep = i === activeStep;
 
