@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.0...v1.1.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* replace logo with svg and remove incorrect link ([8991f1b](https://github.com/jeanverster/chakra-ui-steps/commit/8991f1bc62f5bfa42c4c573ebc4dab0c9ec98ea7))
+* replace logo with svg and remove incorrect link ([5508cc5](https://github.com/jeanverster/chakra-ui-steps/commit/5508cc53ba6311111ecc62f215b0511e8621b9be))
+
 # [1.1.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.0.3...v1.1.0) (2021-06-30)
 
 
