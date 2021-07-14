@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.1...v1.1.2) (2021-07-14)
+
+
+### Bug Fixes
+
+* only mount step vertical step content on either current or completed step ([fa88b98](https://github.com/jeanverster/chakra-ui-steps/commit/fa88b987bc75e4c91b884b64797af277f09b6cdd))
+
 ## [1.1.1](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.0...v1.1.1) (2021-07-01)
 
 
