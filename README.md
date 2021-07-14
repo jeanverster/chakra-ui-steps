@@ -1,7 +1,7 @@
 <h1 align="center" style="font-weight: bold;">
   <br>
-  <a href="https://jeanverster.github.io/chakra-ui-steps-site/">
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://i.imgur.com/EMykZb3.png" alt="Markdownify" width="50"></a>
+  <a href="https://jeanverster.github.io/chakra-ui-steps-site">
+  <img src="https://i.imgur.com/EMykZb3.png" alt="Markdownify" width="50">
   </a>
   <br />
   Chakra UI Steps
