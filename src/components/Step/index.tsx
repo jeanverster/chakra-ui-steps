@@ -64,9 +64,10 @@ export const Step = forwardRef<StepProps, 'div'>(
       ...styleProps
     } = props as FullStepProps;
 
-    const Icon = React.useMemo(() => (CustomIcon ? motion(CustomIcon) : null), [
-      CustomIcon,
-    ]);
+    const Icon = React.useMemo(
+      () => (CustomIcon ? motion(CustomIcon) : null),
+      [CustomIcon]
+    );
 
     const { step, stepIcon, label, description, icon } = useStyles();
 
@@ -203,7 +204,7 @@ export const Step = forwardRef<StepProps, 'div'>(
             hasLabel={!!labelProp || !!descriptionProp}
           >
             <Collapse style={{ width: '100%' }} in={isCurrentStep}>
-              {children}
+              {(isCurrentStep || isCompletedStep) && children}
             </Collapse>
           </Connector>
         </chakra.div>
