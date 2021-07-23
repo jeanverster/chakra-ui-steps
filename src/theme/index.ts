@@ -35,7 +35,6 @@ const baseStyle = (props: Dict) => {
     connector: {
       flex: 1,
       display: 'flex',
-      height: '2px',
       mr: 2,
     },
     label: {

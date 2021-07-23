@@ -54,6 +54,7 @@ export const Connector = React.memo(
           ml: getMargin(),
           my: isVertical ? 2 : 0,
           pl: isVertical ? 4 : 0,
+          height: isVertical ? 'auto' : '2px',
           borderTopWidth: isLastStep || isVertical ? 0 : '2px',
           borderLeftWidth: isLastStep || !isVertical ? 0 : '2px',
           minHeight: isLastStep || !isVertical ? 'auto' : '1.5rem',
