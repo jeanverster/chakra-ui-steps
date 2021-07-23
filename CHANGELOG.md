@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.2...v1.1.3) (2021-07-23)
+
+
+### Bug Fixes
+
+* remove hard coded height value from theme ([a784963](https://github.com/jeanverster/chakra-ui-steps/commit/a78496351e0aca4f6ea206cae4060f27fe7edb4a))
+
 ## [1.1.2](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.1...v1.1.2) (2021-07-14)
 
 
