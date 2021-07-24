@@ -91,7 +91,7 @@ const steps = [
 ];
 
 export const BasicExample = () => {
-  const { nextStep, prevStep, reset, activeStep } = useSteps({
+  const { nextStep, prevStep, setStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
 
