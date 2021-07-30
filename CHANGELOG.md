@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.3...v1.2.0) (2021-07-30)
+
+
+### Features
+
+* **hooks:** add code-review-changes to setStep hook ([00cabdf](https://github.com/jeanverster/chakra-ui-steps/commit/00cabdfa5709c05e356c7c7b77165cf78c23dbb2))
+* **hooks:** add goto hook ([7781fa2](https://github.com/jeanverster/chakra-ui-steps/commit/7781fa2f751047864089a40572b69f92f7bb4423))
+
 ## [1.1.3](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.2...v1.1.3) (2021-07-23)
 
 
