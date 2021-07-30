@@ -18,7 +18,6 @@
          alt="Gitter">
   </a>
 </p>
-<br />
 
 ![screenshot](https://i.imgur.com/XeOZxIF.gif)
 
@@ -92,7 +91,7 @@ const steps = [
 ];
 
 export const BasicExample = () => {
-  const { nextStep, prevStep, reset, activeStep } = useSteps({
+  const { nextStep, prevStep, setStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
 
