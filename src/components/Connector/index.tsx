@@ -29,7 +29,7 @@ export const Connector = React.memo(
     isLastStep,
     hasLabel,
   }: ConnectorProps) => {
-    const { connector, stepIcon } = useStyles();
+    const { connector, stepIconCont } = useStyles();
 
     const theme = useTheme();
 
@@ -42,7 +42,7 @@ export const Connector = React.memo(
     const rawActiveColor = getColor(theme, activeBg);
 
     const getMargin = () => {
-      if (isVertical) return `calc(${stepIcon.width} / 2)`;
+      if (isVertical) return `calc(${stepIconCont.width} / 2)`;
       if (!hasLabel) return 2;
       return 0;
     };

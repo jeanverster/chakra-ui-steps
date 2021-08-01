@@ -16,6 +16,7 @@ export interface StepsProps extends HTMLChakraProps<'div'>, ThemingProps {
   orientation?: 'vertical' | 'horizontal';
   state?: 'loading' | 'error';
   responsive?: boolean;
+  checkIcon?: React.ComponentType<any>;
 }
 
 export const Steps = forwardRef<StepsProps, 'div'>(
@@ -29,6 +30,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       orientation: orientationProp,
       state,
       responsive,
+      checkIcon,
       ...rest
     } = omitThemingProps(props);
 
@@ -66,7 +68,9 @@ export const Steps = forwardRef<StepsProps, 'div'>(
           className={cx('chakra-steps', className)}
         >
           {React.Children.map(children, (child, i) => {
-            const isCompletedStep = (React.isValidElement(child) && child.props.isCompletedStep) ?? i < activeStep;
+            const isCompletedStep =
+              (React.isValidElement(child) && child.props.isCompletedStep) ??
+              i < activeStep;
             const isLastStep = i === stepCount - 1;
             const isCurrentStep = i === activeStep;
 
@@ -78,6 +82,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
               isLastStep,
               orientation,
               state,
+              checkIcon,
             };
 
             return React.isValidElement(child)
