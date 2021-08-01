@@ -67,17 +67,14 @@ export const Step = forwardRef<StepProps, 'div'>(
       ...styleProps
     } = props as FullStepProps;
 
-    console.log('CustomCheckIcon', CustomCheckIcon);
-
-    const Icon = React.useMemo(() => (CustomIcon ? motion(CustomIcon) : null), [
+    const Icon = React.useMemo(() => (CustomIcon ? CustomIcon : null), [
       CustomIcon,
     ]);
 
-    const AnimatedCheck = React.useMemo(
+    const Check = React.useMemo(
       () => (CustomCheckIcon ? CustomCheckIcon : CheckIcon),
       [CustomCheckIcon]
     );
-    console.log('AnimatedCheck', AnimatedCheck);
 
     const { step, stepIconCont, label, description, icon } = useStyles();
 
@@ -120,7 +117,7 @@ export const Step = forwardRef<StepProps, 'div'>(
       if (isCompletedStep) {
         return (
           <MotionFlex key="check-icon" {...animationConfig}>
-            <AnimatedCheck color="white" style={icon} />
+            <Check color="white" style={icon} />
           </MotionFlex>
         );
       }
