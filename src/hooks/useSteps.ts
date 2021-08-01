@@ -18,5 +18,9 @@ export function useSteps({ initialStep }: UseSteps) {
     setActiveStep(initialStep);
   };
 
-  return { nextStep, prevStep, reset, activeStep };
+  const setStep = (step: number) => {
+    setActiveStep(step);
+  };
+
+  return { nextStep, prevStep, reset, setStep, activeStep };
 }

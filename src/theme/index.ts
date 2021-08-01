@@ -3,7 +3,8 @@ import { mode } from '@chakra-ui/theme-tools';
 const parts = [
   'steps',
   'step',
-  'stepIcon',
+  'stepIconCont',
+  'icon',
   'connector',
   'label',
   'description',
@@ -26,16 +27,18 @@ const baseStyle = (props: Dict) => {
       alignItems: 'center',
       justifyContent: 'flex-start',
     },
-    stepIcon: {
+    stepIconCont: {
       display: 'flex',
       borderRadius: '50%',
       alignItems: 'center',
       justifyContent: 'center',
     },
+    icon: {
+      strokeWidth: '2px',
+    },
     connector: {
       flex: 1,
       display: 'flex',
-      mr: 2,
     },
     label: {
       fontWeight: 'medium',
@@ -55,14 +58,14 @@ const baseStyle = (props: Dict) => {
 
 const sizes = {
   sm: {
-    stepIcon: {
+    stepIconCont: {
       width: '32px',
       height: '32px',
       borderWidth: '2px',
     },
     icon: {
-      width: '16px',
-      height: '16px',
+      width: '14px',
+      height: '14px',
     },
     label: {
       fontWeight: 'medium',
@@ -76,14 +79,14 @@ const sizes = {
     },
   },
   md: {
-    stepIcon: {
+    stepIconCont: {
       width: '40px',
       height: '40px',
       borderWidth: '2px',
     },
     icon: {
-      width: '20px',
-      height: '20px',
+      width: '18px',
+      height: '18px',
     },
     label: {
       fontWeight: 'medium',
@@ -97,14 +100,14 @@ const sizes = {
     },
   },
   lg: {
-    stepIcon: {
+    stepIconCont: {
       width: '48px',
       height: '48px',
       borderWidth: '2px',
     },
     icon: {
-      width: '24px',
-      height: '24px',
+      width: '22px',
+      height: '22px',
     },
     label: {
       fontWeight: 'bold',

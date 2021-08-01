@@ -1,4 +1,5 @@
 import { useColorModeValue } from '@chakra-ui/color-mode';
+import { Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import {
   chakra,
@@ -14,7 +15,7 @@ import * as React from 'react';
 import { Connector } from '../Connector';
 import { CheckIcon, CloseIcon } from '../Icons';
 
-const AnimatedCheck = motion(CheckIcon);
+const MotionFlex = motion(Flex);
 const AnimatedCloseIcon = motion(CloseIcon);
 const AnimatedSpan = motion(chakra.span);
 
@@ -34,6 +35,7 @@ interface StepInternalConfig extends ThemingProps {
   isLoading?: boolean;
   isError?: boolean;
   state?: 'loading' | 'error';
+  checkIcon?: React.ComponentType<any>;
 }
 
 const animationConfig = {
@@ -50,25 +52,31 @@ interface FullStepProps extends StepProps, StepInternalConfig {}
 export const Step = forwardRef<StepProps, 'div'>(
   (props, ref: React.Ref<any>) => {
     const {
+      checkIcon: CustomCheckIcon,
       children,
+      colorScheme: c,
+      description: descriptionProp,
+      icon: CustomIcon,
+      index,
       isCompletedStep,
       isCurrentStep,
-      index,
-      colorScheme: c,
-      label: labelProp,
       isLastStep,
-      icon: CustomIcon,
+      label: labelProp,
       orientation,
-      description: descriptionProp,
       state,
       ...styleProps
     } = props as FullStepProps;
 
-    const Icon = React.useMemo(() => (CustomIcon ? motion(CustomIcon) : null), [
+    const Icon = React.useMemo(() => (CustomIcon ? CustomIcon : null), [
       CustomIcon,
     ]);
 
-    const { step, stepIcon, label, description, icon } = useStyles();
+    const Check = React.useMemo(
+      () => (CustomCheckIcon ? CustomCheckIcon : CheckIcon),
+      [CustomCheckIcon]
+    );
+
+    const { step, stepIconCont, label, description, icon } = useStyles();
 
     const activeBg = `${c}.500`;
 
@@ -108,12 +116,9 @@ export const Step = forwardRef<StepProps, 'div'>(
     const renderIcon = () => {
       if (isCompletedStep) {
         return (
-          <AnimatedCheck
-            key="icon"
-            color="white"
-            {...animationConfig}
-            {...icon}
-          />
+          <MotionFlex key="check-icon" {...animationConfig}>
+            <Check color="white" style={icon} />
+          </MotionFlex>
         );
       }
       if (isCurrentStep) {
@@ -123,7 +128,7 @@ export const Step = forwardRef<StepProps, 'div'>(
               key="icon"
               color="white"
               {...animationConfig}
-              {...icon}
+              style={icon}
             />
           );
         if (isLoading)
@@ -134,7 +139,12 @@ export const Step = forwardRef<StepProps, 'div'>(
             />
           );
       }
-      if (Icon) return <Icon />;
+      if (Icon)
+        return (
+          <MotionFlex key="step-icon" {...animationConfig}>
+            <Icon style={icon} />
+          </MotionFlex>
+        );
       return (
         <AnimatedSpan key="label" __css={label} {...animationConfig}>
           {(index || 0) + 1}
@@ -167,7 +177,7 @@ export const Step = forwardRef<StepProps, 'div'>(
           >
             <chakra.div
               __css={{
-                ...stepIcon,
+                ...stepIconCont,
                 bg: getBgColor,
                 borderColor: getBorderColor,
               }}

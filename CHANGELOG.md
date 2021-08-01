@@ -1,3 +1,23 @@
+# [1.3.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.2.0...v1.3.0) (2021-08-01)
+
+
+### Bug Fixes
+
+* make vertical step content full width by default ([ea56c76](https://github.com/jeanverster/chakra-ui-steps/commit/ea56c76845a1e561c20133b614a42f4ba29de480))
+
+
+### Features
+
+* configure storybook ([0e44615](https://github.com/jeanverster/chakra-ui-steps/commit/0e4461519fda32c9015225b645bcc3c6a62d4533))
+
+# [1.2.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.3...v1.2.0) (2021-07-30)
+
+
+### Features
+
+* **hooks:** add code-review-changes to setStep hook ([00cabdf](https://github.com/jeanverster/chakra-ui-steps/commit/00cabdfa5709c05e356c7c7b77165cf78c23dbb2))
+* **hooks:** add goto hook ([7781fa2](https://github.com/jeanverster/chakra-ui-steps/commit/7781fa2f751047864089a40572b69f92f7bb4423))
+
 ## [1.1.3](https://github.com/jeanverster/chakra-ui-steps/compare/v1.1.2...v1.1.3) (2021-07-23)
 
 
