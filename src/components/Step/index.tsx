@@ -159,13 +159,13 @@ export const Step = forwardRef<StepProps, 'div'>(
           {...styleProps}
           aria-disabled={!hasVisited}
           __css={{
-            ...step,
             opacity,
             flexDir: isVertical ? 'column' : 'row',
             alignItems: isVertical ? 'flex-start' : 'center',
             flex: isLastStep && !isVertical ? '0 0 auto' : '1 0 auto',
             justifyContent:
               isLastStep && !isVertical ? 'flex-end' : 'flex-start',
+            ...step,
           }}
         >
           <chakra.div
@@ -177,9 +177,9 @@ export const Step = forwardRef<StepProps, 'div'>(
           >
             <chakra.div
               __css={{
-                ...stepIconCont,
                 bg: getBgColor,
                 borderColor: getBorderColor,
+                ...stepIconCont,
               }}
             >
               <AnimatePresence exitBeforeEnter>{renderIcon()}</AnimatePresence>
