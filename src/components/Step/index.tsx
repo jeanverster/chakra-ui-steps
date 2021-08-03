@@ -76,7 +76,7 @@ export const Step = forwardRef<StepProps, 'div'>(
       [CustomCheckIcon]
     );
 
-    const { step, stepIconCont, label, description, icon } = useStyles();
+    const { step, stepContainer, stepIconCont, label, labelContainer, description, icon } = useStyles();
 
     const activeBg = `${c}.500`;
 
@@ -173,6 +173,7 @@ export const Step = forwardRef<StepProps, 'div'>(
               display: 'flex',
               flexDir: 'row',
               alignItems: 'center',
+              ...stepContainer,
             }}
           >
             <chakra.div
@@ -191,6 +192,7 @@ export const Step = forwardRef<StepProps, 'div'>(
                 flexDir: 'column',
                 justifyContent: 'center',
                 alignItems: 'flex-start',
+                ...labelContainer,
               }}
             >
               {!!labelProp && (
