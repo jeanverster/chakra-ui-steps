@@ -20,7 +20,7 @@ const AnimatedCloseIcon = motion(CloseIcon);
 const AnimatedSpan = motion(chakra.span);
 
 export interface StepProps extends HTMLChakraProps<'div'> {
-  label?: string;
+  label?: string | React.ReactNode;
   description?: string;
   icon?: React.ComponentType<any>;
 }
