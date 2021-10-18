@@ -3,10 +3,12 @@ import { mode } from '@chakra-ui/theme-tools';
 const parts = [
   'steps',
   'step',
+  'stepContainer',
   'stepIconCont',
   'icon',
   'connector',
   'label',
+  'labelContainer',
   'description',
 ];
 

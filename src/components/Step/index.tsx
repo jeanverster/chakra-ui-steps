@@ -20,7 +20,7 @@ const AnimatedCloseIcon = motion(CloseIcon);
 const AnimatedSpan = motion(chakra.span);
 
 export interface StepProps extends HTMLChakraProps<'div'> {
-  label?: string;
+  label?: string | React.ReactNode;
   description?: string;
   icon?: React.ComponentType<any>;
 }
@@ -76,7 +76,7 @@ export const Step = forwardRef<StepProps, 'div'>(
       [CustomCheckIcon]
     );
 
-    const { step, stepIconCont, label, description, icon } = useStyles();
+    const { step, stepContainer, stepIconCont, label, labelContainer, description, icon } = useStyles();
 
     const activeBg = `${c}.500`;
 
@@ -159,13 +159,13 @@ export const Step = forwardRef<StepProps, 'div'>(
           {...styleProps}
           aria-disabled={!hasVisited}
           __css={{
-            ...step,
             opacity,
             flexDir: isVertical ? 'column' : 'row',
             alignItems: isVertical ? 'flex-start' : 'center',
             flex: isLastStep && !isVertical ? '0 0 auto' : '1 0 auto',
             justifyContent:
               isLastStep && !isVertical ? 'flex-end' : 'flex-start',
+            ...step,
           }}
         >
           <chakra.div
@@ -173,13 +173,14 @@ export const Step = forwardRef<StepProps, 'div'>(
               display: 'flex',
               flexDir: 'row',
               alignItems: 'center',
+              ...stepContainer,
             }}
           >
             <chakra.div
               __css={{
-                ...stepIconCont,
                 bg: getBgColor,
                 borderColor: getBorderColor,
+                ...stepIconCont,
               }}
             >
               <AnimatePresence exitBeforeEnter>{renderIcon()}</AnimatePresence>
@@ -191,6 +192,7 @@ export const Step = forwardRef<StepProps, 'div'>(
                 flexDir: 'column',
                 justifyContent: 'center',
                 alignItems: 'flex-start',
+                ...labelContainer,
               }}
             >
               {!!labelProp && (
