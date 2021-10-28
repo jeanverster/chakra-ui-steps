@@ -17,12 +17,12 @@ export interface StepsProps extends HTMLChakraProps<'div'>, ThemingProps {
   state?: 'loading' | 'error';
   responsive?: boolean;
   checkIcon?: React.ComponentType<any>;
+  onClickStep?: (step: number) => void;
 }
 
 export const Steps = forwardRef<StepsProps, 'div'>(
   (props, ref: React.Ref<HTMLDivElement>) => {
     const styles = useMultiStyleConfig('Steps', props);
-    console.log('styles', styles);
 
     const stepsStyles = {
       fontFamily: 'heading',
@@ -41,6 +41,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       state,
       responsive,
       checkIcon,
+      onClickStep,
       ...rest
     } = omitThemingProps(props);
 
@@ -60,6 +61,8 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       }
       return null;
     };
+
+    const clickable = !!onClickStep;
 
     const [isMobile] = useMediaQuery('(max-width: 43em)');
 
@@ -93,6 +96,8 @@ export const Steps = forwardRef<StepsProps, 'div'>(
               orientation,
               state,
               checkIcon,
+              clickable,
+              onClickStep,
             };
 
             return React.isValidElement(child)

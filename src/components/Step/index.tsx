@@ -27,7 +27,7 @@ export interface StepProps extends HTMLChakraProps<'div'> {
 
 // Props which shouldn't be passed to to the Step component from the user
 interface StepInternalConfig extends ThemingProps {
-  index?: number;
+  index: number;
   isCompletedStep?: boolean;
   isCurrentStep?: boolean;
   isLastStep?: boolean;
@@ -36,6 +36,8 @@ interface StepInternalConfig extends ThemingProps {
   isError?: boolean;
   state?: 'loading' | 'error';
   checkIcon?: React.ComponentType<any>;
+  clickable?: boolean;
+  onClickStep?: (index: number) => void;
 }
 
 const animationConfig = {
@@ -64,6 +66,8 @@ export const Step = forwardRef<StepProps, 'div'>(
       label: labelProp,
       orientation,
       state,
+      clickable,
+      onClickStep,
       ...styleProps
     } = props as FullStepProps;
 
@@ -77,13 +81,13 @@ export const Step = forwardRef<StepProps, 'div'>(
     );
 
     const {
+      description,
+      icon,
+      label,
+      labelContainer,
       step,
       stepContainer,
       stepIconContainer,
-      label,
-      labelContainer,
-      description,
-      icon,
     } = useStyles();
 
     const stepStyles = {
@@ -151,7 +155,13 @@ export const Step = forwardRef<StepProps, 'div'>(
 
     const isVertical = orientation === 'vertical';
 
-    const renderIcon = () => {
+    const handleClick = (index: number) => {
+      if (clickable && onClickStep) {
+        onClickStep(index);
+      }
+    };
+
+    const renderIcon = React.useMemo(() => {
       if (isCompletedStep) {
         return (
           <MotionFlex key="check-icon" {...animationConfig}>
@@ -184,17 +194,18 @@ export const Step = forwardRef<StepProps, 'div'>(
           </MotionFlex>
         );
       return (
-        <AnimatedSpan key="label" __css={label} {...animationConfig}>
+        <AnimatedSpan key="label" __css={labelStyles} {...animationConfig}>
           {(index || 0) + 1}
         </AnimatedSpan>
       );
-    };
+    }, [isCompletedStep, isCurrentStep, isError, isLoading, Icon, icon]);
 
     return (
       <>
         <chakra.div
           ref={ref}
           {...styleProps}
+          onClick={() => handleClick(index)}
           aria-disabled={!hasVisited}
           __css={{
             opacity,
@@ -203,6 +214,9 @@ export const Step = forwardRef<StepProps, 'div'>(
             flex: isLastStep && !isVertical ? '0 0 auto' : '1 0 auto',
             justifyContent:
               isLastStep && !isVertical ? 'flex-end' : 'flex-start',
+            _hover: {
+              cursor: clickable ? 'pointer' : 'default',
+            },
             ...stepStyles,
           }}
         >
@@ -218,10 +232,13 @@ export const Step = forwardRef<StepProps, 'div'>(
               __css={{
                 bg: getBgColor,
                 borderColor: getBorderColor,
+                _hover: {
+                  borderColor: clickable ? activeBg : 'transparent',
+                },
                 ...stepIconContainerStyles,
               }}
             >
-              <AnimatePresence exitBeforeEnter>{renderIcon()}</AnimatePresence>
+              <AnimatePresence exitBeforeEnter>{renderIcon}</AnimatePresence>
             </chakra.div>
             <chakra.div
               aria-current={isCurrentStep}

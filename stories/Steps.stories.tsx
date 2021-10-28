@@ -347,3 +347,34 @@ const theme = extendTheme({
 CustomStyles.args = {
   theme,
 };
+
+export const ClickableSteps: Story<{ theme: any }> = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep, setStep } = useSteps({
+    initialStep: 0,
+  });
+  const { size } = useConfigContext();
+  return (
+    <>
+      <Steps
+        size={size}
+        checkIcon={FiCheckCircle}
+        activeStep={activeStep}
+        onClickStep={step => setStep(step)}
+      >
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label}>
+            <Content my={6} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
