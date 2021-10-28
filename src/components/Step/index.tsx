@@ -76,7 +76,45 @@ export const Step = forwardRef<StepProps, 'div'>(
       [CustomCheckIcon]
     );
 
-    const { step, stepContainer, stepIconCont, label, labelContainer, description, icon } = useStyles();
+    const {
+      step,
+      stepContainer,
+      stepIconContainer,
+      label,
+      labelContainer,
+      description,
+      icon,
+    } = useStyles();
+
+    const stepStyles = {
+      display: 'flex',
+      position: 'relative',
+      ...step,
+    };
+
+    const stepIconContainerStyles = {
+      display: 'flex',
+      borderRadius: '50%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      ...stepIconContainer,
+    };
+
+    const labelStyles = {
+      fontWeight: 'medium',
+      color: mode(`gray.900`, `gray.100`)(props),
+      textAlign: 'center',
+      fontSize: 'md',
+      ...label,
+    };
+
+    const descriptionStyles = {
+      marginTop: '-2px',
+      color: mode(`gray.800`, `gray.200`)(props),
+      textAlign: 'center',
+      fontSize: 'sm',
+      ...description,
+    };
 
     const activeBg = `${c}.500`;
 
@@ -165,7 +203,7 @@ export const Step = forwardRef<StepProps, 'div'>(
             flex: isLastStep && !isVertical ? '0 0 auto' : '1 0 auto',
             justifyContent:
               isLastStep && !isVertical ? 'flex-end' : 'flex-start',
-            ...step,
+            ...stepStyles,
           }}
         >
           <chakra.div
@@ -180,7 +218,7 @@ export const Step = forwardRef<StepProps, 'div'>(
               __css={{
                 bg: getBgColor,
                 borderColor: getBorderColor,
-                ...stepIconCont,
+                ...stepIconContainerStyles,
               }}
             >
               <AnimatePresence exitBeforeEnter>{renderIcon()}</AnimatePresence>
@@ -196,12 +234,12 @@ export const Step = forwardRef<StepProps, 'div'>(
               }}
             >
               {!!labelProp && (
-                <chakra.span __css={{ mx: 2, opacity, ...label }}>
+                <chakra.span __css={{ mx: 2, opacity, ...labelStyles }}>
                   {labelProp}
                 </chakra.span>
               )}
               {!!descriptionProp && (
-                <chakra.span __css={{ mx: 2, opacity, ...description }}>
+                <chakra.span __css={{ mx: 2, opacity, ...descriptionStyles }}>
                   {descriptionProp}
                 </chakra.span>
               )}

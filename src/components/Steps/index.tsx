@@ -22,6 +22,16 @@ export interface StepsProps extends HTMLChakraProps<'div'>, ThemingProps {
 export const Steps = forwardRef<StepsProps, 'div'>(
   (props, ref: React.Ref<HTMLDivElement>) => {
     const styles = useMultiStyleConfig('Steps', props);
+    console.log('styles', styles);
+
+    const stepsStyles = {
+      fontFamily: 'heading',
+      textAlign: 'center',
+      width: '100%',
+      display: 'flex',
+      flex: 1,
+      ...styles.steps,
+    };
 
     const {
       className,
@@ -62,10 +72,10 @@ export const Steps = forwardRef<StepsProps, 'div'>(
           __css={{
             justifyContent: stepCount === 1 ? 'flex-end' : 'space-between',
             flexDir: orientation === 'vertical' ? 'column' : 'row',
-            ...styles.steps,
+            ...stepsStyles,
           }}
-          {...rest}
           className={cx('chakra-steps', className)}
+          {...rest}
         >
           {React.Children.map(children, (child, i) => {
             const isCompletedStep =

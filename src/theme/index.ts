@@ -1,66 +1,91 @@
-import { mode } from '@chakra-ui/theme-tools';
+import {
+  anatomy,
+  mode,
+  PartsStyleFunction,
+  SystemStyleFunction,
+  SystemStyleObject,
+} from '@chakra-ui/theme-tools';
 
-const parts = [
-  'steps',
-  'step',
-  'stepContainer',
-  'stepIconCont',
-  'icon',
+// { step, stepContainer, stepIconContainer, label, labelContainer, description, icon }
+
+const parts = anatomy('steps').parts(
   'connector',
+  'description',
+  'icon',
   'label',
   'labelContainer',
-  'description',
-];
+  'step',
+  'stepContainer',
+  'stepIconContainer',
+  'steps'
+);
 
-type Dict = Record<string, any>;
+const baseStyleSteps: SystemStyleObject = {
+  fontFamily: 'heading',
+  textAlign: 'center',
+  width: '100%',
+  display: 'flex',
+  flex: 1,
+};
 
-const baseStyle = (props: Dict) => {
+const baseStyleStep: SystemStyleObject = {
+  display: 'flex',
+  position: 'relative',
+  justifyContent: 'flex-start',
+};
+
+const baseStylestepIconContainer: SystemStyleObject = {
+  display: 'flex',
+  borderRadius: '50%',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const baseStyleIcon: SystemStyleObject = {
+  strokeWidth: '2px',
+};
+
+const baseStyleConnector: SystemStyleObject = {
+  flex: 1,
+  display: 'flex',
+};
+
+const baseStyleLabel: SystemStyleFunction = props => {
   return {
-    steps: {
-      fontFamily: 'heading',
-      textAlign: 'center',
-      width: '100%',
-      display: 'flex',
-      flex: 1,
-    },
-    step: {
-      display: 'flex',
-      position: 'relative',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-    },
-    stepIconCont: {
-      display: 'flex',
-      borderRadius: '50%',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    icon: {
-      strokeWidth: '2px',
-    },
-    connector: {
-      flex: 1,
-      display: 'flex',
-    },
-    label: {
-      fontWeight: 'medium',
-      color: mode(`gray.900`, `gray.100`)(props),
-      textAlign: 'center',
-      fontSize: 'md',
-    },
-    description: {
-      marginTop: '-2px',
-      color: mode(`gray.800`, `gray.200`)(props),
-      textAlign: 'center',
-      opacity: 0.9,
-      fontSize: 'sm',
-    },
+    fontWeight: 'medium',
+    color: mode(`gray.900`, `gray.100`)(props),
+    textAlign: 'center',
+    fontSize: 'md',
+  };
+};
+
+const baseStyleDescription: SystemStyleFunction = props => {
+  return {
+    marginTop: '-2px',
+    color: mode(`gray.800`, `gray.200`)(props),
+    textAlign: 'center',
+    opacity: 0.9,
+    fontSize: 'sm',
+  };
+};
+
+const baseStyle: PartsStyleFunction<typeof parts> = props => {
+  return {
+    connector: baseStyleConnector,
+    description: baseStyleDescription(props),
+    icon: baseStyleIcon,
+    label: baseStyleLabel(props),
+    labelContainer: {},
+    step: baseStyleStep,
+    stepContainer: {},
+    stepIconContainer: baseStylestepIconContainer,
+    steps: baseStyleSteps,
   };
 };
 
 const sizes = {
   sm: {
-    stepIconCont: {
+    stepIconContainer: {
       width: '32px',
       height: '32px',
       borderWidth: '2px',
@@ -81,7 +106,7 @@ const sizes = {
     },
   },
   md: {
-    stepIconCont: {
+    stepIconContainer: {
       width: '40px',
       height: '40px',
       borderWidth: '2px',
@@ -102,7 +127,7 @@ const sizes = {
     },
   },
   lg: {
-    stepIconCont: {
+    stepIconContainer: {
       width: '48px',
       height: '48px',
       borderWidth: '2px',
@@ -130,7 +155,7 @@ const defaultProps = {
 };
 
 export const StepsStyleConfig = {
-  parts,
+  parts: parts.keys,
   baseStyle,
   sizes,
   defaultProps,
