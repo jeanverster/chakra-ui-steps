@@ -6,8 +6,6 @@ import {
   SystemStyleObject,
 } from '@chakra-ui/theme-tools';
 
-// { step, stepContainer, stepIconContainer, label, labelContainer, description, icon }
-
 const parts = anatomy('steps').parts(
   'connector',
   'description',
