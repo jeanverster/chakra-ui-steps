@@ -138,6 +138,11 @@ export const Step = forwardRef<StepProps, 'div'>(
       return inactiveBg;
     }, [isError, isCompletedStep, isCurrentStep, activeBg, inactiveBg]);
 
+    const getHoverBorderColor = React.useMemo(() => {
+      if (!clickable) return getBorderColor;
+      return activeBg;
+    }, [clickable]);
+
     const getBgColor = React.useMemo(() => {
       if (isCompletedStep) return activeBg;
       if (isCurrentStep) {
@@ -233,7 +238,7 @@ export const Step = forwardRef<StepProps, 'div'>(
                 bg: getBgColor,
                 borderColor: getBorderColor,
                 _hover: {
-                  borderColor: clickable ? activeBg : 'transparent',
+                  borderColor: getHoverBorderColor,
                 },
                 ...stepIconContainerStyles,
               }}

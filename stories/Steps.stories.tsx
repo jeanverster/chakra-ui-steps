@@ -348,7 +348,7 @@ CustomStyles.args = {
   theme,
 };
 
-export const ClickableSteps: Story<{ theme: any }> = (): JSX.Element => {
+export const ClickableSteps: Story = (): JSX.Element => {
   const { nextStep, prevStep, reset, activeStep, setStep } = useSteps({
     initialStep: 0,
   });
