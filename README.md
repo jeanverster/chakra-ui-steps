@@ -44,7 +44,7 @@ npm i chakra-ui-steps
 
 ## Usage
 
-> NOTE: This v2.0.0 of this component requires @chakra-ui/react >= v1.6.7 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>. If you aren't able to update your chakra version you can still use v1.3.0
+> NOTE: This v1.4.0 of this component requires @chakra-ui/react >= v1.6.7 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>. If you aren't able to update your chakra version you can still use v1.3.0
 
 In order to get started you will need to extend the default Chakra theme with the provided `StepsStyleConfig` object, like so:
 
