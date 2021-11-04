@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.3.0...v1.4.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* border hover ([42961b2](https://github.com/jeanverster/chakra-ui-steps/commit/42961b2dec4ea8431584e3ddef7b60c72672361f))
+
+
+### Features
+
+* add ability for theme overrides ([fd9da3b](https://github.com/jeanverster/chakra-ui-steps/commit/fd9da3bc907f29d881cd28adba82ae2a46dfc5ba))
+* better support for overriding styles ([#23](https://github.com/jeanverster/chakra-ui-steps/issues/23)) ([5164852](https://github.com/jeanverster/chakra-ui-steps/commit/516485283b163aa34daf8a960114bf6411d0d2f5))
+* clickable steps ([788116e](https://github.com/jeanverster/chakra-ui-steps/commit/788116e79fa34260b1c45f5a63f07b6f92dfd7f0))
+
 # [1.3.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.2.0...v1.3.0) (2021-08-01)
 
 
