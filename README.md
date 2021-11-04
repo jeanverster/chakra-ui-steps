@@ -50,6 +50,8 @@ npm i chakra-ui-steps
 
 > NOTE: This component requires Chakra UI > v1.0 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>.
 
+> NOTE: v2.0 requires @chakra-ui/react >= v1.6.7
+
 In order to get started you will need to extend the default Chakra theme with the provided `StepsStyleConfig` object, like so:
 
 ```jsx
@@ -120,6 +122,7 @@ export const BasicExample = () => {
 | **`orientation`** | string              | no       | Sets the orientation of the Steps component                                | horizontal |
 | **`responsive`**  | boolean             | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
 | **`checkIcon`**   | React.ComponentType | no       | Allows you to provide a custom check icon                                  | undefined  |
+| **`onClickStep`** | () => void          | no       | If defined, allows you to click on the step icons                          | undefined  |
 
 ### `Step`
 
