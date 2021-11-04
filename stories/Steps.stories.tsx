@@ -1,6 +1,7 @@
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import {
   Button,
+  extendTheme,
   Flex,
   FlexProps,
   Heading,
@@ -10,7 +11,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import { motion, MotionProps } from 'framer-motion';
 import React from 'react';
 import {
@@ -20,7 +21,7 @@ import {
   FiUser,
 } from 'react-icons/fi';
 import { useConfigContext } from '../.storybook/preview';
-import { Step, Steps, useSteps } from '../src';
+import { Step, Steps, StepsStyleConfig, useSteps } from '../src';
 
 const meta: Meta = {
   title: 'Steps',
@@ -114,6 +115,9 @@ const descriptionSteps = [
   { label: 'Step 2', description: 'Step 2 Description' },
   { label: 'Step 3', description: 'Step 3 Description' },
 ];
+
+//👇 We create a “template” of how args map to rendering
+// const Template: Story<any> = (args) => <Button {...args} />
 
 export const Horizontal = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -278,6 +282,85 @@ export const CustomCheckIcon = (): JSX.Element => {
   return (
     <>
       <Steps size={size} checkIcon={FiCheckCircle} activeStep={activeStep}>
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label}>
+            <Content my={6} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
+export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const { size } = useConfigContext();
+  return (
+    <>
+      <Steps size={size} checkIcon={FiCheckCircle} activeStep={activeStep}>
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label}>
+            <Content my={6} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
+const CustomSteps = {
+  ...StepsStyleConfig,
+  baseStyle: {
+    steps: {
+      color: 'red',
+    },
+    label: {
+      color: 'red',
+    },
+  },
+};
+
+const theme = extendTheme({
+  components: {
+    Steps: CustomSteps,
+  },
+});
+
+CustomStyles.args = {
+  theme,
+};
+
+export const ClickableSteps: Story = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep, setStep } = useSteps({
+    initialStep: 0,
+  });
+  const { size } = useConfigContext();
+  return (
+    <>
+      <Steps
+        size={size}
+        checkIcon={FiCheckCircle}
+        activeStep={activeStep}
+        onClickStep={step => setStep(step)}
+      >
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
             <Content my={6} index={index} />

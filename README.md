@@ -10,7 +10,7 @@
 
 <h4 align="center">Steps component designed to work seamlessly with <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a>.</h4>
 
-<h4 align="center">An interactive demo can be viewed <a href="https://jeanverster.github.io/chakra-ui-steps-site/" target="_blank">here</a>.</h4>
+<h4 align="center">An interactive demo along with code examples can be viewed <a href="https://jeanverster.github.io/chakra-ui-steps-site/" target="_blank">here</a>.</h4>
 
 <p align="center">
   <a href="https://badge.fury.io/js/chakra-ui-steps">
@@ -19,11 +19,7 @@
   </a>
 </p>
 
-![screenshot](https://i.imgur.com/XeOZxIF.gif)
-
-If you enjoy this component, please consider buying me a coffee :)
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/jeanverster)
+![screenshot](https://i.imgur.com/B9zbJEa.gif)
 
 ## Features
 
@@ -48,7 +44,7 @@ npm i chakra-ui-steps
 
 ## Usage
 
-> NOTE: This component requires Chakra UI > v1.0 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>.
+> NOTE: This v1.4.0 of this component requires @chakra-ui/react >= v1.6.7 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>. If you aren't able to update your chakra version you can still use v1.3.0
 
 In order to get started you will need to extend the default Chakra theme with the provided `StepsStyleConfig` object, like so:
 
@@ -120,6 +116,7 @@ export const BasicExample = () => {
 | **`orientation`** | string              | no       | Sets the orientation of the Steps component                                | horizontal |
 | **`responsive`**  | boolean             | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
 | **`checkIcon`**   | React.ComponentType | no       | Allows you to provide a custom check icon                                  | undefined  |
+| **`onClickStep`** | () => void          | no       | If defined, allows you to click on the step icons                          | undefined  |
 
 ### `Step`
 
