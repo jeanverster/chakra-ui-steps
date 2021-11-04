@@ -76,7 +76,6 @@ const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const withChakra = (StoryFn: Function, context: StoryContext) => {
-  console.log('theme', context?.args?.theme);
   const theme = context?.args?.theme
     ? context?.args.theme
     : extendTheme({ components: { Steps: StepsStyleConfig } });
