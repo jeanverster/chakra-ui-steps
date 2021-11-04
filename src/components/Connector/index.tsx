@@ -29,7 +29,13 @@ export const Connector = React.memo(
     isLastStep,
     hasLabel,
   }: ConnectorProps) => {
-    const { connector, stepIconCont } = useStyles();
+    const { connector, stepIconContainer } = useStyles();
+
+    const connectorStyles = {
+      flex: 1,
+      display: 'flex',
+      ...connector,
+    };
 
     const theme = useTheme();
 
@@ -42,7 +48,7 @@ export const Connector = React.memo(
     const rawActiveColor = getColor(theme, activeBg);
 
     const getMargin = () => {
-      if (isVertical) return `calc(${stepIconCont.width} / 2)`;
+      if (isVertical) return `calc(${stepIconContainer.width} / 2)`;
       if (!hasLabel) return 2;
       return 0;
     };
@@ -50,7 +56,6 @@ export const Connector = React.memo(
     return (
       <MotionDiv
         __css={{
-          ...connector,
           ml: getMargin(),
           my: isVertical ? 2 : 0,
           pl: isVertical ? 4 : 0,
@@ -60,6 +65,7 @@ export const Connector = React.memo(
           borderTopWidth: isLastStep || isVertical ? 0 : '2px',
           borderLeftWidth: isLastStep || !isVertical ? 0 : '2px',
           minHeight: isLastStep || !isVertical ? 'auto' : '1.5rem',
+          ...connectorStyles,
         }}
         initial={{
           borderColor: rawInitialColor,

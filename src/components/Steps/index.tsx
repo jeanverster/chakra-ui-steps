@@ -17,11 +17,21 @@ export interface StepsProps extends HTMLChakraProps<'div'>, ThemingProps {
   state?: 'loading' | 'error';
   responsive?: boolean;
   checkIcon?: React.ComponentType<any>;
+  onClickStep?: (step: number) => void;
 }
 
 export const Steps = forwardRef<StepsProps, 'div'>(
   (props, ref: React.Ref<HTMLDivElement>) => {
     const styles = useMultiStyleConfig('Steps', props);
+
+    const stepsStyles = {
+      fontFamily: 'heading',
+      textAlign: 'center',
+      width: '100%',
+      display: 'flex',
+      flex: 1,
+      ...styles.steps,
+    };
 
     const {
       className,
@@ -31,6 +41,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       state,
       responsive,
       checkIcon,
+      onClickStep,
       ...rest
     } = omitThemingProps(props);
 
@@ -51,6 +62,8 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       return null;
     };
 
+    const clickable = !!onClickStep;
+
     const [isMobile] = useMediaQuery('(max-width: 43em)');
 
     const orientation = isMobile && responsive ? 'vertical' : orientationProp;
@@ -62,10 +75,10 @@ export const Steps = forwardRef<StepsProps, 'div'>(
           __css={{
             justifyContent: stepCount === 1 ? 'flex-end' : 'space-between',
             flexDir: orientation === 'vertical' ? 'column' : 'row',
-            ...styles.steps,
+            ...stepsStyles,
           }}
-          {...rest}
           className={cx('chakra-steps', className)}
+          {...rest}
         >
           {React.Children.map(children, (child, i) => {
             const isCompletedStep =
@@ -83,6 +96,8 @@ export const Steps = forwardRef<StepsProps, 'div'>(
               orientation,
               state,
               checkIcon,
+              clickable,
+              onClickStep,
             };
 
             return React.isValidElement(child)

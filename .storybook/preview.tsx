@@ -76,10 +76,11 @@ const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const withChakra = (StoryFn: Function, context: StoryContext) => {
+  const theme = context?.args?.theme
+    ? context?.args.theme
+    : extendTheme({ components: { Steps: StepsStyleConfig } });
   return (
-    <ChakraProvider
-      theme={extendTheme({ components: { Steps: StepsStyleConfig } })}
-    >
+    <ChakraProvider theme={theme}>
       <ConfigProvider>
         <ToggleBar />
         <StoryFn />
