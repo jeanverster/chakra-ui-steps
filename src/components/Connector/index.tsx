@@ -1,13 +1,10 @@
-import { useColorModeValue } from '@chakra-ui/color-mode';
 import {
   chakra,
   HTMLChakraProps,
   ThemingProps,
   useStyles,
-  useTheme,
 } from '@chakra-ui/system';
-import { getColor } from '@chakra-ui/theme-tools';
-import { motion } from 'framer-motion';
+import { dataAttr } from '@chakra-ui/utils';
 import * as React from 'react';
 
 interface ConnectorProps extends HTMLChakraProps<'div'>, ThemingProps {
@@ -18,11 +15,8 @@ interface ConnectorProps extends HTMLChakraProps<'div'>, ThemingProps {
   orientation?: 'vertical' | 'horizontal';
 }
 
-const MotionDiv = motion(chakra.div);
-
 export const Connector = React.memo(
   ({
-    colorScheme: c,
     isCompletedStep,
     isVertical,
     children,
@@ -37,16 +31,6 @@ export const Connector = React.memo(
       ...connector,
     };
 
-    const theme = useTheme();
-
-    const activeBg = useColorModeValue(`${c}.500`, `${c}.200`);
-
-    const inactiveBg = useColorModeValue(`gray.200`, `gray.700`);
-
-    const rawInitialColor = getColor(theme, inactiveBg);
-
-    const rawActiveColor = getColor(theme, activeBg);
-
     const getMargin = () => {
       if (isVertical) return `calc(${stepIconContainer.width} / 2)`;
       if (!hasLabel) return 2;
@@ -54,7 +38,7 @@ export const Connector = React.memo(
     };
 
     return (
-      <MotionDiv
+      <chakra.div
         __css={{
           ms: getMargin(),
           my: isVertical ? 2 : 0,
@@ -65,17 +49,13 @@ export const Connector = React.memo(
           borderTopWidth: isLastStep || isVertical ? 0 : '2px',
           borderInlineStartWidth: isLastStep || !isVertical ? 0 : '2px',
           minHeight: isLastStep || !isVertical ? 'auto' : '1.5rem',
+          borderColor: connector.borderColor,
           ...connectorStyles,
         }}
-        initial={{
-          borderColor: rawInitialColor,
-        }}
-        animate={{
-          borderColor: isCompletedStep ? rawActiveColor : rawInitialColor,
-        }}
+        data-highlighted={dataAttr(isCompletedStep)}
       >
         {isVertical && children}
-      </MotionDiv>
+      </chakra.div>
     );
   }
 );

@@ -1,4 +1,3 @@
-import { useColorModeValue } from '@chakra-ui/color-mode';
 import { Flex } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import {
@@ -8,7 +7,8 @@ import {
   ThemingProps,
   useStyles,
 } from '@chakra-ui/system';
-import { darken, lighten, mode } from '@chakra-ui/theme-tools';
+import { dataAttr } from '@chakra-ui/utils';
+import { mode } from '@chakra-ui/theme-tools';
 import { Collapse } from '@chakra-ui/transition';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
@@ -120,39 +120,8 @@ export const Step = forwardRef<StepProps, 'div'>(
       ...description,
     };
 
-    const activeBg = `${c}.500`;
-
-    const inactiveBg = useColorModeValue(`gray.200`, `gray.700`);
-
     const isError = state === 'error';
     const isLoading = state === 'loading';
-
-    const getBorderColor = React.useMemo(() => {
-      if (isCompletedStep) return activeBg;
-      if (isCurrentStep) {
-        if (isError) {
-          return 'red.500';
-        }
-        return activeBg;
-      }
-      return inactiveBg;
-    }, [isError, isCompletedStep, isCurrentStep, activeBg, inactiveBg]);
-
-    const getHoverBorderColor = React.useMemo(() => {
-      if (!clickable) return getBorderColor;
-      return activeBg;
-    }, [clickable]);
-
-    const getBgColor = React.useMemo(() => {
-      if (isCompletedStep) return activeBg;
-      if (isCurrentStep) {
-        if (isError) {
-          return 'red.500';
-        }
-        return mode(darken(inactiveBg, 0.5), lighten(inactiveBg, 0.5));
-      }
-      return inactiveBg;
-    }, [isError, isCompletedStep, isCurrentStep, activeBg, inactiveBg]);
 
     const hasVisited = isCurrentStep || isCompletedStep;
 
@@ -234,14 +203,11 @@ export const Step = forwardRef<StepProps, 'div'>(
             }}
           >
             <chakra.div
-              __css={{
-                bg: getBgColor,
-                borderColor: getBorderColor,
-                _hover: {
-                  borderColor: getHoverBorderColor,
-                },
-                ...stepIconContainerStyles,
-              }}
+              __css={stepIconContainerStyles}
+              aria-current={isCurrentStep ? 'step' : undefined}
+              data-invalid={dataAttr(isCurrentStep && isError)}
+              data-highlighted={dataAttr(isCompletedStep)}
+              data-clickable={dataAttr(clickable)}
             >
               <AnimatePresence exitBeforeEnter>{renderIcon}</AnimatePresence>
             </chakra.div>
