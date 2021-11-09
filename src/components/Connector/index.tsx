@@ -56,14 +56,14 @@ export const Connector = React.memo(
     return (
       <MotionDiv
         __css={{
-          ml: getMargin(),
+          ms: getMargin(),
           my: isVertical ? 2 : 0,
-          pl: isVertical ? 4 : 0,
-          mr: isVertical ? 0 : 2,
+          ps: isVertical ? 4 : 0,
+          me: isVertical ? 0 : 2,
           height: isVertical ? 'auto' : '2px',
           alignSelf: isVertical ? 'stretch' : 'auto',
           borderTopWidth: isLastStep || isVertical ? 0 : '2px',
-          borderLeftWidth: isLastStep || !isVertical ? 0 : '2px',
+          borderInlineStartWidth: isLastStep || !isVertical ? 0 : '2px',
           minHeight: isLastStep || !isVertical ? 'auto' : '1.5rem',
           ...connectorStyles,
         }}
