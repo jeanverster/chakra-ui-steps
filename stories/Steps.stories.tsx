@@ -11,6 +11,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { darken, lighten } from '@chakra-ui/theme-tools';
 import { Meta, Story } from '@storybook/react';
 import { motion, MotionProps } from 'framer-motion';
 import React from 'react';
@@ -328,13 +329,51 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
 
 const CustomSteps = {
   ...StepsStyleConfig,
-  baseStyle: {
-    steps: {
-      color: 'red',
-    },
-    label: {
-      color: 'red',
-    },
+  baseStyle: ({ colorMode }) => {
+    const inactiveColor = colorMode === 'light' ? 'gray.100' : 'gray.700';
+    const activeColor = `blue.500`;
+    const color = colorMode === 'light' ? 'blue' : 'white';
+    return {
+      steps: {
+        color,
+      },
+      connector: {
+        // this is the track color of the connector between steps
+        borderColor:
+          colorMode === 'light' ? 'blackAlpha.300' : 'whiteAlpha.500',
+        transitionProperty: 'border-color',
+        transitionDuration: 'normal',
+        _highlighted: {
+          borderColor: activeColor,
+        },
+      },
+      stepIconContainer: {
+        bg: inactiveColor,
+        borderColor: inactiveColor,
+        borderRadius: 'md',
+        _activeStep: {
+          bg:
+            colorMode === 'light'
+              ? darken(inactiveColor, 0.5)
+              : lighten(inactiveColor, 0.5),
+          borderColor: activeColor,
+          _invalid: {
+            bg: 'red.500',
+            borderColor: 'red.500',
+          },
+        },
+        _highlighted: {
+          bg: activeColor,
+          borderColor: activeColor,
+        },
+        '&[data-clickable]:hover': {
+          borderColor: activeColor,
+        },
+      },
+      label: {
+        color,
+      },
+    };
   },
 };
 
