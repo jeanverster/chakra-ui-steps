@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.4.0...v1.5.0) (2021-11-10)
+
+
+### Features
+
+* add custom style storybook example ([bee9961](https://github.com/jeanverster/chakra-ui-steps/commit/bee99618748ed83a82a6dcba1e33cf6efb1fd830))
+
 # [1.4.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.3.0...v1.4.0) (2021-11-04)
 
 
