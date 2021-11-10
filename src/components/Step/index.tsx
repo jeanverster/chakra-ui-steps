@@ -7,9 +7,9 @@ import {
   ThemingProps,
   useStyles,
 } from '@chakra-ui/system';
-import { dataAttr } from '@chakra-ui/utils';
 import { mode } from '@chakra-ui/theme-tools';
 import { Collapse } from '@chakra-ui/transition';
+import { dataAttr } from '@chakra-ui/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
 import { Connector } from '../Connector';
