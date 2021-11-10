@@ -1,6 +1,8 @@
 import {
   anatomy,
   mode,
+  lighten,
+  darken,
   PartsStyleFunction,
   SystemStyleFunction,
   SystemStyleObject,
@@ -22,31 +24,68 @@ const baseStyleIcon: SystemStyleObject = {
   strokeWidth: '2px',
 };
 
-const baseStyleLabel: SystemStyleFunction = props => {
+const baseStyleLabel: SystemStyleFunction = (props) => ({
+  color: mode(`gray.900`, `gray.100`)(props),
+});
+
+const baseStyleDescription: SystemStyleFunction = (props) => ({
+  color: mode(`gray.800`, `gray.200`)(props),
+});
+
+const baseStyleConnector: SystemStyleFunction = (props) => {
+  const { colorScheme: c } = props;
+  const inactiveColor = mode('gray.200', 'gray.700')(props);
+  const activeColor = mode(`${c}.500`, `${c}.200`)(props);
+
   return {
-    color: mode(`gray.900`, `gray.100`)(props),
+    borderColor: inactiveColor,
+    transitionProperty: 'border-color',
+    transitionDuration: 'normal',
+    _highlighted: {
+      borderColor: activeColor,
+    },
   };
 };
 
-const baseStyleDescription: SystemStyleFunction = props => {
+const baseStyleStepIconContainer: SystemStyleFunction = (props) => {
+  const { colorScheme: c } = props;
+  const inactiveColor = mode('gray.200', 'gray.700')(props);
+  const activeColor = `${c}.500`;
+
   return {
-    color: mode(`gray.800`, `gray.200`)(props),
+    bg: inactiveColor,
+    borderColor: inactiveColor,
+    transitionProperty: 'background, border-color',
+    transitionDuration: 'normal',
+    _activeStep: {
+      bg: mode(darken(inactiveColor, 0.5), lighten(inactiveColor, 0.5))(props),
+      borderColor: activeColor,
+      _invalid: {
+        bg: 'red.500',
+        borderColor: 'red.500',
+      },
+    },
+    _highlighted: {
+      bg: activeColor,
+      borderColor: activeColor,
+    },
+    '&[data-clickable]:hover': {
+      borderColor: activeColor,
+    },
   };
 };
 
-const baseStyle: PartsStyleFunction<typeof parts> = props => {
-  return {
-    connector: {},
-    description: baseStyleDescription(props),
-    icon: baseStyleIcon,
-    label: baseStyleLabel(props),
-    labelContainer: {},
-    step: {},
-    stepContainer: {},
-    stepIconContainer: {},
-    steps: {},
-  };
-};
+const baseStyle: PartsStyleFunction<typeof parts> = (props) => ({
+  connector: baseStyleConnector(props),
+  description: baseStyleDescription(props),
+  icon: baseStyleIcon,
+  label: baseStyleLabel(props),
+  labelContainer: {},
+  step: {},
+  stepContainer: {},
+  stepIconContainer: baseStyleStepIconContainer(props),
+  steps: {},
+});
 
 const sizes = {
   sm: {
