@@ -11,6 +11,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { darken, lighten } from '@chakra-ui/theme-tools';
 import { Meta, Story } from '@storybook/react';
 import { motion, MotionProps } from 'framer-motion';
 import React from 'react';
@@ -330,12 +331,38 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
 const CustomSteps = {
   ...StepsStyleConfig,
   baseStyle: props => {
+    const inactiveColor = props.colorMode === 'light' ? 'gray.100' : 'gray.700';
+    const activeColor = `blue.500`;
     return {
       ...StepsStyleConfig.baseStyle(props),
-      icon: {
-        ...StepsStyleConfig.baseStyle(props).icon,
-        // your custom styles here
-        strokeWidth: '1px',
+      connector: {
+        ...StepsStyleConfig.baseStyle(props).connector,
+        // this is the track color of the connector between steps
+        borderColor:
+          props.colorMode === 'light' ? 'blackAlpha.300' : 'whiteAlpha.500',
+        _highlighted: {
+          borderColor: activeColor,
+        },
+      },
+      stepIconContainer: {
+        ...StepsStyleConfig.baseStyle(props).stepIconContainer,
+        bg: inactiveColor,
+        borderColor: inactiveColor,
+        borderRadius: 'md',
+        _activeStep: {
+          bg:
+            props.colorMode === 'light'
+              ? darken(inactiveColor, 0.5)
+              : lighten(inactiveColor, 0.5),
+          borderColor: activeColor,
+        },
+        _highlighted: {
+          bg: activeColor,
+          borderColor: activeColor,
+        },
+        '&[data-clickable]:hover': {
+          borderColor: activeColor,
+        },
       },
     };
   },
@@ -369,6 +396,35 @@ export const ClickableSteps: Story = (): JSX.Element => {
             <Content my={6} index={index} />
           </Step>
         ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
+export const VerticalLabels: Story = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const { size } = useConfigContext();
+  return (
+    <>
+      <Steps size={size} labelOrientation="vertical" activeStep={activeStep}>
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label}>
+            <Content my={6} index={index} />
+          </Step>
+        ))}
+        <Step label="Longer label">
+          <Content my={6} index={3} />
+        </Step>
       </Steps>
       {activeStep === 3 ? (
         <ResetPrompt onReset={reset} />

@@ -7,8 +7,8 @@ import { CheckIcon, CloseIcon } from '../Icons';
 interface StepIconProps {
   isCompletedStep?: boolean;
   isCurrentStep?: boolean;
-  isError: boolean;
-  isLoading: boolean;
+  isError?: boolean;
+  isLoading?: boolean;
   icon?: React.ComponentType<any>;
   index: number;
   checkIcon?: React.ComponentType<any>;

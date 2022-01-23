@@ -26,10 +26,16 @@ const baseStyleIcon: SystemStyleObject = {
 
 const baseStyleLabel: SystemStyleFunction = props => ({
   color: mode(`gray.900`, `gray.100`)(props),
+  fontWeight: 'medium',
+  textAlign: 'center',
+  fontSize: 'md',
 });
 
 const baseStyleDescription: SystemStyleFunction = props => ({
   color: mode(`gray.800`, `gray.200`)(props),
+  marginTop: '-2px',
+  textAlign: 'center',
+  fontSize: 'sm',
 });
 
 const baseStyleConnector: SystemStyleFunction = props => {
@@ -38,6 +44,8 @@ const baseStyleConnector: SystemStyleFunction = props => {
   const activeColor = mode(`${c}.500`, `${c}.200`)(props);
 
   return {
+    flex: 1,
+    display: 'flex',
     borderColor: inactiveColor,
     transitionProperty: 'border-color',
     transitionDuration: 'normal',
@@ -53,6 +61,10 @@ const baseStyleStepIconContainer: SystemStyleFunction = props => {
   const activeColor = `${c}.500`;
 
   return {
+    display: 'flex',
+    borderRadius: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
     bg: inactiveColor,
     borderColor: inactiveColor,
     transitionProperty: 'background, border-color',
@@ -80,11 +92,28 @@ const baseStyle: PartsStyleFunction<typeof parts> = props => ({
   description: baseStyleDescription(props),
   icon: baseStyleIcon,
   label: baseStyleLabel(props),
-  labelContainer: {},
-  step: {},
-  stepContainer: {},
+  labelContainer: {
+    display: 'flex',
+    flexDir: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  step: {
+    display: 'flex',
+    position: 'relative',
+  },
+  stepContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   stepIconContainer: baseStyleStepIconContainer(props),
-  steps: {},
+  steps: {
+    fontFamily: 'heading',
+    textAlign: 'center',
+    width: '100%',
+    display: 'flex',
+    flex: 1,
+  },
 });
 
 const sizes = {
