@@ -1,3 +1,11 @@
+# [1.6.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.5.0...v1.6.0) (2022-01-23)
+
+
+### Features
+
+* add vertical label orientation ([58f51ab](https://github.com/jeanverster/chakra-ui-steps/commit/58f51ab3680e8f20f9be800b0649add68b115070))
+* update vertical labels ([48d280f](https://github.com/jeanverster/chakra-ui-steps/commit/48d280f485393f43c8abf92cc9956e0e79de4330))
+
 # [1.5.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.4.0...v1.5.0) (2021-11-10)
 
 

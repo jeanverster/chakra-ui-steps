@@ -45,6 +45,7 @@ const ToggleBar = () => {
         {Object.values(Sizes).map(val => (
           <Button
             size="sm"
+            key={val}
             onClick={() => setSize(val)}
             bg={size === val ? activeBg : bg}
           >
