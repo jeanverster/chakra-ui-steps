@@ -21,6 +21,7 @@ import {
   FiDollarSign,
   FiUser,
 } from 'react-icons/fi';
+import { MdCheck } from 'react-icons/md';
 import { useConfigContext } from '../.storybook/preview';
 import { Step, Steps, StepsStyleConfig, useSteps } from '../src';
 
@@ -110,10 +111,14 @@ const Content = ({ index, ...rest }: ContentProps) => {
   );
 };
 
-const steps = [{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }];
+const steps = [
+  { label: 'Step 1' },
+  { label: 'Step 2 Label' },
+  { label: 'Step 3' },
+];
 const descriptionSteps = [
   { label: 'Step 1', description: 'Step 1 Description' },
-  { label: 'Step 2', description: 'Step 2 Description' },
+  { label: 'Step 2 Label', description: 'Step 2 Description' },
   { label: 'Step 3', description: 'Step 3 Description' },
 ];
 
@@ -308,9 +313,9 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
   const { size } = useConfigContext();
   return (
     <>
-      <Steps size={size} checkIcon={FiCheckCircle} activeStep={activeStep}>
-        {steps.map(({ label }, index) => (
-          <Step label={label} key={label}>
+      <Steps size={size} checkIcon={MdCheck} activeStep={activeStep}>
+        {iconSteps.map(({ label, icon }, index) => (
+          <Step label={label} key={label} icon={icon}>
             <Content my={6} index={index} />
           </Step>
         ))}
@@ -329,38 +334,31 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
 
 const CustomSteps = {
   ...StepsStyleConfig,
-  baseStyle: ({ colorMode }) => {
-    const inactiveColor = colorMode === 'light' ? 'gray.100' : 'gray.700';
+  baseStyle: props => {
+    const inactiveColor = props.colorMode === 'light' ? 'gray.100' : 'gray.700';
     const activeColor = `blue.500`;
-    const color = colorMode === 'light' ? 'blue' : 'white';
     return {
-      steps: {
-        color,
-      },
+      ...StepsStyleConfig.baseStyle(props),
       connector: {
+        ...StepsStyleConfig.baseStyle(props).connector,
         // this is the track color of the connector between steps
         borderColor:
-          colorMode === 'light' ? 'blackAlpha.300' : 'whiteAlpha.500',
-        transitionProperty: 'border-color',
-        transitionDuration: 'normal',
+          props.colorMode === 'light' ? 'blackAlpha.300' : 'whiteAlpha.500',
         _highlighted: {
           borderColor: activeColor,
         },
       },
       stepIconContainer: {
+        ...StepsStyleConfig.baseStyle(props).stepIconContainer,
         bg: inactiveColor,
         borderColor: inactiveColor,
         borderRadius: 'md',
         _activeStep: {
           bg:
-            colorMode === 'light'
+            props.colorMode === 'light'
               ? darken(inactiveColor, 0.5)
               : lighten(inactiveColor, 0.5),
           borderColor: activeColor,
-          _invalid: {
-            bg: 'red.500',
-            borderColor: 'red.500',
-          },
         },
         _highlighted: {
           bg: activeColor,
@@ -369,9 +367,6 @@ const CustomSteps = {
         '&[data-clickable]:hover': {
           borderColor: activeColor,
         },
-      },
-      label: {
-        color,
       },
     };
   },
@@ -405,6 +400,35 @@ export const ClickableSteps: Story = (): JSX.Element => {
             <Content my={6} index={index} />
           </Step>
         ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
+export const VerticalLabels: Story = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const { size } = useConfigContext();
+  return (
+    <>
+      <Steps size={size} labelOrientation="vertical" activeStep={activeStep}>
+        {descriptionSteps.map(({ label, description }, index) => (
+          <Step label={label} key={label} description={description}>
+            <Content my={6} index={index} />
+          </Step>
+        ))}
+        <Step label="Step 4">
+          <Content my={6} index={3} />
+        </Step>
       </Steps>
       {activeStep === 3 ? (
         <ResetPrompt onReset={reset} />
