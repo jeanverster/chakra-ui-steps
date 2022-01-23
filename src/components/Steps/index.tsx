@@ -79,6 +79,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
             labelOrientation,
             clickable,
             colorScheme: props.colorScheme,
+            stepCount,
           }}
         >
           <chakra.div

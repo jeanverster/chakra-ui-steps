@@ -88,7 +88,7 @@
     "@types/react-dom": "^17.0.5",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.2.0",
-    "framer-motion": "^4.1.17",
+    "framer-motion": "^6.2.1",
     "husky": "^6.0.0",
     "jest-axe": "^4.1.0",
     "nodemon": "^2.0.12",

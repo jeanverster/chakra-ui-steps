@@ -10,6 +10,7 @@ interface StepsContextValue extends StepsProps {
   isLabelVertical?: boolean;
   widths?: number[];
   setWidths?: React.Dispatch<React.SetStateAction<number[]>>;
+  stepCount?: number;
 }
 
 const StepsContext = React.createContext<StepsContextValue>({

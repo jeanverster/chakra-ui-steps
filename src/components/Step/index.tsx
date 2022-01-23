@@ -53,6 +53,7 @@ export const Step = forwardRef<StepProps, 'div'>(
       onClickStep,
       clickable,
       setWidths,
+      stepCount,
     } = useStepsContext();
 
     const { step, stepContainer, stepIconContainer } = useStyles();
@@ -71,9 +72,14 @@ export const Step = forwardRef<StepProps, 'div'>(
 
     React.useEffect(() => {
       if (containerRef && containerRef.current && setWidths) {
-        setWidths(prev => [...prev, containerRef.current?.offsetWidth || 0]);
+        setWidths(prev => {
+          if (prev.length === stepCount) {
+            return [containerRef.current?.offsetWidth || 0];
+          }
+          return [...prev, containerRef.current?.offsetWidth || 0];
+        });
       }
-    }, []);
+    }, [stepIconContainer.width, stepIconContainer.height]);
 
     return (
       <>

@@ -20,10 +20,10 @@ const AnimatedSpan = motion(chakra.span);
 
 const animationConfig = {
   transition: {
-    duration: 0.15,
+    duration: 0.25,
   },
-  exit: { scale: 0, opacity: 0 },
-  initial: { scale: 0, opacity: 0 },
+  exit: { scale: 0.5, opacity: 0 },
+  initial: { scale: 0.5, opacity: 0 },
   animate: { scale: 1, opacity: 1 },
 };
 

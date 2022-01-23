@@ -111,10 +111,14 @@ const Content = ({ index, ...rest }: ContentProps) => {
   );
 };
 
-const steps = [{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }];
+const steps = [
+  { label: 'Step 1' },
+  { label: 'Step 2 Label' },
+  { label: 'Step 3' },
+];
 const descriptionSteps = [
   { label: 'Step 1', description: 'Step 1 Description' },
-  { label: 'Step 2', description: 'Step 2 Description' },
+  { label: 'Step 2 Label', description: 'Step 2 Description' },
   { label: 'Step 3', description: 'Step 3 Description' },
 ];
 
@@ -422,11 +426,8 @@ export const VerticalLabels: Story = (): JSX.Element => {
             <Content my={6} index={index} />
           </Step>
         ))}
-        <Step label="Longer label">
-          <Content my={6} index={3} />
-        </Step>
       </Steps>
-      {activeStep === 3 ? (
+      {activeStep === 4 ? (
         <ResetPrompt onReset={reset} />
       ) : (
         <StepButtons

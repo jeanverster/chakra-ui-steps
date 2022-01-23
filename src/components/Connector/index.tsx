@@ -48,11 +48,12 @@ export const Connector = React.memo(
         return {
           ...base,
           position: 'absolute',
-          top: `calc(${stepIconContainer.height} / 2)`,
-          left: `calc(${stepIconContainer.width} + 20px)`,
+          top: `calc(${stepIconContainer.height} / 2  - ${base.height} / 2)`,
+          left: `calc(((${widths?.[index]}px + ${stepIconContainer.width}) / 2) + 8px)`,
+          // use index of next step to determine spacing
           right: `calc((${widths?.[index + 1]}px - ${
             stepIconContainer.width
-          } - 20px) / -2)`,
+          }) / -2 + 8px)`,
         };
       }
       return base;
