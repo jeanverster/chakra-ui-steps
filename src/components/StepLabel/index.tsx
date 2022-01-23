@@ -38,7 +38,7 @@ export const StepLabel = ({
         <chakra.span
           __css={{
             mx: isLabelVertical ? 0 : 2,
-            mt: isLabelVertical ? 2 : 0,
+            mt: isLabelVertical ? 1 : 0,
             opacity,
             ...labelStyles,
           }}
