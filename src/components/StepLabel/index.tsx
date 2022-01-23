@@ -28,18 +28,32 @@ export const StepLabel = ({
   return shouldRender ? (
     <chakra.div
       aria-current={isCurrentStep ? 'step' : undefined}
-      __css={labelContainer}
+      __css={{
+        textAlign: isLabelVertical ? 'center' : 'left',
+        alignItems: isLabelVertical ? 'center' : 'flex-start',
+        ...labelContainer,
+      }}
     >
       {!!label && (
         <chakra.span
-          __css={{ mx: isLabelVertical ? 0 : 2, opacity, ...labelStyles }}
+          __css={{
+            mx: isLabelVertical ? 0 : 2,
+            mt: isLabelVertical ? 2 : 0,
+            opacity,
+            ...labelStyles,
+          }}
         >
           {label}
         </chakra.span>
       )}
       {!!description && (
         <chakra.span
-          __css={{ mx: isLabelVertical ? 0 : 2, opacity, ...descriptionStyles }}
+          __css={{
+            mx: isLabelVertical ? 0 : 2,
+            mt: isLabelVertical ? 2 : 0,
+            opacity,
+            ...descriptionStyles,
+          }}
         >
           {description}
         </chakra.span>

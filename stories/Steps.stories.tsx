@@ -421,13 +421,16 @@ export const VerticalLabels: Story = (): JSX.Element => {
   return (
     <>
       <Steps size={size} labelOrientation="vertical" activeStep={activeStep}>
-        {steps.map(({ label }, index) => (
-          <Step label={label} key={label}>
+        {descriptionSteps.map(({ label, description }, index) => (
+          <Step label={label} key={label} description={description}>
             <Content my={6} index={index} />
           </Step>
         ))}
+        <Step label="Step 4">
+          <Content my={6} index={3} />
+        </Step>
       </Steps>
-      {activeStep === 4 ? (
+      {activeStep === 3 ? (
         <ResetPrompt onReset={reset} />
       ) : (
         <StepButtons

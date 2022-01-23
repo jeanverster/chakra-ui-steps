@@ -29,7 +29,8 @@ export const StepsProvider: React.FC<{ value: StepsContextValue }> = ({
   const isLoading = value.state === 'loading';
 
   const isVertical = value.orientation === 'vertical';
-  const isLabelVertical = value.labelOrientation === 'vertical';
+  const isLabelVertical =
+    value.orientation !== 'vertical' && value.labelOrientation === 'vertical';
 
   return (
     <StepsContext.Provider

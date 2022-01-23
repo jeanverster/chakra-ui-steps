@@ -96,7 +96,6 @@ const baseStyle: PartsStyleFunction<typeof parts> = props => ({
     display: 'flex',
     flexDir: 'column',
     justifyContent: 'center',
-    alignItems: 'flex-start',
   },
   step: {
     display: 'flex',
