@@ -11,7 +11,6 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { darken, lighten } from '@chakra-ui/theme-tools';
 import { Meta, Story } from '@storybook/react';
 import { motion, MotionProps } from 'framer-motion';
 import React from 'react';
@@ -21,6 +20,7 @@ import {
   FiDollarSign,
   FiUser,
 } from 'react-icons/fi';
+import { MdCheck } from 'react-icons/md';
 import { useConfigContext } from '../.storybook/preview';
 import { Step, Steps, StepsStyleConfig, useSteps } from '../src';
 
@@ -308,9 +308,9 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
   const { size } = useConfigContext();
   return (
     <>
-      <Steps size={size} checkIcon={FiCheckCircle} activeStep={activeStep}>
-        {steps.map(({ label }, index) => (
-          <Step label={label} key={label}>
+      <Steps size={size} checkIcon={MdCheck} activeStep={activeStep}>
+        {iconSteps.map(({ label, icon }, index) => (
+          <Step label={label} key={label} icon={icon}>
             <Content my={6} index={index} />
           </Step>
         ))}
@@ -329,49 +329,13 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
 
 const CustomSteps = {
   ...StepsStyleConfig,
-  baseStyle: ({ colorMode }) => {
-    const inactiveColor = colorMode === 'light' ? 'gray.100' : 'gray.700';
-    const activeColor = `blue.500`;
-    const color = colorMode === 'light' ? 'blue' : 'white';
+  baseStyle: props => {
     return {
-      steps: {
-        color,
-      },
-      connector: {
-        // this is the track color of the connector between steps
-        borderColor:
-          colorMode === 'light' ? 'blackAlpha.300' : 'whiteAlpha.500',
-        transitionProperty: 'border-color',
-        transitionDuration: 'normal',
-        _highlighted: {
-          borderColor: activeColor,
-        },
-      },
-      stepIconContainer: {
-        bg: inactiveColor,
-        borderColor: inactiveColor,
-        borderRadius: 'md',
-        _activeStep: {
-          bg:
-            colorMode === 'light'
-              ? darken(inactiveColor, 0.5)
-              : lighten(inactiveColor, 0.5),
-          borderColor: activeColor,
-          _invalid: {
-            bg: 'red.500',
-            borderColor: 'red.500',
-          },
-        },
-        _highlighted: {
-          bg: activeColor,
-          borderColor: activeColor,
-        },
-        '&[data-clickable]:hover': {
-          borderColor: activeColor,
-        },
-      },
-      label: {
-        color,
+      ...StepsStyleConfig.baseStyle(props),
+      icon: {
+        ...StepsStyleConfig.baseStyle(props).icon,
+        // your custom styles here
+        strokeWidth: '1px',
       },
     };
   },
