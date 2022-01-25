@@ -2,9 +2,8 @@
   chakra-ui-steps
 </h1>
 
-<span>Steps component designed to work seamlessly with <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a>.</span>
-
-<span>An interactive demo along with code examples can be viewed <a href="https://jeanverster.github.io/chakra-ui-steps-site/" target="_blank">here</a>.</span>
+<span>Steps component designed to work seamlessly with <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a>.</span> <span>An interactive demo along with code examples can be viewed <a href="https://jeanverster.github.io/chakra-ui-steps-site/" target="_blank">here</a>.</span>
+<br />
 <br />
 
 [![MIT License](https://badgen.net/github/license/jeanverster/chakra-ui-steps 'MIT License')](LICENSE.md)
