@@ -54,7 +54,7 @@ const theme = extendTheme({
 export const App = () => {
   return (
     <ChakraProvider theme={theme}>
-      <App />
+      <YourApp />
     </ChakraProvider>
   );
 };
@@ -62,7 +62,7 @@ export const App = () => {
 
 Once that's done you should be good to go!
 
-### Basic Example:
+### Basic Example
 
 ```jsx
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
@@ -79,21 +79,87 @@ const steps = [
   { label: 'Step 3', content },
 ];
 
-export const BasicExample = () => {
+export const StepsExample = () => {
   const { nextStep, prevStep, setStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
 
   return (
-    <Steps activeStep={activeStep}>
-      {steps.map(({ label, content }) => (
-        <Step label={label} key={label}>
-          {content}
-        </Step>
-      ))}
-    </Steps>
+    <Flex flexDir="column" width="100%">
+      <Steps activeStep={activeStep}>
+        {steps.map(({ label, content }) => (
+          <Step label={label} key={label}>
+            {content}
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === steps.length ? (
+        <Flex p={4}>
+          <Button mx="auto" size="sm" onClick={reset}>
+            Reset
+          </Button>
+        </Flex>
+      ) : (
+        <Flex width="100%" justify="flex-end">
+          <Button
+            isDisabled={activeStep === 0}
+            mr={4}
+            onClick={prevStep}
+            size="sm"
+            variant="ghost"
+          >
+            Prev
+          </Button>
+          <Button size="sm" onClick={nextStep}>
+            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+          </Button>
+        </Flex>
+      )}
+    </Flex>
   );
 };
+```
+
+### Custom Styles
+
+If you would like to customize the appearance of the Steps component you can do so using the multi part component styling approach as described <a href="https://chakra-ui.com/docs/theming/component-style#styling-multipart-components" target="_blank">here</a>. The parts available for styling are:
+
+```js
+connector;
+description;
+icon;
+label;
+labelContainer;
+step;
+stepContainer;
+stepIconContainer;
+steps;
+```
+
+The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
+
+```js
+import { StepsStyleConfig } from 'chakra-ui-steps';
+
+const CustomSteps = {
+  ...StepsStyleConfig,
+  baseStyle: props => {
+    return {
+      ...StepsStyleConfig.baseStyle(props),
+      icon: {
+        ...StepsStyleConfig.baseStyle(props).icon,
+        // your custom styles here
+        strokeWidth: '1px',
+      },
+    };
+  },
+};
+
+const theme = extendTheme({
+  components: {
+    Steps: CustomSteps,
+  },
+});
 ```
 
 ## Props
