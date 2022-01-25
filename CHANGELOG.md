@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/jeanverster/chakra-ui-steps/compare/v1.6.0...v1.6.1) (2022-01-25)
+
+
+### Bug Fixes
+
+* update readme examples ([5586f00](https://github.com/jeanverster/chakra-ui-steps/commit/5586f00c2b1963b636b6c9ff1def543692e5e3dc))
+
 # [1.6.0](https://github.com/jeanverster/chakra-ui-steps/compare/v1.5.0...v1.6.0) (2022-01-23)
 
 
