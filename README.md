@@ -1,23 +1,17 @@
-<h1 align="center" style="font-weight: bold;">
-  <br>
-  <a href="https://jeanverster.github.io/chakra-ui-steps-site">
-  <img src="https://i.imgur.com/EMykZb3.png" alt="Markdownify" width="50">
-  </a>
-  <br />
-  Chakra UI Steps
-  <br>
+<h1 style="font-weight: bold;">
+  chakra-ui-steps
 </h1>
 
-<h4 align="center">Steps component designed to work seamlessly with <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a>.</h4>
+<h4>Steps component designed to work seamlessly with <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a>.</h4>
 
-<h4 align="center">An interactive demo along with code examples can be viewed <a href="https://jeanverster.github.io/chakra-ui-steps-site/" target="_blank">here</a>.</h4>
+<h4>An interactive demo along with code examples can be viewed <a href="https://jeanverster.github.io/chakra-ui-steps-site/" target="_blank">here</a>.</h4>
+<br />
 
-<p align="center">
-  <a href="https://badge.fury.io/js/chakra-ui-steps">
-    <img src="https://badge.fury.io/js/chakra-ui-steps.svg"
-         alt="Gitter">
-  </a>
-</p>
+[![MIT License](https://badgen.net/github/license/jeanverster/chakra-ui-steps 'MIT License')](LICENSE.md)
+[![npm - chakra-ui-steps](https://img.shields.io/npm/v/chakra-ui-steps 'chakra-ui-steps npm')](https://www.npmjs.com/package/chakra-ui-steps)
+[![bundle size - chakra-ui-steps](https://badgen.net/bundlephobia/min/chakra-ui-steps)](https://bundlephobia.com/result?p=chakra-ui-steps)
+[![bundle size - chakra-ui-steps](https://badgen.net/bundlephobia/minzip/chakra-ui-steps)](https://bundlephobia.com/result?p=chakra-ui-steps)
+[![Total Downloads - chakra-ui-steps](https://badgen.net/npm/dt/chakra-ui-steps?color=blue 'chakra-ui-steps npm downloads')](https://www.npmjs.com/package/chakra-ui-steps)
 
 ![screenshot](https://i.imgur.com/B9zbJEa.gif)
 
@@ -109,14 +103,15 @@ export const BasicExample = () => {
 
 ### `Steps`
 
-| Prop              | Type                | Required | Description                                                                | Default    |
-| ----------------- | ------------------- | -------- | -------------------------------------------------------------------------- | ---------- |
-| **`activeStep`**  | number              | yes      | Currently active step                                                      | 0          |
-| **`colorScheme`** | string              | no       | Sets the color accent of the Steps component show                          | green      |
-| **`orientation`** | string              | no       | Sets the orientation of the Steps component                                | horizontal |
-| **`responsive`**  | boolean             | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
-| **`checkIcon`**   | React.ComponentType | no       | Allows you to provide a custom check icon                                  | undefined  |
-| **`onClickStep`** | () => void          | no       | If defined, allows you to click on the step icons                          | undefined  |
+| Prop                   | Type                | Required | Description                                                                | Default    |
+| ---------------------- | ------------------- | -------- | -------------------------------------------------------------------------- | ---------- |
+| **`activeStep`**       | number              | yes      | Currently active step                                                      | 0          |
+| **`colorScheme`**      | string              | no       | Sets the color accent of the Steps component show                          | green      |
+| **`orientation`**      | string              | no       | Sets the orientation of the Steps component                                | horizontal |
+| **`responsive`**       | boolean             | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
+| **`checkIcon`**        | React.ComponentType | no       | Allows you to provide a custom check icon                                  | undefined  |
+| **`onClickStep`**      | () => void          | no       | If defined, allows you to click on the step icons                          | undefined  |
+| **`labelOrientation`** | string              | no       | Switch between horizontal and vertical label orientation                   | undefined  |
 
 ### `Step`
 
