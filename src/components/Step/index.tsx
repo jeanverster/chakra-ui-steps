@@ -18,6 +18,7 @@ export interface StepProps extends HTMLChakraProps<'div'> {
   label?: string | React.ReactNode;
   description?: string;
   icon?: React.ComponentType<any>;
+  isCompletedStep?: boolean;
 }
 
 // Props which shouldn't be passed to to the Step component from the user
