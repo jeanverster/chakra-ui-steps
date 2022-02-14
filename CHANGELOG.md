@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/jeanverster/chakra-ui-steps/compare/v1.6.1...v1.6.2) (2022-02-14)
+
+
+### Bug Fixes
+
+* add isCompletedStep to the step props ([#48](https://github.com/jeanverster/chakra-ui-steps/issues/48)) ([be22925](https://github.com/jeanverster/chakra-ui-steps/commit/be22925117a8f6c433b487c9af667950c7d31717))
+
 ## [1.6.1](https://github.com/jeanverster/chakra-ui-steps/compare/v1.6.0...v1.6.1) (2022-01-25)
 
 
