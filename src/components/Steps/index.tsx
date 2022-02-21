@@ -10,17 +10,25 @@ import {
 } from '@chakra-ui/system';
 import { cx } from '@chakra-ui/utils';
 import * as React from 'react';
+import { StepsProvider } from '../../context/index';
 
 export interface StepsProps extends HTMLChakraProps<'div'>, ThemingProps {
   activeStep: number;
   orientation?: 'vertical' | 'horizontal';
   state?: 'loading' | 'error';
   responsive?: boolean;
+  checkIcon?: React.ComponentType<any>;
+  onClickStep?: (step: number) => void;
+  labelOrientation?: 'vertical' | 'horizontal';
 }
 
 export const Steps = forwardRef<StepsProps, 'div'>(
   (props, ref: React.Ref<HTMLDivElement>) => {
     const styles = useMultiStyleConfig('Steps', props);
+
+    const stepsStyles = {
+      ...styles.steps,
+    };
 
     const {
       className,
@@ -29,6 +37,9 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       orientation: orientationProp,
       state,
       responsive,
+      checkIcon,
+      onClickStep,
+      labelOrientation,
       ...rest
     } = omitThemingProps(props);
 
@@ -49,43 +60,61 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       return null;
     };
 
+    const clickable = !!onClickStep;
+
     const [isMobile] = useMediaQuery('(max-width: 43em)');
 
     const orientation = isMobile && responsive ? 'vertical' : orientationProp;
 
     return (
       <StylesProvider value={styles}>
-        <chakra.div
-          ref={ref}
-          __css={{
-            justifyContent: stepCount === 1 ? 'flex-end' : 'space-between',
-            flexDir: orientation === 'vertical' ? 'column' : 'row',
-            ...styles.steps,
+        <StepsProvider
+          value={{
+            activeStep,
+            orientation,
+            state,
+            responsive,
+            checkIcon,
+            onClickStep,
+            labelOrientation,
+            clickable,
+            colorScheme: props.colorScheme,
+            stepCount,
           }}
-          {...rest}
-          className={cx('chakra-steps', className)}
         >
-          {React.Children.map(children, (child, i) => {
-            const isCompletedStep = (React.isValidElement(child) && child.props.isCompletedStep) ?? i < activeStep;
-            const isLastStep = i === stepCount - 1;
-            const isCurrentStep = i === activeStep;
+          <chakra.div
+            ref={ref}
+            __css={{
+              justifyContent: stepCount === 1 ? 'flex-end' : 'space-between',
+              flexDir: orientation === 'vertical' ? 'column' : 'row',
+              ...stepsStyles,
+            }}
+            className={cx('chakra-steps', className)}
+            {...rest}
+          >
+            {React.Children.map(children, (child, i) => {
+              const isCompletedStep =
+                (React.isValidElement(child) && child.props.isCompletedStep) ??
+                i < activeStep;
+              const isLastStep = i === stepCount - 1;
+              const isCurrentStep = i === activeStep;
 
-            const stepProps = {
-              index: i,
-              colorScheme: props.colorScheme,
-              isCompletedStep,
-              isCurrentStep,
-              isLastStep,
-              orientation,
-              state,
-            };
+              const stepProps = {
+                index: i,
+                isCompletedStep,
+                isCurrentStep,
+                isLastStep,
+              };
 
-            return React.isValidElement(child)
-              ? React.cloneElement(child, stepProps)
-              : null;
-          })}
-        </chakra.div>
-        {orientation === 'horizontal' && renderHorizontalContent()}
+              if (React.isValidElement(child)) {
+                return React.cloneElement(child, stepProps);
+              }
+
+              return null;
+            })}
+          </chakra.div>
+          {orientation === 'horizontal' && renderHorizontalContent()}
+        </StepsProvider>
       </StylesProvider>
     );
   }
