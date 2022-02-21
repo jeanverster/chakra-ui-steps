@@ -143,7 +143,7 @@ import { StepsStyleConfig } from 'chakra-ui-steps';
 
 const CustomSteps = {
   ...StepsStyleConfig,
-  baseStyle: (props) => {
+  baseStyle: props => {
     return {
       ...StepsStyleConfig.baseStyle(props),
       icon: {
