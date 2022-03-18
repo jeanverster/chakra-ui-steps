@@ -14,7 +14,7 @@ import { Connector } from '../Connector';
 import { StepIcon } from '../StepIcon';
 import { StepLabel } from '../StepLabel';
 
-export interface StepProps extends HTMLChakraProps<'div'> {
+export interface StepProps extends HTMLChakraProps<'li'> {
   label?: string | React.ReactNode;
   description?: string;
   icon?: React.ComponentType<any>;
@@ -31,7 +31,7 @@ interface StepInternalConfig extends ThemingProps {
 
 interface FullStepProps extends StepProps, StepInternalConfig {}
 
-export const Step = forwardRef<StepProps, 'div'>(
+export const Step = forwardRef<StepProps, 'li'>(
   (props, ref: React.Ref<any>) => {
     const {
       children,
@@ -84,7 +84,7 @@ export const Step = forwardRef<StepProps, 'div'>(
 
     return (
       <>
-        <chakra.div
+        <chakra.li
           ref={ref}
           onClick={() => handleClick(index)}
           aria-disabled={!hasVisited}
@@ -146,7 +146,7 @@ export const Step = forwardRef<StepProps, 'div'>(
               {(isCurrentStep || isCompletedStep) && children}
             </Collapse>
           </Connector>
-        </chakra.div>
+        </chakra.li>
       </>
     );
   }

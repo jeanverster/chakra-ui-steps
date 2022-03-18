@@ -12,7 +12,7 @@ import { cx } from '@chakra-ui/utils';
 import * as React from 'react';
 import { StepsProvider } from '../../context/index';
 
-export interface StepsProps extends HTMLChakraProps<'div'>, ThemingProps {
+export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
   activeStep: number;
   orientation?: 'vertical' | 'horizontal';
   state?: 'loading' | 'error';
@@ -23,7 +23,7 @@ export interface StepsProps extends HTMLChakraProps<'div'>, ThemingProps {
 }
 
 export const Steps = forwardRef<StepsProps, 'div'>(
-  (props, ref: React.Ref<HTMLDivElement>) => {
+  (props, ref: React.Ref<HTMLOListElement>) => {
     const styles = useMultiStyleConfig('Steps', props);
 
     const stepsStyles = {
@@ -82,7 +82,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
             stepCount,
           }}
         >
-          <chakra.div
+          <chakra.ol
             ref={ref}
             __css={{
               justifyContent: stepCount === 1 ? 'flex-end' : 'space-between',
@@ -112,7 +112,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
 
               return null;
             })}
-          </chakra.div>
+          </chakra.ol>
           {orientation === 'horizontal' && renderHorizontalContent()}
         </StepsProvider>
       </StylesProvider>

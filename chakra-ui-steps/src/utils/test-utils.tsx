@@ -105,6 +105,7 @@ export const testA11y = async (
     ? render(ui, options).container
     : ui;
 
+  // @ts-ignore
   const results = await axe(container, axeOptions);
 
   expect(results).toHaveNoViolations();
