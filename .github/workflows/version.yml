@@ -2,8 +2,6 @@ name: Semantic Release
 on:
   push:
     branches: ["develop"]
-    paths:
-      - "chakra-ui-steps/**"
 defaults:
   run:
     working-directory: chakra-ui-steps
