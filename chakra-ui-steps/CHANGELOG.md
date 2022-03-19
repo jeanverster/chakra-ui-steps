@@ -1,3 +1,10 @@
+# chakra-ui-steps-v1.0.0 (2022-03-19)
+
+
+### Features
+
+* switch to vite ([#54](https://github.com/jeanverster/chakra-ui-steps/issues/54)) ([2683cd5](https://github.com/jeanverster/chakra-ui-steps/commit/2683cd52363c46b98eded64256b39f6c6a5da8cc)), closes [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48)
+
 ## [1.6.2](https://github.com/jeanverster/chakra-ui-steps/compare/v1.6.1...v1.6.2) (2022-02-14)
 
 
