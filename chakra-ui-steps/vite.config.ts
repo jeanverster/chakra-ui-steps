@@ -1,13 +1,14 @@
+import typescript from '@rollup/plugin-typescript';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import dts from 'vite-dts';
 const path = require('path');
 
 const isExternal = (id: string) => !id.startsWith('.') && !path.isAbsolute(id);
+const resolvePath = (str: string) => path.resolve(__dirname, str);
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [react()],
   build: {
     rollupOptions: {
       external: isExternal,
@@ -24,6 +25,16 @@ export default defineConfig({
           '@chakra-ui/transition': '@chakra-ui/transition',
         },
       },
+      plugins: [
+        typescript({
+          target: 'ESNext',
+          rootDir: resolvePath('./src'),
+          declaration: true,
+          declarationDir: resolvePath('./dist'),
+          exclude: resolvePath('./node_modules/**'),
+          allowSyntheticDefaultImports: true,
+        }),
+      ],
     },
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),

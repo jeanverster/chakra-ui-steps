@@ -1,14 +1,13 @@
-import { Button, Flex } from '@chakra-ui/react';
-import { Step, Steps, useSteps } from 'chakra-ui-steps';
-import { useState } from 'react';
-import './App.css';
-
+import { Button, Flex } from "@chakra-ui/react";
+import { Step, Steps, useSteps } from "chakra-ui-steps";
+import { useState } from "react";
+import "./App.css";
 const content = <Flex py={4}>Yo!</Flex>;
 
 const steps = [
-  { label: 'Step 1', content },
-  { label: 'Step 2', content },
-  { label: 'Step 3', content },
+  { label: "Step 1", content },
+  { label: "Step 2", content },
+  { label: "Step 3", content },
 ];
 
 function App() {
@@ -43,7 +42,7 @@ function App() {
             Prev
           </Button>
           <Button size="sm" onClick={nextStep}>
-            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            {activeStep === steps.length - 1 ? "Finish" : "Next"}
           </Button>
         </Flex>
       )}

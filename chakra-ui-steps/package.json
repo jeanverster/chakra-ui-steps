@@ -12,7 +12,7 @@
   ],
   "main": "./dist/chakra-ui-steps.umd.js",
   "module": "./dist/chakra-ui-steps.es.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "description": "Steps component designed to work seamlessly with Chakra UI",
   "files": [
     "dist"
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build-storybook": "build-storybook",
-    "build": "tsc && vite build",
+    "build": "tsc --noEmit && vite build",
     "coverage": "vitest run --coverage",
     "dev": "vite build --watch",
     "prepare": "yarn build",
@@ -57,6 +57,7 @@
     "@chakra-ui/react": "^1.6.10",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@rollup/plugin-typescript": "^8.3.1",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
@@ -71,7 +72,6 @@
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",
-    "concurrently": "^6.2.0",
     "framer-motion": "^6.2.1",
     "husky": "^6.0.0",
     "jsdom": "^19.0.0",
@@ -83,7 +83,6 @@
     "tslib": "^2.3.1",
     "typescript": "^4.5.4",
     "vite": "^2.8.0",
-    "vite-dts": "^1.0.4",
     "vitest": "^0.7.6"
   },
   "release": {
