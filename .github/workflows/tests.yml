@@ -19,4 +19,4 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Run test suite
-        run: yarn test --ci --coverage --maxWorkers=2
+        run: yarn test
