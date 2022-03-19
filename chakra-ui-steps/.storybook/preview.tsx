@@ -42,11 +42,11 @@ const ToggleBar = () => {
   return (
     <Flex justify="flex-end" mb={4}>
       <ButtonGroup mr={4} isAttached>
-        {Object.values(Sizes).map(val => (
+        {Object.values(Sizes).map((val) => (
           <Button
             size="sm"
             key={val}
-            onClick={() => setSize(val)}
+            onClick={() => setSize?.(val)}
             bg={size === val ? activeBg : bg}
           >
             {val}

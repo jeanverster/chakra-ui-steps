@@ -24,21 +24,21 @@ const baseStyleIcon: SystemStyleObject = {
   strokeWidth: '2px',
 };
 
-const baseStyleLabel: SystemStyleFunction = props => ({
+const baseStyleLabel: SystemStyleFunction = (props) => ({
   color: mode(`gray.900`, `gray.100`)(props),
   fontWeight: 'medium',
   textAlign: 'center',
   fontSize: 'md',
 });
 
-const baseStyleDescription: SystemStyleFunction = props => ({
+const baseStyleDescription: SystemStyleFunction = (props) => ({
   color: mode(`gray.800`, `gray.200`)(props),
   marginTop: '-2px',
   textAlign: 'center',
   fontSize: 'sm',
 });
 
-const baseStyleConnector: SystemStyleFunction = props => {
+const baseStyleConnector: SystemStyleFunction = (props) => {
   const { colorScheme: c } = props;
   const inactiveColor = mode('gray.200', 'gray.700')(props);
   const activeColor = mode(`${c}.500`, `${c}.200`)(props);
@@ -55,7 +55,7 @@ const baseStyleConnector: SystemStyleFunction = props => {
   };
 };
 
-const baseStyleStepIconContainer: SystemStyleFunction = props => {
+const baseStyleStepIconContainer: SystemStyleFunction = (props) => {
   const { colorScheme: c } = props;
   const inactiveColor = mode('gray.200', 'gray.700')(props);
   const activeColor = `${c}.500`;
@@ -87,7 +87,7 @@ const baseStyleStepIconContainer: SystemStyleFunction = props => {
   };
 };
 
-const baseStyle: PartsStyleFunction<typeof parts> = props => ({
+const baseStyle: PartsStyleFunction<typeof parts> = (props) => ({
   connector: baseStyleConnector(props),
   description: baseStyleDescription(props),
   icon: baseStyleIcon,

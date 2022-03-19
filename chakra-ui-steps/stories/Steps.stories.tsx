@@ -219,7 +219,7 @@ export const WithStates = (): JSX.Element => {
       <VStack width="100%" mb={8} align="flex-start">
         <RadioGroup
           defaultValue="loading"
-          onChange={val => setStepState(val as StateValue)}
+          onChange={(val) => setStepState(val as StateValue)}
         >
           <HStack direction="row">
             <Radio value="loading">Loading</Radio>
@@ -334,7 +334,7 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
 
 const CustomSteps = {
   ...StepsStyleConfig,
-  baseStyle: props => {
+  baseStyle: (props: any) => {
     const inactiveColor = props.colorMode === 'light' ? 'gray.100' : 'gray.700';
     const activeColor = `blue.500`;
     return {
@@ -393,7 +393,7 @@ export const ClickableSteps: Story = (): JSX.Element => {
         size={size}
         checkIcon={FiCheckCircle}
         activeStep={activeStep}
-        onClickStep={step => setStep(step)}
+        onClickStep={(step) => setStep(step)}
       >
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
