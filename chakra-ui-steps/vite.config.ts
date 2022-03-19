@@ -10,14 +10,18 @@ export default defineConfig({
   plugins: [react(), dts()],
   build: {
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       external: isExternal,
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
         globals: {
-          react: 'React',
+          react: 'react',
+          'framer-motion': 'framer-motion',
+          '@chakra-ui/system': '@chakra-ui/system',
+          '@chakra-ui/theme-tools': '@chakra-ui/theme-tools',
+          '@chakra-ui/utils': '@chakra-ui/utils',
+          '@chakra-ui/icon': '@chakra-ui/icon',
+          'react/jsx-runtime': 'react/jsx-runtime',
+          '@chakra-ui/react': '@chakra-ui/react',
+          '@chakra-ui/transition': '@chakra-ui/transition',
         },
       },
     },

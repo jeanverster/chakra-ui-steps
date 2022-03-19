@@ -1,16 +1,15 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import '@testing-library/jest-dom/extend-expect';
 import {
   render as rtlRender,
   RenderOptions,
   RenderResult,
 } from '@testing-library/react';
-import { RunOptions } from 'axe-core';
-import { axe, toHaveNoViolations } from 'jest-axe';
 import * as React from 'react';
 import { StepsStyleConfig } from '../theme';
 
-expect.extend(toHaveNoViolations);
+/**
+ * @vitest-environment jsdom
+ */
 
 type UI = Parameters<typeof rtlRender>[0];
 
@@ -45,8 +44,6 @@ export const render = (
 };
 
 export { rtlRender };
-export { axe };
-
 export interface TestOptions extends Omit<RenderOptions, 'wrapper'> {
   /**
    * optional additional wrapper, e.g. Context
@@ -73,40 +70,3 @@ export interface TestOptions extends Omit<RenderOptions, 'wrapper'> {
    */
   wrapper?: typeof ChildrenPassthrough;
 }
-type TestA11YOptions = TestOptions & { axeOptions?: RunOptions };
-/**
- * Validates against common a11y mistakes.
- *
- * Wrapper for jest-axe
- *
- * @example
- * ```jsx
- * it('passes a11y test', async () => {
- *  await testA11Y(<MyComponent />, options);
- * });
- *
- * // sometimes we need to perform interactions first to render conditional UI
- * it('passes a11y test when open', async () => {
- *  const { container } = render(<MyComponent />, options);
- *
- *  fireEvent.click(screen.getByRole('button'));
- *
- *  await testA11Y(container, options);
- * });
- * ```
- *
- * @see https://github.com/nickcolley/jest-axe#testing-react-with-react-testing-library
- */
-export const testA11y = async (
-  ui: UI | Element,
-  { axeOptions, ...options }: TestA11YOptions = {}
-) => {
-  const container = React.isValidElement(ui)
-    ? render(ui, options).container
-    : ui;
-
-  // @ts-ignore
-  const results = await axe(container, axeOptions);
-
-  expect(results).toHaveNoViolations();
-};

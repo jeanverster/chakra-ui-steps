@@ -1,20 +1,14 @@
 import { Flex } from '@chakra-ui/react';
 import * as React from 'react';
+import { describe, expect, it } from 'vitest';
 import { Step, Steps } from '../src';
-import { render, testA11y } from '../src/utils/test-utils';
+import { render } from '../src/utils/test-utils';
+
+/**
+ * @vitest-environment jsdom
+ */
 
 describe('<Steps />', () => {
-  it('should pass a11y test', async () => {
-    const wizard = (
-      <Steps py={6} colorScheme="green" activeStep={0}>
-        <Step label="Step 1" />
-        <Step label="Step 2" />
-        <Step label="Step 3" />
-      </Steps>
-    );
-    await testA11y(wizard);
-  });
-
   it('should render labels if present', async () => {
     const { getByText } = render(
       <Steps colorScheme="green" activeStep={0}>
@@ -59,7 +53,6 @@ describe('<Steps />', () => {
         </Step>
       </Steps>
     );
-    expect(container.querySelectorAll('svg').length).toBe(1)    
-
+    expect(container.querySelectorAll('svg').length).toBe(1);
   });
 });
