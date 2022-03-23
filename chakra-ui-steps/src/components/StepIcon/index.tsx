@@ -28,7 +28,7 @@ const animationConfig = {
 };
 
 export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
-  const { icon, label } = useStyles();
+  const { icon, iconLabel, label } = useStyles();
 
   const {
     isCompletedStep,
@@ -93,6 +93,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
       <AnimatedSpan
         ref={ref}
         key="label"
+        style={iconLabel}
         __css={labelStyles}
         {...animationConfig}
       >
