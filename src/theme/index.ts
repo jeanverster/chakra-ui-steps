@@ -12,6 +12,7 @@ const parts = anatomy('steps').parts(
   'connector',
   'description',
   'icon',
+  'iconLabel',
   'label',
   'labelContainer',
   'step',
@@ -91,6 +92,7 @@ const baseStyle: PartsStyleFunction<typeof parts> = props => ({
   connector: baseStyleConnector(props),
   description: baseStyleDescription(props),
   icon: baseStyleIcon,
+  iconLabel: baseStyleLabel(props),
   label: baseStyleLabel(props),
   labelContainer: {
     display: 'flex',
