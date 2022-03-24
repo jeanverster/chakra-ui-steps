@@ -128,6 +128,7 @@ If you would like to customize the appearance of the Steps component you can do 
 connector;
 description;
 icon;
+iconLabel;
 label;
 labelContainer;
 step;
