@@ -1,5 +1,6 @@
-import { Heading } from "@chakra-ui/react";
-import { ReactHTMLElement } from "react";
+import { Heading, List, ListIcon, ListItem } from "@chakra-ui/react";
+import { ReactHTMLElement, ReactNode } from "react";
+import { CgCheckO } from "react-icons/cg";
 import { Anchor } from "./Anchor";
 import { BlockQuote } from "./BlockQuote";
 import { Code, preToCodeBlock } from "./Code";
@@ -10,6 +11,17 @@ export const components = {
   img: Img,
   p: P,
   a: Anchor,
+  ul: (props: any) => {
+    return <List spacing={3} sx={{ my: 4 }} {...props} />;
+  },
+  li: (props: { children: ReactNode }) => {
+    return (
+      <ListItem sx={{ alignItems: "center", display: "flex" }}>
+        <ListIcon as={CgCheckO} color="green.500" />
+        {props.children}
+      </ListItem>
+    );
+  },
   pre: function codeBlock(
     preProps: Partial<ReactHTMLElement<HTMLPreElement>["props"]>
   ) {

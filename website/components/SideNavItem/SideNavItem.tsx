@@ -32,7 +32,7 @@ export const SideNavItem = ({
         align="center"
         transition="all 0.2s ease"
         opacity={active ? 1 : 0.9}
-        color={active ? "brand.500" : color}
+        color={active ? "blue.500" : color}
         _hover={{
           cursor: "pointer",
           opacity: 1,

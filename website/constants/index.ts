@@ -2,8 +2,8 @@ export const NAV_ITEMS = [
   {
     title: "Getting Started",
     items: [
-      { title: "Introduction", path: "/introduction" },
-      { title: "Installation", path: "/installation" },
+      { title: "Installation", path: "#installation" },
+      { title: "Usage", path: "#usage" },
     ],
   },
   {

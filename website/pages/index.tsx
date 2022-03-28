@@ -1,29 +1,62 @@
-import { Services, YourName } from "@/components";
-import { Page } from "@/layouts";
-import { Button, Flex } from "@chakra-ui/react";
+import { Step1, Step2, Step3, Step4 } from "@/components";
+import { Heading } from "@chakra-ui/layout";
+import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import type { NextPage } from "next";
+import { GetStaticProps } from "next";
+import { GiRocketFlight } from "react-icons/gi";
+import { NavSection } from "../components/NavSection/NavSection";
+import { getPost, getSections } from "../mdx/server";
 
-const content = <Flex py={4}>Yo!</Flex>;
+export type Section = {
+  frontmatter: FrontMatter;
+  code: string;
+};
+
+export type FrontMatter = {
+  title: string;
+  date: string;
+  description: string;
+  cover: string;
+  tags: string[];
+  isPublished: boolean;
+  coverLink: string;
+  coverAttribution: string;
+};
 
 const steps = [
-  { label: "Your Name", content: <YourName /> },
-  { label: "Services", content: <Services /> },
-  { label: "Budget", content },
-  { label: "Finalise", content },
+  { label: "Select Product", content: <Step1 /> },
+  { label: "Home Type", content: <Step2 /> },
+  { label: "Home Value", content: <Step3 /> },
+  { label: "Finalise", content: <Step4 /> },
 ];
 
-const Home: NextPage = () => {
+type HomeProps = {
+  sections: Section[];
+};
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const allSections = getSections();
+  const sections = [];
+
+  for (const section of allSections) {
+    const contents = await getPost(section.slug);
+    sections.push(contents);
+  }
+
+  return {
+    props: { sections: JSON.parse(JSON.stringify(sections)) },
+  };
+};
+
+const Home: NextPage<HomeProps> = ({ sections }) => {
   const { nextStep, prevStep, setStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
   return (
-    <Page
-      title="Chakra UI Steps"
-      metaDescription="Steps component designed to work with Chakra UI"
-      description="Chakra UI Steps makes it super easy to create multi-step interfaces in apps where you are already using Chakra UI. Use it in forms, onboarding, or anywhere you want to lead the user through some logical steps."
-    >
-      <Steps colorScheme="brand" activeStep={activeStep}>
+    <>
+      {/* <Divider sx={{ mb: 12 }} /> */}
+      <Steps colorScheme="blue" activeStep={activeStep}>
         {steps.map(({ label, content }) => (
           <Step label={label} key={label}>
             {content}
@@ -31,7 +64,14 @@ const Home: NextPage = () => {
         ))}
       </Steps>
       {activeStep === steps.length ? (
-        <Flex p={4}>
+        <Flex p={4} sx={{ flexDir: "column", alignItems: "center" }}>
+          <Box sx={{ p: 8 }}>
+            <GiRocketFlight size={96} />
+          </Box>
+          <Heading>Woohoo!</Heading>
+          <Box sx={{ mb: 8, mt: 4 }}>
+            <Text>You&apos;ve completed the steps!</Text>
+          </Box>
           <Button mx="auto" onClick={reset}>
             Reset
           </Button>
@@ -51,7 +91,15 @@ const Home: NextPage = () => {
           </Button>
         </Flex>
       )}
-    </Page>
+      <Divider sx={{ mt: 12 }} />
+      {sections.map(({ frontmatter, code }) => (
+        <NavSection
+          frontmatter={frontmatter}
+          key={frontmatter.title}
+          code={code}
+        />
+      ))}
+    </>
   );
 };
 

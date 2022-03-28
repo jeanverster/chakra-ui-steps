@@ -1,9 +1,6 @@
 import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import Highlight, {
-  defaultProps,
-  Language,
-} from "prism-react-renderer";
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/dracula";
 import lightTheme from "prism-react-renderer/themes/nightOwlLight";
 import React from "react";
@@ -51,29 +48,19 @@ export const Code = (props: CodeProps) => {
 
   const isDarkMode = colorMode === "dark";
 
+  const isBash = props.language === "bash";
+
   return (
-    <Box mb={8} mt={12}>
+    <Box mt={isBash ? 2 : 12} mb={8}>
       <Highlight
         {...defaultProps}
         theme={isDarkMode ? darkTheme : lightTheme}
         code={props.codeString}
         language={props.language as Language}
       >
-        {({
-          className,
-          style,
-          tokens,
-          getLineProps,
-          getTokenProps,
-        }) => (
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Pre className={className} style={style}>
-            <LanguageFlag
-              px={4}
-              py={2}
-              right={8}
-              rounded="md"
-              top={-8}
-            >
+            <LanguageFlag px={4} py={2} right={8} rounded="md" top={-8}>
               <Text fontSize="sm" fontWeight="bold">
                 {props.language.toUpperCase()}
               </Text>
@@ -83,10 +70,7 @@ export const Code = (props: CodeProps) => {
                 <LineNo>{i + 1}</LineNo>
                 <LineContent>
                   {line.map((token, key) => (
-                    <span
-                      key={key}
-                      {...getTokenProps({ token, key })}
-                    />
+                    <span key={key} {...getTokenProps({ token, key })} />
                   ))}
                 </LineContent>
               </Line>
@@ -117,8 +101,7 @@ export const preToCodeBlock = (
     preProps.children.type === "code"
   ) {
     // we have a <pre><code> situation
-    const { children: codeString, className = "" } =
-      preProps.children.props;
+    const { children: codeString, className = "" } = preProps.children.props;
 
     const matches = className.match(/language-(?<lang>.*)/);
 

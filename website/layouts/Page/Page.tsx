@@ -1,6 +1,6 @@
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Flex, FlexProps, Heading } from "@chakra-ui/layout";
-import { Container, IconButton, Text } from "@chakra-ui/react";
+import { Box, FlexProps, Heading } from "@chakra-ui/layout";
+import { IconButton, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -27,17 +27,18 @@ export const Page = ({
   const bg = useColorModeValue("gray.50", "gray.900");
   const { back } = useRouter();
   return (
-    <Flex bg={bg} {...rest}>
+    <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={metaDescription || description} />
       </Head>
-      <Container
+      <Box
+        className="main-container"
         px={{ base: 8, md: 2 }}
         pt={["96px", "12vmax", "12vmin"]}
         pb="128px"
-        maxW="container.md"
-        as="main"
+        sx={{ display: "inherit", minHeight: "100vh" }}
+        {...rest}
       >
         {showBackButton && (
           <IconButton
@@ -50,16 +51,18 @@ export const Page = ({
         )}
         {!hideTopTitle && (
           <>
-            <Heading color="brand.500" fontSize={["2xl", "4xl"]} sx={{ mb: 6 }}>
+            <Heading color="blue.200" fontSize={["2xl", "4xl"]} sx={{ mb: 6 }}>
               {title}
             </Heading>
-            <Text fontSize="lg">{description}</Text>
-            <Box my={8} />
+            <Text sx={{ mb: 4 }} fontSize="lg">
+              {description}
+            </Text>
+            <Box mt={8} mb={10} />
           </>
         )}
         {children}
-      </Container>
-    </Flex>
+      </Box>
+    </>
   );
 };
 

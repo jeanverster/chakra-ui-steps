@@ -20,38 +20,32 @@ const framer = Object.keys(framerMotion).filter((key) => key !== "__esModule");
 
 const ri = Object.keys(reactIconsRI).filter((key) => key !== "__esModule");
 
-const POSTS_PATH = path.join(process.cwd(), "src/posts");
+const SECTIONS_PATH = path.join(process.cwd(), "sections");
 
 export const getSourceOfFile = (filePath: string) => {
-  return fs.readFileSync(path.join(POSTS_PATH, filePath, "index.mdx"), "utf-8");
+  return fs.readFileSync(
+    path.join(SECTIONS_PATH, filePath, "index.mdx"),
+    "utf-8"
+  );
 };
 
-export const getPosts = () => {
-  return fs
-    .readdirSync(POSTS_PATH)
-    .map((filePath) => {
-      const source = getSourceOfFile(filePath);
-      const slug = filePath.replace(/\.mdx?$/, "");
-      const { data } = matter(source);
+export const getSections = () => {
+  return fs.readdirSync(SECTIONS_PATH).map((filePath) => {
+    const source = getSourceOfFile(filePath);
+    const slug = filePath.replace(/\.mdx?$/, "");
+    const { data } = matter(source);
 
-      return {
-        frontmatter: data,
-        slug: slug,
-      };
-    })
-    .filter((posts) => !!posts.frontmatter.isPublished);
+    return {
+      frontmatter: data,
+      slug: slug,
+    };
+  });
 };
 
 export const getPost = async (slug: string) => {
-  const pageDirectory = path.join(`${process.cwd()}`, "pages", slug);
-
+  const source = getSourceOfFile(slug);
   const imagesUrl = `/img/blog/${slug}`;
-
-  const source = fs.readFileSync(
-    path.join(pageDirectory, `${slug}.mdx`),
-    "utf-8"
-  );
-  const directory = path.join(process.cwd(), "pages", slug);
+  const directory = path.join(SECTIONS_PATH, slug);
 
   if (process.platform === "win32") {
     process.env.ESBUILD_BINARY_PATH = path.join(
@@ -89,6 +83,7 @@ export const getPost = async (slug: string) => {
         ".gif": "file",
       };
 
+      options.publicPath = imagesUrl;
       options.write = true;
       return options;
     },
