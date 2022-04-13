@@ -19,6 +19,7 @@ export interface StepProps extends HTMLChakraProps<'li'> {
   description?: string;
   icon?: React.ComponentType<any>;
   isCompletedStep?: boolean;
+  isCollapsible?: boolean;
 }
 
 // Props which shouldn't be passed to to the Step component from the user
@@ -42,6 +43,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       isCurrentStep,
       isLastStep,
       label,
+      isCollapsible = true,
       ...styleProps
     } = props as FullStepProps;
 
@@ -73,7 +75,7 @@ export const Step = forwardRef<StepProps, 'li'>(
 
     React.useEffect(() => {
       if (containerRef && containerRef.current && setWidths) {
-        setWidths(prev => {
+        setWidths((prev) => {
           if (prev.length === stepCount) {
             return [containerRef.current?.offsetWidth || 0];
           }
@@ -142,8 +144,11 @@ export const Step = forwardRef<StepProps, 'li'>(
             hasLabel={!!label || !!description}
             isCompletedStep={isCompletedStep || false}
           >
-            <Collapse style={{ width: '100%' }} in={isCurrentStep}>
-              {(isCurrentStep || isCompletedStep) && children}
+            <Collapse
+              style={{ width: '100%' }}
+              in={isCollapsible && isCurrentStep}
+            >
+              {isCollapsible && (isCurrentStep || isCompletedStep) && children}
             </Collapse>
           </Connector>
         </chakra.li>
