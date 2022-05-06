@@ -1,5 +1,5 @@
 {
-  "version": "1.7.2",
+  "version": "1.7.3",
   "license": "MIT",
   "name": "chakra-ui-steps",
   "author": "Jean Verster",
@@ -38,7 +38,7 @@
     "@chakra-ui/react": ">=1.6.7",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "framer-motion": "^5",
+    "framer-motion": "^6",
     "react": ">=16"
   },
   "husky": {
