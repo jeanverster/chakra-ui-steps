@@ -47,7 +47,7 @@ const SideNav = (props: SideNavProps): JSX.Element => {
       {NAV_ITEMS.map(({ title, items }) => {
         return (
           <Box key="title" sx={{ ":not(:first-child)": { mt: 4 } }}>
-            <Text sx={{ mb: 4 }} color="blue.200" fontWeight="extrabold">
+            <Text sx={{ mb: 4 }} color="teal.500" fontWeight="extrabold">
               {title}
             </Text>
             {items.map(({ title, path }, i) => {

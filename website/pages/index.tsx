@@ -5,7 +5,6 @@ import { Step, Steps, useSteps } from "chakra-ui-steps";
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import { GiRocketFlight } from "react-icons/gi";
-import { NavSection } from "../components/NavSection/NavSection";
 import { getPost, getSections } from "../mdx/server";
 
 export type Section = {
@@ -92,13 +91,13 @@ const Home: NextPage<HomeProps> = ({ sections }) => {
         </Flex>
       )}
       <Divider sx={{ mt: 12 }} />
-      {sections.map(({ frontmatter, code }) => (
+      {/* {sections.map(({ frontmatter, code }) => (
         <NavSection
           frontmatter={frontmatter}
           key={frontmatter.title}
           code={code}
         />
-      ))}
+      ))} */}
     </>
   );
 };

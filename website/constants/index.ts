@@ -9,8 +9,15 @@ export const NAV_ITEMS = [
   {
     title: "Components",
     items: [
-      { title: "Step", path: "/step" },
-      { title: "Steps", path: "/steps" },
+      { title: "Step", path: "#step" },
+      { title: "Steps", path: "#steps" },
+    ],
+  },
+  {
+    title: "Examples",
+    items: [
+      { title: "Multi Step Form", path: "#multi-form" },
+      { title: "Playground", path: "#playground" },
     ],
   },
 ];

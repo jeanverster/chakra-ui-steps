@@ -1,5 +1,5 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-import { StepsTheme as Steps } from "chakra-ui-steps";
+import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 
 // const Button = {
 //   // The styles all button have in common

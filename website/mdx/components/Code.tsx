@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Flex, useColorMode } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/dracula";
@@ -51,7 +51,7 @@ export const Code = (props: CodeProps) => {
   const isBash = props.language === "bash";
 
   return (
-    <Box mt={isBash ? 2 : 12} mb={8}>
+    <Box my={4}>
       <Highlight
         {...defaultProps}
         theme={isDarkMode ? darkTheme : lightTheme}
@@ -60,11 +60,11 @@ export const Code = (props: CodeProps) => {
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Pre className={className} style={style}>
-            <LanguageFlag px={4} py={2} right={8} rounded="md" top={-8}>
+            {/* <LanguageFlag px={4} py={2} right={8} rounded="md" top={-8}>
               <Text fontSize="sm" fontWeight="bold">
                 {props.language.toUpperCase()}
               </Text>
-            </LanguageFlag>
+            </LanguageFlag> */}
             {tokens.map((line, i) => (
               <Line key={i} {...getLineProps({ line, key: i })}>
                 <LineNo>{i + 1}</LineNo>
