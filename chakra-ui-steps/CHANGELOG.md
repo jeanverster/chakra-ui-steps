@@ -1,3 +1,10 @@
+# [chakra-ui-steps-v1.7.3](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.7.2...chakra-ui-steps-v1.7.3) (2022-05-06)
+
+
+### Bug Fixes
+
+* bump framer dep to v6 ([#68](https://github.com/jeanverster/chakra-ui-steps/issues/68)) ([cdc0bc7](https://github.com/jeanverster/chakra-ui-steps/commit/cdc0bc73c536ce2e5b11a1854494a285d46ea1c6))
+
 # chakra-ui-steps-v1.7.2 (2022-03-19)
 
 ### Features
