@@ -85,7 +85,7 @@ export const StepsExample = () => {
   });
 
   return (
-    <Flex flexDir="column" width="100%">
+    <Flex flexDir='column' width='100%'>
       <Steps activeStep={activeStep}>
         {steps.map(({ label, content }) => (
           <Step label={label} key={label}>
@@ -95,22 +95,22 @@ export const StepsExample = () => {
       </Steps>
       {activeStep === steps.length ? (
         <Flex p={4}>
-          <Button mx="auto" size="sm" onClick={reset}>
+          <Button mx='auto' size='sm' onClick={reset}>
             Reset
           </Button>
         </Flex>
       ) : (
-        <Flex width="100%" justify="flex-end">
+        <Flex width='100%' justify='flex-end'>
           <Button
             isDisabled={activeStep === 0}
             mr={4}
             onClick={prevStep}
-            size="sm"
-            variant="ghost"
+            size='sm'
+            variant='ghost'
           >
             Prev
           </Button>
-          <Button size="sm" onClick={nextStep}>
+          <Button size='sm' onClick={nextStep}>
             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
           </Button>
         </Flex>
@@ -137,14 +137,14 @@ stepIconContainer;
 steps;
 ```
 
-The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
+The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/chakra-ui-steps/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
 
 ```js
 import { StepsStyleConfig } from 'chakra-ui-steps';
 
 const CustomSteps = {
   ...StepsStyleConfig,
-  baseStyle: props => {
+  baseStyle: (props) => {
     return {
       ...StepsStyleConfig.baseStyle(props),
       icon: {
