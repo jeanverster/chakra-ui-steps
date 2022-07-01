@@ -137,7 +137,7 @@ stepIconContainer;
 steps;
 ```
 
-The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
+The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/chakra-ui-steps/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
 
 ```js
 import { StepsStyleConfig } from 'chakra-ui-steps';
