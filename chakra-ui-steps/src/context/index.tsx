@@ -17,10 +17,15 @@ const StepsContext = React.createContext<StepsContextValue>({
 
 export const useStepsContext = () => React.useContext(StepsContext);
 
-export const StepsProvider: React.FC<{ value: StepsContextValue }> = ({
+type StepsContextProviderProps = {
+  value: StepsContextValue;
+  children: React.ReactNode;
+};
+
+export const StepsProvider = ({
   value,
   children,
-}) => {
+}: StepsContextProviderProps) => {
   const isError = value.state === 'error';
   const isLoading = value.state === 'loading';
 
