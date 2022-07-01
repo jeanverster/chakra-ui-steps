@@ -1,4 +1,3 @@
-import { useColorModeValue } from '@chakra-ui/color-mode';
 import {
   Button,
   extendTheme,
@@ -9,6 +8,7 @@ import {
   Radio,
   RadioGroup,
   Text,
+  useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
 import { darken, lighten } from '@chakra-ui/theme-tools';

@@ -1,5 +1,4 @@
-import { Flex } from '@chakra-ui/layout';
-import { chakra, Collapse, useStyles } from '@chakra-ui/react';
+import { chakra, Collapse, Flex, useStyles } from '@chakra-ui/react';
 import { dataAttr } from '@chakra-ui/utils';
 import React from 'react';
 import { useStepsContext } from '../../context';

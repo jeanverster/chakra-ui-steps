@@ -9,7 +9,6 @@ import {
   useColorModeValue,
   useMultiStyleConfig,
 } from '@chakra-ui/react';
-import { cx } from '@chakra-ui/utils';
 import * as React from 'react';
 import { StepsProvider } from '../../context/index';
 export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
@@ -21,6 +20,7 @@ export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
   onClickStep?: (step: number) => void;
   labelOrientation?: 'vertical' | 'horizontal';
   trackColor?: string;
+  isMobileBreakpointValue?: Partial<Record<string, boolean>> | boolean[];
 }
 
 export const Steps = forwardRef<StepsProps, 'div'>(
@@ -44,6 +44,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       checkIcon,
       onClickStep,
       labelOrientation,
+      isMobileBreakpointValue,
       ...rest
     } = omitThemingProps(props);
 
@@ -66,7 +67,9 @@ export const Steps = forwardRef<StepsProps, 'div'>(
 
     const clickable = !!onClickStep;
 
-    const isMobile = useBreakpointValue({ base: true, sm: false });
+    const isMobile = useBreakpointValue(
+      isMobileBreakpointValue || { base: true, sm: false }
+    );
 
     const orientation = isMobile && responsive ? 'vertical' : orientationProp;
 
@@ -94,7 +97,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
               flexDir: orientation === 'vertical' ? 'column' : 'row',
               ...stepsStyles,
             }}
-            className={cx('cui-steps', className)}
+            className="cui-steps"
             {...rest}
           >
             {React.Children.map(children, (child, i) => {

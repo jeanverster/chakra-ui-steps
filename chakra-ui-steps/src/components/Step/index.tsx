@@ -1,4 +1,4 @@
-import { forwardRef, HTMLChakraProps, ThemingProps } from '@chakra-ui/system';
+import { forwardRef, HTMLChakraProps, ThemingProps } from '@chakra-ui/react';
 import * as React from 'react';
 import { useStepsContext } from '../../context';
 import { HorizontalStep } from '../HorizontalStep';
