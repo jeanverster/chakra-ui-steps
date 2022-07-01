@@ -27,7 +27,6 @@ export default PostDetail;
 export const getStaticProps: GetStaticProps<PostDetailProps> = async (
   context
 ) => {
-  console.log("context", context);
   const { code, frontmatter } = await getPost("getting-started");
 
   const props = JSON.parse(JSON.stringify({ code, frontmatter }));

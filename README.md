@@ -6,11 +6,11 @@
 <br />
 <br />
 
-[![MIT License](https://badgen.net/github/license/jeanverster/chakra-ui-steps 'MIT License')](LICENSE.md)
-[![npm - chakra-ui-steps](https://img.shields.io/npm/v/chakra-ui-steps 'chakra-ui-steps npm')](https://www.npmjs.com/package/chakra-ui-steps)
+[![MIT License](https://badgen.net/github/license/jeanverster/chakra-ui-steps "MIT License")](LICENSE.md)
+[![npm - chakra-ui-steps](https://img.shields.io/npm/v/chakra-ui-steps "chakra-ui-steps npm")](https://www.npmjs.com/package/chakra-ui-steps)
 [![bundle size - chakra-ui-steps](https://badgen.net/bundlephobia/min/chakra-ui-steps)](https://bundlephobia.com/result?p=chakra-ui-steps)
 [![bundle size - chakra-ui-steps](https://badgen.net/bundlephobia/minzip/chakra-ui-steps)](https://bundlephobia.com/result?p=chakra-ui-steps)
-[![Total Downloads - chakra-ui-steps](https://badgen.net/npm/dt/chakra-ui-steps?color=blue 'chakra-ui-steps npm downloads')](https://www.npmjs.com/package/chakra-ui-steps)
+[![Total Downloads - chakra-ui-steps](https://badgen.net/npm/dt/chakra-ui-steps?color=blue "chakra-ui-steps npm downloads")](https://www.npmjs.com/package/chakra-ui-steps)
 
 ![screenshot](https://i.imgur.com/B9zbJEa.gif)
 
@@ -39,11 +39,11 @@ npm i chakra-ui-steps
 
 > NOTE: This v1.4.0 of this component requires @chakra-ui/react >= v1.6.7 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>. If you aren't able to update your chakra version you can still use v1.3.0
 
-In order to get started you will need to extend the default Chakra theme with the provided `StepsStyleConfig` object, like so:
+In order to get started you will need to extend the default Chakra theme with the provided `StepsTheme` object, like so:
 
 ```jsx
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { StepsTheme as Steps } from "chakra-ui-steps";
 
 const theme = extendTheme({
   components: {
@@ -65,7 +65,7 @@ Once that's done you should be good to go!
 ### Basic Example
 
 ```jsx
-import { Step, Steps, useSteps } from 'chakra-ui-steps';
+import { Step, Steps, useSteps } from "chakra-ui-steps";
 
 const content = (
   <Flex py={4}>
@@ -74,9 +74,9 @@ const content = (
 );
 
 const steps = [
-  { label: 'Step 1', content },
-  { label: 'Step 2', content },
-  { label: 'Step 3', content },
+  { label: "Step 1", content },
+  { label: "Step 2", content },
+  { label: "Step 3", content },
 ];
 
 export const StepsExample = () => {
@@ -111,7 +111,7 @@ export const StepsExample = () => {
             Prev
           </Button>
           <Button size="sm" onClick={nextStep}>
-            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            {activeStep === steps.length - 1 ? "Finish" : "Next"}
           </Button>
         </Flex>
       )}
@@ -140,17 +140,17 @@ steps;
 The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
 
 ```js
-import { StepsStyleConfig } from 'chakra-ui-steps';
+import { StepsTheme } from "chakra-ui-steps";
 
 const CustomSteps = {
-  ...StepsStyleConfig,
-  baseStyle: props => {
+  ...StepsTheme,
+  baseStyle: (props) => {
     return {
-      ...StepsStyleConfig.baseStyle(props),
+      ...StepsTheme.baseStyle(props),
       icon: {
-        ...StepsStyleConfig.baseStyle(props).icon,
+        ...StepsTheme.baseStyle(props).icon,
         // your custom styles here
-        strokeWidth: '1px',
+        strokeWidth: "1px",
       },
     };
   },

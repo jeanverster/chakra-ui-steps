@@ -6,6 +6,7 @@ export type Post = {
 export type FrontMatter = {
   title: string;
   description: string;
+  order: number;
 };
 
 export interface RepoPayload {

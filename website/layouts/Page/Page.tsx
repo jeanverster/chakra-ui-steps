@@ -31,8 +31,8 @@ export const Page = ({
       pt={["96px", "12vmax", "12vmin"]}
       pb="128px"
       sx={{
-        display: "inherit",
-        minHeight: "100vh",
+        display: ["inherit", "inherit", "block"],
+        flexDir: "column",
         minW: 0,
       }}
       {...rest}
@@ -56,9 +56,7 @@ export const Page = ({
           <Heading color="blue.500" fontSize={["2xl", "4xl"]} sx={{ mb: 6 }}>
             {title}
           </Heading>
-          <Text sx={{ mb: 4 }} fontSize="lg">
-            {description}
-          </Text>
+          <Text fontSize="lg">{description}</Text>
           <Box mt={8} mb={10} />
         </>
       )}
@@ -68,7 +66,6 @@ export const Page = ({
 };
 
 Page.defaultProps = {
-  minH: "100vh",
   title: "Title",
   description: "Description",
 };

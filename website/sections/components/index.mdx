@@ -1,18 +1,21 @@
 ---
 title: Usage
 date: 27-11-2021
+order: 2
 ---
+
+import { Divider } from "@chakra-ui/react";
 
 > NOTE: This v1.4.0 of this component requires @chakra-ui/react >= v1.6.7 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>. If you aren't able to update your chakra version you can still use v1.3.0
 
 <p>
-  In order to get started you will need to extend the default Chakra theme with
-  the provided `StepsTheme` object, like so:
+  In order to get started you will need to extend the default Chakra
+  theme with the provided `StepsTheme` object, like so:
 </p>
 
 ```jsx
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { StepsStyleConfig as Steps } from "chakra-ui-steps";
+import { StepsTheme as Steps } from "chakra-ui-steps";
 
 const theme = extendTheme({
   components: {
@@ -31,7 +34,9 @@ export const App = () => {
 
 Once that's done you should be good to go!
 
-### Basic Example
+<Divider my={4} />
+
+## Basic Example
 
 ```jsx
 import { Step, Steps, useSteps } from "chakra-ui-steps";
@@ -49,7 +54,7 @@ const steps = [
 ];
 
 export const StepsExample = () => {
-  const { nextStep, prevStep, setStep, reset, activeStep } = useSteps({
+  const { nextStep, prevStep, activeStep } = useSteps({
     initialStep: 0,
   });
 
@@ -89,9 +94,14 @@ export const StepsExample = () => {
 };
 ```
 
-### Custom Styles
+## Custom Styles
 
-If you would like to customize the appearance of the Steps component you can do so using the multi part component styling approach as described <a href="https://chakra-ui.com/docs/theming/component-style#styling-multipart-components" target="_blank">here</a>. The parts available for styling are:
+<p>
+  If you would like to customize the appearance of the Steps component
+  you can do so using the multi part component styling approach as
+  described [here](https://chakra-ui.com/docs/components/steps). The
+  parts available for styling are:
+</p>
 
 ```js
 connector;
@@ -105,18 +115,23 @@ stepIconContainer;
 steps;
 ```
 
-The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
+<p>
+  The default styles for each part can be found{" "}
+  [here](https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts).
+  Below is an example of how you might change the stroke width of the
+  icons:
+</p>
 
 ```js
-import { StepsStyleConfig } from "chakra-ui-steps";
+import { StepsTheme } from "chakra-ui-steps";
 
 const CustomSteps = {
-  ...StepsStyleConfig,
+  ...StepsTheme,
   baseStyle: (props) => {
     return {
-      ...StepsStyleConfig.baseStyle(props),
+      ...StepsTheme.baseStyle(props),
       icon: {
-        ...StepsStyleConfig.baseStyle(props).icon,
+        ...StepsTheme.baseStyle(props).icon,
         // your custom styles here
         strokeWidth: "1px",
       },
@@ -131,7 +146,7 @@ const theme = extendTheme({
 });
 ```
 
-### `Steps`
+## Steps
 
 | Prop                   | Type                | Required | Description                                                                | Default    |
 | ---------------------- | ------------------- | -------- | -------------------------------------------------------------------------- | ---------- |
@@ -143,7 +158,10 @@ const theme = extendTheme({
 | **`onClickStep`**      | () => void          | no       | If defined, allows you to click on the step icons                          | undefined  |
 | **`labelOrientation`** | string              | no       | Switch between horizontal and vertical label orientation                   | undefined  |
 
-### `Step`
+<br />
+<br />
+
+## Step
 
 | Prop                  | Type                | Required | Description                                                          | Default   |
 | --------------------- | ------------------- | -------- | -------------------------------------------------------------------- | --------- |

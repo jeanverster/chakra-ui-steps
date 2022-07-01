@@ -17,7 +17,7 @@ export const NavSection = (props: PostDetailProps): JSX.Element => {
 
   return (
     <Flex {...rest} sx={{ flexDir: "column" }} id={slugify(title)}>
-      <Heading fontSize="3xl" mt={12} mb={6} textAlign="left">
+      <Heading fontSize="3xl" mb={6} textAlign="left">
         {title}
       </Heading>
       {description && (

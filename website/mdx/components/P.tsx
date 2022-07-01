@@ -6,6 +6,12 @@ export const P = (props: TextProps) => {
   }
 
   return (
-    <Text mb={8} fontSize="lg" sx={{ my: 2 }} lineHeight="taller" {...props} />
+    <Text
+      mb={8}
+      fontSize="lg"
+      sx={{ my: 2 }}
+      lineHeight="taller"
+      {...props}
+    />
   );
 };

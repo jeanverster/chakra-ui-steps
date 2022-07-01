@@ -3,6 +3,7 @@ export const NAV_ITEMS = [
     title: "Getting Started",
     items: [
       { title: "Installation", path: "#installation" },
+      { title: "Features", path: "#features" },
       { title: "Usage", path: "#usage" },
     ],
   },

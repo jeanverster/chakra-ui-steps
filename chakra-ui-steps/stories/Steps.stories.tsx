@@ -23,7 +23,7 @@ import {
 } from 'react-icons/fi';
 import { MdCheck } from 'react-icons/md';
 import { useConfigContext } from '../.storybook/preview';
-import { Step, Steps, StepsStyleConfig, useSteps } from '../src';
+import { Step, Steps, StepsTheme, useSteps } from '../src';
 
 const meta: Meta = {
   title: 'Steps',
@@ -333,14 +333,14 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
 };
 
 const CustomSteps = {
-  ...StepsStyleConfig,
+  ...StepsTheme,
   baseStyle: (props: any) => {
     const inactiveColor = props.colorMode === 'light' ? 'gray.100' : 'gray.700';
     const activeColor = `blue.500`;
     return {
-      ...StepsStyleConfig.baseStyle(props),
+      ...StepsTheme.baseStyle(props),
       connector: {
-        ...StepsStyleConfig.baseStyle(props).connector,
+        ...StepsTheme.baseStyle(props).connector,
         // this is the track color of the connector between steps
         borderColor:
           props.colorMode === 'light' ? 'blackAlpha.300' : 'whiteAlpha.500',
@@ -349,7 +349,7 @@ const CustomSteps = {
         },
       },
       stepIconContainer: {
-        ...StepsStyleConfig.baseStyle(props).stepIconContainer,
+        ...StepsTheme.baseStyle(props).stepIconContainer,
         bg: inactiveColor,
         borderColor: inactiveColor,
         borderRadius: 'md',

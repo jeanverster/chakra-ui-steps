@@ -1,5 +1,5 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-import { StepsStyleConfig as Steps } from "chakra-ui-steps";
+import { StepsTheme as Steps } from "chakra-ui-steps";
 
 // const Button = {
 //   // The styles all button have in common
@@ -47,6 +47,43 @@ const config: ThemeConfig = {
 };
 
 const theme = extendTheme({
+  styles: {
+    global: (props) => {
+      const scrollbarColor =
+        props.colorMode === "light"
+          ? `${props.theme.colors.teal["500"]} ${props.theme.colors.gray["300"]}`
+          : `${props.theme.colors.teal["500"]} ${props.theme.colors.gray["700"]}`;
+      return {
+        "*": {
+          scrollbarWidth: "8px",
+          scrollbarColor,
+        },
+        /* Chrome, Edge, and Safari */
+        "*::-webkit-scrollbar": {
+          width: "8px",
+          height: "8px",
+        },
+        "*::-webkit-scrollbar-track": {
+          background:
+            props.colorMode === "light"
+              ? props.theme.colors.gray["200"]
+              : props.theme.colors.gray["700"],
+        },
+
+        "*::-webkit-scrollbar-thumb": {
+          backgroundColor:
+            props.colorMode === "dark"
+              ? props.theme.colors.gray["600"]
+              : props.theme.colors.gray["400"],
+          borderRadius: "4px",
+        },
+        ".prism-code": {
+          // whiteSpace: "pre-wrap",
+          overflowX: "auto",
+        },
+      };
+    },
+  },
   components: {
     Steps,
     IconButton: {

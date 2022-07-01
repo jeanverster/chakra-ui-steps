@@ -12,7 +12,7 @@ import { StoryContext } from '@storybook/react';
 import React, { Dispatch, SetStateAction } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { withPerformance } from 'storybook-addon-performance';
-import { StepsStyleConfig } from '../src/theme';
+import { StepsTheme } from '../src/theme';
 
 enum Sizes {
   sm = 'sm',
@@ -79,7 +79,7 @@ const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
 const withChakra = (StoryFn: Function, context: StoryContext) => {
   const theme = context?.args?.theme
     ? context?.args.theme
-    : extendTheme({ components: { Steps: StepsStyleConfig } });
+    : extendTheme({ components: { Steps: StepsTheme } });
   return (
     <ChakraProvider theme={theme}>
       <ConfigProvider>

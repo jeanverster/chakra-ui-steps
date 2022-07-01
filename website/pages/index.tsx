@@ -1,6 +1,5 @@
-import { Step1, Step2, Step3, Step4 } from "@/components";
-import { Heading } from "@chakra-ui/layout";
-import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
+import { NavSection, Step1, Step2, Step3, Step4 } from "@/components";
+import { Box, Button, Divider, Flex, Heading } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
@@ -43,6 +42,8 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     sections.push(contents);
   }
 
+  sections.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
+
   return {
     props: { sections: JSON.parse(JSON.stringify(sections)) },
   };
@@ -54,6 +55,13 @@ const Home: NextPage<HomeProps> = ({ sections }) => {
   });
   return (
     <>
+      {sections.map(({ frontmatter, code }) => (
+        <NavSection
+          frontmatter={frontmatter}
+          key={frontmatter.title}
+          code={code}
+        />
+      ))}
       {/* <Divider sx={{ mb: 12 }} /> */}
       <Steps colorScheme="blue" activeStep={activeStep}>
         {steps.map(({ label, content }) => (
@@ -91,13 +99,6 @@ const Home: NextPage<HomeProps> = ({ sections }) => {
         </Flex>
       )}
       <Divider sx={{ mt: 12 }} />
-      {/* {sections.map(({ frontmatter, code }) => (
-        <NavSection
-          frontmatter={frontmatter}
-          key={frontmatter.title}
-          code={code}
-        />
-      ))} */}
     </>
   );
 };

@@ -1,19 +1,23 @@
+import { FrontMatter } from "@/types";
 import * as chakraButtons from "@chakra-ui/button";
 import * as chakraColorMode from "@chakra-ui/color-mode";
 import * as chakraHooks from "@chakra-ui/hooks";
 import * as chakraLayout from "@chakra-ui/layout";
+import * as chakraTable from "@chakra-ui/table";
 import * as framerMotion from "framer-motion";
 import fs from "fs";
 import matter from "gray-matter";
 import { bundleMDX } from "mdx-bundler";
 import path from "path";
 import * as reactIconsRI from "react-icons/ri";
+import remarkGfm from "remark-gfm";
 
 const chakra = Object.keys({
   ...chakraHooks,
   ...chakraLayout,
   ...chakraButtons,
   ...chakraColorMode,
+  ...chakraTable,
 }).filter((key) => key !== "__esModule");
 
 const framer = Object.keys(framerMotion).filter((key) => key !== "__esModule");
@@ -29,14 +33,14 @@ export const getSourceOfFile = (filePath: string) => {
   );
 };
 
-export const getSections = () => {
+export const getSections = (): { frontmatter: FrontMatter; slug: string }[] => {
   return fs.readdirSync(SECTIONS_PATH).map((filePath) => {
     const source = getSourceOfFile(filePath);
     const slug = filePath.replace(/\.mdx?$/, "");
     const { data } = matter(source);
 
     return {
-      frontmatter: data,
+      frontmatter: data as FrontMatter,
       slug: slug,
     };
   });
@@ -68,7 +72,7 @@ export const getPost = async (slug: string) => {
     source,
     cwd: directory,
     xdmOptions: (options) => {
-      options.remarkPlugins = [...(options.remarkPlugins ?? [])];
+      options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkGfm];
       return options;
     },
     esbuildOptions: (options) => {
