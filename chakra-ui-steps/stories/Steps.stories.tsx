@@ -23,7 +23,7 @@ import {
   FiUser,
 } from 'react-icons/fi';
 import { useConfigContext } from '../.storybook/preview';
-import { Step, Steps, StepsStyleConfig, useSteps } from '../src';
+import { Step, Steps, StepsTheme, useSteps } from '../src';
 
 const meta: Meta = {
   title: 'Steps',
@@ -339,14 +339,14 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
 };
 
 const CustomSteps = {
-  ...StepsStyleConfig,
+  ...StepsTheme,
   baseStyle: (props: any) => {
     const inactiveColor = props.colorMode === 'light' ? 'gray.100' : 'gray.700';
     const activeColor = `blue.500`;
     return {
-      ...StepsStyleConfig.baseStyle(props),
+      ...StepsTheme.baseStyle(props),
       stepIconContainer: {
-        ...StepsStyleConfig.baseStyle(props).stepIconContainer,
+        ...StepsTheme.baseStyle(props).stepIconContainer,
         bg: inactiveColor,
         borderColor: inactiveColor,
         borderRadius: 'md',

@@ -6,26 +6,6 @@ import { StepSharedProps } from '../../types';
 import { StepIcon } from '../StepIcon';
 import { StepIconContainer } from '../StepIconContainer';
 import { StepLabel } from '../StepLabel';
-/* 
-Horizontal step markup
-<ol class="c-stepper">
-    <li class="c-stepper__item">
-        <h3 class="c-stepper__title">Step 1</h3>
-    </li>
-    <!-- Other steps -->
-</ol> 
-*/
-
-/*
-Vertical label step markup
-<ol class="c-stepper">
-    <li class="c-stepper__item">
-        <h3 class="c-stepper__title">Step 1</h3>
-        <p class="c-stepper__desc">Some desc text</p>
-    </li>
-    <!-- Other steps -->
-</ol>
-*/
 
 const getStyles = ({
   isLabelVertical,

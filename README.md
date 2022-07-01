@@ -39,11 +39,11 @@ npm i chakra-ui-steps
 
 > NOTE: This v1.4.0 of this component requires @chakra-ui/react >= v1.6.7 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>. If you aren't able to update your chakra version you can still use v1.3.0
 
-In order to get started you will need to extend the default Chakra theme with the provided `StepsStyleConfig` object, like so:
+In order to get started you will need to extend the default Chakra theme with the provided `StepsTheme` object, like so:
 
 ```jsx
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { StepsStyleConfig as Steps } from "chakra-ui-steps";
+import { StepsTheme as Steps } from "chakra-ui-steps";
 
 const theme = extendTheme({
   components: {
@@ -139,15 +139,15 @@ steps;
 The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/chakra-ui-steps/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
 
 ```js
-import { StepsStyleConfig } from "chakra-ui-steps";
+import { StepsTheme } from "chakra-ui-steps";
 
 const CustomSteps = {
-  ...StepsStyleConfig,
+  ...StepsTheme,
   baseStyle: (props) => {
     return {
-      ...StepsStyleConfig.baseStyle(props),
+      ...StepsTheme.baseStyle(props),
       icon: {
-        ...StepsStyleConfig.baseStyle(props).icon,
+        ...StepsTheme.baseStyle(props).icon,
         // your custom styles here
         strokeWidth: "1px",
       },

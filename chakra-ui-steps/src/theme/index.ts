@@ -170,7 +170,7 @@ const defaultProps = {
   colorScheme: 'green',
 };
 
-export const StepsStyleConfig = {
+export const StepsTheme = {
   parts: parts.keys,
   baseStyle,
   sizes,
