@@ -10,7 +10,7 @@ interface StepIconProps {
   isError?: boolean;
   isLoading?: boolean;
   icon?: React.ComponentType<any>;
-  index: number;
+  index: number | undefined;
   checkIcon?: React.ComponentType<any>;
 }
 
@@ -48,9 +48,10 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     ...label,
   };
 
-  const Icon = React.useMemo(() => (CustomIcon ? CustomIcon : null), [
-    CustomIcon,
-  ]);
+  const Icon = React.useMemo(
+    () => (CustomIcon ? CustomIcon : null),
+    [CustomIcon]
+  );
 
   const Check = React.useMemo(
     () => (CustomCheckIcon ? CustomCheckIcon : CheckIcon),

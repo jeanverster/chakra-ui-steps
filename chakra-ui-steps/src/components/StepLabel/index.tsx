@@ -6,7 +6,7 @@ interface StepLabelProps {
   isCurrentStep?: boolean;
   opacity: number;
   label?: string | React.ReactNode;
-  description?: string;
+  description?: string | null;
 }
 
 export const StepLabel = ({

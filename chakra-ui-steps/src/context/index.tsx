@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { StepsProps } from '../components/Steps';
 
-interface StepsContextValue extends StepsProps {
-  stepContainerWidths?: number[];
+export interface StepsContextValue extends StepsProps {
   clickable?: boolean;
   isError?: boolean;
   isLoading?: boolean;
   isVertical?: boolean;
   isLabelVertical?: boolean;
-  widths?: number[];
-  setWidths?: React.Dispatch<React.SetStateAction<number[]>>;
   stepCount?: number;
+  trackColor?: string;
 }
 
 const StepsContext = React.createContext<StepsContextValue>({
@@ -23,8 +21,6 @@ export const StepsProvider: React.FC<{ value: StepsContextValue }> = ({
   value,
   children,
 }) => {
-  const [widths, setWidths] = React.useState<number[]>([]);
-
   const isError = value.state === 'error';
   const isLoading = value.state === 'loading';
 
@@ -36,8 +32,6 @@ export const StepsProvider: React.FC<{ value: StepsContextValue }> = ({
     <StepsContext.Provider
       value={{
         ...value,
-        widths,
-        setWidths,
         isError,
         isLoading,
         isVertical,
