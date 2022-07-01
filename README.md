@@ -122,7 +122,7 @@ export const StepsExample = () => {
 
 ### Custom Styles
 
-If you would like to customize the appearance of the Steps component you can do so using the multi part component styling approach as described <a href="https://chakra-ui.com/docs/theming/component-style#styling-multipart-components" target="_blank">here</a>. The parts available for styling are:
+If you would like to customize the appearance of the Steps component you can do so using the multi part component styling approach as described <a href="https://chakra-ui.com/docs/styled-system/component-style#styling-multipart-components" target="_blank">here</a>. The parts available for styling are:
 
 ```js
 connector;
