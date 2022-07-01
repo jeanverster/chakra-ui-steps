@@ -1,8 +1,9 @@
-import { chakra, useStyles } from '@chakra-ui/react';
+import { chakra } from '@chakra-ui/react';
 import { dataAttr } from '@chakra-ui/utils';
 import { AnimatePresence } from 'framer-motion';
 import { useStepsContext } from '../../context';
 import { StepSharedProps } from '../../types';
+import { useStepsStyles } from '../Steps';
 
 type StepIconContainerProps = StepSharedProps & {
   children?: React.ReactNode;
@@ -13,7 +14,7 @@ export const StepIconContainer = ({
   isCompletedStep,
   children,
 }: StepIconContainerProps) => {
-  const { stepIconContainer } = useStyles();
+  const { stepIconContainer } = useStepsStyles();
   const { isError, clickable } = useStepsContext();
   return (
     <chakra.div

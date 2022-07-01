@@ -1,8 +1,9 @@
-import { chakra, Flex, forwardRef, Spinner, useStyles } from '@chakra-ui/react';
+import { chakra, Flex, forwardRef, Spinner } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { CheckIcon, CloseIcon } from '../Icons';
+import { useStepsStyles } from '../Steps';
 
 interface StepIconProps {
   isCompletedStep?: boolean;
@@ -28,7 +29,7 @@ const animationConfig = {
 };
 
 export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
-  const { icon, iconLabel, label } = useStyles();
+  const { icon, iconLabel, label } = useStepsStyles();
 
   const {
     isCompletedStep,

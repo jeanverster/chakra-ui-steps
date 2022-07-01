@@ -1,9 +1,9 @@
 import {
   chakra,
+  createStylesContext,
   forwardRef,
   HTMLChakraProps,
   omitThemingProps,
-  StylesProvider,
   ThemingProps,
   useBreakpointValue,
   useColorModeValue,
@@ -22,6 +22,10 @@ export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
   trackColor?: string;
   isMobileBreakpointValue?: Partial<Record<string, boolean>> | boolean[];
 }
+
+const [StylesProvider, useStyles] = createStylesContext('Steps');
+
+export const useStepsStyles = useStyles;
 
 export const Steps = forwardRef<StepsProps, 'div'>(
   (props, ref: React.Ref<HTMLOListElement>) => {

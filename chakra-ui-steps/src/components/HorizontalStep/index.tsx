@@ -1,4 +1,4 @@
-import { chakra, CSSObject, useStyles } from '@chakra-ui/react';
+import { chakra, CSSObject } from '@chakra-ui/react';
 import { dataAttr } from '@chakra-ui/utils';
 import * as React from 'react';
 import { StepsContextValue, useStepsContext } from '../../context';
@@ -6,6 +6,7 @@ import { StepSharedProps } from '../../types';
 import { StepIcon } from '../StepIcon';
 import { StepIconContainer } from '../StepIconContainer';
 import { StepLabel } from '../StepLabel';
+import { useStepsStyles } from '../Steps';
 
 const getStyles = ({
   isLabelVertical,
@@ -63,7 +64,7 @@ const getStyles = ({
 
 export const HorizontalStep = React.forwardRef<HTMLLIElement, StepSharedProps>(
   (props, ref) => {
-    const { step, stepContainer, stepIconContainer } = useStyles();
+    const { step, stepContainer, stepIconContainer } = useStepsStyles();
 
     const {
       isError,

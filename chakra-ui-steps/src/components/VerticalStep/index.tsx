@@ -1,4 +1,4 @@
-import { chakra, Collapse, Flex, useStyles } from '@chakra-ui/react';
+import { chakra, Collapse, Flex } from '@chakra-ui/react';
 import { dataAttr } from '@chakra-ui/utils';
 import React from 'react';
 import { useStepsContext } from '../../context';
@@ -6,6 +6,7 @@ import { StepSharedProps } from '../../types';
 import { StepIcon } from '../StepIcon';
 import { StepIconContainer } from '../StepIconContainer';
 import { StepLabel } from '../StepLabel';
+import { useStepsStyles } from '../Steps';
 
 type VerticalStepProps = StepSharedProps & {
   children?: React.ReactNode;
@@ -27,7 +28,7 @@ export const VerticalStep = React.forwardRef<HTMLLIElement, VerticalStepProps>(
     const { checkIcon, isError, isLoading, trackColor, colorScheme } =
       useStepsContext();
 
-    const { stepIconContainer } = useStyles();
+    const { stepIconContainer } = useStepsStyles();
 
     const opacity = hasVisited ? 1 : 0.8;
 
