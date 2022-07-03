@@ -1,4 +1,3 @@
-import { useColorModeValue } from '@chakra-ui/color-mode';
 import {
   Button,
   extendTheme,
@@ -9,19 +8,20 @@ import {
   Radio,
   RadioGroup,
   Text,
+  useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
 import { darken, lighten } from '@chakra-ui/theme-tools';
 import { Meta, Story } from '@storybook/react';
 import { motion, MotionProps } from 'framer-motion';
 import React from 'react';
+import { AiFillCheckCircle } from 'react-icons/ai';
 import {
   FiCheckCircle,
   FiClipboard,
   FiDollarSign,
   FiUser,
 } from 'react-icons/fi';
-import { MdCheck } from 'react-icons/md';
 import { useConfigContext } from '../.storybook/preview';
 import { Step, Steps, StepsTheme, useSteps } from '../src';
 
@@ -313,7 +313,13 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
   const { size } = useConfigContext();
   return (
     <>
-      <Steps size={size} checkIcon={MdCheck} activeStep={activeStep}>
+      <Steps
+        size={size}
+        checkIcon={AiFillCheckCircle}
+        colorScheme="blue"
+        activeStep={activeStep}
+        labelOrientation="vertical"
+      >
         {iconSteps.map(({ label, icon }, index) => (
           <Step label={label} key={label} icon={icon}>
             <Content my={6} index={index} />
@@ -339,15 +345,6 @@ const CustomSteps = {
     const activeColor = `blue.500`;
     return {
       ...StepsTheme.baseStyle(props),
-      connector: {
-        ...StepsTheme.baseStyle(props).connector,
-        // this is the track color of the connector between steps
-        borderColor:
-          props.colorMode === 'light' ? 'blackAlpha.300' : 'whiteAlpha.500',
-        _highlighted: {
-          borderColor: activeColor,
-        },
-      },
       stepIconContainer: {
         ...StepsTheme.baseStyle(props).stepIconContainer,
         bg: inactiveColor,

@@ -1,6 +1,6 @@
 const path = require('path');
 
-const toPath = _path => path.join(process.cwd(), _path);
+const toPath = (_path) => path.join(process.cwd(), _path);
 
 module.exports = {
   stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
@@ -10,7 +10,7 @@ module.exports = {
     check: true, // type-check stories during Storybook build
     reactDocgen: 'none',
   },
-  webpackFinal: async config => {
+  webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.mjs$/,
       include: /node_modules/,
@@ -22,13 +22,13 @@ module.exports = {
         ...config.resolve,
         alias: {
           ...config.resolve.alias,
-          '@emotion/core': toPath('node_modules/@emotion/react'),
-          'emotion-theming': toPath('node_modules/@emotion/react'),
+          '@emotion/core': toPath('../node_modules/@emotion/react'),
+          'emotion-theming': toPath('../node_modules/@emotion/react'),
         },
       },
     };
   },
-  babel: async options => ({
+  babel: async (options) => ({
     ...options,
 
     plugins: [

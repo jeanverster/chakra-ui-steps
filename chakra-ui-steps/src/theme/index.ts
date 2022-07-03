@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/theme-tools';
 
 const parts = anatomy('steps').parts(
-  'connector',
   'description',
   'icon',
   'iconLabel',
@@ -38,23 +37,6 @@ const baseStyleDescription: SystemStyleFunction = (props) => ({
   textAlign: 'center',
   fontSize: 'sm',
 });
-
-const baseStyleConnector: SystemStyleFunction = (props) => {
-  const { colorScheme: c } = props;
-  const inactiveColor = mode('gray.200', 'gray.700')(props);
-  const activeColor = mode(`${c}.500`, `${c}.200`)(props);
-
-  return {
-    flex: 1,
-    display: 'flex',
-    borderColor: inactiveColor,
-    transitionProperty: 'border-color',
-    transitionDuration: 'normal',
-    _highlighted: {
-      borderColor: activeColor,
-    },
-  };
-};
 
 const baseStyleStepIconContainer: SystemStyleFunction = (props) => {
   const { colorScheme: c } = props;
@@ -89,7 +71,6 @@ const baseStyleStepIconContainer: SystemStyleFunction = (props) => {
 };
 
 const baseStyle: PartsStyleFunction<typeof parts> = (props) => ({
-  connector: baseStyleConnector(props),
   description: baseStyleDescription(props),
   icon: baseStyleIcon,
   iconLabel: baseStyleLabel(props),
@@ -114,6 +95,7 @@ const baseStyle: PartsStyleFunction<typeof parts> = (props) => ({
     width: '100%',
     display: 'flex',
     flex: 1,
+    flexWrap: 'wrap',
   },
 });
 

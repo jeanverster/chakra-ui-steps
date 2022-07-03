@@ -1,12 +1,13 @@
-import { chakra, useStyles } from '@chakra-ui/react';
+import { chakra } from '@chakra-ui/react';
 import React from 'react';
 import { useStepsContext } from '../../context/index';
+import { useStepsStyles } from '../Steps';
 
 interface StepLabelProps {
   isCurrentStep?: boolean;
   opacity: number;
   label?: string | React.ReactNode;
-  description?: string;
+  description?: string | null;
 }
 
 export const StepLabel = ({
@@ -19,7 +20,7 @@ export const StepLabel = ({
     labelContainer,
     label: labelStyles,
     description: descriptionStyles,
-  } = useStyles();
+  } = useStepsStyles();
 
   const { isLabelVertical } = useStepsContext();
 

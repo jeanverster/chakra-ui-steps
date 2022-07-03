@@ -1,17 +1,16 @@
-import { useMediaQuery } from '@chakra-ui/react';
 import {
   chakra,
+  createStylesContext,
   forwardRef,
   HTMLChakraProps,
   omitThemingProps,
-  StylesProvider,
   ThemingProps,
+  useBreakpointValue,
+  useColorModeValue,
   useMultiStyleConfig,
-} from '@chakra-ui/system';
-import { cx } from '@chakra-ui/utils';
+} from '@chakra-ui/react';
 import * as React from 'react';
 import { StepsProvider } from '../../context/index';
-
 export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
   activeStep: number;
   orientation?: 'vertical' | 'horizontal';
@@ -20,7 +19,13 @@ export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
   checkIcon?: React.ComponentType<any>;
   onClickStep?: (step: number) => void;
   labelOrientation?: 'vertical' | 'horizontal';
+  trackColor?: string;
+  isMobileBreakpointValue?: Partial<Record<string, boolean>> | boolean[];
 }
+
+const [StylesProvider, useStyles] = createStylesContext('Steps');
+
+export const useStepsStyles = useStyles;
 
 export const Steps = forwardRef<StepsProps, 'div'>(
   (props, ref: React.Ref<HTMLOListElement>) => {
@@ -29,6 +34,9 @@ export const Steps = forwardRef<StepsProps, 'div'>(
     const stepsStyles = {
       ...styles.steps,
     };
+
+    const trackColor =
+      props.trackColor || useColorModeValue('gray.200', 'gray.700');
 
     const {
       className,
@@ -40,6 +48,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       checkIcon,
       onClickStep,
       labelOrientation,
+      isMobileBreakpointValue,
       ...rest
     } = omitThemingProps(props);
 
@@ -49,11 +58,11 @@ export const Steps = forwardRef<StepsProps, 'div'>(
 
     const renderHorizontalContent = () => {
       if (activeStep <= childArr.length) {
-        return React.Children.map(childArr[activeStep], node => {
+        return React.Children.map(childArr[activeStep], (node) => {
           if (!React.isValidElement(node)) return;
           return React.Children.map(
             node.props.children,
-            childNode => childNode
+            (childNode) => childNode
           );
         });
       }
@@ -62,7 +71,9 @@ export const Steps = forwardRef<StepsProps, 'div'>(
 
     const clickable = !!onClickStep;
 
-    const [isMobile] = useMediaQuery('(max-width: 43em)');
+    const isMobile = useBreakpointValue(
+      isMobileBreakpointValue || { base: true, sm: false }
+    );
 
     const orientation = isMobile && responsive ? 'vertical' : orientationProp;
 
@@ -80,6 +91,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
             clickable,
             colorScheme: props.colorScheme,
             stepCount,
+            trackColor,
           }}
         >
           <chakra.ol
@@ -89,7 +101,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
               flexDir: orientation === 'vertical' ? 'column' : 'row',
               ...stepsStyles,
             }}
-            className={cx('chakra-steps', className)}
+            className="cui-steps"
             {...rest}
           >
             {React.Children.map(children, (child, i) => {
