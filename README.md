@@ -122,7 +122,7 @@ export const StepsExample = () => {
 
 ### Custom Styles
 
-If you would like to customize the appearance of the Steps component you can do so using the multi part component styling approach as described <a href="https://chakra-ui.com/docs/theming/component-style#styling-multipart-components" target="_blank">here</a>. The parts available for styling are:
+If you would like to customize the appearance of the Steps component you can do so using the multi part component styling approach as described <a href="https://chakra-ui.com/docs/styled-system/component-style#styling-multipart-components" target="_blank">here</a>. The parts available for styling are:
 
 ```js
 connector;
@@ -137,7 +137,7 @@ stepIconContainer;
 steps;
 ```
 
-The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
+The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/chakra-ui-steps/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
 
 ```js
 import { StepsStyleConfig } from 'chakra-ui-steps';
