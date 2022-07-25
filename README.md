@@ -6,11 +6,11 @@
 <br />
 <br />
 
-[![MIT License](https://badgen.net/github/license/jeanverster/chakra-ui-steps 'MIT License')](LICENSE.md)
-[![npm - chakra-ui-steps](https://img.shields.io/npm/v/chakra-ui-steps 'chakra-ui-steps npm')](https://www.npmjs.com/package/chakra-ui-steps)
+[![MIT License](https://badgen.net/github/license/jeanverster/chakra-ui-steps "MIT License")](LICENSE.md)
+[![npm - chakra-ui-steps](https://img.shields.io/npm/v/chakra-ui-steps "chakra-ui-steps npm")](https://www.npmjs.com/package/chakra-ui-steps)
 [![bundle size - chakra-ui-steps](https://badgen.net/bundlephobia/min/chakra-ui-steps)](https://bundlephobia.com/result?p=chakra-ui-steps)
 [![bundle size - chakra-ui-steps](https://badgen.net/bundlephobia/minzip/chakra-ui-steps)](https://bundlephobia.com/result?p=chakra-ui-steps)
-[![Total Downloads - chakra-ui-steps](https://badgen.net/npm/dt/chakra-ui-steps?color=blue 'chakra-ui-steps npm downloads')](https://www.npmjs.com/package/chakra-ui-steps)
+[![Total Downloads - chakra-ui-steps](https://badgen.net/npm/dt/chakra-ui-steps?color=blue "chakra-ui-steps npm downloads")](https://www.npmjs.com/package/chakra-ui-steps)
 
 ![screenshot](https://i.imgur.com/B9zbJEa.gif)
 
@@ -42,8 +42,8 @@ npm i chakra-ui-steps
 In order to get started you will need to extend the default Chakra theme with the provided `StepsStyleConfig` object, like so:
 
 ```jsx
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 
 const theme = extendTheme({
   components: {
@@ -65,7 +65,7 @@ Once that's done you should be good to go!
 ### Basic Example
 
 ```jsx
-import { Step, Steps, useSteps } from 'chakra-ui-steps';
+import { Step, Steps, useSteps } from "chakra-ui-steps";
 
 const content = (
   <Flex py={4}>
@@ -74,9 +74,9 @@ const content = (
 );
 
 const steps = [
-  { label: 'Step 1', content },
-  { label: 'Step 2', content },
-  { label: 'Step 3', content },
+  { label: "Step 1", content },
+  { label: "Step 2", content },
+  { label: "Step 3", content },
 ];
 
 export const StepsExample = () => {
@@ -111,7 +111,7 @@ export const StepsExample = () => {
             Prev
           </Button>
           <Button size="sm" onClick={nextStep}>
-            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            {activeStep === steps.length - 1 ? "Finish" : "Next"}
           </Button>
         </Flex>
       )}
@@ -140,17 +140,17 @@ steps;
 The default styles for each part can be found <a href="https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts" target="_blank">here</a>. Below is an example of how you might change the stroke width of the icons:
 
 ```js
-import { StepsStyleConfig } from 'chakra-ui-steps';
+import { StepsStyleConfig } from "chakra-ui-steps";
 
 const CustomSteps = {
   ...StepsStyleConfig,
-  baseStyle: props => {
+  baseStyle: (props) => {
     return {
       ...StepsStyleConfig.baseStyle(props),
       icon: {
         ...StepsStyleConfig.baseStyle(props).icon,
         // your custom styles here
-        strokeWidth: '1px',
+        strokeWidth: "1px",
       },
     };
   },
@@ -169,21 +169,24 @@ const theme = extendTheme({
 
 ### `Steps`
 
-| Prop                   | Type                | Required | Description                                                                | Default    |
-| ---------------------- | ------------------- | -------- | -------------------------------------------------------------------------- | ---------- |
-| **`activeStep`**       | number              | yes      | Currently active step                                                      | 0          |
-| **`colorScheme`**      | string              | no       | Sets the color accent of the Steps component show                          | green      |
-| **`orientation`**      | string              | no       | Sets the orientation of the Steps component                                | horizontal |
-| **`responsive`**       | boolean             | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
-| **`checkIcon`**        | React.ComponentType | no       | Allows you to provide a custom check icon                                  | undefined  |
-| **`onClickStep`**      | () => void          | no       | If defined, allows you to click on the step icons                          | undefined  |
-| **`labelOrientation`** | string              | no       | Switch between horizontal and vertical label orientation                   | undefined  |
+| Prop                   | Type                 | Required | Description                                                                | Default    |
+| ---------------------- | -------------------- | -------- | -------------------------------------------------------------------------- | ---------- |
+| **`activeStep`**       | number               | yes      | Currently active step                                                      | 0          |
+| **`colorScheme`**      | string               | no       | Sets the color accent of the Steps component show                          | green      |
+| **`orientation`**      | string               | no       | Sets the orientation of the Steps component                                | horizontal |
+| **`responsive`**       | boolean              | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
+| **`checkIcon`**        | React.ComponentType  | no       | Allows you to provide a custom check icon                                  | undefined  |
+| **`onClickStep`**      | () => void           | no       | If defined, allows you to click on the step icons                          | undefined  |
+| **`labelOrientation`** | string               | no       | Switch between horizontal and vertical label orientation                   | undefined  |
+| **`state`**            | 'loading' \| 'error' | no       | Let's you set the state to error or loading                                | undefined  |
 
 ### `Step`
 
-| Prop                  | Type                | Required | Description                                                          | Default   |
-| --------------------- | ------------------- | -------- | -------------------------------------------------------------------- | --------- |
-| **`label`**           | string              | no       | Sets the title of the step                                           | ''        |
-| **`description`**     | string              | no       | Provides extra info about the step                                   | ''        |
-| **`icon`**            | React.ComponentType | no       | Custom icon to overwrite the default numerical indicator of the step | undefined |
-| **`isCompletedStep`** | boolean             | no       | Individually control each step state, defaults to active step        | undefined |
+| Prop                  | Type                 | Required | Description                                                                                       | Default   |
+| --------------------- | -------------------- | -------- | ------------------------------------------------------------------------------------------------- | --------- |
+| **`label`**           | string               | no       | Sets the title of the step                                                                        | ''        |
+| **`description`**     | string               | no       | Provides extra info about the step                                                                | ''        |
+| **`icon`**            | React.ComponentType  | no       | Custom icon to overwrite the default numerical indicator of the step                              | undefined |
+| **`isCompletedStep`** | boolean              | no       | Individually control each step state, defaults to active step                                     | undefined |
+| **`checkIcon`**       | React.ComponentType  | no       | Allows you to provide a custom check icon that will override the one provided to Steps            | undefined |
+| **`state`**           | 'loading' \| 'error' | no       | Let's you set the state in a specific Step, if defined it will override the one provided to Steps | undefined |
