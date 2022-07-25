@@ -18,6 +18,7 @@ export interface StepProps extends HTMLChakraProps<'li'> {
   label?: string | React.ReactNode;
   description?: string;
   icon?: React.ComponentType<any>;
+  state?: 'loading' | 'error';
   checkIcon?: React.ComponentType<any>;
   isCompletedStep?: boolean;
 }
@@ -38,6 +39,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       children,
       description,
       icon,
+      state,
       checkIcon,
       index,
       isCompletedStep,
@@ -114,7 +116,9 @@ export const Step = forwardRef<StepProps, 'li'>(
             <chakra.div
               __css={stepIconContainer}
               aria-current={isCurrentStep ? 'step' : undefined}
-              data-invalid={dataAttr(isCurrentStep && isError)}
+              data-invalid={dataAttr(
+                isCurrentStep && (isError || state === 'error')
+              )}
               data-highlighted={dataAttr(isCompletedStep)}
               data-clickable={dataAttr(clickable)}
             >
@@ -122,8 +126,8 @@ export const Step = forwardRef<StepProps, 'li'>(
                 <StepIcon
                   {...{
                     index,
-                    isError,
-                    isLoading,
+                    isError: isError || state === 'error',
+                    isLoading: isLoading || state === 'loading',
                     isCurrentStep,
                     isCompletedStep,
                   }}
