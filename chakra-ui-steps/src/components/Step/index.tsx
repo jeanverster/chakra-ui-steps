@@ -18,6 +18,7 @@ export interface StepProps extends HTMLChakraProps<'li'> {
   label?: string | React.ReactNode;
   description?: string;
   icon?: React.ComponentType<any>;
+  checkIcon?: React.ComponentType<any>;
   isCompletedStep?: boolean;
 }
 
@@ -37,6 +38,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       children,
       description,
       icon,
+      checkIcon,
       index,
       isCompletedStep,
       isCurrentStep,
@@ -50,7 +52,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       isError,
       isLoading,
       isLabelVertical,
-      checkIcon,
+      checkIcon: defaultCheckIcon,
       onClickStep,
       clickable,
       setWidths,
@@ -73,7 +75,7 @@ export const Step = forwardRef<StepProps, 'li'>(
 
     React.useEffect(() => {
       if (containerRef && containerRef.current && setWidths) {
-        setWidths(prev => {
+        setWidths((prev) => {
           if (prev.length === stepCount) {
             return [containerRef.current?.offsetWidth || 0];
           }
@@ -126,7 +128,7 @@ export const Step = forwardRef<StepProps, 'li'>(
                     isCompletedStep,
                   }}
                   icon={icon}
-                  checkIcon={checkIcon}
+                  checkIcon={checkIcon ?? defaultCheckIcon}
                 />
               </AnimatePresence>
             </chakra.div>
