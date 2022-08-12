@@ -1,9 +1,16 @@
 name: Publish to NPM
 on:
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - "main"
   push:
-    branches: ["main"]
+    branches:
+      - "main"
 jobs:
   publish:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
