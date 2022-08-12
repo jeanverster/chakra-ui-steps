@@ -5,13 +5,5 @@ export const P = (props: TextProps) => {
     return <>{props.children}</>;
   }
 
-  return (
-    <Text
-      mb={8}
-      fontSize="lg"
-      sx={{ my: 2 }}
-      lineHeight="taller"
-      {...props}
-    />
-  );
+  return <Text mb={8} lineHeight="taller" {...props} />;
 };

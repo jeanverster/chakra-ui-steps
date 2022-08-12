@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { StepsProvider } from '../../context/index';
-export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
+export interface StepsProps extends HTMLChakraProps<'div'>, ThemingProps {
   activeStep: number;
   orientation?: 'vertical' | 'horizontal';
   state?: 'loading' | 'error';
@@ -28,15 +28,12 @@ const [StylesProvider, useStyles] = createStylesContext('Steps');
 export const useStepsStyles = useStyles;
 
 export const Steps = forwardRef<StepsProps, 'div'>(
-  (props, ref: React.Ref<HTMLOListElement>) => {
+  (props, ref: React.Ref<HTMLDivElement>) => {
     const styles = useMultiStyleConfig('Steps', props);
 
     const stepsStyles = {
       ...styles.steps,
     };
-
-    const trackColor =
-      props.trackColor || useColorModeValue('gray.200', 'gray.700');
 
     const {
       className,
@@ -49,8 +46,12 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       onClickStep,
       labelOrientation,
       isMobileBreakpointValue,
+      trackColor: trackColorProp,
       ...rest
     } = omitThemingProps(props);
+
+    const trackColor =
+      trackColorProp || useColorModeValue('gray.200', 'gray.700');
 
     const childArr = React.Children.toArray(children);
 
@@ -72,7 +73,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
     const clickable = !!onClickStep;
 
     const isMobile = useBreakpointValue(
-      isMobileBreakpointValue || { base: true, sm: false }
+      isMobileBreakpointValue || { xs: true, sm: false, md: false, lg: false }
     );
 
     const orientation = isMobile && responsive ? 'vertical' : orientationProp;
@@ -94,7 +95,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
             trackColor,
           }}
         >
-          <chakra.ol
+          <chakra.div
             ref={ref}
             __css={{
               justifyContent: stepCount === 1 ? 'flex-end' : 'space-between',
@@ -124,7 +125,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
 
               return null;
             })}
-          </chakra.ol>
+          </chakra.div>
           {orientation === 'horizontal' && renderHorizontalContent()}
         </StepsProvider>
       </StylesProvider>

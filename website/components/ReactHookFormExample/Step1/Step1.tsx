@@ -1,10 +1,14 @@
 import { Box, Heading } from "@chakra-ui/layout";
 import { RadioGroup, Stack, Text, useRadioGroup } from "@chakra-ui/react";
-import * as React from "react";
+import { useController, useFormContext } from "react-hook-form";
 import { GiMoneyStack, GiReceiveMoney } from "react-icons/gi";
+import * as yup from "yup";
+import { FormValues } from "..";
 import { RadioCard } from "../../RadioCard";
 
-type Step1Props = {};
+export const Step1Schema = yup.object().shape({
+  service: yup.string().required("This value is required."),
+});
 
 const options = [
   { label: "Refinance", value: "refinance", icon: GiReceiveMoney },
@@ -12,30 +16,38 @@ const options = [
 ];
 
 export const Step1 = () => {
-  const [service, setService] = React.useState(options[0].value);
+  const { control } = useFormContext<FormValues>();
+
+  const {
+    field,
+    formState: { errors },
+  } = useController({
+    name: "service",
+    control,
+  });
 
   const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "Step1",
-    defaultValue: "website-design",
-    onChange: (val) => setService(val),
+    name: "service",
+    defaultValue: field.value,
+    onChange: field.onChange,
   });
 
   const group = getRootProps();
 
   return (
-    <Box sx={{ mb: 8 }}>
+    <Box
+      sx={{
+        mb: 8,
+        display: "flex",
+        flexDir: "column",
+        alignItems: "center",
+      }}
+    >
       <Heading size="lg" sx={{ mt: 8 }}>
         What are you looking for today?
       </Heading>
-      <Text sx={{ mb: 8, mt: 4 }}>Select a product below to get started.</Text>
-
-      <RadioGroup
-        mb={4}
-        name="Step1"
-        defaultValue={service}
-        onChange={setService}
-        sx={{ mt: 8 }}
-      >
+      <Text sx={{ mt: 4 }}>Select a service below to get started.</Text>
+      <RadioGroup mb={4} name="Step1" defaultValue={field.value} sx={{ mt: 8 }}>
         <Stack {...group} spacing={4} direction="row">
           {options.map(({ value, label, icon }, i) => {
             const radio = getRadioProps({ value });
@@ -47,6 +59,11 @@ export const Step1 = () => {
           })}
         </Stack>
       </RadioGroup>
+      {errors.service && (
+        <Text sx={{ mt: 2 }} color="red.500">
+          {errors.service.message}
+        </Text>
+      )}
     </Box>
   );
 };

@@ -62,7 +62,7 @@ const getStyles = ({
   };
 };
 
-export const HorizontalStep = React.forwardRef<HTMLLIElement, StepSharedProps>(
+export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
   (props, ref) => {
     const { step, stepContainer, stepIconContainer } = useStepsStyles();
 
@@ -90,7 +90,7 @@ export const HorizontalStep = React.forwardRef<HTMLLIElement, StepSharedProps>(
     const opacity = hasVisited ? 1 : 0.8;
 
     return (
-      <chakra.li
+      <chakra.div
         aria-disabled={!hasVisited}
         className="cui-steps__horizontal-step"
         data-highlighted={dataAttr(isCompletedStep)}
@@ -134,7 +134,7 @@ export const HorizontalStep = React.forwardRef<HTMLLIElement, StepSharedProps>(
             {...{ isCurrentStep, opacity }}
           />
         </chakra.div>
-      </chakra.li>
+      </chakra.div>
     );
   }
 );

@@ -1,5 +1,4 @@
 import { SideNav } from "@/components";
-import { Page } from "@/layouts";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 import "@fontsource/manrope/400.css";
 import "@fontsource/manrope/700.css";
@@ -14,8 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Container
-        // wrapper
-        maxW="container.lg"
+        maxW="container.xl"
         className="wrapper"
         sx={{
           display: { sm: "flex", md: "grid" },
@@ -28,13 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <SideNav />
-        <Page
-          title="Chakra UI Steps"
-          metaDescription="Steps component designed to work seamlessly with Chakra UI"
-          description="Chakra UI Steps makes it super easy to create multi-step interfaces in apps where you are already using Chakra UI. Use it in forms, onboarding, or anywhere you want to lead the user through some logical steps."
-        >
-          <Component {...pageProps} />
-        </Page>
+        <Component {...pageProps} />
       </Container>
     </ChakraProvider>
   );

@@ -39,7 +39,10 @@ export const Page = ({
     >
       <Head>
         <title>{title}</title>
-        <meta name="description" content={metaDescription || description} />
+        <meta
+          name="description"
+          content={metaDescription || description}
+        />
       </Head>
 
       {showBackButton && (
@@ -53,10 +56,10 @@ export const Page = ({
       )}
       {!hideTopTitle && (
         <>
-          <Heading color="blue.500" fontSize={["2xl", "4xl"]} sx={{ mb: 6 }}>
+          <Heading fontSize={["2xl", "4xl"]} sx={{ mb: 6 }}>
             {title}
           </Heading>
-          <Text fontSize="lg">{description}</Text>
+          <Text fontSize="md">{description}</Text>
           <Box mt={8} mb={10} />
         </>
       )}

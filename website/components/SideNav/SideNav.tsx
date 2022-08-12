@@ -1,9 +1,19 @@
 import { Flex } from "@chakra-ui/layout";
-import { Box, Button, Divider, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Image,
+  Link as ChakraLink,
+  Tag,
+  Text,
+} from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { FaRegStar } from "react-icons/fa";
 import { ColorModeSwitcher } from "..";
+import pkgJson from "../../../chakra-ui-steps/package.json";
 import { NAV_ITEMS } from "../../constants";
 import { RepoPayload } from "../../types";
 import { SideNavItem } from "../SideNavItem";
@@ -44,19 +54,50 @@ const SideNav = (props: SideNavProps): JSX.Element => {
         top: "12vmin",
       }}
     >
+      <Flex mb={4} align="center" width="100%" justify="flex-start">
+        <Image
+          alt="Chakra UI Logo"
+          width="24px"
+          height="24px"
+          rounded="full"
+          src={"/54212428.png"}
+        />
+        <Link passHref href="/">
+          <ChakraLink
+            ml={2}
+            textAlign="left"
+            fontSize="md"
+            fontWeight={"bold"}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flex: 1,
+            }}
+            _hover={{
+              cursor: "pointer",
+              color: "teal.500",
+              transition: "all 0.2s ease",
+            }}
+          >
+            chakra-ui-steps
+            <Tag size="sm">v{pkgJson.version}</Tag>
+          </ChakraLink>
+        </Link>
+      </Flex>
       {NAV_ITEMS.map(({ title, items }) => {
         return (
           <Box key="title" sx={{ ":not(:first-child)": { mt: 4 } }}>
             <Text sx={{ mb: 4 }} color="teal.500" fontWeight="extrabold">
               {title}
             </Text>
-            {items.map(({ title, path }, i) => {
-              const active = router.pathname === path;
+            {items.map(({ title, href }, i) => {
+              const active = router.pathname === href;
               return (
                 <SideNavItem
                   title={title}
-                  href={path}
-                  key={path}
+                  href={href}
+                  key={href}
                   active={active}
                   mr={i < items.length - 1 ? 4 : 0}
                   sx={{ ":not(:last-child)": { mb: 2 } }}

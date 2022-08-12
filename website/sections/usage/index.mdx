@@ -1,17 +1,16 @@
 ---
 title: Usage
-date: 27-11-2021
-order: 2
+next: /step
+previous: /installation
 ---
 
 import { Divider } from "@chakra-ui/react";
 
 > NOTE: This v1.4.0 of this component requires @chakra-ui/react >= v1.6.7 to work correctly. You can follow the installation instructions <a href="https://chakra-ui.com/docs/getting-started" target="_blank">here</a>. If you aren't able to update your chakra version you can still use v1.3.0
 
-<p>
-  In order to get started you will need to extend the default Chakra
-  theme with the provided `StepsTheme` object, like so:
-</p>
+<div>
+
+In order to get started you will need to extend the default Chakra theme with the provided `StepsTheme` object, like so:
 
 ```jsx
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
@@ -94,14 +93,13 @@ export const StepsExample = () => {
 };
 ```
 
+</div>
 ## Custom Styles
 
-<p>
-  If you would like to customize the appearance of the Steps component
-  you can do so using the multi part component styling approach as
-  described [here](https://chakra-ui.com/docs/components/steps). The
-  parts available for styling are:
-</p>
+If you would like to customize the appearance of the Steps component
+you can do so using the multi part component styling approach as
+described [here](https://chakra-ui.com/docs/components/steps). The
+parts available for styling are:
 
 ```js
 connector;
@@ -115,14 +113,12 @@ stepIconContainer;
 steps;
 ```
 
-<p>
-  The default styles for each part can be found{" "}
-  [here](https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts).
-  Below is an example of how you might change the stroke width of the
-  icons:
-</p>
+The default styles for each part can be found{" "}
+[here](https://github.com/jeanverster/chakra-ui-steps/blob/main/src/theme/index.ts).
+Below is an example of how you might change the stroke width of the
+icons:
 
-```js
+```jsx
 import { StepsTheme } from "chakra-ui-steps";
 
 const CustomSteps = {

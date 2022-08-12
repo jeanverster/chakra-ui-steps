@@ -48,7 +48,7 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({
   styles: {
-    global: (props) => {
+    global: (props: any) => {
       const scrollbarColor =
         props.colorMode === "light"
           ? `${props.theme.colors.teal["500"]} ${props.theme.colors.gray["300"]}`

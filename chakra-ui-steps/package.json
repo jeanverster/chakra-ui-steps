@@ -109,5 +109,9 @@
       "@semantic-release/git"
     ],
     "extends": "semantic-release-monorepo"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.2.1",
+    "@fontsource/source-sans-pro": "^4.5.11"
   }
 }

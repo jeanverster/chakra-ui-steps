@@ -12,7 +12,7 @@ type VerticalStepProps = StepSharedProps & {
   children?: React.ReactNode;
 };
 
-export const VerticalStep = React.forwardRef<HTMLLIElement, VerticalStepProps>(
+export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
   (props, ref) => {
     const {
       children,
@@ -33,7 +33,7 @@ export const VerticalStep = React.forwardRef<HTMLLIElement, VerticalStepProps>(
     const opacity = hasVisited ? 1 : 0.8;
 
     return (
-      <chakra.li
+      <chakra.div
         ref={ref}
         className="cui-steps__vertical-step"
         data-highlighted={dataAttr(isCompletedStep)}
@@ -92,7 +92,7 @@ export const VerticalStep = React.forwardRef<HTMLLIElement, VerticalStepProps>(
             {(isCurrentStep || isCompletedStep) && children}
           </Collapse>
         </chakra.div>
-      </chakra.li>
+      </chakra.div>
     );
   }
 );

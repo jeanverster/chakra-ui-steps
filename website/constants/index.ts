@@ -2,23 +2,22 @@ export const NAV_ITEMS = [
   {
     title: "Getting Started",
     items: [
-      { title: "Installation", path: "#installation" },
-      { title: "Features", path: "#features" },
-      { title: "Usage", path: "#usage" },
+      { title: "Installation", href: "installation" },
+      { title: "Usage", href: "usage" },
     ],
   },
   {
     title: "Components",
     items: [
-      { title: "Step", path: "#step" },
-      { title: "Steps", path: "#steps" },
+      { title: "Step", href: "step" },
+      { title: "Steps", href: "steps" },
     ],
   },
   {
     title: "Examples",
     items: [
-      { title: "Multi Step Form", path: "#multi-form" },
-      { title: "Playground", path: "#playground" },
+      { title: "Multi Step Form", href: "multi-form" },
+      { title: "Playground", href: "playground" },
     ],
   },
 ];

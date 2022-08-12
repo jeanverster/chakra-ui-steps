@@ -25,7 +25,6 @@ export const NavSection = (props: PostDetailProps): JSX.Element => {
           {description}
         </Text>
       )}
-
       <MDX source={code} />
     </Flex>
   );

@@ -7,6 +7,9 @@
   "resolutions": {
     "csstype": "3.0.10"
   },
+  "scripts": {
+    "dev": "yarn workspaces foreach run dev -p"
+  },
   "workspaces": [
     "chakra-ui-steps",
     "website"

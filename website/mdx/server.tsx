@@ -20,9 +20,13 @@ const chakra = Object.keys({
   ...chakraTable,
 }).filter((key) => key !== "__esModule");
 
-const framer = Object.keys(framerMotion).filter((key) => key !== "__esModule");
+const framer = Object.keys(framerMotion).filter(
+  (key) => key !== "__esModule"
+);
 
-const ri = Object.keys(reactIconsRI).filter((key) => key !== "__esModule");
+const ri = Object.keys(reactIconsRI).filter(
+  (key) => key !== "__esModule"
+);
 
 const SECTIONS_PATH = path.join(process.cwd(), "sections");
 
@@ -33,7 +37,10 @@ export const getSourceOfFile = (filePath: string) => {
   );
 };
 
-export const getSections = (): { frontmatter: FrontMatter; slug: string }[] => {
+export const getSections = (): {
+  frontmatter: FrontMatter;
+  slug: string;
+}[] => {
   return fs.readdirSync(SECTIONS_PATH).map((filePath) => {
     const source = getSourceOfFile(filePath);
     const slug = filePath.replace(/\.mdx?$/, "");
@@ -46,7 +53,7 @@ export const getSections = (): { frontmatter: FrontMatter; slug: string }[] => {
   });
 };
 
-export const getPost = async (slug: string) => {
+export const getSection = async (slug: string) => {
   const source = getSourceOfFile(slug);
   const imagesUrl = `/img/blog/${slug}`;
   const directory = path.join(SECTIONS_PATH, slug);
@@ -71,8 +78,11 @@ export const getPost = async (slug: string) => {
   const { code, frontmatter } = await bundleMDX({
     source,
     cwd: directory,
-    xdmOptions: (options) => {
-      options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkGfm];
+    mdxOptions: (options) => {
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        remarkGfm,
+      ];
       return options;
     },
     esbuildOptions: (options) => {

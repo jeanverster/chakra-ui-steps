@@ -7,6 +7,8 @@ export type FrontMatter = {
   title: string;
   description: string;
   order: number;
+  next?: string;
+  previous?: string;
 };
 
 export interface RepoPayload {
