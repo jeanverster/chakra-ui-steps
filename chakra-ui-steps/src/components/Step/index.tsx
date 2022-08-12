@@ -69,18 +69,19 @@ export const Step = forwardRef<StepProps, 'li'>(
       }
     };
 
-    const containerRef = React.createRef<HTMLDivElement>();
-
-    React.useEffect(() => {
-      if (containerRef && containerRef.current && setWidths) {
-        setWidths(prev => {
-          if (prev.length === stepCount) {
-            return [containerRef.current?.offsetWidth || 0];
-          }
-          return [...prev, containerRef.current?.offsetWidth || 0];
-        });
-      }
-    }, [stepIconContainer.width, stepIconContainer.height]);
+    const containerRef: React.RefCallback<HTMLDivElement> = React.useCallback(
+      (node) => {
+        if (node && setWidths) {
+          setWidths((prev) => {
+            if (prev.length === stepCount) {
+              return [node.offsetWidth || 0];
+            }
+            return [...prev, node.offsetWidth || 0];
+          });
+        }
+      },
+      [stepIconContainer.width, stepIconContainer.height]
+    );
 
     return (
       <>
