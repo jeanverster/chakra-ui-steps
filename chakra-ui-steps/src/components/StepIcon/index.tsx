@@ -9,6 +9,7 @@ interface StepIconProps {
   isCurrentStep?: boolean;
   isError?: boolean;
   isLoading?: boolean;
+  isKeepError?: boolean;
   icon?: React.ComponentType<any>;
   index: number;
   checkIcon?: React.ComponentType<any>;
@@ -35,6 +36,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     isCurrentStep,
     isError,
     isLoading,
+    isKeepError,
     icon: CustomIcon,
     index,
     checkIcon: CustomCheckIcon,
@@ -48,9 +50,10 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     ...label,
   };
 
-  const Icon = React.useMemo(() => (CustomIcon ? CustomIcon : null), [
-    CustomIcon,
-  ]);
+  const Icon = React.useMemo(
+    () => (CustomIcon ? CustomIcon : null),
+    [CustomIcon]
+  );
 
   const Check = React.useMemo(
     () => (CustomCheckIcon ? CustomCheckIcon : CheckIcon),
@@ -59,6 +62,16 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
 
   return React.useMemo(() => {
     if (isCompletedStep) {
+      if (isError && isKeepError) {
+        return (
+          <AnimatedCloseIcon
+            key="icon"
+            color="white"
+            {...animationConfig}
+            style={icon}
+          />
+        );
+      }
       return (
         <MotionFlex key="check-icon" {...animationConfig}>
           <Check color="white" style={icon} />

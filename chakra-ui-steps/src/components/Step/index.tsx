@@ -21,6 +21,7 @@ export interface StepProps extends HTMLChakraProps<'li'> {
   state?: 'loading' | 'error';
   checkIcon?: React.ComponentType<any>;
   isCompletedStep?: boolean;
+  isKeepError?: boolean;
 }
 
 // Props which shouldn't be passed to to the Step component from the user
@@ -45,6 +46,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       isCompletedStep,
       isCurrentStep,
       isLastStep,
+      isKeepError,
       label,
       ...styleProps
     } = props as FullStepProps;
@@ -116,9 +118,14 @@ export const Step = forwardRef<StepProps, 'li'>(
           >
             <chakra.div
               __css={stepIconContainer}
-              aria-current={isCurrentStep ? 'step' : undefined}
+              aria-current={
+                (hasVisited && isKeepError) || isCurrentStep
+                  ? 'step'
+                  : undefined
+              }
               data-invalid={dataAttr(
-                isCurrentStep && (isError || state === 'error')
+                ((hasVisited && isKeepError) || isCurrentStep) &&
+                  (isError || state === 'error')
               )}
               data-highlighted={dataAttr(isCompletedStep)}
               data-clickable={dataAttr(clickable)}
@@ -131,6 +138,7 @@ export const Step = forwardRef<StepProps, 'li'>(
                     isLoading: isLoading || state === 'loading',
                     isCurrentStep,
                     isCompletedStep,
+                    isKeepError,
                   }}
                   icon={icon}
                   checkIcon={checkIcon ?? defaultCheckIcon}
