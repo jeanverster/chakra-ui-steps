@@ -1,5 +1,10 @@
 name: Semantic Release
 on:
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - "develop"
   push:
     branches:
       - "develop"
@@ -7,7 +12,7 @@ defaults:
   run:
     working-directory: chakra-ui-steps
 jobs:
-  release:
+  version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
