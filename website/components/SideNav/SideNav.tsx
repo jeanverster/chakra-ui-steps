@@ -40,8 +40,8 @@ const SideNav = (props: SideNavProps): JSX.Element => {
     <Box
       className="side-nav"
       as="aside"
+      display={["none", "none", "block"]}
       sx={{
-        display: { xs: "none", sm: "inherit" },
         gridTemplateColumns: { xs: "none", sm: "1fr 1fr" },
         gridAutoRows: "min-content",
         h: "100vh",

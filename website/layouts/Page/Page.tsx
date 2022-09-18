@@ -3,6 +3,7 @@ import { IconButton, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import * as React from "react";
+import { Suspense } from "react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 
 type PageProps = FlexProps & {
@@ -28,7 +29,7 @@ export const Page = ({
     <Box
       as="main"
       px={{ base: 8, md: 2 }}
-      pt={["96px", "12vmax", "12vmin"]}
+      pt={["128px", "128px", "12vmin"]}
       pb="128px"
       sx={{
         display: ["inherit", "inherit", "block"],
@@ -39,10 +40,7 @@ export const Page = ({
     >
       <Head>
         <title>{title}</title>
-        <meta
-          name="description"
-          content={metaDescription || description}
-        />
+        <meta name="description" content={metaDescription || description} />
       </Head>
 
       {showBackButton && (
@@ -63,7 +61,7 @@ export const Page = ({
           <Box mt={8} mb={10} />
         </>
       )}
-      {children}
+      <Suspense>{children}</Suspense>
     </Box>
   );
 };

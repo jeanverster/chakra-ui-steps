@@ -12,6 +12,48 @@ import path from "path";
 import * as reactIconsRI from "react-icons/ri";
 import remarkGfm from "remark-gfm";
 
+const EXAMPLES_PATH = path.join(process.cwd(), "examples");
+
+// const getFilesRecursively = (directory: string) => {
+//   let files = [];
+//   const filesInDirectory = fs.readdirSync(directory);
+//   for (const file of filesInDirectory) {
+//     const absolute = path.join(directory, file);
+//     if (fs.statSync(absolute).isDirectory()) {
+//         getFilesRecursively(absolute);
+//     } else {
+//         files.push(absolute);
+//     }
+//   }
+// };
+
+export type CodeExample = {
+  code: string;
+  fileName: string;
+};
+
+// recursively read in all files in the examples directory except for the index.ts file and output an array of strings containing the stringified buffer
+export const getFileStrings = (directory = EXAMPLES_PATH) => {
+  let files: CodeExample[] = [];
+  const filesInDirectory = fs.readdirSync(directory);
+  for (const file of filesInDirectory) {
+    const absolute = path.join(directory, file);
+    if (fs.statSync(absolute).isDirectory()) {
+      files = files.concat(getFileStrings(absolute));
+    } else {
+      if (file !== "index.ts") {
+        const code = fs.readFileSync(absolute).toString();
+        const fileName = path.basename(absolute);
+        files.push({
+          code,
+          fileName,
+        });
+      }
+    }
+  }
+  return files;
+};
+
 const chakra = Object.keys({
   ...chakraHooks,
   ...chakraLayout,
@@ -20,13 +62,9 @@ const chakra = Object.keys({
   ...chakraTable,
 }).filter((key) => key !== "__esModule");
 
-const framer = Object.keys(framerMotion).filter(
-  (key) => key !== "__esModule"
-);
+const framer = Object.keys(framerMotion).filter((key) => key !== "__esModule");
 
-const ri = Object.keys(reactIconsRI).filter(
-  (key) => key !== "__esModule"
-);
+const ri = Object.keys(reactIconsRI).filter((key) => key !== "__esModule");
 
 const SECTIONS_PATH = path.join(process.cwd(), "sections");
 
@@ -79,10 +117,7 @@ export const getSection = async (slug: string) => {
     source,
     cwd: directory,
     mdxOptions: (options) => {
-      options.remarkPlugins = [
-        ...(options.remarkPlugins ?? []),
-        remarkGfm,
-      ];
+      options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkGfm];
       return options;
     },
     esbuildOptions: (options) => {

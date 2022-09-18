@@ -81,6 +81,12 @@ const theme = extendTheme({
           // whiteSpace: "pre-wrap",
           overflowX: "auto",
         },
+        ":target": {
+          scrollMarginTop: "calc(12vmin + 1.25rem)",
+        },
+        body: {
+          bg: props.colorMode === "light" ? "white" : "gray.900",
+        },
       };
     },
   },
