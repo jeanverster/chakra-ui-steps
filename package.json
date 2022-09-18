@@ -1,5 +1,5 @@
 {
-  "name": "chakra-ui-steps",
+  "name": "cui-steps",
   "author": "Jean Verster",
   "private": true,
   "version": "0.1.0",
@@ -8,10 +8,17 @@
     "csstype": "3.0.10"
   },
   "scripts": {
-    "dev": "yarn workspaces foreach run dev -p"
+    "dev": "yarn workspaces foreach -i -p run dev"
   },
   "workspaces": [
     "chakra-ui-steps",
     "website"
-  ]
+  ],
+  "packageManager": "yarn@3.2.3",
+  "dependencies": {
+    "@chakra-ui/react": "^2.3.2",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "framer-motion": "^7.3.5"
+  }
 }

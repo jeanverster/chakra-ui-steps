@@ -24,7 +24,7 @@ export const StepIconContainer = ({
       data-highlighted={dataAttr(isCompletedStep)}
       data-clickable={dataAttr(clickable)}
     >
-      <AnimatePresence exitBeforeEnter>{children}</AnimatePresence>
+      <AnimatePresence mode="wait">{children}</AnimatePresence>
     </chakra.div>
   );
 };

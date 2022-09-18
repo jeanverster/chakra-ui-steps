@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 website/.next
+.yarn
 
 # Editor directories and files
 .vscode/*

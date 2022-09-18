@@ -73,7 +73,16 @@ export const Steps = forwardRef<StepsProps, 'div'>(
     const clickable = !!onClickStep;
 
     const isMobile = useBreakpointValue(
-      isMobileBreakpointValue || { xs: true, sm: false, md: false, lg: false }
+      isMobileBreakpointValue || {
+        base: true,
+        xs: true,
+        sm: false,
+        md: false,
+        lg: false,
+      },
+      {
+        fallback: 'base',
+      }
     );
 
     const orientation = isMobile && responsive ? 'vertical' : orientationProp;
