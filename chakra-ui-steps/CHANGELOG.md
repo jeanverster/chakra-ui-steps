@@ -1,3 +1,10 @@
+# [chakra-ui-steps-v1.8.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.7.4...chakra-ui-steps-v1.8.0) (2022-10-01)
+
+
+### Features
+
+* make it possible to defined checkIcon and state at each Step ([#78](https://github.com/jeanverster/chakra-ui-steps/issues/78)) ([7925c77](https://github.com/jeanverster/chakra-ui-steps/commit/7925c77efa1512f53bafff9f1126c5dd4683fd6a))
+
 # [chakra-ui-steps-v1.7.4](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.7.3...chakra-ui-steps-v1.7.4) (2022-08-12)
 
 
