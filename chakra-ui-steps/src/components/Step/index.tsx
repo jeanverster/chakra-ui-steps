@@ -18,7 +18,10 @@ export interface StepProps extends HTMLChakraProps<'li'> {
   label?: string | React.ReactNode;
   description?: string;
   icon?: React.ComponentType<any>;
+  state?: 'loading' | 'error';
+  checkIcon?: React.ComponentType<any>;
   isCompletedStep?: boolean;
+  isKeepError?: boolean;
 }
 
 // Props which shouldn't be passed to to the Step component from the user
@@ -37,10 +40,13 @@ export const Step = forwardRef<StepProps, 'li'>(
       children,
       description,
       icon,
+      state,
+      checkIcon,
       index,
       isCompletedStep,
       isCurrentStep,
       isLastStep,
+      isKeepError,
       label,
       ...styleProps
     } = props as FullStepProps;
@@ -50,7 +56,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       isError,
       isLoading,
       isLabelVertical,
-      checkIcon,
+      checkIcon: defaultCheckIcon,
       onClickStep,
       clickable,
       setWidths,
@@ -112,8 +118,15 @@ export const Step = forwardRef<StepProps, 'li'>(
           >
             <chakra.div
               __css={stepIconContainer}
-              aria-current={isCurrentStep ? 'step' : undefined}
-              data-invalid={dataAttr(isCurrentStep && isError)}
+              aria-current={
+                (hasVisited && isKeepError) || isCurrentStep
+                  ? 'step'
+                  : undefined
+              }
+              data-invalid={dataAttr(
+                ((hasVisited && isKeepError) || isCurrentStep) &&
+                  (isError || state === 'error')
+              )}
               data-highlighted={dataAttr(isCompletedStep)}
               data-clickable={dataAttr(clickable)}
             >
@@ -121,13 +134,14 @@ export const Step = forwardRef<StepProps, 'li'>(
                 <StepIcon
                   {...{
                     index,
-                    isError,
-                    isLoading,
+                    isError: isError || state === 'error',
+                    isLoading: isLoading || state === 'loading',
                     isCurrentStep,
                     isCompletedStep,
+                    isKeepError,
                   }}
                   icon={icon}
-                  checkIcon={checkIcon}
+                  checkIcon={checkIcon ?? defaultCheckIcon}
                 />
               </AnimatePresence>
             </chakra.div>
