@@ -51,6 +51,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       isLoading,
       isLabelVertical,
       checkIcon,
+      errorIcon,
       onClickStep,
       clickable,
       setWidths,
@@ -73,7 +74,7 @@ export const Step = forwardRef<StepProps, 'li'>(
 
     React.useEffect(() => {
       if (containerRef && containerRef.current && setWidths) {
-        setWidths(prev => {
+        setWidths((prev) => {
           if (prev.length === stepCount) {
             return [containerRef.current?.offsetWidth || 0];
           }
@@ -127,6 +128,7 @@ export const Step = forwardRef<StepProps, 'li'>(
                   }}
                   icon={icon}
                   checkIcon={checkIcon}
+                  errorIcon={errorIcon}
                 />
               </AnimatePresence>
             </chakra.div>

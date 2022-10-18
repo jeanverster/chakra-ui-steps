@@ -18,6 +18,7 @@ export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
   state?: 'loading' | 'error';
   responsive?: boolean;
   checkIcon?: React.ComponentType<any>;
+  errorIcon?: React.ComponentType<any>;
   onClickStep?: (step: number) => void;
   labelOrientation?: 'vertical' | 'horizontal';
 }
@@ -38,6 +39,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       state,
       responsive,
       checkIcon,
+      errorIcon,
       onClickStep,
       labelOrientation,
       ...rest
@@ -49,11 +51,11 @@ export const Steps = forwardRef<StepsProps, 'div'>(
 
     const renderHorizontalContent = () => {
       if (activeStep <= childArr.length) {
-        return React.Children.map(childArr[activeStep], node => {
+        return React.Children.map(childArr[activeStep], (node) => {
           if (!React.isValidElement(node)) return;
           return React.Children.map(
             node.props.children,
-            childNode => childNode
+            (childNode) => childNode
           );
         });
       }
@@ -75,6 +77,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
             state,
             responsive,
             checkIcon,
+            errorIcon,
             onClickStep,
             labelOrientation,
             clickable,
