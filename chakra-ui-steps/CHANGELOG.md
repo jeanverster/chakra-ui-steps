@@ -1,3 +1,18 @@
+# [chakra-ui-steps-v1.8.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.7.4...chakra-ui-steps-v1.8.0) (2022-10-01)
+
+
+### Features
+
+* make it possible to defined checkIcon and state at each Step ([#78](https://github.com/jeanverster/chakra-ui-steps/issues/78)) ([7925c77](https://github.com/jeanverster/chakra-ui-steps/commit/7925c77efa1512f53bafff9f1126c5dd4683fd6a))
+
+# [chakra-ui-steps-v1.7.4](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.7.3...chakra-ui-steps-v1.7.4) (2022-08-12)
+
+
+### Bug Fixes
+
+* root node_modules for emotion res ([7d0188a](https://github.com/jeanverster/chakra-ui-steps/commit/7d0188a9176186f721e375f0261423adea49b988))
+* useCallback hook for containerRef ([#77](https://github.com/jeanverster/chakra-ui-steps/issues/77)) ([4d1a378](https://github.com/jeanverster/chakra-ui-steps/commit/4d1a378f46f5ef52814255b9a9aeee6c6fe7d828)), closes [#62](https://github.com/jeanverster/chakra-ui-steps/issues/62) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#54](https://github.com/jeanverster/chakra-ui-steps/issues/54) [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#59](https://github.com/jeanverster/chakra-ui-steps/issues/59) [#60](https://github.com/jeanverster/chakra-ui-steps/issues/60) [#69](https://github.com/jeanverster/chakra-ui-steps/issues/69) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68)
+
 # [chakra-ui-steps-v1.7.3](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.7.2...chakra-ui-steps-v1.7.3) (2022-05-06)
 
 
