@@ -18,7 +18,7 @@ function App() {
     <>
       <Steps activeStep={activeStep}>
         {steps.map(({ label, content }) => (
-          <Step value='error' label={label} key={label}>
+          <Step label={label} key={label}>
             {content}
           </Step>
         ))}
