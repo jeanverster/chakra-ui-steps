@@ -8,7 +8,10 @@ export interface StepProps extends HTMLChakraProps<'li'> {
   label?: string | React.ReactNode;
   description?: string;
   icon?: React.ComponentType<any>;
+  state?: 'loading' | 'error';
+  checkIcon?: React.ComponentType<any>;
   isCompletedStep?: boolean;
+  isKeepError?: boolean;
 }
 
 // Props which shouldn't be passed to to the Step component from the user
@@ -27,10 +30,13 @@ export const Step = forwardRef<StepProps, 'li'>(
       children,
       description,
       icon,
+      state,
+      checkIcon,
       index,
       isCompletedStep,
       isCurrentStep,
       isLastStep,
+      isKeepError,
       label,
     } = props as FullStepProps;
 

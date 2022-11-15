@@ -24,3 +24,5 @@ website/.next
 *.njsproj
 *.sln
 *.sw?
+
+.yarn

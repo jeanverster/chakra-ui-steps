@@ -242,6 +242,64 @@ export const WithStates = (): JSX.Element => {
   );
 };
 
+const statesSteps: StateValue[] = ['loading', 'error', undefined];
+
+export const WithPerStepState = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+
+  const { size } = useConfigContext();
+
+  return (
+    <>
+      <Steps size={size} activeStep={activeStep}>
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label} state={statesSteps[index]}>
+            <Content my={6} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
+export const WithKeepErrorState = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+
+  const { size } = useConfigContext();
+
+  return (
+    <>
+      <Steps size={size} activeStep={activeStep}>
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label} state="error" isKeepError>
+            <Content my={6} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
 const iconSteps = [
   { label: 'Login', icon: FiUser },
   { label: 'Verification', icon: FiClipboard },
@@ -287,6 +345,32 @@ export const CustomCheckIcon = (): JSX.Element => {
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
             <Content my={3} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
+export const CustomPerStepCheckIcon = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const { size } = useConfigContext();
+  return (
+    <>
+      <Steps size={size} checkIcon={FiCheckCircle} activeStep={activeStep}>
+        {iconSteps.map(({ label, icon }, index) => (
+          <Step label={label} key={label} checkIcon={icon}>
+            <Content my={6} index={index} />
           </Step>
         ))}
       </Steps>
