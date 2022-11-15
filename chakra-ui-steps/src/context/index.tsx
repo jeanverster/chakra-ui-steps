@@ -6,7 +6,6 @@ export interface StepsContextValue extends StepsProps {
   isError?: boolean;
   isLoading?: boolean;
   isVertical?: boolean;
-  isLabelVertical?: boolean;
   stepCount?: number;
   trackColor?: string;
 }
@@ -29,18 +28,12 @@ export const StepsProvider = ({
   const isError = value.state === 'error';
   const isLoading = value.state === 'loading';
 
-  const isVertical = value.orientation === 'vertical';
-  const isLabelVertical =
-    value.orientation !== 'vertical' && value.labelOrientation === 'vertical';
-
   return (
     <StepsContext.Provider
       value={{
         ...value,
         isError,
         isLoading,
-        isVertical,
-        isLabelVertical,
       }}
     >
       {children}

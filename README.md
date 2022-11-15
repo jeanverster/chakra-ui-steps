@@ -168,15 +168,14 @@ const theme = extendTheme({
 
 ### `Steps`
 
-| Prop                   | Type                | Required | Description                                                                | Default    |
-| ---------------------- | ------------------- | -------- | -------------------------------------------------------------------------- | ---------- |
-| **`activeStep`**       | number              | yes      | Currently active step                                                      | 0          |
-| **`colorScheme`**      | string              | no       | Sets the color accent of the Steps component show                          | green      |
-| **`orientation`**      | string              | no       | Sets the orientation of the Steps component                                | horizontal |
-| **`responsive`**       | boolean             | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
-| **`checkIcon`**        | React.ComponentType | no       | Allows you to provide a custom check icon                                  | undefined  |
-| **`onClickStep`**      | () => void          | no       | If defined, allows you to click on the step icons                          | undefined  |
-| **`labelOrientation`** | string              | no       | Switch between horizontal and vertical label orientation                   | undefined  |
+| Prop              | Type                | Required | Description                                                                | Default    |
+| ----------------- | ------------------- | -------- | -------------------------------------------------------------------------- | ---------- |
+| **`activeStep`**  | number              | yes      | Currently active step                                                      | 0          |
+| **`colorScheme`** | string              | no       | Sets the color accent of the Steps component show                          | green      |
+| **`orientation`** | string              | no       | Sets the orientation of the Steps component                                | horizontal |
+| **`responsive`**  | boolean             | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
+| **`checkIcon`**   | React.ComponentType | no       | Allows you to provide a custom check icon                                  | undefined  |
+| **`onClickStep`** | () => void          | no       | If defined, allows you to click on the step icons                          | undefined  |
 
 ### `Step`
 

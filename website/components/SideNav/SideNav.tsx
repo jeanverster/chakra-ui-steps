@@ -5,6 +5,7 @@ import {
   Divider,
   Image,
   Link as ChakraLink,
+  Select,
   Tag,
   Text,
 } from "@chakra-ui/react";
@@ -15,12 +16,30 @@ import { FaRegStar } from "react-icons/fa";
 import { ColorModeSwitcher } from "..";
 import pkgJson from "../../../chakra-ui-steps/package.json";
 import { NAV_ITEMS } from "../../constants";
+import { Store, useVariantContext } from "../../pages/_app";
 import { RepoPayload } from "../../types";
 import { SideNavItem } from "../SideNavItem";
 
 type SideNavProps = {};
 
 const NAV_HEIGHT = "96px";
+
+type VariantItems = {
+  label: string;
+  value: Store["variant"];
+}[];
+
+const VARIANT_ITEMS: VariantItems = [
+  {
+    label: "Circles",
+    value: "circles",
+  },
+  {
+    label: "Simple",
+    value: "simple",
+  },
+];
+
 const SideNav = (props: SideNavProps): JSX.Element => {
   const router = useRouter();
   const [repo, setRepo] = React.useState<RepoPayload | undefined>();
@@ -35,6 +54,8 @@ const SideNav = (props: SideNavProps): JSX.Element => {
     }
     fetchData();
   }, []);
+
+  const [_, setVariant] = useVariantContext();
 
   return (
     <Box
@@ -62,6 +83,7 @@ const SideNav = (props: SideNavProps): JSX.Element => {
           rounded="full"
           src={"/54212428.png"}
         />
+
         <Link passHref href="/">
           <ChakraLink
             ml={2}
@@ -85,28 +107,45 @@ const SideNav = (props: SideNavProps): JSX.Element => {
           </ChakraLink>
         </Link>
       </Flex>
-      {NAV_ITEMS.map(({ title, items }) => {
-        return (
-          <Box key="title" sx={{ ":not(:first-child)": { mt: 4 } }}>
-            <Text sx={{ mb: 4 }} color="teal.500" fontWeight="extrabold">
-              {title}
-            </Text>
-            {items.map(({ title, href }, i) => {
-              const active = router.pathname === href;
-              return (
-                <SideNavItem
-                  title={title}
-                  href={href}
-                  key={href}
-                  active={active}
-                  mr={i < items.length - 1 ? 4 : 0}
-                  sx={{ ":not(:last-child)": { mb: 2 } }}
-                />
-              );
-            })}
-          </Box>
-        );
-      })}
+      <Select
+        size="sm"
+        mb={4}
+        onChange={(e) => {
+          setVariant({
+            variant: e.target.value as Store["variant"],
+          });
+        }}
+        rounded="md"
+      >
+        {VARIANT_ITEMS.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+      </Select>
+      <Box as="nav" maxH={"60vh"} overflowY="auto">
+        {NAV_ITEMS.map(({ title, items }) => {
+          return (
+            <Box key="title" sx={{ ":not(:first-child)": { mt: 4 } }}>
+              <Text sx={{ mb: 4 }} color="teal.500" fontWeight="extrabold">
+                {title}
+              </Text>
+              {items.map(({ title, href }, i) => {
+                const active = router.pathname === href;
+                return (
+                  <SideNavItem
+                    title={title}
+                    href={href}
+                    key={href}
+                    active={active}
+                    sx={{ ":not(:last-child)": { mb: 2 } }}
+                  />
+                );
+              })}
+            </Box>
+          );
+        })}
+      </Box>
       <Divider sx={{ my: 4 }} />
       <Flex sx={{ justifyContent: "space-between" }}>
         <ColorModeSwitcher />

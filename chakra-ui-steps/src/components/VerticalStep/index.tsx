@@ -25,47 +25,23 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
       hasVisited,
     } = props;
 
-    const { checkIcon, isError, isLoading, trackColor, colorScheme } =
-      useStepsContext();
+    const { checkIcon, isError, isLoading, variant } = useStepsContext();
 
-    const { stepIconContainer } = useStepsStyles();
+    const { step, stepIconContainer } = useStepsStyles();
 
     const opacity = hasVisited ? 1 : 0.8;
+
+    const highlighted =
+      variant === 'simple' ? isCompletedStep || isCurrentStep : isCompletedStep;
 
     return (
       <chakra.div
         ref={ref}
         className="cui-steps__vertical-step"
-        data-highlighted={dataAttr(isCompletedStep)}
-        __css={{
-          position: 'relative',
-          gap: 4,
-          pb: 4,
-          display: 'flex',
-          flexDir: 'column',
-          '--size': stepIconContainer.height as string,
-          '--gap': '8px',
-          _highlighted: {
-            pb: 4,
-            '&:not(:last-child):after': {
-              backgroundColor: `${colorScheme}.500`,
-              backgroundPosition: 'left',
-              transition: 'background-position .2s ease-in-out',
-            },
-          },
-          '&:not(:last-child):after': {
-            content: '""',
-            backgroundColor: trackColor,
-            bottom: 'var(--gap)',
-            left: 0,
-            position: 'absolute',
-            top: 'calc(var(--size) + var(--gap))',
-            transform: `translateX(calc(var(--size) / 2))`,
-            width: '2px',
-          },
-        }}
+        data-highlighted={dataAttr(highlighted)}
+        __css={step}
       >
-        <Flex>
+        <Flex className="cui-steps__vertical-step-container">
           <StepIconContainer {...props}>
             <StepIcon
               {...{
@@ -86,6 +62,7 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
           />
         </Flex>
         <chakra.div
+          className="cui-steps__vertical-step-content"
           __css={{ minH: '8px', pl: `calc(${stepIconContainer.width})` }}
         >
           <Collapse style={{ width: '100%' }} in={isCurrentStep}>

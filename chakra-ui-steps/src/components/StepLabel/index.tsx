@@ -1,6 +1,5 @@
 import { chakra } from '@chakra-ui/react';
 import React from 'react';
-import { useStepsContext } from '../../context/index';
 import { useStepsStyles } from '../Steps';
 
 interface StepLabelProps {
@@ -22,24 +21,16 @@ export const StepLabel = ({
     description: descriptionStyles,
   } = useStepsStyles();
 
-  const { isLabelVertical } = useStepsContext();
-
   const shouldRender = !!label || !!description;
 
   return shouldRender ? (
     <chakra.div
       aria-current={isCurrentStep ? 'step' : undefined}
-      __css={{
-        textAlign: isLabelVertical ? 'center' : 'left',
-        alignItems: isLabelVertical ? 'center' : 'flex-start',
-        ...labelContainer,
-      }}
+      __css={labelContainer}
     >
       {!!label && (
         <chakra.span
           __css={{
-            mx: isLabelVertical ? 0 : 2,
-            mt: isLabelVertical ? 1 : 0,
             opacity,
             ...labelStyles,
           }}
@@ -50,8 +41,6 @@ export const StepLabel = ({
       {!!description && (
         <chakra.span
           __css={{
-            mx: isLabelVertical ? 0 : 2,
-            mt: isLabelVertical ? 2 : 0,
             opacity,
             ...descriptionStyles,
           }}

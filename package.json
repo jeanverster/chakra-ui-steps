@@ -7,14 +7,10 @@
   "resolutions": {
     "csstype": "3.0.10"
   },
-  "scripts": {
-    "dev": "yarn workspaces foreach -i -p run dev"
-  },
   "workspaces": [
     "chakra-ui-steps",
     "website"
   ],
-  "packageManager": "yarn@3.2.3",
   "dependencies": {
     "@chakra-ui/react": "^2.3.2",
     "@emotion/react": "^11.10.4",

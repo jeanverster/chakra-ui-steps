@@ -53,12 +53,7 @@ export const ReactHookFormExample = () => {
   return (
     <>
       <FormProvider {...methods}>
-        <Steps
-          activeStep={activeStep}
-          colorScheme="blue"
-          labelOrientation="vertical"
-          size="sm"
-        >
+        <Steps activeStep={activeStep} colorScheme="blue" size="sm">
           {steps.map(({ label, content }) => (
             <Step label={label} key={label}>
               {content}

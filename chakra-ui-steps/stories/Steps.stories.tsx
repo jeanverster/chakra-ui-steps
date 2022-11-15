@@ -111,15 +111,11 @@ const Content = ({ index, ...rest }: ContentProps) => {
   );
 };
 
-const steps = [
-  { label: 'Step 1' },
-  { label: 'Step 2 Label' },
-  { label: 'Step 3' },
-];
+const steps = [{ label: 'Login' }, { label: 'Verification' }, { label: 'Pay' }];
 const descriptionSteps = [
-  { label: 'Step 1', description: 'Step 1 Description' },
-  { label: 'Step 2 Label', description: 'Step 2 Description' },
-  { label: 'Step 3', description: 'Step 3 Description' },
+  { label: 'Login', description: 'Step 1 Description' },
+  { label: 'Verification', description: 'Step 2 Description' },
+  { label: 'Pay', description: 'Step 3 Description' },
 ];
 
 //👇 We create a “template” of how args map to rendering
@@ -129,13 +125,13 @@ export const Horizontal = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  const { size } = useConfigContext();
+  const config = useConfigContext();
   return (
     <>
-      <Steps size={size} activeStep={activeStep}>
+      <Steps {...config} activeStep={activeStep}>
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
-            <Content my={6} index={index} />
+            <Content my={3} index={index} />
           </Step>
         ))}
       </Steps>
@@ -155,10 +151,10 @@ export const Vertical = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  const { size } = useConfigContext();
+  const config = useConfigContext();
   return (
     <>
-      <Steps size={size} orientation="vertical" activeStep={activeStep}>
+      <Steps {...config} orientation="vertical" activeStep={activeStep}>
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
             <Content index={index} />
@@ -181,13 +177,13 @@ export const WithDescription = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  const { size } = useConfigContext();
+  const config = useConfigContext();
   return (
     <>
-      <Steps size={size} activeStep={activeStep}>
+      <Steps {...config} activeStep={activeStep}>
         {descriptionSteps.map(({ label, description }, index) => (
           <Step label={label} key={label} description={description}>
-            <Content my={6} index={index} />
+            <Content my={3} index={index} />
           </Step>
         ))}
       </Steps>
@@ -212,7 +208,7 @@ export const WithStates = (): JSX.Element => {
 
   const [stepState, setStepState] = React.useState<StateValue>('loading');
 
-  const { size } = useConfigContext();
+  const config = useConfigContext();
 
   return (
     <>
@@ -227,10 +223,10 @@ export const WithStates = (): JSX.Element => {
           </HStack>
         </RadioGroup>
       </VStack>
-      <Steps size={size} state={stepState} activeStep={activeStep}>
+      <Steps {...config} state={stepState} activeStep={activeStep}>
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
-            <Content my={6} index={index} />
+            <Content my={3} index={index} />
           </Step>
         ))}
       </Steps>
@@ -257,14 +253,14 @@ export const CustomStepIcons = (): JSX.Element => {
     initialStep: 0,
   });
 
-  const { size } = useConfigContext();
+  const config = useConfigContext();
 
   return (
     <>
-      <Steps size={size} activeStep={activeStep}>
+      <Steps {...config} activeStep={activeStep}>
         {iconSteps.map(({ label, icon }, index) => (
           <Step label={label} key={label} icon={icon}>
-            <Content my={6} index={index} />
+            <Content my={3} index={index} />
           </Step>
         ))}
       </Steps>
@@ -284,13 +280,13 @@ export const CustomCheckIcon = (): JSX.Element => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  const { size } = useConfigContext();
+  const config = useConfigContext();
   return (
     <>
-      <Steps size={size} checkIcon={FiCheckCircle} activeStep={activeStep}>
+      <Steps {...config} checkIcon={FiCheckCircle} activeStep={activeStep}>
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
-            <Content my={6} index={index} />
+            <Content my={3} index={index} />
           </Step>
         ))}
       </Steps>
@@ -310,19 +306,18 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  const { size } = useConfigContext();
+  const config = useConfigContext();
   return (
     <>
       <Steps
-        size={size}
+        {...config}
         checkIcon={AiFillCheckCircle}
         colorScheme="blue"
         activeStep={activeStep}
-        labelOrientation="vertical"
       >
         {iconSteps.map(({ label, icon }, index) => (
           <Step label={label} key={label} icon={icon}>
-            <Content my={6} index={index} />
+            <Content my={3} index={index} />
           </Step>
         ))}
       </Steps>
@@ -383,49 +378,20 @@ export const ClickableSteps: Story = (): JSX.Element => {
   const { nextStep, prevStep, reset, activeStep, setStep } = useSteps({
     initialStep: 0,
   });
-  const { size } = useConfigContext();
+  const config = useConfigContext();
   return (
     <>
       <Steps
-        size={size}
+        {...config}
         checkIcon={FiCheckCircle}
         activeStep={activeStep}
         onClickStep={(step) => setStep(step)}
       >
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
-            <Content my={6} index={index} />
+            <Content my={3} index={index} />
           </Step>
         ))}
-      </Steps>
-      {activeStep === 3 ? (
-        <ResetPrompt onReset={reset} />
-      ) : (
-        <StepButtons
-          {...{ nextStep, prevStep }}
-          prevDisabled={activeStep === 0}
-        />
-      )}
-    </>
-  );
-};
-
-export const VerticalLabels: Story = (): JSX.Element => {
-  const { nextStep, prevStep, reset, activeStep } = useSteps({
-    initialStep: 0,
-  });
-  const { size } = useConfigContext();
-  return (
-    <>
-      <Steps size={size} labelOrientation="vertical" activeStep={activeStep}>
-        {descriptionSteps.map(({ label, description }, index) => (
-          <Step label={label} key={label} description={description}>
-            <Content my={6} index={index} />
-          </Step>
-        ))}
-        <Step label="Step 4">
-          <Content my={6} index={3} />
-        </Step>
       </Steps>
       {activeStep === 3 ? (
         <ResetPrompt onReset={reset} />

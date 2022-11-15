@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fontsource/inter": "^4.5.12",
+    "@fontsource/inter": "^4.5.14",
     "@fontsource/manrope": "^4.5.0",
     "@fontsource/sora": "^4.5.3",
     "@fontsource/urbanist": "^4.5.12",

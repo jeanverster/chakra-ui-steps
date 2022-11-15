@@ -1,5 +1,3 @@
-import Highlight, { defaultProps } from "prism-react-renderer";
-import dracula from "prism-react-renderer/themes/dracula";
 import * as React from "react";
 
 type LazyCodeLoaderProps = {
@@ -7,8 +5,12 @@ type LazyCodeLoaderProps = {
 };
 
 const LazyCodeLoader = ({ code }: LazyCodeLoaderProps) => {
-  // lazy load prism react renderer to reduce bundle size
   const loader = React.useCallback(() => {
+    console.log("loading code!");
+    const { default: Highlight, defaultProps } =
+      require("prism-react-renderer") as typeof import("prism-react-renderer");
+    const { default: dracula } =
+      require("prism-react-renderer/themes/dracula") as typeof import("prism-react-renderer/themes/dracula");
     return (
       <Highlight {...defaultProps} theme={dracula} code={code} language="tsx">
         {({ className, style, tokens, getLineProps, getTokenProps }) => (

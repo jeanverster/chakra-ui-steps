@@ -23,11 +23,7 @@ export const SideNavItem = ({
     url.hash = href;
     window.location.href = url.href;
     window.location.hash = href;
-    // scroll with smooth animation
-    window.scrollTo({
-      top: document.querySelector(href)?.clientTop,
-      behavior: "smooth",
-    });
+    window.scrollTo(0, 0);
   };
 
   return (

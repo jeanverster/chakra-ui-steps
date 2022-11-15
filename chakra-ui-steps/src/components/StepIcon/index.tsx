@@ -2,7 +2,7 @@ import { chakra, Flex, forwardRef, Spinner } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import { motion } from 'framer-motion';
 import React from 'react';
-import { CheckIcon, CloseIcon } from '../Icons';
+import { CheckIcon, WarningIcon } from '../Icons';
 import { useStepsStyles } from '../Steps';
 
 interface StepIconProps {
@@ -16,7 +16,7 @@ interface StepIconProps {
 }
 
 const MotionFlex = motion(Flex);
-const AnimatedCloseIcon = motion(CloseIcon);
+const AnimatedWarningIcon = motion(WarningIcon);
 const AnimatedSpan = motion(chakra.span);
 
 const animationConfig = {
@@ -68,15 +68,16 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
       );
     }
     if (isCurrentStep) {
-      if (isError)
+      if (isError) {
         return (
-          <AnimatedCloseIcon
-            key="icon"
+          <AnimatedWarningIcon
             color="white"
+            key="icon"
             {...animationConfig}
             style={icon}
           />
         );
+      }
       if (isLoading)
         return (
           <Spinner
