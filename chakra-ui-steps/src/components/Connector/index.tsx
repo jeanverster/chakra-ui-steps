@@ -1,11 +1,11 @@
+import { useMultiStyleConfig } from '@chakra-ui/react';
 import {
   chakra,
   HTMLChakraProps,
   ThemingProps,
-  useStyles,
 } from '@chakra-ui/system';
 import { dataAttr } from '@chakra-ui/utils';
-import * as React from 'react';
+import React, { useMemo, memo } from 'react';
 import { useStepsContext } from '../../context';
 
 interface ConnectorProps extends HTMLChakraProps<'div'>, ThemingProps {
@@ -15,24 +15,24 @@ interface ConnectorProps extends HTMLChakraProps<'div'>, ThemingProps {
   index: number;
 }
 
-export const Connector = React.memo(
+export const Connector = memo(
   ({
     index,
     isCompletedStep,
     children,
     isLastStep,
-    hasLabel,
+    hasLabel
   }: ConnectorProps) => {
-    const { connector, stepIconContainer } = useStyles();
+    const {connector, stepIconContainer} = useMultiStyleConfig("Steps");
     const { isVertical, isLabelVertical, widths } = useStepsContext();
 
     const getMargin = () => {
-      if (isVertical) return `calc(${stepIconContainer.width} / 2)`;
+      if (isVertical) return `calc(${stepIconContainer?.width} / 2)`;
       if (!hasLabel) return 2;
       return 0;
     };
 
-    const styles = React.useMemo(() => {
+    const styles = useMemo(() => {
       const base = {
         ms: getMargin(),
         my: isVertical ? 2 : 0,
@@ -48,11 +48,11 @@ export const Connector = React.memo(
         return {
           ...base,
           position: 'absolute',
-          top: `calc(${stepIconContainer.height} / 2  - ${base.height} / 2)`,
-          left: `calc(((${widths?.[index]}px + ${stepIconContainer.width}) / 2) + 8px)`,
+          top: `calc(${stepIconContainer?.height} / 2  - ${base.height} / 2)`,
+          left: `calc(((${widths?.[index]}px + ${stepIconContainer?.width}) / 2) + 8px)`,
           // use index of next step to determine spacing
           right: `calc((${widths?.[index + 1]}px - ${
-            stepIconContainer.width
+            stepIconContainer?.width
           }) / -2 + 8px)`,
         };
       }
@@ -61,8 +61,8 @@ export const Connector = React.memo(
       widths,
       isLabelVertical,
       isVertical,
-      stepIconContainer.height,
-      stepIconContainer.width,
+      stepIconContainer?.height,
+      stepIconContainer?.width,
     ]);
 
     return (

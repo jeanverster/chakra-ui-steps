@@ -1,5 +1,5 @@
+import React from 'react';
 import { Flex } from '@chakra-ui/react';
-import * as React from 'react';
 import { describe, expect, it } from 'vitest';
 import { Step, Steps } from '../src';
 import { render } from '../src/utils/test-utils';
@@ -24,7 +24,7 @@ describe('<Steps />', () => {
 
   it('should render children', async () => {
     const { queryByTestId } = render(
-      <Steps colorScheme="green" orientation="vertical" activeStep={0}>
+      <Steps colorScheme="green" activeStep={0}>
         <Step label="Step 1">
           <Flex data-testid="child-1">
             <span>Child 1</span>
@@ -34,13 +34,12 @@ describe('<Steps />', () => {
     );
 
     const child = queryByTestId('child-1');
-
     expect(child).toBeTruthy();
   });
 
   it('should be able to control isCompletedStep for each step', async () => {
     const { container } = render(
-      <Steps colorScheme="green" orientation="vertical" activeStep={1}>
+      <Steps colorScheme="green" activeStep={1}>
         <Step isCompletedStep={false} label="Step 1">
           <Flex data-testid="child-1">
             <span>Child 1</span>

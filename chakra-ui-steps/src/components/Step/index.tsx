@@ -3,23 +3,23 @@ import {
   forwardRef,
   HTMLChakraProps,
   ThemingProps,
-  useStyles,
 } from '@chakra-ui/system';
+import { useMultiStyleConfig } from "@chakra-ui/react"
 import { Collapse } from '@chakra-ui/transition';
 import { dataAttr } from '@chakra-ui/utils';
 import { AnimatePresence } from 'framer-motion';
-import * as React from 'react';
 import { useStepsContext } from '../../context';
 import { Connector } from '../Connector';
 import { StepIcon } from '../StepIcon';
 import { StepLabel } from '../StepLabel';
+import React, { ComponentType, ReactNode, Ref, RefCallback, useCallback } from 'react';
 
 export interface StepProps extends HTMLChakraProps<'li'> {
-  label?: string | React.ReactNode;
+  label?: string | ReactNode;
   description?: string;
-  icon?: React.ComponentType<any>;
+  icon?: ComponentType<any>;
   state?: 'loading' | 'error';
-  checkIcon?: React.ComponentType<any>;
+  checkIcon?: ComponentType<any>;
   isCompletedStep?: boolean;
   isKeepError?: boolean;
 }
@@ -35,7 +35,7 @@ interface StepInternalConfig extends ThemingProps {
 interface FullStepProps extends StepProps, StepInternalConfig {}
 
 export const Step = forwardRef<StepProps, 'li'>(
-  (props, ref: React.Ref<any>) => {
+  (props, ref: Ref<any>) => {
     const {
       children,
       description,
@@ -50,7 +50,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       label,
       ...styleProps
     } = props as FullStepProps;
-
+    
     const {
       isVertical,
       isError,
@@ -63,7 +63,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       stepCount,
     } = useStepsContext();
 
-    const { step, stepContainer, stepIconContainer } = useStyles();
+    const {step, stepContainer, stepIconContainer} = useMultiStyleConfig("Steps");
 
     const hasVisited = isCurrentStep || isCompletedStep;
 
@@ -75,7 +75,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       }
     };
 
-    const containerRef: React.RefCallback<HTMLDivElement> = React.useCallback(
+    const containerRef: RefCallback<HTMLDivElement> = useCallback(
       (node) => {
         if (node && setWidths) {
           setWidths((prev) => {
@@ -86,7 +86,7 @@ export const Step = forwardRef<StepProps, 'li'>(
           });
         }
       },
-      [stepIconContainer.width, stepIconContainer.height]
+      [stepIconContainer?.width, stepIconContainer?.height]
     );
 
     return (
@@ -97,11 +97,10 @@ export const Step = forwardRef<StepProps, 'li'>(
           aria-disabled={!hasVisited}
           __css={{
             opacity,
-            flexDir: isVertical ? 'column' : 'row',
+            flexDirection: isVertical ? 'column' : 'row',
             alignItems: isVertical || isLabelVertical ? 'flex-start' : 'center',
             flex: isLastStep && !isVertical ? '0 0 auto' : '1 0 auto',
-            justifyContent:
-              isLastStep && !isVertical ? 'flex-end' : 'flex-start',
+            justifyContent: isLastStep && !isVertical ? 'flex-end' : 'flex-start',
             _hover: {
               cursor: clickable ? 'pointer' : 'default',
             },
@@ -112,7 +111,7 @@ export const Step = forwardRef<StepProps, 'li'>(
           <chakra.div
             ref={containerRef}
             __css={{
-              flexDir: isLabelVertical ? 'column' : 'row',
+              flexDirection: isLabelVertical ? 'column' : 'row',
               ...stepContainer,
             }}
           >
@@ -130,7 +129,7 @@ export const Step = forwardRef<StepProps, 'li'>(
               data-highlighted={dataAttr(isCompletedStep)}
               data-clickable={dataAttr(clickable)}
             >
-              <AnimatePresence exitBeforeEnter>
+              <AnimatePresence mode="wait">
                 <StepIcon
                   {...{
                     index,

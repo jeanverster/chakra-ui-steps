@@ -1,10 +1,10 @@
-import * as React from 'react';
+import react from 'react';
 type UseSteps = {
   initialStep: number;
 };
 
 export function useSteps({ initialStep }: UseSteps) {
-  const [activeStep, setActiveStep] = React.useState(initialStep);
+  const [activeStep, setActiveStep] = react.useState(initialStep);
 
   const nextStep = () => {
     setActiveStep(prev => prev + 1);
