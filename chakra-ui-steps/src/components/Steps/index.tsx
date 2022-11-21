@@ -1,14 +1,15 @@
-import { createStylesContext, useMediaQuery } from '@chakra-ui/react';
+import { useMediaQuery } from '@chakra-ui/react';
 import {
   chakra,
   forwardRef,
   HTMLChakraProps,
   omitThemingProps,
+  StylesProvider,
   ThemingProps,
+  useMultiStyleConfig,
 } from '@chakra-ui/system';
-import { useMultiStyleConfig } from "@chakra-ui/react";
 import { cx } from '@chakra-ui/utils';
-import React, { ComponentType, Ref, Children, isValidElement, cloneElement } from 'react';
+import * as React from 'react';
 import { StepsProvider } from '../../context/index';
 
 export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
@@ -16,14 +17,18 @@ export interface StepsProps extends HTMLChakraProps<'ol'>, ThemingProps {
   orientation?: 'vertical' | 'horizontal';
   state?: 'loading' | 'error';
   responsive?: boolean;
-  checkIcon?: ComponentType<any>;
+  checkIcon?: React.ComponentType<any>;
   onClickStep?: (step: number) => void;
   labelOrientation?: 'vertical' | 'horizontal';
 }
 
 export const Steps = forwardRef<StepsProps, 'div'>(
-  (props, ref: Ref<HTMLOListElement>) => {
-    const [StylesProvider] = createStylesContext("Steps");
+  (props, ref: React.Ref<HTMLOListElement>) => {
+    const styles = useMultiStyleConfig('Steps', props);
+
+    const stepsStyles = {
+      ...styles.steps,
+    };
 
     const {
       className,
@@ -36,23 +41,17 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       onClickStep,
       labelOrientation,
       ...rest
-    } =  omitThemingProps(props);
+    } = omitThemingProps(props);
 
-    const styles = useMultiStyleConfig('Steps', rest);
-
-    const stepsStyles = {
-      ...styles.steps,
-    };
-
-    const childArr = Children.toArray(children);
+    const childArr = React.Children.toArray(children);
 
     const stepCount = childArr.length;
 
     const renderHorizontalContent = () => {
       if (activeStep <= childArr.length) {
-        return Children.map(childArr[activeStep], node => {
-          if (!isValidElement(node)) return;
-          return Children.map(
+        return React.Children.map(childArr[activeStep], node => {
+          if (!React.isValidElement(node)) return;
+          return React.Children.map(
             node.props.children,
             childNode => childNode
           );
@@ -63,7 +62,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
 
     const clickable = !!onClickStep;
 
-    const [isMobile] = useMediaQuery('(max-width: 43em)', { fallback: false });
+    const [isMobile] = useMediaQuery('(max-width: 43em)');
 
     const orientation = isMobile && responsive ? 'vertical' : orientationProp;
 
@@ -87,15 +86,15 @@ export const Steps = forwardRef<StepsProps, 'div'>(
             ref={ref}
             __css={{
               justifyContent: stepCount === 1 ? 'flex-end' : 'space-between',
-              flexDirection: orientation === 'vertical' ? 'column' : 'row',
+              flexDir: orientation === 'vertical' ? 'column' : 'row',
               ...stepsStyles,
             }}
             className={cx('chakra-steps', className)}
             {...rest}
           >
-            {Children.map(children, (child, i) => {
+            {React.Children.map(children, (child, i) => {
               const isCompletedStep =
-                (isValidElement(child) && (child.props as any).isCompletedStep ) ??
+                (React.isValidElement(child) && child.props.isCompletedStep) ??
                 i < activeStep;
               const isLastStep = i === stepCount - 1;
               const isCurrentStep = i === activeStep;
@@ -107,8 +106,8 @@ export const Steps = forwardRef<StepsProps, 'div'>(
                 isLastStep,
               };
 
-              if (isValidElement(child)) {
-                return cloneElement(child, stepProps);
+              if (React.isValidElement(child)) {
+                return React.cloneElement(child, stepProps);
               }
 
               return null;
