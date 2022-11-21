@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { StepsProps } from '../components/Steps';
 
 interface StepsContextValue extends StepsProps {
@@ -19,7 +19,7 @@ const StepsContext = React.createContext<StepsContextValue>({
 
 export const useStepsContext = () => React.useContext(StepsContext);
 
-export const StepsProvider: React.FC<{ value: StepsContextValue }> = ({
+export const StepsProvider: React.FC<React.PropsWithChildren<{ value: StepsContextValue }>> = ({
   value,
   children,
 }) => {

@@ -1,5 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite';
 const path = require('path');
 
@@ -8,7 +8,11 @@ const resolvePath = (str: string) => path.resolve(__dirname, str);
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({
+    babel: {
+      plugins: ['@babel/plugin-transform-typescript'],
+    },
+  })],
   build: {
     rollupOptions: {
       external: isExternal,
