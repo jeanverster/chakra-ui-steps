@@ -1,8 +1,8 @@
-import { chakra, Flex, forwardRef, Spinner, useMultiStyleConfig } from '@chakra-ui/react';
+import { chakra, Flex, forwardRef, Spinner, useStyles } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import { motion } from 'framer-motion';
+import React from 'react';
 import { CheckIcon, CloseIcon } from '../Icons';
-import React, { ComponentType, useMemo } from 'react';
 
 interface StepIconProps {
   isCompletedStep?: boolean;
@@ -10,9 +10,9 @@ interface StepIconProps {
   isError?: boolean;
   isLoading?: boolean;
   isKeepError?: boolean;
-  icon?: ComponentType<any>;
+  icon?: React.ComponentType<any>;
   index: number;
-  checkIcon?: ComponentType<any>;
+  checkIcon?: React.ComponentType<any>;
 }
 
 const MotionFlex = motion(Flex);
@@ -29,7 +29,7 @@ const animationConfig = {
 };
 
 export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
-  const { icon, iconLabel, label } = useMultiStyleConfig("Steps", props);
+  const { icon, iconLabel, label } = useStyles();
 
   const {
     isCompletedStep,
@@ -50,17 +50,17 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     ...label,
   };
 
-  const Icon = useMemo(
+  const Icon = React.useMemo(
     () => (CustomIcon ? CustomIcon : null),
     [CustomIcon]
   );
 
-  const Check = useMemo(
+  const Check = React.useMemo(
     () => (CustomCheckIcon ? CustomCheckIcon : CheckIcon),
     [CustomCheckIcon]
   );
 
-  return useMemo(() => {
+  return React.useMemo(() => {
     if (isCompletedStep) {
       if (isError && isKeepError) {
         return (

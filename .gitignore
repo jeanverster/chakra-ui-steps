@@ -25,6 +25,3 @@ website/.next
 *.sw?
 
 .yarn
-chakra-ui-steps/.rollup.cache
-chakra-ui-steps/storybook-static
-yarn.lock

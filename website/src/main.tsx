@@ -5,7 +5,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 // import "@fontsource/sora/700.css";
 import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import App from "./App";
 
 const theme = extendTheme({
@@ -14,14 +14,11 @@ const theme = extendTheme({
   },
 });
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
 );

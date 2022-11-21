@@ -24,6 +24,7 @@
     }
   },
   "scripts": {
+    "build-storybook": "build-storybook",
     "build": "tsc --noEmit && vite build",
     "coverage": "vitest run --coverage",
     "dev": "vite build --watch",
@@ -34,18 +35,11 @@
     "test": "vitest"
   },
   "peerDependencies": {
-    "@babel/core": "7.17.12",
-    "@babel/plugin-transform-typescript": "7.17.12",
-    "@babel/preset-env": "7.17.12",
-    "@babel/types": "7.17.12",
-    "@chakra-ui/react": "^2.0.0",
+    "@chakra-ui/react": ">=1.6.7",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "framer-motion": "^7",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "framer-motion": "^6",
+    "react": ">=16"
   },
   "husky": {
     "hooks": {
@@ -60,46 +54,38 @@
   },
   "homepage": "https://github.com/jeanverster/chakra-ui-steps",
   "devDependencies": {
-    "@babel/core": "7.17.12",
-    "@babel/plugin-transform-typescript": "7.17.12",
-    "@babel/preset-env": "7.17.12",
-    "@babel/preset-react": "7.17.12",
-    "@babel/preset-typescript": "7.17.12",
-    "@babel/runtime": "7.17.12",
-    "@babel/types": "7.17.12",
-    "@chakra-ui/react": "^2.0.0",
+    "@chakra-ui/react": "^1.6.10",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@rollup/plugin-typescript": "^9.0.2",
+    "@rollup/plugin-typescript": "^8.3.1",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/npm": "^7.1.3",
     "@semantic-release/release-notes-generator": "^9.0.2",
-    "@storybook/addon-essentials": "^6.5.9",
-    "@storybook/addon-links": "^6.5.9",
-    "@storybook/addons": "^6.5.9",
-    "@storybook/react": "^6.5.9",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^2.2.0",
-    "framer-motion": "^7",
-    "husky": "^7.0.4",
-    "jsdom": "^20.0.3",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/addons": "^6.2.9",
+    "@storybook/react": "^6.2.9",
+    "@testing-library/react": "^12.1.4",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@vitejs/plugin-react": "^1.0.7",
+    "framer-motion": "^6.2.1",
+    "husky": "^6.0.0",
+    "jsdom": "^19.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "rimraf": "^3.0.2",
     "semantic-release": "^19.0.2",
     "semantic-release-monorepo": "^7.0.5",
-    "storybook": "^6.5.9",
-    "storybook-addon-performance": "^0.16.1",
-    "tslib": "^2.4.1",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.0",
-    "vitest": "^0.25.2"
+    "storybook-addon-performance": "^0.16.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0",
+    "vitest": "^0.7.6"
   },
   "release": {
     "branches": [
@@ -118,8 +104,5 @@
       "@semantic-release/git"
     ],
     "extends": "semantic-release-monorepo"
-  },
-  "dependencies": {
-    "@storybook/builder-vite": "^0.2.5"
   }
 }
