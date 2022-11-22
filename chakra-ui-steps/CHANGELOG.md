@@ -1,3 +1,10 @@
+# [chakra-ui-steps-v1.9.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.8.0...chakra-ui-steps-v1.9.0) (2022-11-22)
+
+
+### Features
+
+* custom error icon ([#93](https://github.com/jeanverster/chakra-ui-steps/issues/93)) ([b5d4041](https://github.com/jeanverster/chakra-ui-steps/commit/b5d4041ad08315e2e6464630af6a6fd4b435d383))
+
 # [chakra-ui-steps-v1.8.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.7.4...chakra-ui-steps-v1.8.0) (2022-10-01)
 
 
