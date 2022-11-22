@@ -56,6 +56,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       isError,
       isLoading,
       isLabelVertical,
+      errorIcon,
       checkIcon: defaultCheckIcon,
       onClickStep,
       clickable,
@@ -141,6 +142,7 @@ export const Step = forwardRef<StepProps, 'li'>(
                     isKeepError,
                   }}
                   icon={icon}
+                  errorIcon={errorIcon}
                   checkIcon={checkIcon ?? defaultCheckIcon}
                 />
               </AnimatePresence>
