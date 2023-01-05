@@ -5,6 +5,8 @@ import React from 'react';
 import { CheckIcon, WarningIcon } from '../Icons';
 import { useStepsStyles } from '../Steps';
 
+type IconType = React.ComponentType<any>;
+
 interface StepIconProps {
   isCompletedStep?: boolean;
   isCurrentStep?: boolean;
@@ -12,8 +14,9 @@ interface StepIconProps {
   isLoading?: boolean;
   isKeepError?: boolean;
   icon?: React.ComponentType<any>;
-  index: number | undefined;
-  checkIcon?: React.ComponentType<any>;
+  index: number;
+  checkIcon?: IconType;
+  errorIcon?: IconType;
 }
 
 const MotionFlex = motion(Flex);
@@ -41,6 +44,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     icon: CustomIcon,
     index,
     checkIcon: CustomCheckIcon,
+    errorIcon: CustomErrorIcon,
   } = props;
 
   const labelStyles = {
@@ -54,6 +58,11 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
   const Icon = React.useMemo(
     () => (CustomIcon ? CustomIcon : null),
     [CustomIcon]
+  );
+
+  const ErrorIcon = React.useMemo(
+    () => (CustomErrorIcon ? CustomErrorIcon : null),
+    [CustomErrorIcon]
   );
 
   const Check = React.useMemo(
@@ -80,6 +89,13 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
       );
     }
     if (isCurrentStep) {
+      if (isError && ErrorIcon) {
+        return (
+          <MotionFlex key="error-icon" {...animationConfig}>
+            <ErrorIcon color="white" style={icon} />
+          </MotionFlex>
+        );
+      }
       if (isError) {
         return (
           <AnimatedWarningIcon

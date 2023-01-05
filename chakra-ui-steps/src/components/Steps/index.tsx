@@ -19,6 +19,7 @@ interface StepOptions {
   state?: 'loading' | 'error';
   responsive?: boolean;
   checkIcon?: React.ComponentType<any>;
+  errorIcon?: React.ComponentType<any>;
   onClickStep?: (step: number) => void;
   trackColor?: string;
   isMobileBreakpointValue?: Partial<Record<string, boolean>> | boolean[];
@@ -50,6 +51,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       state,
       responsive,
       checkIcon,
+      errorIcon,
       onClickStep,
       isMobileBreakpointValue,
       trackColor: trackColorProp,
@@ -106,6 +108,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
             state,
             responsive,
             checkIcon,
+            errorIcon,
             onClickStep,
             clickable,
             colorScheme: props.colorScheme,
