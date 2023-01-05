@@ -14,7 +14,7 @@ interface StepIconProps {
   isLoading?: boolean;
   isKeepError?: boolean;
   icon?: React.ComponentType<any>;
-  index: number;
+  index?: number;
   checkIcon?: IconType;
   errorIcon?: IconType;
 }
