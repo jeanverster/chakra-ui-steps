@@ -56,6 +56,9 @@ export const Step = forwardRef<StepProps, 'li'>(
       description,
       hasVisited,
       icon,
+      isKeepError,
+      checkIcon,
+      state,
     };
 
     const renderStep = () => {

@@ -25,7 +25,8 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
       hasVisited,
     } = props;
 
-    const { checkIcon, isError, isLoading, variant } = useStepsContext();
+    const { checkIcon, isError, isLoading, variant, onClickStep, clickable } =
+      useStepsContext();
 
     const { step, stepIconContainer } = useStepsStyles();
 
@@ -39,6 +40,8 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
         ref={ref}
         className="cui-steps__vertical-step"
         data-highlighted={dataAttr(highlighted)}
+        data-clickable={dataAttr(clickable)}
+        onClick={() => onClickStep?.(index || 0)}
         __css={step}
       >
         <Flex className="cui-steps__vertical-step-container">

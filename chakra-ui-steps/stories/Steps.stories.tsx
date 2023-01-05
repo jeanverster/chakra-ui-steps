@@ -11,7 +11,6 @@ import {
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
-import { darken, lighten } from '@chakra-ui/theme-tools';
 import { Meta, Story } from '@storybook/react';
 import { motion, MotionProps } from 'framer-motion';
 import React from 'react';
@@ -249,11 +248,11 @@ export const WithPerStepState = (): JSX.Element => {
     initialStep: 0,
   });
 
-  const { size } = useConfigContext();
+  const config = useConfigContext();
 
   return (
     <>
-      <Steps size={size} activeStep={activeStep}>
+      <Steps {...config} activeStep={activeStep}>
         {steps.map(({ label }, index) => (
           <Step label={label} key={label} state={statesSteps[index]}>
             <Content my={6} index={index} />
@@ -277,11 +276,11 @@ export const WithKeepErrorState = (): JSX.Element => {
     initialStep: 0,
   });
 
-  const { size } = useConfigContext();
+  const config = useConfigContext();
 
   return (
     <>
-      <Steps size={size} activeStep={activeStep}>
+      <Steps {...config} activeStep={activeStep}>
         {steps.map(({ label }, index) => (
           <Step label={label} key={label} state="error" isKeepError>
             <Content my={6} index={index} />
@@ -364,10 +363,10 @@ export const CustomPerStepCheckIcon = (): JSX.Element => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  const { size } = useConfigContext();
+  const config = useConfigContext();
   return (
     <>
-      <Steps size={size} checkIcon={FiCheckCircle} activeStep={activeStep}>
+      <Steps {...config} checkIcon={FiCheckCircle} activeStep={activeStep}>
         {iconSteps.map(({ label, icon }, index) => (
           <Step label={label} key={label} checkIcon={icon}>
             <Content my={6} index={index} />
@@ -420,20 +419,14 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
 const CustomSteps = {
   ...StepsTheme,
   baseStyle: (props: any) => {
-    const inactiveColor = props.colorMode === 'light' ? 'gray.100' : 'gray.700';
     const activeColor = `blue.500`;
     return {
       ...StepsTheme.baseStyle(props),
-      stepIconContainer: {
-        ...StepsTheme.baseStyle(props).stepIconContainer,
-        bg: inactiveColor,
-        borderColor: inactiveColor,
-        borderRadius: 'md',
+      stepContainer: {
+        ...StepsTheme.baseStyle(props).stepContainer,
+        borderRadius: 0,
         _activeStep: {
-          bg:
-            props.colorMode === 'light'
-              ? darken(inactiveColor, 0.5)
-              : lighten(inactiveColor, 0.5),
+          bg: activeColor,
           borderColor: activeColor,
         },
         _highlighted: {

@@ -65,7 +65,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     if (isCompletedStep) {
       if (isError && isKeepError) {
         return (
-          <AnimatedCloseIcon
+          <AnimatedWarningIcon
             key="icon"
             color="white"
             {...animationConfig}

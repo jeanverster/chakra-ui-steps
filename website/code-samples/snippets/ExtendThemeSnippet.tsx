@@ -7,12 +7,10 @@ const theme = extendTheme({
   },
 });
 
-const App = () => {
+export default function App() {
   return (
     <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>
   );
-};
-
-export default App;
+}

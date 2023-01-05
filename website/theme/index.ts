@@ -110,8 +110,8 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    heading: "Sora",
-    body: "Manrope",
+    heading: "Sora, sans-serif",
+    body: "Manrope, sans-serif",
   },
   mdx: {
     h1: {

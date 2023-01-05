@@ -13,9 +13,10 @@ export const StepIconContainer = ({
   isCurrentStep,
   isCompletedStep,
   children,
+  isError,
 }: StepIconContainerProps) => {
   const { stepIconContainer } = useStepsStyles();
-  const { isError, clickable, isLoading } = useStepsContext();
+  const { clickable, isLoading } = useStepsContext();
   return (
     <chakra.div
       __css={stepIconContainer}

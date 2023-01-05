@@ -6,7 +6,6 @@ type LazyCodeLoaderProps = {
 
 const LazyCodeLoader = ({ code }: LazyCodeLoaderProps) => {
   const loader = React.useCallback(() => {
-    console.log("loading code!");
     const { default: Highlight, defaultProps } =
       require("prism-react-renderer") as typeof import("prism-react-renderer");
     const { default: dracula } =

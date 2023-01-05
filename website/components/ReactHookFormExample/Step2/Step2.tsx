@@ -4,6 +4,7 @@ import { useController, useFormContext } from "react-hook-form";
 import { GiBirdHouse, GiGreenhouse, GiSydneyOperaHouse } from "react-icons/gi";
 import * as yup from "yup";
 import { FormValues } from "..";
+import { ErrorMessage } from "../../ErrorMessage";
 import { RadioCard } from "../../RadioCard";
 
 export const Step2Schema = yup.object().shape({
@@ -65,9 +66,7 @@ export const Step2 = () => {
         </Stack>
       </RadioGroup>
       {errors.homeType && (
-        <Text sx={{ mt: 2 }} color="red.500">
-          {errors.homeType.message}
-        </Text>
+        <ErrorMessage message={errors.homeType.message || ""} />
       )}
     </Box>
   );

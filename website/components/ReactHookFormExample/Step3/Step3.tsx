@@ -10,6 +10,7 @@ import {
 import { useController, useFormContext } from "react-hook-form";
 import * as yup from "yup";
 import { FormValues } from "..";
+import { ErrorMessage } from "../../ErrorMessage";
 
 export const Step3Schema = yup.object().shape({
   homeValue: yup
@@ -67,9 +68,7 @@ export const Step3 = () => {
         </Slider>
       </Flex>
       {errors.homeValue && (
-        <Text sx={{ mt: 2 }} color="red.500">
-          {errors.homeValue.message}
-        </Text>
+        <ErrorMessage message={errors.homeValue.message || ""} />
       )}
     </Box>
   );

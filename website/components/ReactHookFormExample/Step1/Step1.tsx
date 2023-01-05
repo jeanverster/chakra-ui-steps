@@ -4,6 +4,7 @@ import { useController, useFormContext } from "react-hook-form";
 import { GiMoneyStack, GiReceiveMoney } from "react-icons/gi";
 import * as yup from "yup";
 import { FormValues } from "..";
+import { ErrorMessage } from "../../ErrorMessage";
 import { RadioCard } from "../../RadioCard";
 
 export const Step1Schema = yup.object().shape({
@@ -60,9 +61,7 @@ export const Step1 = () => {
         </Stack>
       </RadioGroup>
       {errors.service && (
-        <Text sx={{ mt: 2 }} color="red.500">
-          {errors.service.message}
-        </Text>
+        <ErrorMessage message={errors.service.message || ""} />
       )}
     </Box>
   );

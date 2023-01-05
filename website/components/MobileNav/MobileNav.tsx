@@ -1,12 +1,12 @@
 import { useCardBg } from "@/hooks/useCardBg";
-import { Box } from "@chakra-ui/layout";
 import {
+  Button,
   Flex,
   IconButton,
   Image,
   Link as ChakraLink,
+  Select,
   Tag,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
@@ -14,16 +14,23 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
+import { FaRegStar } from "react-icons/fa";
 import { RiMenu4Fill } from "react-icons/ri";
 import pkgJson from "../../../chakra-ui-steps/package.json";
-import { NAV_ITEMS } from "../../constants";
+import { NAV_HEIGHT, NAV_ITEMS } from "../../constants";
+import { Store, useVariantContext } from "../../pages/_app";
+import { RepoPayload } from "../../types";
+import { ColorModeSwitcher } from "../ColorModeSwitcher";
+import { VARIANT_ITEMS } from "../SideNav/SideNav";
 import { SideNavItem } from "../SideNavItem";
 
-type MobileNavProps = {};
+type MobileNavProps = {
+  repo: RepoPayload | undefined;
+};
 
 const MotionFlex = motion(Flex);
 
-const MobileNav = (props: MobileNavProps) => {
+const MobileNav = ({ repo }: MobileNavProps) => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const router = useRouter();
   const target = React.createRef<HTMLButtonElement>();
@@ -37,6 +44,8 @@ const MobileNav = (props: MobileNavProps) => {
     }
   }, [isOpen, target]);
 
+  const [_, setVariant] = useVariantContext();
+
   return (
     <>
       <Flex
@@ -49,13 +58,13 @@ const MobileNav = (props: MobileNavProps) => {
           md: "none",
         }}
         sx={{
-          height: "96px",
+          height: NAV_HEIGHT,
           px: 8,
           top: 0,
           position: "fixed",
           zIndex: "sticky",
           bg,
-          // backdropFilter: "blur(10px)",
+          backdropFilter: "blur(10px)",
         }}
       >
         <Image
@@ -133,90 +142,47 @@ const MobileNav = (props: MobileNavProps) => {
               flex: 1,
             }}
           >
-            {NAV_ITEMS.map(({ title, items }) => {
+            {NAV_ITEMS.map(({ title, href }) => {
+              const active = router.pathname === href;
               return (
-                <Box key="title" sx={{ ":not(:first-child)": { mt: 4 } }}>
-                  <Text sx={{ mb: 4 }} color="teal.500" fontWeight="extrabold">
-                    {title}
-                  </Text>
-                  {items.map(({ title, href }, i) => {
-                    const active = router.pathname === href;
-                    return (
-                      <SideNavItem
-                        title={title}
-                        href={href}
-                        key={href}
-                        active={active}
-                        mr={i < items.length - 1 ? 4 : 0}
-                        sx={{ ":not(:last-child)": { mb: 2 }, py: 2 }}
-                      />
-                    );
-                  })}
-                </Box>
+                <SideNavItem
+                  title={title}
+                  href={href}
+                  key={href}
+                  mb={6}
+                  active={active}
+                />
               );
             })}
-            {/* <Flex
-              bg={bg}
-              borderTopWidth={1}
-              borderBottomLeftRadius="md"
-              borderBottomRightRadius="md"
+            <Flex
+              sx={{
+                justifyContent: "flex-end",
+                alignItems: "center",
+                gap: 4,
+              }}
             >
-              <Flex
-                transition="all 0.2s ease"
-                _hover={{
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
+              <Select
+                size="sm"
+                onChange={(e) => {
+                  setVariant({
+                    variant: e.target.value as Store["variant"],
+                  });
                 }}
-                borderBottomLeftRadius="md"
-                borderRightWidth={1}
-                justify="center"
-                flex={1}
-                p={4}
+                rounded="md"
               >
-                <Link href="/profile">
-                  <IconButton
-                    size="sm"
-                    variant="ghost"
-                    icon={<FiUser />}
-                    aria-label="Profile"
-                  />
-                </Link>
-              </Flex>
-              <Flex
-                transition="all 0.2s ease"
-                _hover={{
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                }}
-                borderRightWidth={1}
-                justify="center"
-                flex={1}
-                p={4}
-              >
-                <Link href="/create">
-                  <IconButton
-                    size="sm"
-                    variant="ghost"
-                    icon={<FiPlus />}
-                    aria-label="Create"
-                  />
-                </Link>
-              </Flex>
-              <Flex
-                transition="all 0.2s ease"
-                _hover={{
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                }}
-                borderBottomRightRadius="md"
-                overflow="hidden"
-                justify="center"
-                flex={1}
-                p={4}
-              >
-                <ColorModeSwitcher ml={0} />
-              </Flex>
-            </Flex> */}
+                {VARIANT_ITEMS.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </Select>
+              <ColorModeSwitcher />
+              <a href={repo?.html_url} target="_blank" rel="noreferrer">
+                <Button variant="ghost" size="sm" leftIcon={<FaRegStar />}>
+                  {repo?.stargazers_count}
+                </Button>
+              </a>
+            </Flex>
           </MotionFlex>
         )}
       </AnimatePresence>

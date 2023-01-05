@@ -42,7 +42,6 @@ export const useStepsStyles = useStyles;
 
 export const Steps = forwardRef<StepsProps, 'div'>(
   (props, ref: React.Ref<HTMLDivElement>) => {
-    console.log('~ PROPS', props);
     const {
       className,
       activeStep,

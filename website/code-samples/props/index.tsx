@@ -118,7 +118,6 @@ const Props = () => {
   const bg = useCardBg();
   return (
     <Box sx={{ maxWidth: "100%" }}>
-      <Heading fontSize="2xl">Component Props</Heading>
       {PROPS.map((component) => (
         <Box mt={8} key={component.name} sx={{ maxW: "100%" }}>
           <Heading as="h2" size="md" mb={4}>

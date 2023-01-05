@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 
 type PageProps = FlexProps & {
-  title: string;
+  title?: string;
   children: React.ReactNode;
   description: string;
   metaDescription?: string;
@@ -25,12 +25,12 @@ export const Page = ({
   ...rest
 }: PageProps): JSX.Element => {
   const { back } = useRouter();
+  const metaTitle = title ? `${title} - Chakra UI Steps` : "Chakra UI Steps";
   return (
     <Box
       as="main"
       px={{ base: 8, md: 2 }}
-      pt={["128px", "128px", "12vmin"]}
-      pb="128px"
+      py="128px"
       sx={{
         display: ["inherit", "inherit", "block"],
         flexDir: "column",
@@ -38,8 +38,8 @@ export const Page = ({
       }}
       {...rest}
     >
-      <Head>
-        <title>{title}</title>
+      <Head key="page">
+        <title>{metaTitle}</title>
         <meta name="description" content={metaDescription || description} />
       </Head>
 
@@ -53,13 +53,12 @@ export const Page = ({
         />
       )}
       {!hideTopTitle && (
-        <>
+        <Box my={8} display="flex" flexDir={"column"} gap={3}>
           <Heading fontSize={["2xl", "4xl"]} sx={{ mb: 6 }}>
-            {title}
+            {title || "Chakra UI Steps"}
           </Heading>
-          <Text fontSize="md">{description}</Text>
-          <Box mt={8} mb={10} />
-        </>
+          <Text fontSize="lg">{description}</Text>
+        </Box>
       )}
       <Suspense>{children}</Suspense>
     </Box>
@@ -67,6 +66,5 @@ export const Page = ({
 };
 
 Page.defaultProps = {
-  title: "Title",
   description: "Description",
 };

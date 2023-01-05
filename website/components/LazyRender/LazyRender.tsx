@@ -1,4 +1,4 @@
-import { createRef, useLayoutEffect, useMemo, useState } from "react";
+import { createRef, useEffect, useMemo, useState } from "react";
 
 type LazyRenderProps = {
   threshold?: number;
@@ -25,7 +25,7 @@ const LazyRender = ({
 
   const [isVisible, setIsVisible] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!ref.current) {
       return;
     }

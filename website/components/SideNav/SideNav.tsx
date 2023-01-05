@@ -1,17 +1,15 @@
+import { useCardBg } from "@/hooks/useCardBg";
 import { Flex } from "@chakra-ui/layout";
 import {
-  Box,
   Button,
-  Divider,
+  Container,
   Image,
   Link as ChakraLink,
   Select,
   Tag,
-  Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import * as React from "react";
 import { FaRegStar } from "react-icons/fa";
 import { ColorModeSwitcher } from "..";
 import pkgJson from "../../../chakra-ui-steps/package.json";
@@ -20,7 +18,9 @@ import { Store, useVariantContext } from "../../pages/_app";
 import { RepoPayload } from "../../types";
 import { SideNavItem } from "../SideNavItem";
 
-type SideNavProps = {};
+type SideNavProps = {
+  repo: RepoPayload | undefined;
+};
 
 const NAV_HEIGHT = "96px";
 
@@ -29,133 +29,131 @@ type VariantItems = {
   value: Store["variant"];
 }[];
 
-const VARIANT_ITEMS: VariantItems = [
+export const VARIANT_ITEMS: VariantItems = [
+  {
+    label: "Simple",
+    value: "simple",
+  },
   {
     label: "Circles",
     value: "circles",
   },
   {
-    label: "Simple",
-    value: "simple",
+    label: "Circles Alt",
+    value: "circles-alt",
   },
 ];
 
-const SideNav = (props: SideNavProps): JSX.Element => {
+const SideNav = ({ repo }: SideNavProps) => {
   const router = useRouter();
-  const [repo, setRepo] = React.useState<RepoPayload | undefined>();
-
-  React.useEffect(() => {
-    async function fetchData() {
-      const res = await fetch(
-        "https://api.github.com/repos/jeanverster/chakra-ui-steps"
-      );
-      const json = await res.json();
-      setRepo(json);
-    }
-    fetchData();
-  }, []);
 
   const [_, setVariant] = useVariantContext();
 
+  const bg = useCardBg();
+
   return (
-    <Box
-      className="side-nav"
-      as="aside"
-      display={["none", "none", "block"]}
+    <Flex
       sx={{
-        gridTemplateColumns: { xs: "none", sm: "1fr 1fr" },
-        gridAutoRows: "min-content",
-        h: "100vh",
-        height: "max-content",
-        maxHeight: `calc(100vh - ${NAV_HEIGHT})`,
-        maxW: "100%",
-        position: "sticky",
-        pt: 5,
-        px: 8,
-        top: "12vmin",
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: NAV_HEIGHT,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bg,
+        zIndex: "sticky",
+        display: {
+          base: "none",
+          md: "flex",
+        },
       }}
     >
-      <Flex mb={4} align="center" width="100%" justify="flex-start">
-        <Image
-          alt="Chakra UI Logo"
-          width="24px"
-          height="24px"
-          rounded="full"
-          src={"/54212428.png"}
-        />
-
-        <Link passHref href="/">
-          <ChakraLink
-            ml={2}
-            textAlign="left"
-            fontSize="md"
-            fontWeight={"bold"}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flex: 1,
-            }}
-            _hover={{
-              cursor: "pointer",
-              color: "teal.500",
-              transition: "all 0.2s ease",
-            }}
-          >
-            chakra-ui-steps
-            <Tag size="sm">v{pkgJson.version}</Tag>
-          </ChakraLink>
-        </Link>
-      </Flex>
-      <Select
-        size="sm"
-        mb={4}
-        onChange={(e) => {
-          setVariant({
-            variant: e.target.value as Store["variant"],
-          });
+      <Container
+        maxW="container.lg"
+        className="wrapper"
+        sx={{
+          display: "flex",
+          gap: 4,
+          padding: [0, 0, 4],
+          mx: "auto",
+          minWidth: 0,
+          justifyContent: "space-between",
         }}
-        rounded="md"
       >
-        {VARIANT_ITEMS.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
-          </option>
-        ))}
-      </Select>
-      <Box as="nav" maxH={"60vh"} overflowY="auto">
-        {NAV_ITEMS.map(({ title, items }) => {
-          return (
-            <Box key="title" sx={{ ":not(:first-child)": { mt: 4 } }}>
-              <Text sx={{ mb: 4 }} color="teal.500" fontWeight="extrabold">
-                {title}
-              </Text>
-              {items.map(({ title, href }, i) => {
-                const active = router.pathname === href;
-                return (
-                  <SideNavItem
-                    title={title}
-                    href={href}
-                    key={href}
-                    active={active}
-                    sx={{ ":not(:last-child)": { mb: 2 } }}
-                  />
-                );
-              })}
-            </Box>
-          );
-        })}
-      </Box>
-      <Divider sx={{ my: 4 }} />
-      <Flex sx={{ justifyContent: "space-between" }}>
-        <ColorModeSwitcher />
-        <a href={repo?.html_url} target="_blank" rel="noreferrer">
-          <Button ml={2} variant="ghost" size="sm" leftIcon={<FaRegStar />}>
-            {repo?.stargazers_count}
-          </Button>
-        </a>
-      </Flex>
-    </Box>
+        <Flex sx={{ alignItems: "center" }}>
+          <Image
+            alt="Chakra UI Logo"
+            width="24px"
+            height="24px"
+            rounded="full"
+            src={"/54212428.png"}
+          />
+
+          <Link passHref href="/">
+            <ChakraLink
+              ml={2}
+              textAlign="left"
+              fontSize="md"
+              fontWeight={"bold"}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flex: 1,
+              }}
+              _hover={{
+                cursor: "pointer",
+                color: "teal.500",
+                transition: "all 0.2s ease",
+              }}
+            >
+              chakra-ui-steps
+              <Tag size="sm" sx={{ ms: 2 }}>
+                v{pkgJson.version}
+              </Tag>
+            </ChakraLink>
+          </Link>
+        </Flex>
+
+        <Flex as="nav" sx={{ alignItems: "center", gap: 3 }}>
+          {NAV_ITEMS.map(({ title, href }) => {
+            const active = router.pathname === href;
+            return (
+              <SideNavItem
+                title={title}
+                href={href}
+                key={href}
+                active={active}
+              />
+            );
+          })}
+        </Flex>
+        <Flex sx={{ justifyContent: "flex-end", alignItems: "center", gap: 2 }}>
+          <ColorModeSwitcher />
+          <a href={repo?.html_url} target="_blank" rel="noreferrer">
+            <Button variant="ghost" size="sm" leftIcon={<FaRegStar />}>
+              {repo?.stargazers_count}
+            </Button>
+          </a>
+          <Select
+            size="sm"
+            onChange={(e) => {
+              setVariant({
+                variant: e.target.value as Store["variant"],
+              });
+            }}
+            rounded="md"
+          >
+            {VARIANT_ITEMS.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </Select>
+        </Flex>
+      </Container>
+    </Flex>
   );
 };
 

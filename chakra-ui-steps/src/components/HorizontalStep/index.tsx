@@ -10,7 +10,7 @@ import { useStepsStyles } from '../Steps';
 
 export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
   (props, ref) => {
-    const { step, stepContainer, stepIconContainer } = useStepsStyles();
+    const { step, stepContainer } = useStepsStyles();
 
     const { isError, isLoading, checkIcon, onClickStep, variant, clickable } =
       useStepsContext();
@@ -23,7 +23,11 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
       icon,
       label,
       description,
+      isKeepError,
+      state,
     } = props;
+
+    const localIsError = isError || state === 'error';
 
     const opacity = hasVisited ? 1 : 0.8;
 
@@ -37,7 +41,7 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
         aria-disabled={!hasVisited}
         className="cui-steps__horizontal-step"
         data-highlighted={dataAttr(highlighted)}
-        data-invalid={dataAttr(isCurrentStep && isError)}
+        data-invalid={dataAttr(localIsError)}
         data-clickable={dataAttr(clickable)}
         onClick={() => onClickStep?.(index || 0)}
         ref={ref}
@@ -47,14 +51,15 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
           className="cui-steps__horizontal-step-container"
           __css={stepContainer}
         >
-          <StepIconContainer {...props}>
+          <StepIconContainer {...{ isError: localIsError, ...props }}>
             <StepIcon
               {...{
                 index,
-                isError,
                 isLoading,
                 isCurrentStep,
                 isCompletedStep,
+                isKeepError,
+                isError: localIsError,
               }}
               icon={icon}
               checkIcon={checkIcon}

@@ -33,9 +33,9 @@ const baseStyleIcon: SystemStyleObject = {
 
 const baseStyleLabel: SystemStyleFunction = (props) => ({
   color: mode(`gray.900`, `gray.100`)(props),
-  fontWeight: 'medium',
   textAlign: 'center',
   fontSize: 'md',
+  fontWeight: 'bold',
 });
 
 const baseStyleDescription: SystemStyleFunction = (props) => ({
@@ -164,8 +164,8 @@ const variantCircles = definePartsStyle((props) => {
     }),
     labelContainer: {
       flexDir: 'column',
-      alignItems: props.orientation === 'horizontal' ? 'center' : 'flex-start',
-      ms: props.orientation === 'horizontal' ? 0 : 3,
+      alignItems: 'flex-start',
+      mx: 2,
     },
     step:
       props.orientation === 'horizontal'
@@ -220,6 +220,7 @@ const variantSimple = definePartsStyle((props) => {
     },
     label: {
       mx: 0,
+      fontWeight: 'bold',
       mt: isVertical ? 0 : 2,
     },
     labelContainer: {
@@ -269,7 +270,9 @@ const variantSimple = definePartsStyle((props) => {
       '&[data-clickable]:hover': {
         borderColor: activeColor,
         cursor: 'pointer',
-        backgroundColor: mode('gray.100', 'gray.700')(props),
+        '& .cui-steps__vertical-step-container': {
+          borderColor: activeColor,
+        },
       },
     },
   };

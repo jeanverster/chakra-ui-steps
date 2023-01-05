@@ -10,11 +10,13 @@ import path from "path";
 import * as reactIconsRI from "react-icons/ri";
 
 const EXAMPLES_PATH = path.join(process.cwd(), "code-samples/examples");
+const SNIPPETS_PATH = path.join(process.cwd(), "code-samples/snippets");
 const DOCS_PATH = path.join(process.cwd(), "docs");
 
 export type CodeExample = {
   code: string;
-  fileName: any;
+  fileName: string;
+  filePath: string;
 };
 
 // recursively read in all files in the examples directory except for the index.ts file and output an array of strings containing the stringified buffer
@@ -27,11 +29,13 @@ export const getFileStrings = (directory = EXAMPLES_PATH) => {
       files = files.concat(getFileStrings(absolute));
     } else {
       const fileName = path.basename(absolute);
+      const filePath = path.join(directory, fileName);
       if (fileName !== "index.ts") {
         const code = fs.readFileSync(absolute).toString().trim();
         files.push({
           code,
           fileName,
+          filePath,
         });
       }
     }
@@ -39,29 +43,23 @@ export const getFileStrings = (directory = EXAMPLES_PATH) => {
   return files;
 };
 
+export const getFileString = (filePath: string): CodeExample | undefined => {
+  try {
+    const absPath = path.join(process.cwd(), filePath);
+    const file = fs.readFileSync(absPath);
+    return {
+      code: file.toString().trim(),
+      fileName: path.basename(absPath),
+      filePath,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 type Doc = {
   code: string;
   fileName: string;
-};
-
-// recursively read in all folders in the docs directory, and output an array of objects containing the directory name as the key and all files within that directory as the value
-export const getDocs = (directory = DOCS_PATH): Doc[] => {
-  let sections = [];
-  const filesInDirectory = fs.readdirSync(directory);
-  for (const file of filesInDirectory) {
-    const absolute = path.join(directory, file);
-    if (fs.statSync(absolute).isDirectory()) {
-      sections.push(getDocs(absolute));
-    } else {
-      const code = fs.readFileSync(absolute).toString().trim();
-      const fileName = path.basename(absolute);
-      sections.push({
-        code,
-        fileName,
-      } as Doc);
-    }
-  }
-  return sections;
 };
 
 const chakra = Object.keys({

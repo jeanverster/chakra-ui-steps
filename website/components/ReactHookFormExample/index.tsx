@@ -3,16 +3,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import { FormProvider, useForm } from "react-hook-form";
 import { GiRocketFlight } from "react-icons/gi";
+import { useCardBg } from "../../hooks/useCardBg";
+import { useVariantContext } from "../../pages/_app";
 import { Step1, Step1Schema } from "./Step1";
 import { Step2, Step2Schema } from "./Step2";
 import { Step3, Step3Schema } from "./Step3";
 import { Step4, Step4Schema } from "./Step4";
 
 const steps = [
-  { label: "Select Service", content: <Step1 /> },
-  { label: "Home Type", content: <Step2 /> },
-  { label: "Home Value", content: <Step3 /> },
-  { label: "Goal", content: <Step4 /> },
+  { label: "Step 1", description: "Select Service", content: <Step1 /> },
+  { label: "Step 2", description: "Home Type", content: <Step2 /> },
+  { label: "Step 3", description: "Home Value", content: <Step3 /> },
+  { label: "Step 4", description: "Goal", content: <Step4 /> },
 ];
 
 const INITIAL_VALUES = {
@@ -31,6 +33,8 @@ export const ReactHookFormExample = () => {
     initialStep: 0,
   });
 
+  const [variant] = useVariantContext();
+
   const methods = useForm<FormValues>({
     resolver: yupResolver(schemaArr[activeStep]),
     defaultValues: INITIAL_VALUES,
@@ -45,17 +49,19 @@ export const ReactHookFormExample = () => {
     nextStep();
   };
 
+  const bg = useCardBg();
+
   const handleReset = () => {
     reset();
     methods.reset();
   };
 
   return (
-    <>
+    <Box sx={{ mt: 16 }}>
       <FormProvider {...methods}>
-        <Steps activeStep={activeStep} colorScheme="blue" size="sm">
-          {steps.map(({ label, content }) => (
-            <Step label={label} key={label}>
+        <Steps variant={variant} activeStep={activeStep} colorScheme="blue">
+          {steps.map(({ label, content, description }) => (
+            <Step label={label} key={label} description={description}>
               {content}
             </Step>
           ))}
@@ -89,9 +95,9 @@ export const ReactHookFormExample = () => {
           </Button>
         </Flex>
       )}
-      <Box as="pre" bg="gray.700" rounded="md" width="100%" p={4} mt={8}>
+      <Box as="pre" bg={bg} rounded="md" width="100%" p={4} mt={8}>
         <code>{JSON.stringify(methods.watch(), null, 2)}</code>
       </Box>
-    </>
+    </Box>
   );
 };
