@@ -1,3 +1,43 @@
+# [chakra-ui-steps-v2.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.9.0...chakra-ui-steps-v2.0.0) (2023-01-08)
+
+
+### Features
+
+* website ([#103](https://github.com/jeanverster/chakra-ui-steps/issues/103)) ([05e1efd](https://github.com/jeanverster/chakra-ui-steps/commit/05e1efd31e11299cc081282be66a9159c85cc790))
+
+
+### BREAKING CHANGES
+
+* rename StepsStyleConfig to StepsTheme
+
+chore: add trackColor to docs
+
+* chore: consolidate imports
+
+* feat: update to react 18
+
+* chore: remove deprecated StylesProvider
+
+* feat: website updates
+
+* feat: mobile nav & more updates
+
+* chore: add uncommitted changes
+
+* chore: cleanup default styles
+
+feat: website updates
+
+* feat: add contributing.md
+
+* feat: website improvements
+
+fix: make vertical steps clickable
+
+* chore: fix types
+
+* chore: add more tests
+
 # [chakra-ui-steps-v1.9.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.8.0...chakra-ui-steps-v1.9.0) (2022-11-22)
 
 
