@@ -23,10 +23,11 @@ interface StepOptions {
   onClickStep?: (step: number) => void;
   trackColor?: string;
   isMobileBreakpointValue?: Partial<Record<string, boolean>> | boolean[];
+  variant?: 'circles' | 'circles-alt' | 'simple';
 }
 export interface StepsProps
   extends Omit<HTMLChakraProps<'div'>, 'onChange'>,
-    ThemingProps<'Steps'>,
+    Omit<ThemingProps<'Steps'>, 'variant'>,
     StepOptions {
   children?: React.ReactNode;
 }

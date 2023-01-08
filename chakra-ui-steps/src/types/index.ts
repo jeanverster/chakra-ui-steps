@@ -10,4 +10,5 @@ export type StepSharedProps = {
   isError?: boolean;
   isKeepError?: boolean;
   state?: 'loading' | 'error';
+  checkIcon?: React.ComponentType<any> | undefined;
 };
