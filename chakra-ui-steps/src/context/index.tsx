@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { StepsProps } from '../components/Steps';
 
-interface StepsContextValue extends StepsProps {
-  stepContainerWidths?: number[];
+export interface StepsContextValue extends StepsProps {
   clickable?: boolean;
   isError?: boolean;
   isLoading?: boolean;
   isVertical?: boolean;
-  isLabelVertical?: boolean;
-  widths?: number[];
-  setWidths?: React.Dispatch<React.SetStateAction<number[]>>;
   stepCount?: number;
+  trackColor?: string;
 }
 
 const StepsContext = React.createContext<StepsContextValue>({
@@ -19,29 +16,24 @@ const StepsContext = React.createContext<StepsContextValue>({
 
 export const useStepsContext = () => React.useContext(StepsContext);
 
-export const StepsProvider: React.FC<{ value: StepsContextValue }> = ({
+type StepsContextProviderProps = {
+  value: StepsContextValue;
+  children: React.ReactNode;
+};
+
+export const StepsProvider = ({
   value,
   children,
-}) => {
-  const [widths, setWidths] = React.useState<number[]>([]);
-
+}: StepsContextProviderProps) => {
   const isError = value.state === 'error';
   const isLoading = value.state === 'loading';
-
-  const isVertical = value.orientation === 'vertical';
-  const isLabelVertical =
-    value.orientation !== 'vertical' && value.labelOrientation === 'vertical';
 
   return (
     <StepsContext.Provider
       value={{
         ...value,
-        widths,
-        setWidths,
         isError,
         isLoading,
-        isVertical,
-        isLabelVertical,
       }}
     >
       {children}

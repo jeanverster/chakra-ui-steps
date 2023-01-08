@@ -40,7 +40,6 @@ jobs:
         run: |
           yarn
           yarn build
-
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:

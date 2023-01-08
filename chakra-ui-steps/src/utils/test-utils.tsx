@@ -5,7 +5,7 @@ import {
   RenderResult,
 } from '@testing-library/react';
 import * as React from 'react';
-import { StepsStyleConfig } from '../theme';
+import { StepsTheme } from '../theme';
 
 /**
  * @vitest-environment jsdom
@@ -31,7 +31,7 @@ export const render = (
 ): RenderResult => {
   const theme = extendTheme({
     components: {
-      Steps: StepsStyleConfig,
+      Steps: StepsTheme,
     },
   });
 

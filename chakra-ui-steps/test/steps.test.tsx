@@ -40,7 +40,12 @@ describe('<Steps />', () => {
 
   it('should be able to control isCompletedStep for each step', async () => {
     const { container } = render(
-      <Steps colorScheme="green" orientation="vertical" activeStep={1}>
+      <Steps
+        colorScheme="green"
+        orientation="vertical"
+        variant="circles"
+        activeStep={1}
+      >
         <Step isCompletedStep={false} label="Step 1">
           <Flex data-testid="child-1">
             <span>Child 1</span>
@@ -54,5 +59,49 @@ describe('<Steps />', () => {
       </Steps>
     );
     expect(container.querySelectorAll('svg').length).toBe(1);
+  });
+
+  it('should render custom check icon', async () => {
+    const CheckIcon = () => <span>Custom Check Icon</span>;
+
+    const { getByText } = render(
+      <Steps colorScheme="green" variant="circles" activeStep={0}>
+        <Step isCompletedStep={true} label="Step 1" checkIcon={CheckIcon}>
+          <Flex data-testid="child-1">
+            <span>Child 1</span>
+          </Flex>
+        </Step>
+      </Steps>
+    );
+    expect(getByText('Custom Check Icon')).toBeTruthy();
+  });
+
+  it('should render custom icon for each step', async () => {
+    const CustomIconOne = () => <span>CiOne</span>;
+    const CustomIconTwo = () => <span>CiTwo</span>;
+    const CustomIconThree = () => <span>CiThree</span>;
+
+    const { getByText } = render(
+      <Steps
+        colorScheme="green"
+        orientation="vertical"
+        variant="circles"
+        activeStep={0}
+      >
+        <Step label="Uno" icon={CustomIconOne}>
+          <Flex data-testid="child-1">Child 1</Flex>
+        </Step>
+        <Step label="Dos" icon={CustomIconTwo}>
+          <Flex data-testid="child-2">Child 2</Flex>
+        </Step>
+        <Step label="Tres" icon={CustomIconThree}>
+          <Flex data-testid="child-3">Child 3</Flex>
+        </Step>
+      </Steps>
+    );
+
+    expect(getByText('CiOne')).toBeTruthy();
+    expect(getByText('CiTwo')).toBeTruthy();
+    expect(getByText('CiThree')).toBeTruthy();
   });
 });

@@ -1,8 +1,9 @@
-import { chakra, Flex, forwardRef, Spinner, useStyles } from '@chakra-ui/react';
+import { chakra, Flex, forwardRef, Spinner } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import { motion } from 'framer-motion';
 import React from 'react';
-import { CheckIcon, CloseIcon } from '../Icons';
+import { CheckIcon, WarningIcon } from '../Icons';
+import { useStepsStyles } from '../Steps';
 
 type IconType = React.ComponentType<any>;
 
@@ -13,13 +14,13 @@ interface StepIconProps {
   isLoading?: boolean;
   isKeepError?: boolean;
   icon?: React.ComponentType<any>;
-  index: number;
+  index?: number;
   checkIcon?: IconType;
   errorIcon?: IconType;
 }
 
 const MotionFlex = motion(Flex);
-const AnimatedCloseIcon = motion(CloseIcon);
+const AnimatedWarningIcon = motion(WarningIcon);
 const AnimatedSpan = motion(chakra.span);
 
 const animationConfig = {
@@ -32,7 +33,7 @@ const animationConfig = {
 };
 
 export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
-  const { icon, iconLabel, label } = useStyles();
+  const { icon, iconLabel, label } = useStepsStyles();
 
   const {
     isCompletedStep,
@@ -58,7 +59,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     () => (CustomIcon ? CustomIcon : null),
     [CustomIcon]
   );
-  
+
   const ErrorIcon = React.useMemo(
     () => (CustomErrorIcon ? CustomErrorIcon : null),
     [CustomErrorIcon]
@@ -73,7 +74,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     if (isCompletedStep) {
       if (isError && isKeepError) {
         return (
-          <AnimatedCloseIcon
+          <AnimatedWarningIcon
             key="icon"
             color="white"
             {...animationConfig}
@@ -95,15 +96,16 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
           </MotionFlex>
         );
       }
-      if (isError)
+      if (isError) {
         return (
-          <AnimatedCloseIcon
-            key="icon"
+          <AnimatedWarningIcon
             color="white"
+            key="icon"
             {...animationConfig}
             style={icon}
           />
         );
+      }
       if (isLoading)
         return (
           <Spinner

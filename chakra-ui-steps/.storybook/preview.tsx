@@ -12,7 +12,7 @@ import { StoryContext } from '@storybook/react';
 import React, { Dispatch, SetStateAction } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { withPerformance } from 'storybook-addon-performance';
-import { StepsStyleConfig } from '../src/theme';
+import { StepsTheme } from '../src/theme';
 
 enum Sizes {
   sm = 'sm',
@@ -20,13 +20,30 @@ enum Sizes {
   lg = 'lg',
 }
 
+enum Orientation {
+  horizontal = 'horizontal',
+  vertical = 'vertical',
+}
+
+enum Variants {
+  circles = 'circles',
+  circlesAlt = 'circles-alt',
+  simple = 'simple',
+}
+
 type ConfigContextType = {
   size: Sizes;
   setSize: Dispatch<SetStateAction<Sizes>>;
+  variant: Variants;
+  setVariant: Dispatch<SetStateAction<Variants>>;
+  orientation: Orientation;
+  setOrientation: Dispatch<SetStateAction<Orientation>>;
 };
 
 const ConfigContext = React.createContext<Partial<ConfigContextType>>({
   size: Sizes.md,
+  orientation: Orientation.horizontal,
+  variant: Variants.circles,
 });
 
 export const useConfigContext = () => React.useContext(ConfigContext);
@@ -37,14 +54,39 @@ const ToggleBar = () => {
   const nextMode = useColorModeValue('dark', 'light');
   const bg = useColorModeValue('gray.200', 'gray.700');
   const activeBg = useColorModeValue('teal.300', 'teal.600');
-  const { size, setSize } = useConfigContext();
+  const { size, setSize, variant, setVariant, setOrientation, orientation } =
+    useConfigContext();
 
   return (
-    <Flex justify="flex-end" mb={4}>
-      <ButtonGroup mr={4} isAttached>
+    <Flex justify="flex-end" mb={8} gap={4}>
+      <ButtonGroup size="sm" isAttached>
+        {Object.values(Orientation).map((val) => (
+          <Button
+            key={val}
+            size="xs"
+            onClick={() => setOrientation?.(val)}
+            bg={val === orientation ? activeBg : bg}
+          >
+            {val}
+          </Button>
+        ))}
+      </ButtonGroup>
+      <ButtonGroup isAttached>
+        {Object.values(Variants).map((val) => (
+          <Button
+            size="xs"
+            key={val}
+            onClick={() => setVariant?.(val)}
+            bg={variant === val ? activeBg : bg}
+          >
+            {val}
+          </Button>
+        ))}
+      </ButtonGroup>
+      <ButtonGroup isAttached>
         {Object.values(Sizes).map((val) => (
           <Button
-            size="sm"
+            size="xs"
             key={val}
             onClick={() => setSize?.(val)}
             bg={size === val ? activeBg : bg}
@@ -69,8 +111,21 @@ const ToggleBar = () => {
 
 const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   const [size, setSize] = React.useState<Sizes>(Sizes.md);
+  const [variant, setVariant] = React.useState<Variants>(Variants.circlesAlt);
+  const [orientation, setOrientation] = React.useState<Orientation>(
+    Orientation.horizontal
+  );
   return (
-    <ConfigContext.Provider value={{ size, setSize }}>
+    <ConfigContext.Provider
+      value={{
+        size,
+        setSize,
+        variant,
+        setVariant,
+        orientation,
+        setOrientation,
+      }}
+    >
       {children}
     </ConfigContext.Provider>
   );
@@ -79,7 +134,7 @@ const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
 const withChakra = (StoryFn: Function, context: StoryContext) => {
   const theme = context?.args?.theme
     ? context?.args.theme
-    : extendTheme({ components: { Steps: StepsStyleConfig } });
+    : extendTheme({ components: { Steps: StepsTheme } });
   return (
     <ChakraProvider theme={theme}>
       <ConfigProvider>

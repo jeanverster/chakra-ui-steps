@@ -1,5 +1,5 @@
 {
-  "name": "chakra-ui-steps",
+  "name": "cui-steps",
   "author": "Jean Verster",
   "private": true,
   "version": "0.1.0",
@@ -10,5 +10,11 @@
   "workspaces": [
     "chakra-ui-steps",
     "website"
-  ]
+  ],
+  "dependencies": {
+    "@chakra-ui/react": "^2.4.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "framer-motion": "^7.6.7"
+  }
 }
