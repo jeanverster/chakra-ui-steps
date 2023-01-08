@@ -16,7 +16,7 @@
 
 ## Features
 
-- Multiple orientations
+- Multiple variants
 - Easily render step content
 - Custom icons
 - Size variants
@@ -119,6 +119,19 @@ export const StepsExample = () => {
   );
 };
 ```
+
+### Upgrade guide
+
+If you are upgrading to v2 of this component you will need to make the following changes:
+
+- `StepsStyleConfig` has been renamed to `StepsTheme` - so you will need to update the reference to this in your theme config:
+
+```diff
+- import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
++ import { StepsTheme as Steps } from 'chakra-ui-steps';
+```
+
+The rest of the API remains the same.
 
 ### Custom Styles
 
