@@ -146,6 +146,32 @@ export const Horizontal = () => {
   );
 };
 
+export const NoLabels = () => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const config = useConfigContext();
+  return (
+    <>
+      <Steps {...config} activeStep={activeStep}>
+        {steps.map(({ label }, index) => (
+          <Step key={label}>
+            <Content my={3} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
 export const Vertical = () => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,

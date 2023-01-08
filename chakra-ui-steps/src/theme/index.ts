@@ -165,7 +165,7 @@ const variantCircles = definePartsStyle((props) => {
     labelContainer: {
       flexDir: 'column',
       alignItems: 'flex-start',
-      mx: 2,
+      ms: 3,
     },
     step:
       props.orientation === 'horizontal'

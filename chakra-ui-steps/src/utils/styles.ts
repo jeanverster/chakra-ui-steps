@@ -22,7 +22,7 @@ export const getCirclesHorizontalBaseStyles = ({
     flex: 1,
     height: '2px',
     backgroundColor: `${t}`,
-    me: 3,
+    mx: 3,
     transition: 'background-color .2s ease',
   },
   _highlighted: {
