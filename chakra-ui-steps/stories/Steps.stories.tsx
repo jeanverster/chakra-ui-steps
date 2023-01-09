@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   extendTheme,
   Flex,
@@ -505,5 +506,35 @@ export const ClickableSteps: Story = (): JSX.Element => {
         />
       )}
     </>
+  );
+};
+
+export const RTL = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const config = useConfigContext();
+  return (
+    <Box
+      sx={{
+        direction: 'rtl',
+      }}
+    >
+      <Steps {...config} checkIcon={FiCheckCircle} activeStep={activeStep}>
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label}>
+            <Content my={3} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </Box>
   );
 };

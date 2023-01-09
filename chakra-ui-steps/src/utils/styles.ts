@@ -52,8 +52,8 @@ export const getCirclesAlternateBaseStyles = ({
     content: '""',
     backgroundColor: trackColor || inactiveColor,
     height: '2px',
-    left: `50%`,
     order: -1,
+    'inset-inline-start': '50%',
     position: 'relative',
     top: `calc(${stepHeight} / 2)`,
     transition: 'background-color .2s ease',
@@ -86,10 +86,9 @@ export const getCirclesVerticalBaseStyles = ({
     content: '""',
     backgroundColor: trackColor,
     bottom: 'var(--gap)',
-    left: 0,
+    'inset-inline-start': 'calc(var(--size) / 2)',
     position: 'absolute',
     top: 'calc(var(--size) + var(--gap))',
-    transform: `translateX(calc(var(--size) / 2))`,
     width: '2px',
   },
   _hover: {
@@ -117,6 +116,10 @@ export const getCirclesStepIconContainerBaseStyles = ({
   _highlighted: {
     bg: activeColor,
     borderColor: activeColor,
+    _invalid: {
+      bg: 'red.500',
+      borderColor: 'red.500',
+    },
   },
   '&[data-clickable]:hover': {
     borderColor: activeColor,

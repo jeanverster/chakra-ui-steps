@@ -12,8 +12,14 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
   (props, ref) => {
     const { step, stepContainer } = useStepsStyles();
 
-    const { isError, isLoading, onClickStep, variant, clickable } =
-      useStepsContext();
+    const {
+      isError,
+      isLoading,
+      onClickStep,
+      variant,
+      clickable,
+      checkIcon: checkIconContext,
+    } = useStepsContext();
 
     const {
       index,
@@ -25,7 +31,7 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
       description,
       isKeepError,
       state,
-      checkIcon,
+      checkIcon: checkIconProp,
     } = props;
 
     const localIsLoading = isLoading || state === 'loading';
@@ -35,6 +41,8 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
 
     const highlighted =
       variant === 'simple' ? isCompletedStep || isCurrentStep : isCompletedStep;
+
+    const checkIcon = checkIconProp || checkIconContext;
 
     return (
       <chakra.div
@@ -51,7 +59,9 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
           className="cui-steps__horizontal-step-container"
           __css={stepContainer}
         >
-          <StepIconContainer {...{ isError: localIsError, ...props }}>
+          <StepIconContainer
+            {...{ ...props, isError: localIsError, isLoading: localIsLoading }}
+          >
             <StepIcon
               {...{
                 index,

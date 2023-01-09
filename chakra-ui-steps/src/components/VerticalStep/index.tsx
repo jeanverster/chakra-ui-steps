@@ -23,17 +23,28 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
       description,
       icon,
       hasVisited,
+      state,
+      checkIcon: checkIconProp,
     } = props;
 
-    const { checkIcon, isError, isLoading, variant, onClickStep, clickable } =
-      useStepsContext();
+    const {
+      checkIcon: checkIconContext,
+      isError,
+      isLoading,
+      variant,
+      onClickStep,
+      clickable,
+    } = useStepsContext();
 
     const { step, stepIconContainer } = useStepsStyles();
 
     const opacity = hasVisited ? 1 : 0.8;
+    const localIsLoading = isLoading || state === 'loading';
+    const localIsError = isError || state === 'error';
 
     const highlighted =
       variant === 'simple' ? isCompletedStep || isCurrentStep : isCompletedStep;
+    const checkIcon = checkIconProp || checkIconContext;
 
     return (
       <chakra.div
@@ -41,16 +52,19 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
         className="cui-steps__vertical-step"
         data-highlighted={dataAttr(highlighted)}
         data-clickable={dataAttr(clickable)}
+        data-invalid={dataAttr(localIsError)}
         onClick={() => onClickStep?.(index || 0)}
         __css={step}
       >
         <Flex className="cui-steps__vertical-step-container">
-          <StepIconContainer {...props}>
+          <StepIconContainer
+            {...{ isLoading: localIsLoading, isError: localIsError, ...props }}
+          >
             <StepIcon
               {...{
                 index,
-                isError,
-                isLoading,
+                isError: localIsError,
+                isLoading: localIsLoading,
                 isCurrentStep,
                 isCompletedStep,
               }}
@@ -66,7 +80,7 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
         </Flex>
         <chakra.div
           className="cui-steps__vertical-step-content"
-          __css={{ minH: '8px', pl: `calc(${stepIconContainer.width})` }}
+          __css={{ minH: '8px', ps: `calc(${stepIconContainer.width})` }}
         >
           <Collapse style={{ width: '100%' }} in={isCurrentStep}>
             {(isCurrentStep || isCompletedStep) && children}

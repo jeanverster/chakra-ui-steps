@@ -14,18 +14,22 @@ export const StepIconContainer = ({
   isCompletedStep,
   children,
   isError,
+  isLoading: isLoadingProp,
 }: StepIconContainerProps) => {
   const { stepIconContainer } = useStepsStyles();
-  const { clickable, isLoading } = useStepsContext();
+  const { clickable, isLoading: isLoadingContext } = useStepsContext();
+
+  const isLoading = isLoadingProp || isLoadingContext;
+
   return (
     <chakra.div
       __css={stepIconContainer}
       className="cui-steps__step-icon-container"
       aria-current={isCurrentStep ? 'step' : undefined}
-      data-invalid={dataAttr(isError)}
+      data-invalid={dataAttr(isError && (isCurrentStep || isCompletedStep))}
       data-highlighted={dataAttr(isCompletedStep)}
       data-clickable={dataAttr(clickable)}
-      data-loading={dataAttr(isCurrentStep && isLoading)}
+      data-loading={dataAttr(isLoading && (isCurrentStep || isCompletedStep))}
     >
       <AnimatePresence mode="wait">{children}</AnimatePresence>
     </chakra.div>

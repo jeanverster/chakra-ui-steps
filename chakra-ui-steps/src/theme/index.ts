@@ -210,18 +210,31 @@ const variantSimple = definePartsStyle((props) => {
   const isVertical = props.orientation === 'vertical';
   return {
     stepIconContainer: {
-      display: 'none',
+      opacity: 0,
+      pointerEvents: 'none',
+      borderWidth: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      _loading: {
+        opacity: 1,
+        pointerEvents: 'auto',
+      },
+      _invalid: {
+        opacity: 1,
+        pointerEvents: 'auto',
+      },
     },
     stepContainer: {
       flex: 1,
       py: 2,
-      flexDir: 'row',
+      flexDir: 'row-reverse',
       alignItems: 'center',
+      justifyContent: 'space-between',
     },
     label: {
       mx: 0,
       fontWeight: 'bold',
-      mt: isVertical ? 0 : 2,
     },
     labelContainer: {
       flexDir: 'column',
@@ -243,25 +256,40 @@ const variantSimple = definePartsStyle((props) => {
         display: 'none',
       },
       transition: 'border-color .2s ease',
+      _activeStep: {
+        _invalid: {
+          borderColor: 'red.500',
+          '& .cui-steps__vertical-step-container': {
+            borderColor: 'red.500',
+          },
+        },
+      },
       _highlighted: {
         transition: 'border-color .2s ease',
         borderColor: activeColor,
         '& .cui-steps__vertical-step-container': {
           borderColor: activeColor,
         },
-      },
-      _invalid: {
-        borderColor: 'red.500',
-        '& .cui-steps__vertical-step-container': {
+        _invalid: {
           borderColor: 'red.500',
+          '& .cui-steps__vertical-step-container': {
+            borderColor: 'red.500',
+          },
         },
       },
       '& .cui-steps__vertical-step-container': {
-        borderLeftWidth: 3,
+        borderInlineStartWidth: 3,
         py: 2,
         ps: 3,
         display: 'flex',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
+        flexDirection: 'row-reverse',
+        _invalid: {
+          borderColor: 'red.500',
+          '& .cui-steps__vertical-step-container': {
+            borderColor: 'red.500',
+          },
+        },
       },
       '& .cui-steps__vertical-step-content': {
         ps: 0,

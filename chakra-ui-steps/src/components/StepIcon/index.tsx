@@ -74,12 +74,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     if (isCompletedStep) {
       if (isError && isKeepError) {
         return (
-          <AnimatedWarningIcon
-            key="icon"
-            color="white"
-            {...animationConfig}
-            style={icon}
-          />
+          <AnimatedWarningIcon key="icon" {...animationConfig} style={icon} />
         );
       }
       return (
@@ -98,12 +93,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
       }
       if (isError) {
         return (
-          <AnimatedWarningIcon
-            color="white"
-            key="icon"
-            {...animationConfig}
-            style={icon}
-          />
+          <AnimatedWarningIcon key="icon" {...animationConfig} style={icon} />
         );
       }
       if (isLoading)
