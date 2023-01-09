@@ -1,15 +1,18 @@
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system';
 import {
   anatomy,
-  darken,
-  lighten,
   mode,
-  PartsStyleFunction,
   SystemStyleFunction,
   SystemStyleObject,
 } from '@chakra-ui/theme-tools';
+import {
+  getCirclesAlternateBaseStyles,
+  getCirclesHorizontalBaseStyles,
+  getCirclesStepIconContainerBaseStyles,
+  getCirclesVerticalBaseStyles,
+} from '../utils/styles';
 
 const parts = anatomy('steps').parts(
-  'connector',
   'description',
   'icon',
   'iconLabel',
@@ -18,8 +21,11 @@ const parts = anatomy('steps').parts(
   'step',
   'stepContainer',
   'stepIconContainer',
-  'steps'
+  'root'
 );
+
+export const { defineMultiStyleConfig, definePartsStyle } =
+  createMultiStyleConfigHelpers(parts.keys);
 
 const baseStyleIcon: SystemStyleObject = {
   strokeWidth: '2px',
@@ -27,98 +33,60 @@ const baseStyleIcon: SystemStyleObject = {
 
 const baseStyleLabel: SystemStyleFunction = (props) => ({
   color: mode(`gray.900`, `gray.100`)(props),
-  fontWeight: 'medium',
   textAlign: 'center',
   fontSize: 'md',
+  fontWeight: 'bold',
 });
 
 const baseStyleDescription: SystemStyleFunction = (props) => ({
   color: mode(`gray.800`, `gray.200`)(props),
-  marginTop: '-2px',
+  mt: '-2px',
   textAlign: 'center',
   fontSize: 'sm',
 });
 
-const baseStyleConnector: SystemStyleFunction = (props) => {
-  const { colorScheme: c } = props;
-  const inactiveColor = mode('gray.200', 'gray.700')(props);
-  const activeColor = mode(`${c}.500`, `${c}.200`)(props);
+const baseStyleRoot: SystemStyleFunction = ({ stepCount, orientation }) => ({
+  justifyContent: stepCount === 1 ? 'flex-end' : 'space-between',
+  flexDir: orientation === 'vertical' ? 'column' : 'row',
+  fontFamily: 'heading',
+  textAlign: 'center',
+  width: '100%',
+  display: 'flex',
+  flex: 1,
+  flexWrap: 'wrap',
+});
 
-  return {
-    flex: 1,
-    display: 'flex',
-    borderColor: inactiveColor,
-    transitionProperty: 'border-color',
-    transitionDuration: 'normal',
-    _highlighted: {
-      borderColor: activeColor,
-    },
-  };
+const baseStyleStepContainer: SystemStyleFunction = () => ({
+  display: 'flex',
+  alignItems: 'center',
+});
+
+const baseStyleStep = {
+  display: 'flex',
+  position: 'relative',
 };
 
-const baseStyleStepIconContainer: SystemStyleFunction = (props) => {
-  const { colorScheme: c } = props;
-  const inactiveColor = mode('gray.200', 'gray.700')(props);
-  const activeColor = `${c}.500`;
-
+const baseStyleLabelContainer: SystemStyleFunction = () => {
   return {
     display: 'flex',
-    borderRadius: '50%',
-    alignItems: 'center',
+    flexDir: 'column',
     justifyContent: 'center',
-    bg: inactiveColor,
-    borderColor: inactiveColor,
-    transitionProperty: 'background, border-color',
-    transitionDuration: 'normal',
-    _activeStep: {
-      bg: mode(darken(inactiveColor, 0.5), lighten(inactiveColor, 0.5))(props),
-      borderColor: activeColor,
-      _invalid: {
-        bg: 'red.500',
-        borderColor: 'red.500',
-      },
-    },
-    _highlighted: {
-      bg: activeColor,
-      borderColor: activeColor,
-    },
-    '&[data-clickable]:hover': {
-      borderColor: activeColor,
-    },
   };
 };
 
-const baseStyle: PartsStyleFunction<typeof parts> = (props) => ({
-  connector: baseStyleConnector(props),
+const baseStyle = definePartsStyle((props) => ({
   description: baseStyleDescription(props),
   icon: baseStyleIcon,
   iconLabel: baseStyleLabel(props),
   label: baseStyleLabel(props),
-  labelContainer: {
-    display: 'flex',
-    flexDir: 'column',
-    justifyContent: 'center',
-  },
-  step: {
-    display: 'flex',
-    position: 'relative',
-  },
-  stepContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  stepIconContainer: baseStyleStepIconContainer(props),
-  steps: {
-    fontFamily: 'heading',
-    textAlign: 'center',
-    width: '100%',
-    display: 'flex',
-    flex: 1,
-  },
-});
+  labelContainer: baseStyleLabelContainer(props),
+  step: baseStyleStep,
+  stepContainer: baseStyleStepContainer(props),
+  root: baseStyleRoot(props),
+}));
 
 const sizes = {
-  sm: {
+  sm: definePartsStyle({
     stepIconContainer: {
       width: '32px',
       height: '32px',
@@ -138,8 +106,8 @@ const sizes = {
       textAlign: 'center',
       fontSize: 'xs',
     },
-  },
-  md: {
+  }),
+  md: definePartsStyle({
     stepIconContainer: {
       width: '40px',
       height: '40px',
@@ -159,8 +127,8 @@ const sizes = {
       textAlign: 'center',
       fontSize: 'sm',
     },
-  },
-  lg: {
+  }),
+  lg: definePartsStyle({
     stepIconContainer: {
       width: '48px',
       height: '48px',
@@ -180,17 +148,177 @@ const sizes = {
       textAlign: 'center',
       fontSize: 'md',
     },
-  },
+  }),
 };
 
-const defaultProps = {
-  size: 'md',
-  colorScheme: 'green',
+const variantCircles = definePartsStyle((props) => {
+  const { colorScheme: c } = props;
+  const inactiveColor = mode('gray.200', 'gray.700')(props);
+  const activeColor = `${c}.500`;
+  // @ts-ignore
+  const stepHeight = sizes[props.size].stepIconContainer.height;
+  return {
+    stepIconContainer: getCirclesStepIconContainerBaseStyles({
+      inactiveColor,
+      activeColor,
+    }),
+    labelContainer: {
+      flexDir: 'column',
+      alignItems: 'flex-start',
+      ms: 3,
+    },
+    step:
+      props.orientation === 'horizontal'
+        ? getCirclesHorizontalBaseStyles({ ...props, stepHeight })
+        : getCirclesVerticalBaseStyles({ ...props, stepHeight }),
+  };
+});
+
+const variantCirclesAlt = definePartsStyle((props) => {
+  const { colorScheme: c } = props;
+  const inactiveColor = mode('gray.200', 'gray.700')(props);
+  const activeColor = `${c}.500`;
+  // @ts-ignore
+  const stepHeight = sizes[props.size].stepIconContainer.height;
+  return {
+    stepIconContainer: {
+      ...getCirclesStepIconContainerBaseStyles({
+        inactiveColor,
+        activeColor,
+      }),
+      flexDir: 'column',
+    },
+    stepContainer: {
+      flexDir: 'column',
+    },
+    labelContainer: {
+      flexDir: 'column',
+      alignItems: props.orientation === 'horizontal' ? 'center' : 'flex-start',
+      ms: props.orientation === 'horizontal' ? 0 : 3,
+    },
+    step:
+      props.orientation === 'horizontal'
+        ? getCirclesAlternateBaseStyles({ ...props, stepHeight })
+        : getCirclesVerticalBaseStyles({ ...props, stepHeight }),
+  };
+});
+
+const variantSimple = definePartsStyle((props) => {
+  const { colorScheme: c } = props;
+  const inactiveColor = mode('gray.200', 'gray.700')(props);
+  const activeColor = `${c}.500`;
+  const isVertical = props.orientation === 'vertical';
+  return {
+    stepIconContainer: {
+      opacity: 0,
+      pointerEvents: 'none',
+      borderWidth: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      _loading: {
+        opacity: 1,
+        pointerEvents: 'auto',
+      },
+      _invalid: {
+        opacity: 1,
+        pointerEvents: 'auto',
+      },
+    },
+    stepContainer: {
+      flex: 1,
+      py: 2,
+      flexDir: 'row-reverse',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    label: {
+      mx: 0,
+      fontWeight: 'bold',
+    },
+    labelContainer: {
+      flexDir: 'column',
+      alignItems: 'flex-start',
+    },
+    description: {
+      mx: 0,
+    },
+    root: {
+      gap: 4,
+    },
+    step: {
+      flexDir: 'column',
+      position: 'relative',
+      flex: 1,
+      borderTopWidth: isVertical ? 0 : 3,
+      borderColor: props?.trackColor || inactiveColor,
+      '&:not(:last-child):after': {
+        display: 'none',
+      },
+      transition: 'border-color .2s ease',
+      _activeStep: {
+        _invalid: {
+          borderColor: 'red.500',
+          '& .cui-steps__vertical-step-container': {
+            borderColor: 'red.500',
+          },
+        },
+      },
+      _highlighted: {
+        transition: 'border-color .2s ease',
+        borderColor: activeColor,
+        '& .cui-steps__vertical-step-container': {
+          borderColor: activeColor,
+        },
+        _invalid: {
+          borderColor: 'red.500',
+          '& .cui-steps__vertical-step-container': {
+            borderColor: 'red.500',
+          },
+        },
+      },
+      '& .cui-steps__vertical-step-container': {
+        borderInlineStartWidth: 3,
+        py: 2,
+        ps: 3,
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row-reverse',
+        _invalid: {
+          borderColor: 'red.500',
+          '& .cui-steps__vertical-step-container': {
+            borderColor: 'red.500',
+          },
+        },
+      },
+      '& .cui-steps__vertical-step-content': {
+        ps: 0,
+        py: 0,
+      },
+      '&[data-clickable]:hover': {
+        borderColor: activeColor,
+        cursor: 'pointer',
+        '& .cui-steps__vertical-step-container': {
+          borderColor: activeColor,
+        },
+      },
+    },
+  };
+});
+
+const variants = {
+  circles: variantCircles,
+  'circles-alt': variantCirclesAlt,
+  simple: variantSimple,
 };
 
-export const StepsStyleConfig = {
-  parts: parts.keys,
+export const StepsTheme: any = defineMultiStyleConfig({
   baseStyle,
   sizes,
-  defaultProps,
-};
+  variants,
+  defaultProps: {
+    size: 'md',
+    colorScheme: 'blue',
+    variant: 'circles',
+  },
+});

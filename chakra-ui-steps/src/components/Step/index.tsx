@@ -1,18 +1,8 @@
-import {
-  chakra,
-  forwardRef,
-  HTMLChakraProps,
-  ThemingProps,
-  useStyles,
-} from '@chakra-ui/system';
-import { Collapse } from '@chakra-ui/transition';
-import { dataAttr } from '@chakra-ui/utils';
-import { AnimatePresence } from 'framer-motion';
+import { forwardRef, HTMLChakraProps, ThemingProps } from '@chakra-ui/react';
 import * as React from 'react';
 import { useStepsContext } from '../../context';
-import { Connector } from '../Connector';
-import { StepIcon } from '../StepIcon';
-import { StepLabel } from '../StepLabel';
+import { HorizontalStep } from '../HorizontalStep';
+import { VerticalStep } from '../VerticalStep';
 
 export interface StepProps extends HTMLChakraProps<'li'> {
   label?: string | React.ReactNode;
@@ -48,121 +38,42 @@ export const Step = forwardRef<StepProps, 'li'>(
       isLastStep,
       isKeepError,
       label,
-      ...styleProps
     } = props as FullStepProps;
 
-    const {
-      isVertical,
-      isError,
-      isLoading,
-      isLabelVertical,
-      checkIcon: defaultCheckIcon,
-      onClickStep,
-      clickable,
-      setWidths,
-      stepCount,
-    } = useStepsContext();
-
-    const { step, stepContainer, stepIconContainer } = useStyles();
+    const { isVertical, isError, isLoading, clickable } = useStepsContext();
 
     const hasVisited = isCurrentStep || isCompletedStep;
 
-    const opacity = hasVisited ? 1 : 0.8;
+    const sharedProps = {
+      isLastStep,
+      isCompletedStep,
+      isCurrentStep,
+      index,
+      isError,
+      isLoading,
+      clickable,
+      label,
+      description,
+      hasVisited,
+      icon,
+      isKeepError,
+      checkIcon,
+      state,
+    };
 
-    const handleClick = (index: number) => {
-      if (clickable && onClickStep) {
-        onClickStep(index);
+    const renderStep = () => {
+      switch (isVertical) {
+        case true:
+          return (
+            <VerticalStep ref={ref} {...sharedProps}>
+              {children}
+            </VerticalStep>
+          );
+        default:
+          return <HorizontalStep ref={ref} {...sharedProps} />;
       }
     };
 
-    const containerRef: React.RefCallback<HTMLDivElement> = React.useCallback(
-      (node) => {
-        if (node && setWidths) {
-          setWidths((prev) => {
-            if (prev.length === stepCount) {
-              return [node.offsetWidth || 0];
-            }
-            return [...prev, node.offsetWidth || 0];
-          });
-        }
-      },
-      [stepIconContainer.width, stepIconContainer.height]
-    );
-
-    return (
-      <>
-        <chakra.li
-          ref={ref}
-          onClick={() => handleClick(index)}
-          aria-disabled={!hasVisited}
-          __css={{
-            opacity,
-            flexDir: isVertical ? 'column' : 'row',
-            alignItems: isVertical || isLabelVertical ? 'flex-start' : 'center',
-            flex: isLastStep && !isVertical ? '0 0 auto' : '1 0 auto',
-            justifyContent:
-              isLastStep && !isVertical ? 'flex-end' : 'flex-start',
-            _hover: {
-              cursor: clickable ? 'pointer' : 'default',
-            },
-            ...step,
-          }}
-          {...styleProps}
-        >
-          <chakra.div
-            ref={containerRef}
-            __css={{
-              flexDir: isLabelVertical ? 'column' : 'row',
-              ...stepContainer,
-            }}
-          >
-            <chakra.div
-              __css={stepIconContainer}
-              aria-current={
-                (hasVisited && isKeepError) || isCurrentStep
-                  ? 'step'
-                  : undefined
-              }
-              data-invalid={dataAttr(
-                ((hasVisited && isKeepError) || isCurrentStep) &&
-                  (isError || state === 'error')
-              )}
-              data-highlighted={dataAttr(isCompletedStep)}
-              data-clickable={dataAttr(clickable)}
-            >
-              <AnimatePresence exitBeforeEnter>
-                <StepIcon
-                  {...{
-                    index,
-                    isError: isError || state === 'error',
-                    isLoading: isLoading || state === 'loading',
-                    isCurrentStep,
-                    isCompletedStep,
-                    isKeepError,
-                  }}
-                  icon={icon}
-                  checkIcon={checkIcon ?? defaultCheckIcon}
-                />
-              </AnimatePresence>
-            </chakra.div>
-            <StepLabel
-              label={label}
-              description={description}
-              {...{ isCurrentStep, opacity }}
-            />
-          </chakra.div>
-          <Connector
-            index={index}
-            isLastStep={isLastStep}
-            hasLabel={!!label || !!description}
-            isCompletedStep={isCompletedStep || false}
-          >
-            <Collapse style={{ width: '100%' }} in={isCurrentStep}>
-              {(isCurrentStep || isCompletedStep) && children}
-            </Collapse>
-          </Connector>
-        </chakra.li>
-      </>
-    );
+    return renderStep();
   }
 );

@@ -10,31 +10,8 @@ module.exports = {
     check: true, // type-check stories during Storybook build
     reactDocgen: 'none',
   },
-  webpackFinal: async (config) => {
-    config.module.rules.push({
-      test: /\.mjs$/,
-      include: /node_modules/,
-      type: 'javascript/auto',
-    });
-    return {
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...config.resolve.alias,
-          '@emotion/core': toPath('../node_modules/@emotion/react'),
-          'emotion-theming': toPath('../node_modules/@emotion/react'),
-        },
-      },
-    };
+  core: {
+    builder: 'webpack5',
+    disableTelemetry: true,
   },
-  babel: async (options) => ({
-    ...options,
-
-    plugins: [
-      '@babel/plugin-proposal-class-properties',
-      '@babel/plugin-proposal-private-methods',
-      '@babel/plugin-proposal-private-property-in-object',
-    ],
-  }),
 };

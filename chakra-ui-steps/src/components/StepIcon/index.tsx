@@ -1,8 +1,11 @@
-import { chakra, Flex, forwardRef, Spinner, useStyles } from '@chakra-ui/react';
+import { chakra, Flex, forwardRef, Spinner } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import { motion } from 'framer-motion';
 import React from 'react';
-import { CheckIcon, CloseIcon } from '../Icons';
+import { CheckIcon, WarningIcon } from '../Icons';
+import { useStepsStyles } from '../Steps';
+
+type IconType = React.ComponentType<any>;
 
 interface StepIconProps {
   isCompletedStep?: boolean;
@@ -11,12 +14,13 @@ interface StepIconProps {
   isLoading?: boolean;
   isKeepError?: boolean;
   icon?: React.ComponentType<any>;
-  index: number;
-  checkIcon?: React.ComponentType<any>;
+  index?: number;
+  checkIcon?: IconType;
+  errorIcon?: IconType;
 }
 
 const MotionFlex = motion(Flex);
-const AnimatedCloseIcon = motion(CloseIcon);
+const AnimatedWarningIcon = motion(WarningIcon);
 const AnimatedSpan = motion(chakra.span);
 
 const animationConfig = {
@@ -29,7 +33,7 @@ const animationConfig = {
 };
 
 export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
-  const { icon, iconLabel, label } = useStyles();
+  const { icon, iconLabel, label } = useStepsStyles();
 
   const {
     isCompletedStep,
@@ -40,6 +44,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     icon: CustomIcon,
     index,
     checkIcon: CustomCheckIcon,
+    errorIcon: CustomErrorIcon,
   } = props;
 
   const labelStyles = {
@@ -55,6 +60,11 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     [CustomIcon]
   );
 
+  const ErrorIcon = React.useMemo(
+    () => (CustomErrorIcon ? CustomErrorIcon : null),
+    [CustomErrorIcon]
+  );
+
   const Check = React.useMemo(
     () => (CustomCheckIcon ? CustomCheckIcon : CheckIcon),
     [CustomCheckIcon]
@@ -64,12 +74,7 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
     if (isCompletedStep) {
       if (isError && isKeepError) {
         return (
-          <AnimatedCloseIcon
-            key="icon"
-            color="white"
-            {...animationConfig}
-            style={icon}
-          />
+          <AnimatedWarningIcon key="icon" {...animationConfig} style={icon} />
         );
       }
       return (
@@ -79,15 +84,18 @@ export const StepIcon = forwardRef<StepIconProps, 'div'>((props, ref) => {
       );
     }
     if (isCurrentStep) {
-      if (isError)
+      if (isError && ErrorIcon) {
         return (
-          <AnimatedCloseIcon
-            key="icon"
-            color="white"
-            {...animationConfig}
-            style={icon}
-          />
+          <MotionFlex key="error-icon" {...animationConfig}>
+            <ErrorIcon color="white" style={icon} />
+          </MotionFlex>
         );
+      }
+      if (isError) {
+        return (
+          <AnimatedWarningIcon key="icon" {...animationConfig} style={icon} />
+        );
+      }
       if (isLoading)
         return (
           <Spinner
