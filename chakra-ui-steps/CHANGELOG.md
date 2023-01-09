@@ -1,3 +1,47 @@
+# [chakra-ui-steps-v3.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.1...chakra-ui-steps-v3.0.0) (2023-01-09)
+
+
+* Release 2.0.1 (#104) ([972d53b](https://github.com/jeanverster/chakra-ui-steps/commit/972d53b2726f17e289366a61e27b63f18c79e8dd)), closes [#104](https://github.com/jeanverster/chakra-ui-steps/issues/104) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#71](https://github.com/jeanverster/chakra-ui-steps/issues/71) [#75](https://github.com/jeanverster/chakra-ui-steps/issues/75) [#62](https://github.com/jeanverster/chakra-ui-steps/issues/62) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#54](https://github.com/jeanverster/chakra-ui-steps/issues/54) [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#59](https://github.com/jeanverster/chakra-ui-steps/issues/59) [#60](https://github.com/jeanverster/chakra-ui-steps/issues/60) [#69](https://github.com/jeanverster/chakra-ui-steps/issues/69) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#77](https://github.com/jeanverster/chakra-ui-steps/issues/77) [#62](https://github.com/jeanverster/chakra-ui-steps/issues/62) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#54](https://github.com/jeanverster/chakra-ui-steps/issues/54) [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#59](https://github.com/jeanverster/chakra-ui-steps/issues/59) [#60](https://github.com/jeanverster/chakra-ui-steps/issues/60) [#69](https://github.com/jeanverster/chakra-ui-steps/issues/69) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#62](https://github.com/jeanverster/chakra-ui-steps/issues/62) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#54](https://github.com/jeanverster/chakra-ui-steps/issues/54) [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#49](https://github.com/jeanverster/chakra-ui-steps/issues/49) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#48](https://github.com/jeanverster/chakra-ui-steps/issues/48) [#59](https://github.com/jeanverster/chakra-ui-steps/issues/59) [#60](https://github.com/jeanverster/chakra-ui-steps/issues/60) [#69](https://github.com/jeanverster/chakra-ui-steps/issues/69) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#68](https://github.com/jeanverster/chakra-ui-steps/issues/68) [#82](https://github.com/jeanverster/chakra-ui-steps/issues/82) [#78](https://github.com/jeanverster/chakra-ui-steps/issues/78) [#78](https://github.com/jeanverster/chakra-ui-steps/issues/78) [#93](https://github.com/jeanverster/chakra-ui-steps/issues/93) [#93](https://github.com/jeanverster/chakra-ui-steps/issues/93) [#103](https://github.com/jeanverster/chakra-ui-steps/issues/103) [#103](https://github.com/jeanverster/chakra-ui-steps/issues/103)
+
+
+### BREAKING CHANGES
+
+* rename StepsStyleConfig to StepsTheme
+
+chore: add trackColor to docs
+
+* chore: consolidate imports
+
+* feat: update to react 18
+
+* chore: remove deprecated StylesProvider
+
+* feat: website updates
+
+* feat: mobile nav & more updates
+
+* chore: add uncommitted changes
+
+* chore: cleanup default styles
+
+feat: website updates
+
+* feat: add contributing.md
+
+* feat: website improvements
+
+fix: make vertical steps clickable
+
+* chore: fix types
+
+* chore: add more tests
+
+* chore(release): 2.0.0 [skip ci]
+
+# [chakra-ui-steps-v2.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.9.0...chakra-ui-steps-v2.0.0) (2023-01-08)
+
+### Features
+
 # [chakra-ui-steps-v2.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.9.0...chakra-ui-steps-v2.0.0) (2023-01-08)
 
 ### Features
