@@ -120,6 +120,19 @@ export const StepsExample = () => {
 };
 ```
 
+### Upgrade guide
+
+If you are upgrading to v2 of this component you will need to make the following changes:
+
+- `StepsStyleConfig` has been renamed to `StepsTheme` - so you will need to update the reference to this in your theme config:
+
+```diff
+- import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
++ import { StepsTheme as Steps } from 'chakra-ui-steps';
+```
+
+The rest of the API remains the same.
+
 ### Custom Styles
 
 If you would like to customize the appearance of the Steps component you can do so using the multi part component styling approach as described <a href="https://chakra-ui.com/docs/styled-system/component-style#styling-multipart-components" target="_blank">here</a>. The parts available for styling are:
