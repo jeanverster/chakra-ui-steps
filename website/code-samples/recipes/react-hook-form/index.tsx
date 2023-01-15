@@ -1,10 +1,15 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import { FormProvider, useForm } from "react-hook-form";
 import { GiRocketFlight } from "react-icons/gi";
-import { useCardBg } from "../../hooks/useCardBg";
-import { useVariantContext } from "../../pages/_app";
 import { Step1, Step1Schema } from "./Step1";
 import { Step2, Step2Schema } from "./Step2";
 import { Step3, Step3Schema } from "./Step3";
@@ -28,12 +33,31 @@ export type FormValues = typeof INITIAL_VALUES;
 
 const schemaArr = [Step1Schema, Step2Schema, Step3Schema, Step4Schema];
 
-export const ReactHookFormExample = () => {
+export const ErrorMessage = ({ message }: { message: string }) => {
+  return (
+    <Box
+      sx={{
+        p: 2,
+        rounded: "md",
+        boxShadow: "sm",
+        bg: useColorModeValue("gray.50", "gray.800"),
+      }}
+    >
+      <Text fontSize="md" color="red.500" fontWeight={"bold"}>
+        {message}
+      </Text>
+    </Box>
+  );
+};
+
+export const ReactHookFormExample = ({
+  variant,
+}: {
+  variant: "circles" | "circles-alt" | "simple" | undefined;
+}) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-
-  const [variant] = useVariantContext();
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(schemaArr[activeStep]),
@@ -49,7 +73,7 @@ export const ReactHookFormExample = () => {
     nextStep();
   };
 
-  const bg = useCardBg();
+  const bg = useColorModeValue("gray.50", "gray.800");
 
   const handleReset = () => {
     reset();

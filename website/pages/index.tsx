@@ -76,10 +76,10 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippets }) => {
   const bg = useCardBg();
 
   const extendThemeSnippet = snippets.find(
-    (snippet) => snippet.fileName === "ExtendThemeSnippet.tsx"
+    (snippet) => snippet.filename === "ExtendThemeSnippet.tsx"
   );
   // const basicExample = examples.find(
-  //   (example) => example.fileName === "BasicExample.tsx"
+  //   (example) => example.filename === "BasicExample.tsx"
   // );
 
   return (
@@ -157,13 +157,13 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippets }) => {
         {basicExample && (
           <LazyRender rootMargin="100px">
             <DynamicSectionWrap
-              title={replaceExtension(".tsx", basicExample.fileName)}
+              title={replaceExtension(".tsx", basicExample.filename)}
               description="A basic example of how to use the Steps component."
               preview={<BasicExample variant={variant} />}
               code={[
                 {
                   language: "tsx",
-                  filename: basicExample?.fileName,
+                  filename: basicExample?.filename,
                   code: basicExample?.code,
                 },
               ]}

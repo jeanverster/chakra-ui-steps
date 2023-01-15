@@ -11,13 +11,8 @@ import * as reactIconsRI from "react-icons/ri";
 
 const EXAMPLES_PATH = path.join(process.cwd(), "code-samples/examples");
 const SNIPPETS_PATH = path.join(process.cwd(), "code-samples/snippets");
+const RECIPES_PATH = path.join(process.cwd(), "code-samples/recipes");
 const DOCS_PATH = path.join(process.cwd(), "docs");
-
-export type CodeExample = {
-  code: string;
-  fileName: string;
-  filePath: string;
-};
 
 // recursively read in all files in the examples directory except for the index.ts file and output an array of strings containing the stringified buffer
 export const getFileStrings = (directory = EXAMPLES_PATH) => {
@@ -28,14 +23,14 @@ export const getFileStrings = (directory = EXAMPLES_PATH) => {
     if (fs.statSync(absolute).isDirectory()) {
       files = files.concat(getFileStrings(absolute));
     } else {
-      const fileName = path.basename(absolute);
-      const filePath = path.join(directory, fileName);
-      if (fileName !== "index.ts") {
+      const filename = path.basename(absolute);
+      const filepath = path.join(directory, filename);
+      if (filename !== "index.ts") {
         const code = fs.readFileSync(absolute).toString().trim();
         files.push({
           code,
-          fileName,
-          filePath,
+          filename,
+          filepath,
         });
       }
     }
@@ -43,23 +38,79 @@ export const getFileStrings = (directory = EXAMPLES_PATH) => {
   return files;
 };
 
-export const getFileString = (filePath: string): CodeExample | undefined => {
+export const getFileString = (filepath: string): CodeExample | undefined => {
   try {
-    const absPath = path.join(process.cwd(), filePath);
+    const absPath = path.join(process.cwd(), filepath);
     const file = fs.readFileSync(absPath);
     return {
       code: file.toString().trim(),
-      fileName: path.basename(absPath),
-      filePath,
+      filename: path.basename(absPath),
+      filepath,
     };
   } catch (error) {
     console.log(error);
   }
 };
 
+export type CodeExample = {
+  code: string;
+  filename: string;
+  filepath: string;
+  language?: string;
+};
+
+type MultipleCodeSampleResults = {
+  dir: string;
+  files: CodeExample[];
+}[];
+
+export function dirToFileArray(dir = RECIPES_PATH): MultipleCodeSampleResults {
+  let results = [];
+
+  for (const recipe of fs.readdirSync(dir)) {
+    const absolute = path.join(dir, recipe);
+    if (fs.statSync(absolute).isDirectory()) {
+      const files = fs.readdirSync(absolute);
+      let res: CodeExample[] = [];
+      for (const file of files) {
+        const filepath = path.join(dir, recipe, file);
+        if (fs.statSync(filepath).isDirectory()) {
+          res = res.concat(
+            fs
+              .readdirSync(filepath)
+              .filter((innerFile) => path.basename(innerFile) !== "index.ts")
+              .map((innerFile) => {
+                const innerFilePath = path.join(dir, recipe, file, innerFile);
+                return {
+                  code: fs.readFileSync(innerFilePath).toString().trim(),
+                  filename: path.basename(innerFilePath),
+                  filepath: innerFilePath,
+                  language: path.extname(innerFilePath).replace(".", ""),
+                };
+              })
+          );
+        } else {
+          res.push({
+            code: fs.readFileSync(filepath).toString().trim(),
+            filename: path.basename(filepath),
+            filepath,
+            language: path.extname(filepath).replace(".", ""),
+          });
+        }
+      }
+      results.push({
+        dir: path.basename(recipe),
+        files: res,
+      });
+    }
+  }
+
+  return results;
+}
+
 type Doc = {
   code: string;
-  fileName: string;
+  filename: string;
 };
 
 const chakra = Object.keys({
@@ -76,9 +127,9 @@ const ri = Object.keys(reactIconsRI).filter((key) => key !== "__esModule");
 
 const SECTIONS_PATH = path.join(process.cwd(), "sections");
 
-export const getSourceOfFile = (filePath: string) => {
+export const getSourceOfFile = (filepath: string) => {
   return fs.readFileSync(
-    path.join(SECTIONS_PATH, filePath, "index.mdx"),
+    path.join(SECTIONS_PATH, filepath, "index.mdx"),
     "utf-8"
   );
 };
@@ -87,9 +138,9 @@ export const getSourceOfFile = (filePath: string) => {
 //   frontmatter: FrontMatter;
 //   slug: string;
 // }[] => {
-//   return fs.readdirSync(SECTIONS_PATH).map((filePath) => {
-//     const source = getSourceOfFile(filePath);
-//     const slug = filePath.replace(/\.mdx?$/, "");
+//   return fs.readdirSync(SECTIONS_PATH).map((filepath) => {
+//     const source = getSourceOfFile(filepath);
+//     const slug = filepath.replace(/\.mdx?$/, "");
 //     const { data } = matter(source);
 
 //     return {

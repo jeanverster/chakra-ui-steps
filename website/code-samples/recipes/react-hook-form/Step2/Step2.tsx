@@ -1,47 +1,38 @@
 import { Box, Heading } from "@chakra-ui/layout";
 import { RadioGroup, Stack, Text, useRadioGroup } from "@chakra-ui/react";
 import { useController, useFormContext } from "react-hook-form";
-import { GiDiamondsSmile, GiPayMoney, GiTakeMyMoney } from "react-icons/gi";
+import { GiBirdHouse, GiGreenhouse, GiSydneyOperaHouse } from "react-icons/gi";
 import * as yup from "yup";
-import { FormValues } from "..";
-import { ErrorMessage } from "../../ErrorMessage";
-import { RadioCard } from "../../RadioCard";
+import { ErrorMessage, FormValues } from "..";
+import { RadioCard } from "../RadioCard";
 
-export const Step4Schema = yup.object().shape({
-  goal: yup.string().required("This value is required."),
+export const Step2Schema = yup.object().shape({
+  homeType: yup.string().required("This value is required."),
 });
 
 const options = [
+  { label: "Family home", value: "family-home", icon: GiGreenhouse },
   {
-    label: "Lower Payments",
-    value: "lower-payment",
-    icon: GiPayMoney,
+    label: "Townhouse",
+    value: "townhouse",
+    icon: GiSydneyOperaHouse,
   },
-  {
-    label: "Pay Off Faster",
-    value: "pay-off-faster",
-    icon: GiTakeMyMoney,
-  },
-  {
-    label: "Just Browsing",
-    value: "just-browsing",
-    icon: GiDiamondsSmile,
-  },
+  { label: "Condo", value: "condo", icon: GiBirdHouse },
 ];
 
-export const Step4 = () => {
+export const Step2 = () => {
   const { control } = useFormContext<FormValues>();
 
   const {
     field,
     formState: { errors },
   } = useController({
-    name: "goal",
+    name: "homeType",
     control,
   });
 
   const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "goal",
+    name: "homeType",
     defaultValue: field.value,
     onChange: field.onChange,
   });
@@ -57,16 +48,11 @@ export const Step4 = () => {
         alignItems: "center",
       }}
     >
-      <Heading
-        size="lg"
-        sx={{
-          mt: 8,
-        }}
-      >
-        What&apos;s your main goal for refinancing?
+      <Heading size="lg" sx={{ mt: 8 }}>
+        What&apos;s your dream home?
       </Heading>
       <Text sx={{ mt: 4 }}>Select a property type below.</Text>
-      <RadioGroup mb={4} name="Step4" defaultValue={field.value} sx={{ mt: 8 }}>
+      <RadioGroup mb={4} name="Step2" sx={{ mt: 8 }}>
         <Stack {...group} spacing={4} direction="row">
           {options.map(({ value, label, icon }, i) => {
             const radio = getRadioProps({ value });
@@ -78,7 +64,9 @@ export const Step4 = () => {
           })}
         </Stack>
       </RadioGroup>
-      {errors.goal && <ErrorMessage message={errors.goal?.message || ""} />}
+      {errors.homeType && (
+        <ErrorMessage message={errors.homeType.message || ""} />
+      )}
     </Box>
   );
 };
