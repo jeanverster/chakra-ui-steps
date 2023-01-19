@@ -19,6 +19,7 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
       variant,
       clickable,
       checkIcon: checkIconContext,
+      errorIcon: errorIconContext,
     } = useStepsContext();
 
     const {
@@ -32,6 +33,7 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
       isKeepError,
       state,
       checkIcon: checkIconProp,
+      errorIcon: errorIconProp,
     } = props;
 
     const localIsLoading = isLoading || state === 'loading';
@@ -43,6 +45,7 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
       variant === 'simple' ? isCompletedStep || isCurrentStep : isCompletedStep;
 
     const checkIcon = checkIconProp || checkIconContext;
+    const errorIcon = errorIconProp || errorIconContext;
 
     return (
       <chakra.div
@@ -73,6 +76,7 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
               }}
               icon={icon}
               checkIcon={checkIcon}
+              errorIcon={errorIcon}
             />
           </StepIconContainer>
           <StepLabel

@@ -19,7 +19,6 @@ const DynamicSectionWrap = dynamic(
 
 export const getStaticProps = async () => {
   const recipes = dirToFileArray();
-  console.log("recipes", recipes);
   return {
     props: {
       recipes,
@@ -28,7 +27,6 @@ export const getStaticProps = async () => {
 };
 
 const Recipes = ({ recipes }: RecipesProps) => {
-  console.log("recipes", recipes);
   const [variant] = useVariantContext();
   const renderRecipes = () => {
     return recipes.map((recipe, index) => {
