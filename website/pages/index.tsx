@@ -1,4 +1,3 @@
-import { useCardBg } from "@/hooks/useCardBg";
 import { Page } from "@/layouts";
 import { FrontMatter } from "@/types";
 import {
@@ -18,7 +17,6 @@ import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { CgCheckO } from "react-icons/cg";
 import { BasicExample } from "../code-samples/examples";
-import Props from "../code-samples/props";
 import CopyButton from "../components/CopyButton/CopyButton";
 import LazyRender from "../components/LazyRender/LazyRender";
 import { CodeExample, getFileString, getFileStrings } from "../mdx/server";
@@ -71,24 +69,18 @@ const features = [
 ];
 
 const Home: NextPage<HomeProps> = ({ basicExample, snippets }) => {
-  // console.log("snippets", snippets);
   const [variant] = useVariantContext();
-  const bg = useCardBg();
 
   const extendThemeSnippet = snippets.find(
-    (snippet) => snippet.fileName === "ExtendThemeSnippet.tsx"
+    (snippet) => snippet.filename === "ExtendThemeSnippet.tsx"
   );
-  // const basicExample = examples.find(
-  //   (example) => example.fileName === "BasicExample.tsx"
-  // );
 
   return (
     <Page
       metaDescription="Steps component designed to work seamlessly with Chakra UI"
-      description="Chakra UI Steps makes it super easy to create multi-step interfaces in apps where you are already using Chakra UI. Use it in forms, onboarding, or anywhere you want to lead the user through some logical steps. Below is an example of how you might use it in a form."
+      description="Chakra UI Steps makes it super easy to create multi-step interfaces in apps where you are already using Chakra UI. Use it in forms, onboarding, or anywhere you want to lead the user through some logical steps."
     >
       <Suspense fallback={"Loading..."}>
-        {/* <ReactHookFormExample /> */}
         <Divider my={12} />
         <Box sx={{ mb: 6 }}>
           <Heading as="h2" size="xl" mb={6}>
@@ -157,21 +149,19 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippets }) => {
         {basicExample && (
           <LazyRender rootMargin="100px">
             <DynamicSectionWrap
-              title={replaceExtension(".tsx", basicExample.fileName)}
+              title={replaceExtension(".tsx", basicExample.filename)}
               description="A basic example of how to use the Steps component."
               preview={<BasicExample variant={variant} />}
               code={[
                 {
                   language: "tsx",
-                  filename: basicExample?.fileName,
+                  filename: basicExample?.filename,
                   code: basicExample?.code,
                 },
               ]}
             />
           </LazyRender>
         )}
-
-        <Props />
       </Suspense>
     </Page>
   );

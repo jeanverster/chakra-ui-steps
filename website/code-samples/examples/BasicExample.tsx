@@ -5,7 +5,11 @@ import { Step, Steps, useSteps } from "chakra-ui-steps";
 
 const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
 
-export const BasicExample = ({ variant }: { variant: string }) => {
+export const BasicExample = ({
+  variant,
+}: {
+  variant: "circles" | "circles-alt" | "simple" | undefined;
+}) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });

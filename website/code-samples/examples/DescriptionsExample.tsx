@@ -9,7 +9,11 @@ const steps = [
   { label: "Step 3", description: "This is the third step" },
 ];
 
-export const DescriptionsExample = ({ variant }: { variant: string }) => {
+export const DescriptionsExample = ({
+  variant,
+}: {
+  variant: "circles" | "circles-alt" | "simple" | undefined;
+}) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });

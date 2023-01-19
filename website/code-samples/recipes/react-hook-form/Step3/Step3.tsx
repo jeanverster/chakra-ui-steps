@@ -9,8 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useController, useFormContext } from "react-hook-form";
 import * as yup from "yup";
-import { FormValues } from "..";
-import { ErrorMessage } from "../../ErrorMessage";
+import { ErrorMessage, FormValues } from "..";
 
 export const Step3Schema = yup.object().shape({
   homeValue: yup

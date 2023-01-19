@@ -36,19 +36,19 @@ const Examples = ({ examples }: ExamplesProps): JSX.Element => {
     return examples.map((example, index) => {
       const Component =
         ExampleComponents[
-          example.fileName.replace(".tsx", "") as keyof typeof ExampleComponents
+          example.filename.replace(".tsx", "") as keyof typeof ExampleComponents
         ];
       return (
         <>
-          <LazyRender key={`${example.fileName}-${index}`} rootMargin="100px">
+          <LazyRender key={`${example.filename}-${index}`} rootMargin="100px">
             <DynamicSectionWrap
-              title={replaceExtension(".tsx", example.fileName)}
+              title={replaceExtension(".tsx", example.filename)}
               description="A basic example of how to use the Steps component."
               preview={<Component variant={variant} />}
               code={[
                 {
                   language: "tsx",
-                  filename: example?.fileName,
+                  filename: example?.filename,
                   code: example?.code,
                 },
               ]}

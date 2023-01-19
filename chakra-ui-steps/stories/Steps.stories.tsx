@@ -412,6 +412,69 @@ export const CustomPerStepCheckIcon = (): JSX.Element => {
   );
 };
 
+export const CustomErrorIcon = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const config = useConfigContext();
+  return (
+    <>
+      <Steps
+        state="error"
+        {...config}
+        errorIcon={FiDollarSign}
+        activeStep={activeStep}
+      >
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label}>
+            <Content my={3} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
+export const CustomPerStepErrorIcon = (): JSX.Element => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const config = useConfigContext();
+  return (
+    <>
+      <Steps {...config} checkIcon={FiCheckCircle} activeStep={activeStep}>
+        {iconSteps.map(({ label, icon }, index) => (
+          <Step
+            isKeepError
+            state="error"
+            label={label}
+            key={label}
+            errorIcon={icon}
+          >
+            <Content my={6} index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
 export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,

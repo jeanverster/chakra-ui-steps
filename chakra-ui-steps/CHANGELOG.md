@@ -1,12 +1,4 @@
-# [chakra-ui-steps-v2.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.9.0...chakra-ui-steps-v2.0.0) (2023-01-08)
-
-### Features
-
 # [chakra-ui-steps-v2.0.1](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.0...chakra-ui-steps-v2.0.1) (2023-01-08)
-
-### Bug Fixes
-
-- no labels ([9d8e19e](https://github.com/jeanverster/chakra-ui-steps/commit/9d8e19e0a417c042c891941e8d90bdeb58ed7ae6))
 
 # [chakra-ui-steps-v2.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.9.0...chakra-ui-steps-v2.0.0) (2023-01-08)
 

@@ -10,6 +10,7 @@ export interface StepProps extends HTMLChakraProps<'li'> {
   icon?: React.ComponentType<any>;
   state?: 'loading' | 'error';
   checkIcon?: React.ComponentType<any>;
+  errorIcon?: React.ComponentType<any>;
   isCompletedStep?: boolean;
   isKeepError?: boolean;
 }
@@ -32,6 +33,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       icon,
       state,
       checkIcon,
+      errorIcon,
       index,
       isCompletedStep,
       isCurrentStep,
@@ -59,6 +61,7 @@ export const Step = forwardRef<StepProps, 'li'>(
       isKeepError,
       checkIcon,
       state,
+      errorIcon,
     };
 
     const renderStep = () => {
