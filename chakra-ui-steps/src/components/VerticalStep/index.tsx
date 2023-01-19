@@ -25,10 +25,12 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
       hasVisited,
       state,
       checkIcon: checkIconProp,
+      errorIcon: errorIconProp,
     } = props;
 
     const {
       checkIcon: checkIconContext,
+      errorIcon: errorIconContext,
       isError,
       isLoading,
       variant,
@@ -45,6 +47,7 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
     const highlighted =
       variant === 'simple' ? isCompletedStep || isCurrentStep : isCompletedStep;
     const checkIcon = checkIconProp || checkIconContext;
+    const errorIcon = errorIconProp || errorIconContext;
 
     return (
       <chakra.div
@@ -70,6 +73,7 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
               }}
               icon={icon}
               checkIcon={checkIcon}
+              errorIcon={errorIcon}
             />
           </StepIconContainer>
           <StepLabel
