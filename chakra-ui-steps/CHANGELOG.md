@@ -1,10 +1,3 @@
-# [chakra-ui-steps-v3.0.1](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v3.0.0...chakra-ui-steps-v3.0.1) (2023-01-19)
-
-
-### Bug Fixes
-
-* add error icon to single step ([2bc2ff7](https://github.com/jeanverster/chakra-ui-steps/commit/2bc2ff7df6ba28bbb7cd0bf1784074297a63485e))
-
 # [chakra-ui-steps-v2.0.1](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.0...chakra-ui-steps-v2.0.1) (2023-01-08)
 
 # [chakra-ui-steps-v2.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.9.0...chakra-ui-steps-v2.0.0) (2023-01-08)
