@@ -258,9 +258,9 @@ const variantSimple = definePartsStyle((props) => {
       transition: 'border-color .2s ease',
       _activeStep: {
         _invalid: {
-          borderColor: 'red.500',
+          borderColor: 'red.400',
           '& .cui-steps__vertical-step-container': {
-            borderColor: 'red.500',
+            borderColor: 'red.400',
           },
         },
       },
@@ -271,9 +271,9 @@ const variantSimple = definePartsStyle((props) => {
           borderColor: activeColor,
         },
         _invalid: {
-          borderColor: 'red.500',
+          borderColor: 'red.400',
           '& .cui-steps__vertical-step-container': {
-            borderColor: 'red.500',
+            borderColor: 'red.400',
           },
         },
       },
@@ -285,9 +285,9 @@ const variantSimple = definePartsStyle((props) => {
         justifyContent: 'space-between',
         flexDirection: 'row-reverse',
         _invalid: {
-          borderColor: 'red.500',
+          borderColor: 'red.400',
           '& .cui-steps__vertical-step-container': {
-            borderColor: 'red.500',
+            borderColor: 'red.400',
           },
         },
       },

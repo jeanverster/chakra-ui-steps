@@ -15,7 +15,7 @@ export const ErrorMessage = ({ message }: Props) => {
         boxShadow: "sm",
       }}
     >
-      <Text fontSize="md" color="red.500" fontWeight={"bold"}>
+      <Text fontSize="md" color="red.400" fontWeight={"bold"}>
         {message}
       </Text>
     </Box>
