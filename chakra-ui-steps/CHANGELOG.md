@@ -1,10 +1,3 @@
-# [chakra-ui-steps-v2.0.3](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.2...chakra-ui-steps-v2.0.3) (2023-01-21)
-
-
-### Bug Fixes
-
-* kebab case style rules ([#114](https://github.com/jeanverster/chakra-ui-steps/issues/114)) ([9baca55](https://github.com/jeanverster/chakra-ui-steps/commit/9baca55c7dd9da5292fd8489fef692922c4282b4))
-
 # [chakra-ui-steps-v2.0.1](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.0...chakra-ui-steps-v2.0.1) (2023-01-08)
 
 # [chakra-ui-steps-v2.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.9.0...chakra-ui-steps-v2.0.0) (2023-01-08)
