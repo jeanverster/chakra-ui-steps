@@ -1,8 +1,14 @@
 name: Tests
 
 on:
-  pull_request:
-    branches: [develop]
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - "develop"
+  push:
+    branches:
+      - "develop"
     paths:
       - "chakra-ui-steps/**"
 

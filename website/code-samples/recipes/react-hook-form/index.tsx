@@ -43,7 +43,7 @@ export const ErrorMessage = ({ message }: { message: string }) => {
         bg: useColorModeValue("gray.50", "gray.800"),
       }}
     >
-      <Text fontSize="md" color="red.500" fontWeight={"bold"}>
+      <Text fontSize="md" color="red.400" fontWeight={"bold"}>
         {message}
       </Text>
     </Box>
