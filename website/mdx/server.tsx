@@ -35,9 +35,9 @@ export const getFileStrings = (directory = EXAMPLES_PATH) => {
   return files;
 };
 
-export const getChangelog = (path = CHANGELOG_PATH) => {
-  // read in the changelog file as a string
-  return fs.readFileSync(path).toString();
+export const getChangelog = () => {
+  const absolute = path.join(process.cwd(), CHANGELOG_PATH);
+  return fs.readFileSync(absolute).toString();
 };
 
 export const getFileString = (filepath: string): CodeExample | undefined => {
