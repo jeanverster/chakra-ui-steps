@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { Suspense } from "react";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import Balancer from "react-wrap-balancer";
 
 type PageProps = FlexProps & {
   title?: string;
@@ -30,7 +31,7 @@ export const Page = ({
     <Box
       as="main"
       px={{ base: 8, md: 2 }}
-      py="128px"
+      pt="128px"
       sx={{
         display: ["inherit", "inherit", "block"],
         flexDir: "column",
@@ -54,10 +55,14 @@ export const Page = ({
       )}
       {!hideTopTitle && (
         <Box my={8} display="flex" flexDir={"column"} gap={3}>
-          <Heading fontSize={["2xl", "4xl"]} sx={{ mb: 6 }}>
+          <Heading fontSize={["3xl", "4xl"]} sx={{ mb: 6 }}>
             {title || "Chakra UI Steps"}
           </Heading>
-          <Text fontSize="lg">{description}</Text>
+          {description && (
+            <Text fontSize="lg">
+              <Balancer>{description}</Balancer>
+            </Text>
+          )}
         </Box>
       )}
       <Suspense>{children}</Suspense>

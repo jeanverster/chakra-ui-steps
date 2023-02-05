@@ -3,7 +3,6 @@ import { FrontMatter } from "@/types";
 import {
   Box,
   Code,
-  Divider,
   Heading,
   List,
   ListIcon,
@@ -16,15 +15,16 @@ import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { CgCheckO } from "react-icons/cg";
-import { BasicExample } from "../code-samples/examples";
+import Balancer from "react-wrap-balancer";
+import { Basic } from "../code-samples/examples";
 import CopyButton from "../components/CopyButton/CopyButton";
 import LazyRender from "../components/LazyRender/LazyRender";
 import { CodeExample, getFileString, getFileStrings } from "../mdx/server";
 import { replaceExtension } from "../utils/replaceExtension";
 import { useVariantContext } from "./_app";
 
-const DynamicSectionWrap = dynamic(
-  () => import("../containers/SectionWrap/SectionWrap"),
+const DynamicCodePreview = dynamic(
+  () => import("../containers/CodePreview/CodePreview"),
   {
     ssr: false,
   }
@@ -50,7 +50,7 @@ type HomeProps = {
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const snippets = getFileStrings("code-samples/snippets");
 
-  const basicExample = getFileString("code-samples/examples/BasicExample.tsx");
+  const basicExample = getFileString("code-samples/examples/Basic.tsx");
 
   return {
     props: {
@@ -81,12 +81,6 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippets }) => {
       description="Chakra UI Steps makes it super easy to create multi-step interfaces in apps where you are already using Chakra UI. Use it in forms, onboarding, or anywhere you want to lead the user through some logical steps."
     >
       <Suspense fallback={"Loading..."}>
-        <Divider my={12} />
-        <Box sx={{ mb: 6 }}>
-          <Heading as="h2" size="xl" mb={6}>
-            Getting Started
-          </Heading>
-        </Box>
         <SimpleGrid columns={[1, 1, 2]} spacing={8} sx={{ mb: 10 }}>
           <Flex sx={{ py: 4, gap: 4, flexDir: "column" }}>
             <Heading fontSize="2xl">Installation</Heading>
@@ -109,7 +103,13 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippets }) => {
               </Code>
             </Box>
           </Flex>
-          <Flex sx={{ py: 4, gap: 4, flexDir: "column" }}>
+          <Flex
+            sx={{
+              py: 4,
+              gap: 4,
+              flexDir: "column",
+            }}
+          >
             <Heading fontSize="2xl">Features</Heading>
 
             <List spacing={3}>
@@ -129,29 +129,42 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippets }) => {
             </List>
           </Flex>
         </SimpleGrid>
-        <Flex sx={{ mb: 10, flexDir: "column", gap: 4 }}>
+        <Flex
+          sx={{
+            mb: 10,
+            flexDir: "column",
+            gap: 4,
+          }}
+        >
           <Heading id="usage" fontSize="2xl">
             Usage
           </Heading>
           <Text fontSize="lg">
-            In order to get started you will need to extend the default Chakra
-            theme with the provided StepsStyleConfig object, like so:
+            <Balancer>
+              In order to get started, you will need to extend your theme with
+              the steps component&apos;s styles. This can be done by importing{" "}
+              <Code>StepsTheme</Code> from chakra-ui-steps and passing it to the{" "}
+              <Code>extendTheme</Code> function from Chakra UI.
+            </Balancer>
           </Text>
-          <LazyRender>
+          <Box sx={{ my: 3 }}>
             <DynamicCodeHighlight code={extendThemeSnippet} />
-          </LazyRender>
+          </Box>
+
           <Text fontSize="lg">
-            Once that&apos;s done you should be able to use the Steps component
-            in your app!
+            <Balancer>
+              Once you have extended the theme, you can use the Steps component
+              anywhere in your app. Below is a basic example of how you might
+              use the Steps component.
+            </Balancer>
           </Text>
         </Flex>
-        <Divider sx={{ mb: 10 }} />
+        {/* <Divider sx={{ mb: 10 }} /> */}
         {basicExample && (
           <LazyRender rootMargin="100px">
-            <DynamicSectionWrap
+            <DynamicCodePreview
               title={replaceExtension(".tsx", basicExample.filename)}
-              description="A basic example of how to use the Steps component."
-              preview={<BasicExample variant={variant} />}
+              preview={<Basic variant={variant} />}
               code={[
                 {
                   language: "tsx",
