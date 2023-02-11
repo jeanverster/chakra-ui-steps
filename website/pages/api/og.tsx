@@ -7,9 +7,9 @@ export const config = {
 
 const unkpkgUrl = "https://unpkg.com/chakra-ui-steps/package.json";
 
-const font = fetch(new URL("../../assets/Sora-Bold.ttf", import.meta.url)).then(
-  (res) => res.arrayBuffer()
-);
+const font = fetch(
+  new URL("../../assets/Sora-Bold.ttf", import.meta.url).href
+).then((res) => res.arrayBuffer());
 
 const pkgPromise = fetch(unkpkgUrl).then((res) => {
   return res.json();
