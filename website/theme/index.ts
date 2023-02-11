@@ -48,6 +48,9 @@ const theme = extendTheme({
         body: {
           bg: props.colorMode === "light" ? "white" : "gray.900",
         },
+        a: {
+          color: props.colorMode === "light" ? "teal.500" : "teal.400",
+        },
       };
     },
   },

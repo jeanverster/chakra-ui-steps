@@ -1,4 +1,9 @@
 import { SideNav } from "@/components";
+import { Footer } from "@/components/Footer";
+import MobileNav from "@/components/MobileNav/MobileNav";
+import createFastContext from "@/context/createFastContext";
+import theme from "@/theme";
+import { RepoPayload } from "@/types";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 import "@fontsource/manrope/400.css";
 import "@fontsource/manrope/700.css";
@@ -6,10 +11,6 @@ import "@fontsource/sora/400.css";
 import "@fontsource/sora/700.css";
 import type { AppProps } from "next/app";
 import React from "react";
-import MobileNav from "../components/MobileNav/MobileNav";
-import createFastContext from "../context/createFastContext";
-import theme from "../theme";
-import { RepoPayload } from "../types";
 
 export type Store = {
   variant: "simple" | "circles" | "circles-alt";
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
           <Component {...pageProps} />
         </Container>
+        <Footer />
       </Provider>
     </ChakraProvider>
   );

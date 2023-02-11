@@ -1,3 +1,10 @@
+# [chakra-ui-steps-v2.0.4](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.3...chakra-ui-steps-v2.0.4) (2023-02-11)
+
+
+### Bug Fixes
+
+* handle responsive value ([d1c5e96](https://github.com/jeanverster/chakra-ui-steps/commit/d1c5e96557108c7adac8690696a2be8a9283dddb))
+
 # [chakra-ui-steps-v2.0.1](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.0...chakra-ui-steps-v2.0.1) (2023-01-08)
 
 # [chakra-ui-steps-v2.0.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v1.9.0...chakra-ui-steps-v2.0.0) (2023-01-08)

@@ -3,10 +3,9 @@ name: Tests
 on:
   pull_request_target:
     types:
-      - closed
-    branches:
-      - "develop"
-  push:
+      - opened
+      - synchronize
+      - reopened
     branches:
       - "develop"
     paths:
