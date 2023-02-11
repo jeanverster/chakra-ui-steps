@@ -16,7 +16,6 @@ jobs:
           node-version: "16"
           registry-url: "https://registry.npmjs.org"
       - run: yarn
-
-      - run: npm config set registry https://registry.npmjs.org && npm publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}

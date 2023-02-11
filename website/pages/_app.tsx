@@ -10,6 +10,7 @@ import "@fontsource/manrope/700.css";
 import "@fontsource/sora/400.css";
 import "@fontsource/sora/700.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import React from "react";
 
 export type Store = {
@@ -36,28 +37,36 @@ function MyApp({ Component, pageProps }: AppProps) {
     fetchData();
   }, []);
   return (
-    <ChakraProvider theme={theme}>
-      <Provider>
-        <SideNav repo={repo} />
-        <Container
-          maxW="container.lg"
-          className="wrapper"
-          sx={{
-            display: { sm: "flex", md: "grid" },
-            flexDir: "column",
-            gap: 4,
-            padding: [0, 0, 4],
-            mx: "auto",
-            minWidth: 0,
-          }}
-        >
-          <MobileNav repo={repo} />
+    <>
+      <Head>
+        <meta
+          property="og:image"
+          content="https://chakra-ui-steps.vercel.app/api/og"
+        />
+      </Head>
+      <ChakraProvider theme={theme}>
+        <Provider>
+          <SideNav repo={repo} />
+          <Container
+            maxW="container.lg"
+            className="wrapper"
+            sx={{
+              display: { sm: "flex", md: "grid" },
+              flexDir: "column",
+              gap: 4,
+              padding: [0, 0, 4],
+              mx: "auto",
+              minWidth: 0,
+            }}
+          >
+            <MobileNav repo={repo} />
 
-          <Component {...pageProps} />
-        </Container>
-        <Footer />
-      </Provider>
-    </ChakraProvider>
+            <Component {...pageProps} />
+          </Container>
+          <Footer />
+        </Provider>
+      </ChakraProvider>
+    </>
   );
 }
 
