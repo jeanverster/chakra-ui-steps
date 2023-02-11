@@ -4,10 +4,10 @@ import { InferGetStaticPropsType } from "next";
 import Balancer from "react-wrap-balancer";
 import PropsTable from "../code-samples/props";
 import CodeHighlight from "../containers/CodeHighlight/CodeHighlight";
-import { CodeExample, getFileString } from "../mdx/server";
+import { CodeExample, getCodeExample } from "../mdx/server";
 
 export const getStaticProps = async () => {
-  const useStepsSnippet = getFileString(
+  const useStepsSnippet = getCodeExample(
     "code-samples/snippets/UseStepsSnippet.tsx"
   );
 

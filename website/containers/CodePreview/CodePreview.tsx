@@ -93,6 +93,7 @@ const CodePreview = ({
           py: 5,
           justifyContent: "flex-end",
           flexDir: "column",
+          fontSize: "lg",
         }}
       >
         {description}

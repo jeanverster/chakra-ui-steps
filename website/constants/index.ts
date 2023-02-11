@@ -11,10 +11,6 @@ export const NAV_ITEMS = [
     title: "Recipes",
     href: "/recipes",
   },
-  {
-    title: "Changelog",
-    href: "/changelog",
-  },
 ];
 
 export const NAV_HEIGHT = "96px";

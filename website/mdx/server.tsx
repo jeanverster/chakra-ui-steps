@@ -2,23 +2,16 @@ import fs from "fs";
 import path from "path";
 
 const EXAMPLES_PATH = path.join(process.cwd(), "code-samples/examples");
-const SNIPPETS_PATH = path.join(process.cwd(), "code-samples/snippets");
 const RECIPES_PATH = path.join(process.cwd(), "code-samples/recipes");
-// changelog is located outside root directory
-const CHANGELOG_PATH = path.join(
-  process.cwd(),
-  "../../chakra-ui-steps/chakra-ui-steps/CHANGELOG.md"
-);
-console.log("CHANGELOG_PATH", CHANGELOG_PATH);
 
 // recursively read in all files in the examples directory except for the index.ts file and output an array of strings containing the stringified buffer
-export const getFileStrings = (directory = EXAMPLES_PATH) => {
+export const getCodeExamples = (directory = EXAMPLES_PATH) => {
   let files: CodeExample[] = [];
   const filesInDirectory = fs.readdirSync(directory);
   for (const file of filesInDirectory) {
     const absolute = path.join(directory, file);
     if (fs.statSync(absolute).isDirectory()) {
-      files = files.concat(getFileStrings(absolute));
+      files = files.concat(getCodeExamples(absolute));
     } else {
       const filename = path.basename(absolute);
       const filepath = path.join(directory, filename);
@@ -35,12 +28,7 @@ export const getFileStrings = (directory = EXAMPLES_PATH) => {
   return files;
 };
 
-export const getChangelog = () => {
-  const absolute = path.join(process.cwd(), CHANGELOG_PATH);
-  return fs.readFileSync(absolute).toString();
-};
-
-export const getFileString = (filepath: string): CodeExample | undefined => {
+export const getCodeExample = (filepath: string): CodeExample | undefined => {
   try {
     const absPath = path.join(process.cwd(), filepath);
     const file = fs.readFileSync(absPath);
