@@ -46,7 +46,7 @@ export default async function OG() {
             height: 164,
           }}
         />
-        <h2 style={{ marginTop: "8px" }}>chakra-ui-steps</h2>
+        <h2 style={{ marginTop: "16px" }}>chakra-ui-steps</h2>
         <div
           style={{
             display: "flex",
