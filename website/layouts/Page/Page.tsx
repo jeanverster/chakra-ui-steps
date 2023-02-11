@@ -58,6 +58,10 @@ export const Page = ({
       <Head key="page">
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
+        <meta
+          property="og:image"
+          content="https://chakra-ui-steps.vercel.app/api/og"
+        />
       </Head>
 
       {showBackButton && (
