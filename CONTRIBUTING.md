@@ -45,8 +45,9 @@ To run storybook, first run `cd chakra-ui-steps` to navigate to the correct dire
 
 - `yarn` - Install all dependencies
 - `yarn dev` - Run the website in development mode
-- `yarn build` - Build the website
-- `yarn serve` - Serve the website
+- `yarn build` - Build the website (make sure to run `yarn build` in the `chakra-ui-steps`
+  directory first)
+- `yarn start` - Serve the website
 - `yarn lint` - Lint the website
 
 ### Commit Convention
