@@ -81,7 +81,7 @@ export const ReactHookFormExample = ({
   };
 
   return (
-    <Box sx={{ mt: 16 }}>
+    <Box sx={{ mt: 8 }}>
       <FormProvider {...methods}>
         <Steps variant={variant} activeStep={activeStep} colorScheme="blue">
           {steps.map(({ label, content, description }) => (

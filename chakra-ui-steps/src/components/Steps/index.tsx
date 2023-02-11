@@ -6,6 +6,7 @@ import {
   SystemStyleObject,
   ThemingProps,
   useColorModeValue,
+  useMediaQuery,
   useMultiStyleConfig,
 } from '@chakra-ui/react';
 import { createContext } from '@chakra-ui/react-context';
@@ -22,7 +23,7 @@ interface StepOptions {
   errorIcon?: React.ComponentType<any>;
   onClickStep?: (step: number) => void;
   trackColor?: string;
-  isMobileBreakpointValue?: Partial<Record<string, boolean>> | boolean[];
+  mobileBreakpoint?: string;
   variant?: 'circles' | 'circles-alt' | 'simple';
 }
 export interface StepsProps
@@ -54,7 +55,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       checkIcon,
       errorIcon,
       onClickStep,
-      isMobileBreakpointValue,
+      mobileBreakpoint,
       trackColor: trackColorProp,
       ...rest
     } = omitThemingProps(props);
@@ -79,8 +80,9 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       return null;
     };
 
-    // TODO: move this out of the component
-    const isMobile = false;
+    const [isMobile] = useMediaQuery(
+      `(max-width: ${mobileBreakpoint || '768px'})`
+    );
 
     const clickable = !!onClickStep;
 

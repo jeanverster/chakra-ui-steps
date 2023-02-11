@@ -1,11 +1,7 @@
 import { Link as ChakraLink } from "@chakra-ui/react";
+import Link from "next/link";
 
-type AnchorProps = {
-  href: string;
-  children: React.ReactNode;
-};
-
-export const Anchor = (props: AnchorProps) => {
+export const Anchor = (props: any) => {
   const { href, children } = props;
 
   if (!href) {
@@ -13,8 +9,8 @@ export const Anchor = (props: AnchorProps) => {
   }
 
   return (
-    <ChakraLink color="blue.500" {...props}>
-      {children}
-    </ChakraLink>
+    <Link href={href} passHref={true}>
+      <ChakraLink color="teal.400">{children}</ChakraLink>
+    </Link>
   );
 };

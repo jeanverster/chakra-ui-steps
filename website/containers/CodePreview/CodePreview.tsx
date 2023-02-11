@@ -1,6 +1,6 @@
 import { useCardBg } from "@/hooks/useCardBg";
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Heading } from "@chakra-ui/layout";
+import { Flex, Heading } from "@chakra-ui/layout";
 import {
   Stack,
   Tab,
@@ -24,11 +24,11 @@ export type CodeConfig = {
 type SectionWrapProps = {
   preview: React.ReactNode;
   title: string;
-  description?: string;
+  description?: JSX.Element;
   code: CodeConfig[];
 };
 
-const SectionWrap = ({
+const CodePreview = ({
   preview,
   code = [],
   title,
@@ -37,7 +37,6 @@ const SectionWrap = ({
   const bg = useCardBg();
   const selectedBg = useColorModeValue("blue.500", "blue.400");
 
-  // boolean value which is true on mobile and false on desktop
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
@@ -66,6 +65,7 @@ const SectionWrap = ({
             borderRadius: "12px",
             "& .chakra-tabs__tab": {
               gap: 1,
+              flex: ["1 1 auto"],
               fontSize: "sm",
               justifyContent: "center",
               alignItems: "center",
@@ -88,11 +88,16 @@ const SectionWrap = ({
           </Tab>
         </TabList>
       </Stack>
-      {description && (
-        <Heading as="p" fontSize="md" color="gray.500" mt={2}>
-          {description}
-        </Heading>
-      )}
+      <Flex
+        sx={{
+          py: 5,
+          justifyContent: "flex-end",
+          flexDir: "column",
+          fontSize: "lg",
+        }}
+      >
+        {description}
+      </Flex>
       <TabPanels mt={8}>
         <TabPanel p={0}>{preview}</TabPanel>
         <TabPanel sx={{ p: 0, mt: 4, bg, rounded: "md", overflow: "hidden" }}>
@@ -137,4 +142,4 @@ const SectionWrap = ({
   );
 };
 
-export default SectionWrap;
+export default CodePreview;

@@ -3,9 +3,13 @@ import { Box } from "@chakra-ui/layout";
 import { Button, Flex, Heading } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 
-const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
+const steps = [
+  { label: "Step 1", description: "This is the first step" },
+  { label: "Step 2", description: "This is the second step" },
+  { label: "Step 3", description: "This is the third step" },
+];
 
-export const BasicExample = ({
+export const Descriptions = ({
   variant,
 }: {
   variant: "circles" | "circles-alt" | "simple" | undefined;
@@ -19,8 +23,8 @@ export const BasicExample = ({
   return (
     <Flex flexDir="column" width="100%">
       <Steps variant={variant} colorScheme="blue" activeStep={activeStep}>
-        {steps.map(({ label }, index) => (
-          <Step label={label} key={label}>
+        {steps.map(({ label, description }, index) => (
+          <Step label={label} key={label} description={description}>
             <Box sx={{ p: 8, bg, my: 8, rounded: "md" }}>
               <Heading fontSize="xl" textAlign="center">
                 Step {index + 1}

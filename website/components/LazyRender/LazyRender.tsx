@@ -20,6 +20,7 @@ const LazyRender = ({
   threshold,
   rootMargin,
   onVisible,
+  ...rest
 }: LazyRenderProps) => {
   const ref = useMemo(() => createRef<HTMLDivElement>(), []);
 
@@ -55,7 +56,13 @@ const LazyRender = ({
     };
   }, [threshold, rootMargin, ref, onVisible]);
 
-  return <div ref={ref}>{isVisible ? children : null}</div>;
+  // return <div ref={ref}>{isVisible ? children : null}</div>;
+  // return the same but forward ref
+  return (
+    <div ref={ref} {...rest}>
+      {isVisible ? children : null}
+    </div>
+  );
 };
 
 export default LazyRender;
