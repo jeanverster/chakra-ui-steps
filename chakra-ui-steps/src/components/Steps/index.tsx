@@ -60,8 +60,6 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       ...rest
     } = omitThemingProps(props);
 
-    console.log('responsive', responsive);
-
     const trackColor =
       trackColorProp || useColorModeValue('gray.200', 'gray.700');
 
