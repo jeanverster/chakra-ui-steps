@@ -188,7 +188,7 @@ const theme = extendTheme({
 | **`orientation`** | string               | no       | Sets the orientation of the Steps component                                | horizontal |
 | **`responsive`**  | boolean              | no       | Sets whether the component auto switches to vertical orientation on mobile | true       |
 | **`checkIcon`**   | React.ComponentType  | no       | Allows you to provide a custom check icon                                  | undefined  |
-| **`onClickStep`** | () => void           | no       | If defined, allows you to click on the step icons                          | undefined  |
+| **`onClickStep`** | (step: number) => void           | no       | If defined, allows you to click on the step icons                          | undefined  |
 | **`state`**       | 'loading' \| 'error' | no       | Let's you set the state to error or loading                                | undefined  |
 
 ### `Step`
