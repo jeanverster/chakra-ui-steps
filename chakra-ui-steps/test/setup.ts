@@ -1,6 +1,6 @@
-import { beforeAll, vi } from 'vitest';
+import { beforeEach, vi } from 'vitest';
 
-beforeAll(() => {
+beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: vi.fn().mockImplementation((query) => ({
