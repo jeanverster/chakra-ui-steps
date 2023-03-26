@@ -107,5 +107,9 @@
       "@semantic-release/git"
     ],
     "extends": "semantic-release-monorepo"
+  },
+  "dependencies": {
+    "vite": "^4.2.1",
+    "vitest": "^0.29.7"
   }
 }
