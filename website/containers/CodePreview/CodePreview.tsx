@@ -1,3 +1,4 @@
+import LazyRender from "@/components/LazyRender/LazyRender";
 import { useCardBg } from "@/hooks/useCardBg";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Flex, Heading } from "@chakra-ui/layout";
@@ -101,41 +102,43 @@ const CodePreview = ({
       <TabPanels mt={8}>
         <TabPanel p={0}>{preview}</TabPanel>
         <TabPanel sx={{ p: 0, mt: 4, bg, rounded: "md", overflow: "hidden" }}>
-          <Tabs sx={{ p: 0 }}>
-            <Stack>
-              <TabList>
+          <LazyRender>
+            <Tabs sx={{ p: 0 }}>
+              <Stack>
+                <TabList>
+                  {code.map((item) => (
+                    <Tab
+                      key={item.language}
+                      _selected={{
+                        bg: selectedBg,
+                        color: "white",
+                        shadow: "sm",
+                        borderColor: "blue.500",
+                      }}
+                    >
+                      {item.filename.split(".")[0]}.{item.language}
+                    </Tab>
+                  ))}
+                </TabList>
+              </Stack>
+              <TabPanels>
                 {code.map((item) => (
-                  <Tab
+                  <TabPanel
+                    sx={{ p: 0, position: "relative" }}
                     key={item.language}
-                    _selected={{
-                      bg: selectedBg,
-                      color: "white",
-                      shadow: "sm",
-                      borderColor: "blue.500",
-                    }}
                   >
-                    {item.filename.split(".")[0]}.{item.language}
-                  </Tab>
+                    <LazyCodeLoader code={item?.code} />
+                    <CopyButton
+                      code={item?.code}
+                      position="absolute"
+                      top={4}
+                      right={4}
+                    />
+                  </TabPanel>
                 ))}
-              </TabList>
-            </Stack>
-            <TabPanels>
-              {code.map((item) => (
-                <TabPanel
-                  sx={{ p: 0, position: "relative" }}
-                  key={item.language}
-                >
-                  <LazyCodeLoader code={item?.code} />
-                  <CopyButton
-                    code={item?.code}
-                    position="absolute"
-                    top={4}
-                    right={4}
-                  />
-                </TabPanel>
-              ))}
-            </TabPanels>
-          </Tabs>
+              </TabPanels>
+            </Tabs>
+          </LazyRender>
         </TabPanel>
       </TabPanels>
     </Tabs>

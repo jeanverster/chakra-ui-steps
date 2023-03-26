@@ -1,5 +1,10 @@
+import { Basic } from "@/code-samples/examples";
+import CopyButton from "@/components/CopyButton/CopyButton";
+import LazyRender from "@/components/LazyRender/LazyRender";
 import { Page } from "@/layouts";
+import { CodeExample, getCodeExample } from "@/mdx/server";
 import { FrontMatter } from "@/types";
+import { replaceExtension } from "@/utils/replaceExtension";
 import {
   Box,
   Code,
@@ -9,18 +14,29 @@ import {
   ListItem,
   SimpleGrid,
 } from "@chakra-ui/layout";
-import { Flex, Link, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Divider,
+  Flex,
+  Link,
+  Table,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
+  useClipboard,
+} from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { default as NextLink } from "next/link";
+import * as React from "react";
+import { useState } from "react";
 import { CgCheckO } from "react-icons/cg";
+import { FiCopy } from "react-icons/fi";
 import Balancer from "react-wrap-balancer";
-import { Basic } from "../code-samples/examples";
-import CopyButton from "../components/CopyButton/CopyButton";
-import LazyRender from "../components/LazyRender/LazyRender";
-import { CodeExample, getCodeExample } from "../mdx/server";
-import { replaceExtension } from "../utils/replaceExtension";
 import { useVariantContext } from "./_app";
 
 const DynamicCodePreview = dynamic(
@@ -45,18 +61,27 @@ export type Section = {
 type HomeProps = {
   basicExample: CodeExample | undefined;
   snippet: CodeExample | undefined;
+  customStyleSnippet: CodeExample | undefined;
+  upgradeGuide: string | null;
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const snippet = getCodeExample(
     "code-samples/snippets/ExtendThemeSnippet.tsx"
   );
+  const customStyleSnippet = getCodeExample(
+    "code-samples/snippets/CustomStylesSnippet.tsx"
+  );
   const basicExample = getCodeExample("code-samples/examples/Basic.tsx");
+
+  const upgradeGuideMarkdown = getCodeExample("md/upgrade-guide.mdx");
 
   return {
     props: {
       basicExample,
       snippet,
+      customStyleSnippet,
+      upgradeGuide: upgradeGuideMarkdown?.code || null,
     },
   };
 };
@@ -88,8 +113,130 @@ const Description = () => {
   );
 };
 
-const Home: NextPage<HomeProps> = ({ basicExample, snippet }) => {
+{
+  /* 'description',
+  'icon',
+  'iconLabel',
+  'label',
+  'labelContainer',
+  'step',
+  'stepContainer',
+  'stepIconContainer',
+  'root' */
+}
+
+// const CLASSES = [
+//   "cui-steps",
+//   "cui-steps__horizontal-step",
+//   "cui-steps--horizontal-step-container",
+//   "cui-steps__step-icon-container",
+//   "cui-steps__vertical-step",
+//   "cui-steps__vertical-step-container",
+//   "cui-steps__vertical-step-content",
+// ];
+
+const CLASSES = [
+  {
+    className: "cui-steps",
+    description: "Root element",
+  },
+  {
+    className: "cui-steps__horizontal-step",
+    description: "Outer wrapper for each step in horizontal layout",
+  },
+  {
+    className: "cui-steps--horizontal-step-container",
+    description: "Inner wrapper for each step in horizontal layout",
+  },
+  {
+    className: "cui-steps__step-icon-container",
+    description: "Wrapper for the step icon",
+  },
+  {
+    className: "cui-steps__vertical-step",
+    description: "Outer wrapper for each step in vertical layout",
+  },
+  {
+    className: "cui-steps__vertical-step-container",
+    description: "Inner wrapper for each step in vertical layout",
+  },
+  {
+    className: "cui-steps__vertical-step-content",
+    description: "Wrapper for the step content",
+  },
+];
+
+const DATA_ATTRIBUTES = [
+  {
+    dataAttribute: "_active",
+    description: "Select step which is currently active",
+  },
+  {
+    dataAttribute: "_invalid",
+    description: "Select steps that are invalid",
+  },
+  {
+    dataAttribute: "_loading",
+    description: "Select steps that are loading",
+  },
+  {
+    dataAttribute: "_clickable",
+    description: "Select steps that are clickable",
+  },
+  {
+    dataAttribute: "_completed",
+    description: "Select steps that are completed",
+  },
+];
+
+const CopyCell = ({ text }: { text: string }) => {
+  const { hasCopied, onCopy } = useClipboard(text);
+
+  return (
+    <Td>
+      <Code>{text}</Code>
+      <Button
+        size="xs"
+        ml={3}
+        sx={{
+          display: ["none", "none", "inline-block"],
+        }}
+      >
+        {hasCopied ? (
+          <Text>Copied</Text>
+        ) : (
+          <FiCopy
+            onClick={() => onCopy()}
+            color={hasCopied ? "green.500" : "gray.500"}
+          />
+        )}
+      </Button>
+    </Td>
+  );
+};
+
+const Home: NextPage<HomeProps> = ({
+  basicExample,
+  snippet,
+  customStyleSnippet,
+}) => {
   const [variant] = useVariantContext();
+
+  const [classToCopy, setClassToCopy] = useState<string>("");
+  const { hasCopied, onCopy } = useClipboard(classToCopy);
+
+  const handleCopy = (className: string) => {
+    setClassToCopy(className);
+  };
+
+  React.useEffect(() => {
+    if (classToCopy) {
+      onCopy();
+      setTimeout(() => {
+        setClassToCopy("");
+      }, 1000);
+    }
+  }, [classToCopy, onCopy]);
 
   return (
     <Page
@@ -159,7 +306,11 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippet }) => {
           </Balancer>
         </Text>
         <Box sx={{ my: 3 }}>
-          <DynamicCodeHighlight code={snippet} />
+          <DynamicCodeHighlight
+            prismProps={{
+              code: snippet?.code || "",
+            }}
+          />
         </Box>
 
         <Text fontSize="lg">
@@ -170,7 +321,6 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippet }) => {
           </Balancer>
         </Text>
       </Flex>
-      {/* <Divider sx={{ mb: 10 }} /> */}
       {basicExample && (
         <LazyRender rootMargin="100px">
           <DynamicCodePreview
@@ -191,7 +341,79 @@ const Home: NextPage<HomeProps> = ({ basicExample, snippet }) => {
           />
         </LazyRender>
       )}
-      <Text sx={{ mb: 8, mt: 4 }} fontSize="lg">
+      <Divider my={8} />
+      <Heading id="usage" fontSize="2xl" mb={4}>
+        Custom Styles
+      </Heading>
+      <Text fontSize="lg">
+        <Balancer>
+          To customize the styles of the Steps component,{" "}
+          <Code>chakra-ui-steps</Code> provides a list of css classes for each
+          part of the component. You can use these classes to override the
+          default styles. Below is a list of the classes that are available.
+        </Balancer>
+      </Text>
+      <Table my={10}>
+        <Thead>
+          <Tr>
+            <Th>Class</Th>
+            <Th>Description</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {CLASSES.map(({ className, description }) => (
+            <Tr key={className}>
+              <CopyCell text={className} />
+              <Td>
+                <Text>
+                  <Balancer>{description}</Balancer>
+                </Text>
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+      <Text fontSize="lg">
+        <Balancer>
+          In some cases you may want to customize the styles of a step based on
+          its state. For example, you may want to change the color of a step
+          when it is active. To do this, you can use the data attributes defined
+          below.
+        </Balancer>
+      </Text>
+      <Table my={10}>
+        <Thead>
+          <Tr>
+            <Th>Attribute</Th>
+            <Th>Description</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {DATA_ATTRIBUTES.map(({ dataAttribute, description }) => (
+            <Tr key={dataAttribute}>
+              <CopyCell text={dataAttribute} />
+              <Td>
+                <Text>
+                  <Balancer>{description}</Balancer>
+                </Text>
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+      <Text fontSize="lg">
+        Here is an example of how you might create some custom styles using a
+        combination of the classes and data attributes.
+      </Text>
+      <Box sx={{ my: 10 }}>
+        <DynamicCodeHighlight
+          prismProps={{
+            code: customStyleSnippet?.code || "",
+            language: "tsx",
+          }}
+        />
+      </Box>
+      <Text sx={{ mb: 8, mt: 10 }} fontSize="lg">
         To get up and running and have a look at some code, check out the{" "}
         <NextLink passHref href="/examples">
           <Link color="teal.400">examples </Link>

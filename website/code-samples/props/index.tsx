@@ -94,6 +94,14 @@ const PROPS = [
         required: false,
         description: "Sets the variant of the Steps component",
       },
+      {
+        name: "expandVerticalSteps",
+        type: "boolean",
+        required: false,
+        default: true,
+        description:
+          "Control whether or not the vertical steps should collapse",
+      },
     ],
   },
   {

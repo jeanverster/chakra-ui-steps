@@ -1,21 +1,23 @@
 import { useCardBg } from "@/hooks/useCardBg";
 import { Stack, StackProps } from "@chakra-ui/react";
-import { Suspense } from "react";
+import Highlight, { Language } from "prism-react-renderer";
 import CopyButton from "../../components/CopyButton/CopyButton";
 import LazyCodeLoader from "../../components/LazyCodeLoader/LazyCodeLoader";
-import { CodeExample } from "../../mdx/server";
 
 type CodeHighlightProps = StackProps & {
-  code: CodeExample | undefined;
   path?: string;
+  prismProps?: Omit<
+    React.ComponentProps<typeof Highlight>,
+    "Prism" | "language" | "children"
+  > & {
+    language?: Language;
+  };
 };
 
-const CodeHighlight = ({ code, path, ...rest }: CodeHighlightProps) => {
+const CodeHighlight = ({ path, prismProps, ...rest }: CodeHighlightProps) => {
   const bg = useCardBg();
 
   const { sx } = rest;
-
-  if (!code) return null;
 
   return (
     <Stack
@@ -33,10 +35,13 @@ const CodeHighlight = ({ code, path, ...rest }: CodeHighlightProps) => {
       }}
       {...rest}
     >
-      <Suspense fallback={<div>Loading...</div>}>
-        <LazyCodeLoader code={code?.code} />
-      </Suspense>
-      <CopyButton code={code?.code} position="absolute" top={4} right={4} />
+      <LazyCodeLoader {...prismProps} />
+      <CopyButton
+        code={prismProps?.code || ""}
+        position="absolute"
+        top={4}
+        right={4}
+      />
     </Stack>
   );
 };

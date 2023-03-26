@@ -264,7 +264,7 @@ const variantSimple = definePartsStyle((props) => {
           },
         },
       },
-      _highlighted: {
+      _active: {
         transition: 'border-color .2s ease',
         borderColor: activeColor,
         '& .cui-steps__vertical-step-container': {
@@ -312,7 +312,7 @@ const variants = {
   simple: variantSimple,
 };
 
-export const StepsTheme: any = defineMultiStyleConfig({
+export const StepsTheme = defineMultiStyleConfig({
   baseStyle,
   sizes,
   variants,

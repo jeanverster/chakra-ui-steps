@@ -25,7 +25,7 @@ export const getCirclesHorizontalBaseStyles = ({
     mx: 3,
     transition: 'background-color .2s ease',
   },
-  _highlighted: {
+  _active: {
     '&:not(:last-child):after': {
       backgroundColor: `${c}.500`,
       backgroundPosition: 'left',
@@ -74,7 +74,7 @@ export const getCirclesVerticalBaseStyles = ({
   flexDir: 'column',
   '--size': stepHeight,
   '--gap': '8px',
-  _highlighted: {
+  _active: {
     pb: 4,
     '&:not(:last-child):after': {
       backgroundColor: `${colorScheme}.500`,
@@ -113,7 +113,7 @@ export const getCirclesStepIconContainerBaseStyles = ({
       borderColor: 'red.400',
     },
   },
-  _highlighted: {
+  _active: {
     bg: activeColor,
     borderColor: activeColor,
     _invalid: {

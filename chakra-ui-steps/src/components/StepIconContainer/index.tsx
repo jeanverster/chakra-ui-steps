@@ -27,7 +27,7 @@ export const StepIconContainer = ({
       className="cui-steps__step-icon-container"
       aria-current={isCurrentStep ? 'step' : undefined}
       data-invalid={dataAttr(isError && (isCurrentStep || isCompletedStep))}
-      data-highlighted={dataAttr(isCompletedStep)}
+      data-active={dataAttr(isCompletedStep)}
       data-clickable={dataAttr(clickable)}
       data-loading={dataAttr(isLoading && (isCurrentStep || isCompletedStep))}
     >

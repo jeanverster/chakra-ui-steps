@@ -1,17 +1,29 @@
+import Highlight, { Language } from "prism-react-renderer";
 import * as React from "react";
 
-type LazyCodeLoaderProps = {
-  code: string;
+type LazyCodeLoaderProps = Partial<
+  Omit<
+    React.ComponentProps<typeof Highlight>,
+    "Prism" | "language" | "children"
+  >
+> & {
+  language?: Language;
 };
 
-const LazyCodeLoader = ({ code }: LazyCodeLoaderProps) => {
+const LazyCodeLoader = ({ code, language, ...rest }: LazyCodeLoaderProps) => {
   const loader = React.useCallback(() => {
     const { default: Highlight, defaultProps } =
       require("prism-react-renderer") as typeof import("prism-react-renderer");
     const { default: dracula } =
       require("prism-react-renderer/themes/dracula") as typeof import("prism-react-renderer/themes/dracula");
     return (
-      <Highlight {...defaultProps} theme={dracula} code={code} language="tsx">
+      <Highlight
+        language={language || "tsx"}
+        code={code || ""}
+        {...defaultProps}
+        {...rest}
+        theme={dracula}
+      >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={{ ...style, padding: "1rem" }}>
             {tokens.map((line, i) => (
@@ -25,7 +37,7 @@ const LazyCodeLoader = ({ code }: LazyCodeLoaderProps) => {
         )}
       </Highlight>
     );
-  }, [code]);
+  }, [code, rest, language]);
 
   return loader();
 };
