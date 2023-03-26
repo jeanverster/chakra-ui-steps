@@ -312,26 +312,28 @@ const Home: NextPage<HomeProps> = ({
           default styles. Below is a list of the classes that are available.
         </Balancer>
       </Text>
-      <Table my={10}>
-        <Thead>
-          <Tr>
-            <Th>Class</Th>
-            <Th>Description</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {CLASSES.map(({ className, description }) => (
-            <Tr key={className}>
-              <CopyCell text={className} />
-              <Td>
-                <Text>
-                  <Balancer>{description}</Balancer>
-                </Text>
-              </Td>
+      <LazyRender rootMargin="100px">
+        <Table my={10}>
+          <Thead>
+            <Tr>
+              <Th>Class</Th>
+              <Th>Description</Th>
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
+          </Thead>
+          <Tbody>
+            {CLASSES.map(({ className, description }) => (
+              <Tr key={className}>
+                <CopyCell text={className} />
+                <Td>
+                  <Text>
+                    <Balancer>{description}</Balancer>
+                  </Text>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </LazyRender>
       <Text fontSize="lg">
         <Balancer>
           In some cases you may want to customize the styles of a step based on
@@ -340,38 +342,42 @@ const Home: NextPage<HomeProps> = ({
           below.
         </Balancer>
       </Text>
-      <Table my={10}>
-        <Thead>
-          <Tr>
-            <Th>Attribute</Th>
-            <Th>Description</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {DATA_ATTRIBUTES.map(({ dataAttribute, description }) => (
-            <Tr key={dataAttribute}>
-              <CopyCell text={dataAttribute} />
-              <Td>
-                <Text>
-                  <Balancer>{description}</Balancer>
-                </Text>
-              </Td>
+      <LazyRender rootMargin="100px">
+        <Table my={10}>
+          <Thead>
+            <Tr>
+              <Th>Attribute</Th>
+              <Th>Description</Th>
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
+          </Thead>
+          <Tbody>
+            {DATA_ATTRIBUTES.map(({ dataAttribute, description }) => (
+              <Tr key={dataAttribute}>
+                <CopyCell text={dataAttribute} />
+                <Td>
+                  <Text>
+                    <Balancer>{description}</Balancer>
+                  </Text>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </LazyRender>
       <Text fontSize="lg">
         Here is an example of how you might create some custom styles using a
         combination of the classes and data attributes.
       </Text>
-      <Box sx={{ my: 10 }}>
-        <DynamicCodeHighlight
-          prismProps={{
-            code: customStyleSnippet?.code || "",
-            language: "tsx",
-          }}
-        />
-      </Box>
+      <LazyRender rootMargin="100px">
+        <Box sx={{ my: 10 }}>
+          <DynamicCodeHighlight
+            prismProps={{
+              code: customStyleSnippet?.code || "",
+              language: "tsx",
+            }}
+          />
+        </Box>
+      </LazyRender>
       <Text sx={{ mb: 8, mt: 10 }} fontSize="lg">
         To get up and running and have a look at some code, check out the{" "}
         <NextLink passHref href="/examples">
