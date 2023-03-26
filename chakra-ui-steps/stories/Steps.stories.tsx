@@ -682,3 +682,20 @@ export const RTL = (): JSX.Element => {
     </Box>
   );
 };
+
+export const Bla = () => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  return (
+    <div>
+      <Steps activeStep={activeStep}>
+        <Step label="Step 1" description="This is the first step" />
+        <Step label="Step 2" description="This is the second step" />
+        <Step label="Step 3" description="This is the third step" />
+      </Steps>
+      <Button onClick={() => prevStep()}>Back</Button>
+      <Button onClick={() => nextStep()}>Next</Button>
+    </div>
+  );
+};

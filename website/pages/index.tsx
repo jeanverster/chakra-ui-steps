@@ -32,8 +32,6 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { default as NextLink } from "next/link";
-import * as React from "react";
-import { useState } from "react";
 import { CgCheckO } from "react-icons/cg";
 import { FiCopy } from "react-icons/fi";
 import Balancer from "react-wrap-balancer";
@@ -112,28 +110,6 @@ const Description = () => {
     </>
   );
 };
-
-{
-  /* 'description',
-  'icon',
-  'iconLabel',
-  'label',
-  'labelContainer',
-  'step',
-  'stepContainer',
-  'stepIconContainer',
-  'root' */
-}
-
-// const CLASSES = [
-//   "cui-steps",
-//   "cui-steps__horizontal-step",
-//   "cui-steps--horizontal-step-container",
-//   "cui-steps__step-icon-container",
-//   "cui-steps__vertical-step",
-//   "cui-steps__vertical-step-container",
-//   "cui-steps__vertical-step-content",
-// ];
 
 const CLASSES = [
   {
@@ -221,23 +197,6 @@ const Home: NextPage<HomeProps> = ({
   customStyleSnippet,
 }) => {
   const [variant] = useVariantContext();
-
-  const [classToCopy, setClassToCopy] = useState<string>("");
-  const { hasCopied, onCopy } = useClipboard(classToCopy);
-
-  const handleCopy = (className: string) => {
-    setClassToCopy(className);
-  };
-
-  React.useEffect(() => {
-    if (classToCopy) {
-      onCopy();
-      setTimeout(() => {
-        setClassToCopy("");
-      }, 1000);
-    }
-  }, [classToCopy, onCopy]);
-
   return (
     <Page
       metaDescription="Steps component designed to work seamlessly with Chakra UI"
