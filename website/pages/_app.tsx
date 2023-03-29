@@ -9,6 +9,7 @@ import "@fontsource/manrope/400.css";
 import "@fontsource/manrope/700.css";
 import "@fontsource/sora/400.css";
 import "@fontsource/sora/700.css";
+import { Analytics } from "@vercel/analytics/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
@@ -62,6 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <MobileNav repo={repo} />
 
             <Component {...pageProps} />
+            <Analytics />
           </Container>
           <Footer />
         </Provider>

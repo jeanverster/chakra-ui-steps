@@ -16,9 +16,17 @@ cd chakra-ui-steps
 
 3. Setup all the dependencies and packages by running `yarn`.
 
-## Development
+## Install deps
 
-You'll notice that the project has been configured using yarn workspaces. Essentially this means that you can run `yarn` from the root of the project and it will install all the dependencies for all the packages. You can also run `yarn` from within a package and it will only install the dependencies for that package.
+To get started, run `yarn` from the root of the project to install all the dependencies.
+
+You'll notice that the project has been configured using yarn workspaces. Essentially this means that you can run `yarn` from the root of the project and it will install all the dependencies for all the packages in the project. You can also run `yarn` from the root of each package and it will install the dependencies for that package only.
+
+### Running the development server
+
+To run the development server, first run `cd chakra-ui-steps` to navigate to the correct directory. Then run `yarn dev`. This will start the vite server and open the browser to the demo page.
+
+Then, navigate to the `website` directory and run `yarn dev`. This will start the next dev server for the website. You can now navigate to `http://localhost:3000` to view the website.
 
 ### Running Storybook
 

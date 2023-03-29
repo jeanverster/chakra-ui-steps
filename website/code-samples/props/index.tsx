@@ -70,7 +70,7 @@ const PROPS = [
       },
       {
         name: "onClickStep",
-        type: "() => void",
+        type: "(step: number) => void",
         required: false,
         description: "If defined, allows you to click on the step icons",
         default: "undefined",
@@ -93,6 +93,14 @@ const PROPS = [
         type: "'circles' | 'circles-alt' | 'simple'",
         required: false,
         description: "Sets the variant of the Steps component",
+      },
+      {
+        name: "expandVerticalSteps",
+        type: "boolean",
+        required: false,
+        default: true,
+        description:
+          "Control whether or not the vertical steps should collapse",
       },
     ],
   },

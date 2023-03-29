@@ -1,3 +1,17 @@
+# [chakra-ui-steps-v2.1.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.4...chakra-ui-steps-v2.1.0) (2023-03-29)
+
+
+### Bug Fixes
+
+* package json config ([efecc0b](https://github.com/jeanverster/chakra-ui-steps/commit/efecc0bb065311290a03ac6410050da619954034))
+* pointer cursor on hover ([e0d4f4f](https://github.com/jeanverster/chakra-ui-steps/commit/e0d4f4f075ed6ba1f7764219f25e9c0bae83d2aa))
+* tests ([f3b5ae7](https://github.com/jeanverster/chakra-ui-steps/commit/f3b5ae7282f42b0a7c306f744b1797e25fc863e6))
+
+
+### Features
+
+* add expandVerticalSteps prop ([d7ad7d7](https://github.com/jeanverster/chakra-ui-steps/commit/d7ad7d70206f68875f73a4c02e280b21b4406002))
+
 # [chakra-ui-steps-v2.0.4](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.3...chakra-ui-steps-v2.0.4) (2023-02-11)
 
 

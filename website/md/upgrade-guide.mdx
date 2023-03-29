@@ -1,0 +1,18 @@
+## Upgrade guide
+
+If you are upgrading to v2 of this component you will need to make the
+following changes: &nbsp;&nbsp;
+
+- `StepsStyleConfig` has been renamed to `StepsTheme` - so you will need to update the reference to this in your theme config:
+
+```diff
+- import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
++ import { StepsTheme as Steps } from 'chakra-ui-steps';
+```
+
+- Previously the `Steps` component accepted a `labelOrientation` prop, this has been removed in favor of the `circles-alt` variant. If you were using this prop you will need to update your code to use the variant instead:
+
+```diff
+- <Steps labelOrientation="vertical" />
++ <Steps variant="circles-alt" />
+```

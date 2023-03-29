@@ -1,10 +1,9 @@
 import { Page } from "@/layouts";
 import { Code, Divider, Link, Spacer, Text } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import Balancer from "react-wrap-balancer";
 import { ReactHookFormExample } from "../code-samples/recipes";
-import LazyRender from "../components/LazyRender/LazyRender";
 import { dirToFileArray } from "../mdx/server";
 import { useVariantContext } from "./_app";
 
@@ -61,21 +60,19 @@ const Recipes = ({ recipes }: RecipesProps) => {
     return recipes.map((recipe, index) => {
       const description = getJSXDescription(recipe.dir);
       return (
-        <>
-          <LazyRender key={`${recipe.fileName}-${index}`} rootMargin="100px">
-            <DynamicSectionWrap
-              title={recipe.dir}
-              preview={<ReactHookFormExample variant={variant} />}
-              description={description}
-              code={recipe.files}
-            />
-          </LazyRender>
+        <Fragment key={`${recipe.fileName}-${index}`}>
+          <DynamicSectionWrap
+            title={recipe.dir}
+            preview={<ReactHookFormExample variant={variant} />}
+            description={description}
+            code={recipe.files}
+          />
           {index !== recipes.length - 1 ? (
             <Divider sx={{ my: 10 }} />
           ) : (
             <Spacer pt={12} />
           )}
-        </>
+        </Fragment>
       );
     });
   }, [recipes, variant]);
@@ -84,7 +81,7 @@ const Recipes = ({ recipes }: RecipesProps) => {
     <Page
       title="Recipes"
       metaDescription="Steps component designed to work seamlessly with Chakra UI"
-      description="Common recipes for using chakra-ui-steps in your Next.js application."
+      description="Common recipes for using chakra-ui-steps in your application."
     >
       {renderRecipes}
     </Page>

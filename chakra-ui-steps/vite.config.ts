@@ -1,14 +1,25 @@
 import typescript from '@rollup/plugin-typescript';
 import react from '@vitejs/plugin-react';
+/// <reference types="vitest" />
 import { defineConfig } from 'vite';
+
+import type { UserConfig as VitestUserConfigInterface } from 'vitest/config';
+
 const path = require('path');
 
 const isExternal = (id: string) => !id.startsWith('.') && !path.isAbsolute(id);
 const resolvePath = (str: string) => path.resolve(__dirname, str);
 
+const vitestConfig: VitestUserConfigInterface = {
+  test: {
+    environment: 'jsdom',
+  },
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  test: vitestConfig.test,
   build: {
     rollupOptions: {
       external: isExternal,
@@ -23,6 +34,9 @@ export default defineConfig({
           'react/jsx-runtime': 'react/jsx-runtime',
           '@chakra-ui/react': '@chakra-ui/react',
           '@chakra-ui/transition': '@chakra-ui/transition',
+          '@chakra-ui/react-context': '@chakra-ui/react-context',
+          '@chakra-ui/shared-utils': '@chakra-ui/shared-utils',
+          '@chakra-ui/styled-system': '@chakra-ui/styled-system',
         },
       },
       plugins: [
