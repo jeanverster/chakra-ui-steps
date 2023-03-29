@@ -41,7 +41,7 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
 
     const opacity = hasVisited ? 1 : 0.8;
 
-    const highlighted =
+    const active =
       variant === 'simple' ? isCompletedStep || isCurrentStep : isCompletedStep;
 
     const checkIcon = checkIconProp || checkIconContext;
@@ -51,7 +51,7 @@ export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
       <chakra.div
         aria-disabled={!hasVisited}
         className="cui-steps__horizontal-step"
-        data-highlighted={dataAttr(highlighted)}
+        data-active={dataAttr(active)}
         data-invalid={dataAttr(localIsError)}
         data-clickable={dataAttr(clickable)}
         onClick={() => onClickStep?.(index || 0)}

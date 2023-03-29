@@ -1,12 +1,30 @@
 import { Flex } from '@chakra-ui/react';
 import * as React from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { Step, Steps } from '../src';
 import { render } from '../src/utils/test-utils';
 
-/**
- * @vitest-environment jsdom
- */
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(), // deprecated
+    removeListener: vi.fn(), // deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
+
+vi.mock('@chakra-ui/react', async () => {
+  const mod = await vi.importActual('@chakra-ui/react');
+  return {
+    ...(mod as Record<string, unknown>),
+    useBreakpointValue: vi.fn().mockImplementation(() => 'sm'),
+  };
+});
 
 describe('<Steps />', () => {
   it('should render labels if present', async () => {

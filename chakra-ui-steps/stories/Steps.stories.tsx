@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  extendTheme,
   Flex,
   FlexProps,
   Heading,
@@ -23,7 +22,7 @@ import {
   FiUser,
 } from 'react-icons/fi';
 import { useConfigContext } from '../.storybook/preview';
-import { Step, Steps, StepsTheme, useSteps } from '../src';
+import { Step, Steps, useSteps } from '../src';
 
 const meta: Meta = {
   title: 'Steps',
@@ -181,6 +180,37 @@ export const Vertical = () => {
   return (
     <>
       <Steps {...config} orientation="vertical" activeStep={activeStep}>
+        {steps.map(({ label }, index) => (
+          <Step label={label} key={label}>
+            <Content index={index} />
+          </Step>
+        ))}
+      </Steps>
+      {activeStep === 3 ? (
+        <ResetPrompt onReset={reset} />
+      ) : (
+        <StepButtons
+          {...{ nextStep, prevStep }}
+          prevDisabled={activeStep === 0}
+        />
+      )}
+    </>
+  );
+};
+
+export const VerticalExpanded = () => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  const config = useConfigContext();
+  return (
+    <>
+      <Steps
+        {...config}
+        expandVerticalSteps
+        orientation="vertical"
+        activeStep={activeStep}
+      >
         {steps.map(({ label }, index) => (
           <Step label={label} key={label}>
             <Content index={index} />
@@ -475,6 +505,37 @@ export const CustomPerStepErrorIcon = (): JSX.Element => {
   );
 };
 
+// const CLASSES = [
+//   {
+//     className: "cui-steps",
+//     description: "Root element",
+//   },
+//   {
+//     className: "cui-steps__horizontal-step",
+//     description: "Outer wrapper for each step in horizontal layout",
+//   },
+//   {
+//     className: "cui-steps--horizontal-step-container",
+//     description: "Inner wrapper for each step in horizontal layout",
+//   },
+//   {
+//     className: "cui-steps__step-icon-container",
+//     description: "Wrapper for the step icon",
+//   },
+//   {
+//     className: "cui-steps__vertical-step",
+//     description: "Outer wrapper for each step in vertical layout",
+//   },
+//   {
+//     className: "cui-steps__vertical-step-container",
+//     description: "Inner wrapper for each step in vertical layout",
+//   },
+//   {
+//     className: "cui-steps__vertical-step-content",
+//     description: "Wrapper for the step content",
+//   },
+// ];
+
 export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
@@ -485,8 +546,29 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
       <Steps
         {...config}
         checkIcon={AiFillCheckCircle}
-        colorScheme="blue"
+        colorScheme="cyan"
         activeStep={activeStep}
+        sx={{
+          '& .cui-steps__step-icon-container': {
+            bg: 'cyan.400',
+            color: 'white',
+            borderRadius: '4px',
+            '&:hover': {
+              bg: 'cyan.400',
+              cursor: 'pointer',
+            },
+            // you can use
+            _active: {
+              bg: 'cyan.900',
+            },
+            _dark: {
+              _active: {
+                bg: 'cyan.700',
+              },
+              bg: 'cyan.800',
+            },
+          },
+        }}
       >
         {iconSteps.map(({ label, icon }, index) => (
           <Step label={label} key={label} icon={icon}>
@@ -506,40 +588,39 @@ export const CustomStyles: Story<{ theme: any }> = (): JSX.Element => {
   );
 };
 
-const CustomSteps = {
-  ...StepsTheme,
-  baseStyle: (props: any) => {
-    const activeColor = `blue.500`;
-    return {
-      ...StepsTheme.baseStyle(props),
-      stepContainer: {
-        ...StepsTheme.baseStyle(props).stepContainer,
-        borderRadius: 0,
-        _activeStep: {
-          bg: activeColor,
-          borderColor: activeColor,
-        },
-        _highlighted: {
-          bg: activeColor,
-          borderColor: activeColor,
-        },
-        '&[data-clickable]:hover': {
-          borderColor: activeColor,
-        },
-      },
-    };
-  },
-};
+// const helpers = createMultiStyleConfigHelpers(['stepContainer']);
 
-const theme = extendTheme({
-  components: {
-    Steps: CustomSteps,
-  },
-});
+// const CustomSteps = helpers.defineMultiStyleConfig({
+//   baseStyle: () => {
+//     const activeColor = `red.500`;
+//     return {
+//       stepContainer: {
+//         borderRadius: 0,
+//         _activeStep: {
+//           bg: activeColor,
+//           borderColor: activeColor,
+//         },
+//         _active: {
+//           bg: activeColor,
+//           borderColor: activeColor,
+//         },
+//         '&[data-clickable]:hover': {
+//           borderColor: activeColor,
+//         },
+//       },
+//     };
+//   },
+// });
 
-CustomStyles.args = {
-  theme,
-};
+// const theme = extendTheme({
+//   components: {
+//     Steps: CustomSteps,
+//   },
+// });
+
+// CustomStyles.args = {
+//   theme,
+// };
 
 export const ClickableSteps: Story = (): JSX.Element => {
   const { nextStep, prevStep, reset, activeStep, setStep } = useSteps({
@@ -599,5 +680,22 @@ export const RTL = (): JSX.Element => {
         />
       )}
     </Box>
+  );
+};
+
+export const Bla = () => {
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
+    initialStep: 0,
+  });
+  return (
+    <div>
+      <Steps activeStep={activeStep}>
+        <Step label="Step 1" description="This is the first step" />
+        <Step label="Step 2" description="This is the second step" />
+        <Step label="Step 3" description="This is the third step" />
+      </Steps>
+      <Button onClick={() => prevStep()}>Back</Button>
+      <Button onClick={() => nextStep()}>Next</Button>
+    </div>
   );
 };

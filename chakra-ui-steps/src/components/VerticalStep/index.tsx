@@ -36,6 +36,7 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
       variant,
       onClickStep,
       clickable,
+      expandVerticalSteps,
     } = useStepsContext();
 
     const { step, stepIconContainer } = useStepsStyles();
@@ -44,22 +45,36 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
     const localIsLoading = isLoading || state === 'loading';
     const localIsError = isError || state === 'error';
 
-    const highlighted =
+    const active =
       variant === 'simple' ? isCompletedStep || isCurrentStep : isCompletedStep;
     const checkIcon = checkIconProp || checkIconContext;
     const errorIcon = errorIconProp || errorIconContext;
+
+    const renderChildren = () => {
+      if (!expandVerticalSteps) {
+        return (
+          <Collapse style={{ width: '100%' }} in={isCurrentStep}>
+            {(isCurrentStep || isCompletedStep) && children}
+          </Collapse>
+        );
+      }
+      return children;
+    };
 
     return (
       <chakra.div
         ref={ref}
         className="cui-steps__vertical-step"
-        data-highlighted={dataAttr(highlighted)}
+        data-active={dataAttr(active)}
         data-clickable={dataAttr(clickable)}
         data-invalid={dataAttr(localIsError)}
         onClick={() => onClickStep?.(index || 0)}
         __css={step}
       >
-        <Flex className="cui-steps__vertical-step-container">
+        <Flex
+          data-vertical={dataAttr(true)}
+          className="cui-steps__vertical-step-container"
+        >
           <StepIconContainer
             {...{ isLoading: localIsLoading, isError: localIsError, ...props }}
           >
@@ -86,9 +101,7 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
           className="cui-steps__vertical-step-content"
           __css={{ minH: '8px', ps: `calc(${stepIconContainer.width})` }}
         >
-          <Collapse style={{ width: '100%' }} in={isCurrentStep}>
-            {(isCurrentStep || isCompletedStep) && children}
-          </Collapse>
+          {renderChildren()}
         </chakra.div>
       </chakra.div>
     );

@@ -40,7 +40,12 @@ const Props = ({
           </Balancer>
         </Text>
         <Box sx={{ mt: 3, mb: 12 }}>
-          <CodeHighlight code={useStepsSnippet} />
+          <CodeHighlight
+            prismProps={{
+              language: "tsx",
+              code: useStepsSnippet.code,
+            }}
+          />
         </Box>
       </Flex>
     </Page>

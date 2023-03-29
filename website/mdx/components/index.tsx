@@ -1,37 +1,36 @@
-import { Heading, List, ListIcon, ListItem } from "@chakra-ui/react";
+import { Heading, List, ListItem } from "@chakra-ui/react";
 import { ReactHTMLElement } from "react";
-import { HiCheck } from "react-icons/hi";
 import { Anchor } from "./Anchor";
 import { BlockQuote } from "./BlockQuote";
-import { Code, preToCodeBlock } from "./Code";
+import { Code as CodeRenderer, preToCodeBlock } from "./Code";
 import { Img } from "./Image";
 import { P } from "./P";
-
 export const components = {
   img: Img,
   p: P,
   a: Anchor,
+  span: function span(props: any) {
+    return <span {...props} />;
+  },
   pre: function codeBlock(
     preProps: Partial<ReactHTMLElement<HTMLPreElement>["props"]>
   ) {
     const props = preToCodeBlock(preProps);
 
     if (props) {
-      return <Code {...props} />;
+      return <CodeRenderer {...props} />;
     }
 
     return <pre {...preProps} />;
   },
   li: function li(props: any) {
-    return (
-      <ListItem p={2} {...props}>
-        <ListIcon as={HiCheck} color="green.500" />
-        {props.children}
-      </ListItem>
-    );
+    return <ListItem {...props}>{props.children}</ListItem>;
   },
   ul: function ul(props: any) {
     return <List {...props} />;
+  },
+  br: function br(props: any) {
+    return <br />;
   },
   blockquote: BlockQuote,
   h1: function Headline(props: any) {

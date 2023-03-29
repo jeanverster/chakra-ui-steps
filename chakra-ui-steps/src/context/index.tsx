@@ -8,6 +8,7 @@ export interface StepsContextValue extends StepsProps {
   isVertical?: boolean;
   stepCount?: number;
   trackColor?: string;
+  expandVerticalSteps?: boolean;
 }
 
 const StepsContext = React.createContext<StepsContextValue>({

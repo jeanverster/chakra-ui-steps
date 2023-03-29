@@ -25,6 +25,7 @@ interface StepOptions {
   trackColor?: string;
   mobileBreakpoint?: string;
   variant?: 'circles' | 'circles-alt' | 'simple';
+  expandVerticalSteps?: boolean;
 }
 export interface StepsProps
   extends Omit<HTMLChakraProps<'div'>, 'onChange'>,
@@ -57,6 +58,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
       onClickStep,
       mobileBreakpoint,
       trackColor: trackColorProp,
+      expandVerticalSteps = false,
       ...rest
     } = omitThemingProps(props);
 
@@ -119,6 +121,7 @@ export const Steps = forwardRef<StepsProps, 'div'>(
             trackColor,
             isVertical,
             variant: props.variant || 'circles',
+            expandVerticalSteps,
           }}
         >
           <chakra.div

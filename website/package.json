@@ -15,6 +15,7 @@
     "@fontsource/urbanist": "^4.5.12",
     "@hookform/resolvers": "^2.9.7",
     "@types/body-scroll-lock": "^3.1.0",
+    "@vercel/analytics": "^0.1.8",
     "@vercel/og": "^0.1.0",
     "body-scroll-lock": "^4.0.0-beta.0",
     "chakra-ui-steps": "2.0.4",
