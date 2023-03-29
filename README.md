@@ -30,6 +30,23 @@ npm i chakra-ui-steps
 
 ## Usage
 
+In order to use the `Steps` component you will need to first extend the theme with the `StepsTheme` object. This can be done in your theme file:
+
+```jsx
+import { extendTheme } from "@chakra-ui/react";
+import { StepsTheme as Steps } from "chakra-ui-steps";
+
+const theme = extendTheme({
+  components: {
+    Steps,
+  },
+});
+
+export default theme;
+```
+
+Then you can use the `Steps` component in your app:
+
 ```jsx
 import { Steps, Step } from "chakra-ui-steps";
 
