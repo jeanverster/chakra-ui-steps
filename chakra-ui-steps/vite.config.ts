@@ -12,7 +12,7 @@ const resolvePath = (str: string) => path.resolve(__dirname, str);
 
 const vitestConfig: VitestUserConfigInterface = {
   test: {
-    setupFiles: [resolvePath('./test/setup.ts')],
+    environment: 'jsdom',
   },
 };
 
