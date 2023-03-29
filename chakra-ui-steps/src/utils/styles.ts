@@ -123,5 +123,6 @@ export const getCirclesStepIconContainerBaseStyles = ({
   },
   '&[data-clickable]:hover': {
     borderColor: activeColor,
+    cursor: 'pointer',
   },
 });
