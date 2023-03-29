@@ -70,7 +70,7 @@ const PROPS = [
       },
       {
         name: "onClickStep",
-        type: "() => void",
+        type: "(step: number) => void",
         required: false,
         description: "If defined, allows you to click on the step icons",
         default: "undefined",
