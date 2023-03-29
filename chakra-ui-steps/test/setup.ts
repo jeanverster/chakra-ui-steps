@@ -1,6 +1,6 @@
-import { beforeEach, vi } from 'vitest';
+import { beforeAll, vi } from 'vitest';
 
-beforeEach(() => {
+beforeAll(() => {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: vi.fn().mockImplementation((query) => ({
@@ -13,5 +13,12 @@ beforeEach(() => {
       removeEventListener: vi.fn(),
       dispatchEvent: vi.fn(),
     })),
+  });
+  vi.mock('@chakra-ui/react', async () => {
+    const mod = await vi.importActual('@chakra-ui/react');
+    return {
+      ...(mod as Record<string, unknown>),
+      useBreakpointValue: vi.fn().mockImplementation(() => 'sm'),
+    };
   });
 });

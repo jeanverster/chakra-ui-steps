@@ -8,7 +8,7 @@ import { render } from '../src/utils/test-utils';
  * @vitest-environment jsdom
  */
 
-describe.skip('<Steps />', () => {
+describe('<Steps />', () => {
   it('should render labels if present', async () => {
     const { getByText } = render(
       <Steps colorScheme="green" activeStep={0}>
