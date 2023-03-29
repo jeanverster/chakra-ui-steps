@@ -115,7 +115,7 @@ const CLASSES = [
     description: "Outer wrapper for each step in horizontal layout",
   },
   {
-    className: "cui-steps--horizontal-step-container",
+    className: "cui-steps__horizontal-step-container",
     description: "Inner wrapper for each step in horizontal layout",
   },
   {
