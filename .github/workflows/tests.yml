@@ -18,9 +18,12 @@ defaults:
 jobs:
   Tests:
     runs-on: ubuntu-latest
-    container: node:16-alpine
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+          registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: yarn
       - name: Run test suite

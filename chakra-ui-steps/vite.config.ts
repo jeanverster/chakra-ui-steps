@@ -34,6 +34,9 @@ export default defineConfig({
           'react/jsx-runtime': 'react/jsx-runtime',
           '@chakra-ui/react': '@chakra-ui/react',
           '@chakra-ui/transition': '@chakra-ui/transition',
+          '@chakra-ui/react-context': '@chakra-ui/react-context',
+          '@chakra-ui/shared-utils': '@chakra-ui/shared-utils',
+          '@chakra-ui/styled-system': '@chakra-ui/styled-system',
         },
       },
       plugins: [

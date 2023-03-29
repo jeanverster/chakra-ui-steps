@@ -312,7 +312,7 @@ const variants = {
   simple: variantSimple,
 };
 
-export const StepsTheme = defineMultiStyleConfig({
+export const StepsTheme: any = defineMultiStyleConfig({
   baseStyle,
   sizes,
   variants,

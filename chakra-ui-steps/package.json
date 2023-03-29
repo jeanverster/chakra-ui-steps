@@ -10,19 +10,19 @@
     "navigation",
     "multi"
   ],
-  "main": "./dist/chakra-ui-steps.umd.js",
-  "module": "./dist/chakra-ui-steps.es.js",
+  "main": "./dist/chakra-ui-steps.umd.cjs",
+  "module": "./dist/chakra-ui-steps.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/chakra-ui-steps.mjs",
+      "require": "./dist/chakra-ui-steps.umd.cjs"
+    }
+  },
   "types": "dist/index.d.ts",
   "description": "Steps component designed to work seamlessly with Chakra UI",
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/chakra-ui-steps.es.js",
-      "require": "./dist/chakra-ui-steps.umd.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jeanverster/chakra-ui-steps"
@@ -39,11 +39,11 @@
     "test": "vitest"
   },
   "peerDependencies": {
-    "@chakra-ui/react": "*",
-    "@emotion/react": "*",
-    "@emotion/styled": "*",
-    "framer-motion": "*",
-    "react": ">=18"
+    "@chakra-ui/react": "^2.0.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "framer-motion": "^7.0.0",
+    "react": "^18.0.0"
   },
   "husky": {
     "hooks": {

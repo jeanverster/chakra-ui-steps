@@ -7,18 +7,16 @@ import { FrontMatter } from "@/types";
 import { replaceExtension } from "@/utils/replaceExtension";
 import {
   Box,
+  Button,
   Code,
+  Divider,
+  Flex,
   Heading,
+  Link,
   List,
   ListIcon,
   ListItem,
   SimpleGrid,
-} from "@chakra-ui/layout";
-import {
-  Button,
-  Divider,
-  Flex,
-  Link,
   Table,
   Tbody,
   Td,
@@ -60,7 +58,6 @@ type HomeProps = {
   basicExample: CodeExample | undefined;
   snippet: CodeExample | undefined;
   customStyleSnippet: CodeExample | undefined;
-  upgradeGuide: string | null;
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
@@ -72,14 +69,11 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   );
   const basicExample = getCodeExample("code-samples/examples/Basic.tsx");
 
-  const upgradeGuideMarkdown = getCodeExample("md/upgrade-guide.mdx");
-
   return {
     props: {
       basicExample,
       snippet,
       customStyleSnippet,
-      upgradeGuide: upgradeGuideMarkdown?.code || null,
     },
   };
 };
@@ -174,6 +168,7 @@ const CopyCell = ({ text }: { text: string }) => {
       <Button
         size="xs"
         ml={3}
+        onClick={() => onCopy()}
         sx={{
           display: ["none", "none", "inline-block"],
         }}
@@ -181,10 +176,7 @@ const CopyCell = ({ text }: { text: string }) => {
         {hasCopied ? (
           <Text>Copied</Text>
         ) : (
-          <FiCopy
-            onClick={() => onCopy()}
-            color={hasCopied ? "green.500" : "gray.500"}
-          />
+          <FiCopy color={hasCopied ? "green.500" : "gray.500"} />
         )}
       </Button>
     </Td>
@@ -313,7 +305,7 @@ const Home: NextPage<HomeProps> = ({
         </Balancer>
       </Text>
       <LazyRender rootMargin="100px">
-        <Table my={10}>
+        <Table variant="simple" my={10}>
           <Thead>
             <Tr>
               <Th>Class</Th>
@@ -321,7 +313,7 @@ const Home: NextPage<HomeProps> = ({
             </Tr>
           </Thead>
           <Tbody>
-            {CLASSES.map(({ className, description }) => (
+            {CLASSES.map(({ className, description }, i) => (
               <Tr key={className}>
                 <CopyCell text={className} />
                 <Td>
@@ -343,7 +335,7 @@ const Home: NextPage<HomeProps> = ({
         </Balancer>
       </Text>
       <LazyRender rootMargin="100px">
-        <Table my={10}>
+        <Table variant="simple" my={10}>
           <Thead>
             <Tr>
               <Th>Attribute</Th>

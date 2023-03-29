@@ -56,6 +56,15 @@ const theme = extendTheme({
   },
   components: {
     Steps,
+    Code: {
+      baseStyle: {
+        fontFamily: "mono",
+        bg: "gray.100",
+        _dark: {
+          bg: "gray.700",
+        },
+      },
+    },
     IconButton: {
       baseStyle: {
         fontWeight: "bold",
