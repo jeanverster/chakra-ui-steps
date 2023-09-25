@@ -14,8 +14,11 @@
   "module": "./dist/chakra-ui-steps.mjs",
   "exports": {
     ".": {
-      "import": "./dist/chakra-ui-steps.mjs",
-      "require": "./dist/chakra-ui-steps.umd.cjs"
+      "import": {
+        "default": "./dist/chakra-ui-steps.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "require": "./dist/chakra-ui-steps.umd.js"
     }
   },
   "types": "dist/index.d.ts",
