@@ -99,7 +99,10 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
         </Flex>
         <chakra.div
           className="cui-steps__vertical-step-content"
-          __css={{ minH: '8px', ps: `calc(${stepIconContainer.width})` }}
+          __css={{
+            minH: '8px',
+            paddingLeft: stepIconContainer?.width ? `calc(${stepIconContainer.width}` : 0,
+          }}
         >
           {renderChildren()}
         </chakra.div>
