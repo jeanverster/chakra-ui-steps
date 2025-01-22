@@ -101,7 +101,7 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
           className="cui-steps__vertical-step-content"
           __css={{
             minH: '8px',
-            paddingLeft: stepIconContainer?.width ? `calc(${stepIconContainer.width}` : 0,
+            paddingStart: stepIconContainer?.width ? `calc(${stepIconContainer.width})` : 0,
           }}
         >
           {renderChildren()}
