@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "MIT",
   "name": "chakra-ui-steps",
   "author": "Jean Verster",
@@ -14,8 +14,11 @@
   "module": "./dist/chakra-ui-steps.mjs",
   "exports": {
     ".": {
-      "import": "./dist/chakra-ui-steps.mjs",
-      "require": "./dist/chakra-ui-steps.umd.cjs"
+      "import": {
+        "default": "./dist/chakra-ui-steps.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "require": "./dist/chakra-ui-steps.umd.js"
     }
   },
   "types": "dist/index.d.ts",
@@ -42,7 +45,7 @@
     "@chakra-ui/react": "^2.0.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "framer-motion": "^7.0.0",
+    "framer-motion": ">=4.0.0",
     "react": "^18.0.0"
   },
   "husky": {

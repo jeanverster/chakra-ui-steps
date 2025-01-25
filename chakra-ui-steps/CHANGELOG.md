@@ -1,3 +1,10 @@
+# [chakra-ui-steps-v2.2.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.1.0...chakra-ui-steps-v2.2.0) (2025-01-25)
+
+
+### Features
+
+* width issue reported by [@dadhia](https://github.com/dadhia) ([4bf9cb4](https://github.com/jeanverster/chakra-ui-steps/commit/4bf9cb42fd9bf9d5291cec93a77b92719bfd6fd7))
+
 # [chakra-ui-steps-v2.1.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.0.4...chakra-ui-steps-v2.1.0) (2023-03-29)
 
 
