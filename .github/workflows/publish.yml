@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - "main"
+      
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+  
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -10,10 +15,10 @@ jobs:
       run:
         working-directory: chakra-ui-steps
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "16"
+          node-version: "20"
           registry-url: "https://registry.npmjs.org"
       - run: yarn
       - run: npm publish
