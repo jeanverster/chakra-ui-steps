@@ -20,7 +20,8 @@ jobs:
         with:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
-      - run: yarn
+      - run: npm install -g npm@latest
+      - run: yarn --immutable
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
