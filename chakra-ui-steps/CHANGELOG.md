@@ -1,3 +1,10 @@
+# [chakra-ui-steps-v2.2.1](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.2.0...chakra-ui-steps-v2.2.1) (2025-12-16)
+
+
+### Bug Fixes
+
+* **exports:** reorder types before default condition in package.json ([7a3136b](https://github.com/jeanverster/chakra-ui-steps/commit/7a3136b9715297db6a2782d674586a2a9e477228))
+
 # [chakra-ui-steps-v2.2.0](https://github.com/jeanverster/chakra-ui-steps/compare/chakra-ui-steps-v2.1.0...chakra-ui-steps-v2.2.0) (2025-01-25)
 
 
