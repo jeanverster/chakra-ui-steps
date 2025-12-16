@@ -1,5 +1,5 @@
 {
-  "version": "2.2.0",
+  "version": "2.2.1",
   "license": "MIT",
   "name": "chakra-ui-steps",
   "author": "Jean Verster",
@@ -15,8 +15,8 @@
   "exports": {
     ".": {
       "import": {
-        "default": "./dist/chakra-ui-steps.mjs",
-        "types": "./dist/index.d.ts"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/chakra-ui-steps.mjs"
       },
       "require": "./dist/chakra-ui-steps.umd.js"
     }
